@@ -2,26 +2,30 @@ define [
   'namespace'
   'react'
   'views/person_filters'
-], (zt, React, PersonFilters) ->
+  'views/view_options'
+], (zt, React, PersonFilters, ViewOptions) ->
 
   DraftState = React.createClass
 
     getInitialState: ->
+      people = @createFauxData()
+
+      people: people
       filters: 
-        min_age: @minAttr('age')
-        max_age: @maxAttr('age')
-        name: ''
+        min_age: @minAttr('age', people)
+        max_age: @maxAttr('age', people)
+        first_name: ''
         sex: ''
         min_skill: 0
         max_skill: 5
-        min_height: @minAttr('height')
-        max_height: @maxAttr('height')
+        min_height: @minAttr('height', people)
+        max_height: @maxAttr('height', people)
         has_baggage: ''
       view_options:
         baggage: true
         selected: true
       sort: 
-        by: 'name'
+        by: 'first_name'
         dir: 'asc'
 
     filterChangeHandler: (filters) ->
@@ -30,7 +34,7 @@ define [
     resetFiltersHandler: ->
       @setState filters: @getInitialState().filters
 
-    viewChangeHandler: (options) ->
+    viewOptionChangeHandler: (options) ->
       @setState view_options: options
 
     sortHandler: (sortBy) ->
@@ -47,7 +51,7 @@ define [
                                        person.skill <= @state.filters.max_skill and
                                        person.height >= @state.filters.min_height and
                                        person.height <= @state.filters.max_height and
-                                       new RegExp(@state.filters.name).test(person.name) and 
+                                       new RegExp(@state.filters.first_name).test(person.first_name) and 
                                        new RegExp(@state.filters.sex).test(person.sex) and
                                        ((@state.filters.has_baggage is 'y' and person.baggage?) or
                                         (@state.filters.has_baggage is 'n' and not person.baggage?) or
@@ -62,40 +66,45 @@ define [
         else if p1V < p2V then return -1 * dir
         else return 0
 
-    minAttr: (attr, max = 9999) ->
-      @props.people.reduce(
+    minAttr: (attr, people = @state.people, max = 9999) ->
+      people.reduce(
         ((previousValue, person) ->
           if previousValue > person[attr] then person[attr] else previousValue
         ), max)
 
-    maxAttr: (attr, min = 0) ->
-      @props.people.reduce(
+    maxAttr: (attr, people = @state.people, min = 0) ->
+      people.reduce(
         ((previousValue, person) ->
           if previousValue < person[attr] then person[attr] else previousValue
-        ), 0) 
+        ), min) 
 
     buildPersonList: ->
-      ([ @normalPerson(person), @baggagePerson(person, @props.people) ]) for person in @sortPersons(@filterPersons(@props.people))
+      ([ @normalPerson(person), @baggagePerson(person, @state.people) ]) for person in @sortPersons(@filterPersons(@state.people))
 
     heightDisplay: (cm) ->
       "#{Math.floor(cm / 2.54 / 12)}' #{Math.floor(cm / 2.54 % 12)}\"" 
 
     clickHandler: (person) ->
-      alert "Clicked!"
-      # person.selected = if person.selected? then not person.selected else true
-      # @props.people[person.baggage].selected = person.selected if person.baggage?
+      
+      people = @state.people
+      person = people[person.id]
+
+      person.selected = if person.selected? then not person.selected else true
+      people[person.baggage].selected = person.selected if person.baggage?
+
+      @setState people: people
 
     normalPerson: (person) ->
       return null if person.selected and not @state.view_options.selected
       (    
-        <tr onClick={@clickHandler.bind(this, person)}>
+        <tr className="#{if person.selected then 'selected' else ''}" onClick={@clickHandler.bind(this, person)}>
           <td className="selected">{if person.selected then "X" else ""}</td>
-          <td className="name">{person.name}</td>
-          <td>{person.age}</td>
-          <td>{person.sex}</td>
-          <td>{if person.baggage? then "Y" else "N"}</td>
-          <td>{person.skill}</td>
-          <td>{@heightDisplay(person.height)}</td>
+          <td className="name">{person.first_name}</td>
+          <td className="age">{person.age}</td>
+          <td className="sex">{person.sex}</td>
+          <td className="has-baggage">{if person.baggage? then "Y" else "N"}</td>
+          <td className="skill">{person.skill}</td>
+          <td className="height">{@heightDisplay(person.height)}</td>
         </tr>
       )
 
@@ -106,9 +115,9 @@ define [
       
       baggage = people[person.baggage]
       (    
-        <tr className="baggage">
-          <td className="selected">{if baggage.selected then "X" else ""}</td>
-          <td className="name">{baggage.name}</td>
+        <tr className="#{if person.selected then 'selected' else ''  } baggage">
+          <td className="selected"></td>
+          <td className="name">{baggage.first_name}</td>
           <td>{baggage.age}</td>
           <td>{baggage.sex}</td>
           <td></td>
@@ -137,11 +146,14 @@ define [
           max_height={max_height} 
           changeHandler={@filterChangeHandler} 
           resetHandler={@resetFiltersHandler} />
+        <ViewOptions
+          options={@state.view_options}
+          changeHandler={@viewOptionChangeHandler} />
         <table className="players-list">
           <thead>
             <tr>
               <td className="selected" onClick={@sortHandler.bind(this, 'selected')}>Selected</td>
-              <td className="name" onClick={@sortHandler.bind(this, 'name')}>Name</td>
+              <td className="first-name" onClick={@sortHandler.bind(this, 'first-name')}>First Name</td>
               <td onClick={@sortHandler.bind(this, 'age')}>Age</td>
               <td onClick={@sortHandler.bind(this, 'sex')}>Sex</td>
               <td onClick={@sortHandler.bind(this, 'baggage')}>Has Baggage</td>
@@ -154,3 +166,34 @@ define [
           </tbody>
         </table>
       </div>
+
+    # TMP
+    createFauxData: ->
+      names = ["Aaron","Ada","Al","Alan","Albert","Alexandra","Alexis","Alfonso","Alice","Amanda","Andrew","Angel","Angelina","Ann","Anna","Anne","Annie","Anthony","Antoinette","Antonia","Becky","Belinda","Benjamin","Bennie","Bert","Betty","Beulah","Bill","Billy","Bobby","Boyd","Brandon","Brandy","Brenda","Brian","Cameron","Candace","Carl","Carlos","Carol","Carolyn","Carroll","Catherine","Christie","Christopher","Claude","Cora","Curtis","Cynthia","Daniel","Darlene","Darrel","Debra","Desiree","Devin","Dewey","Dexter","Diana","Diane","Dianne","Domingo","Don","Donna","Dorothy","Douglas","Doyle","Duane","Earl","Edward","Eleanor","Elizabeth","Elmer","Emanuel","Eric","Erik","Erma","Ernest","Ervin","Esther","Ethel","Evelyn","Flora","Floyd","Francis","Frank","Frankie","Fred","Freda","Garry","Gary","Gayle","George","Georgia","Gerald","Gloria","Grady","Greg","Gregory","Hannah","Harold","Harriet","Harry","Harvey","Hazel","Heather","Hilda","Holly","Homer","Howard","Ira","Irene","Isabel","Israel","Jack","Jackie","Jacqueline","Jake","James","Jana","Jane","Janet","Jasmine","Jason","Jean","Jenna","Jennie","Jeremy","Jesse","Jessie","Jo","Joan","Joe","Joel","Johanna","John","Johnny","Jonathan","Jose","Josh","Joy","Judith","Judy","Julia","Julian","June","Justin","Kari","Katherine","Kathryn","Kathy","Kellie","Kelly","Kelvin","Kenneth","Kerry","Kristin","Lana","Larry","Lee","Lillian","Linda","Lisa","Lois","Louise","Lucia","Lula","Lynette","Mabel","Maggie","Margaret","Maria","Marian","Marianne","Marie","Marilyn","Martha","Martin","Megan","Melissa","Michael","Miguel","Mildred","Mitchell","Monica","Moses","Nadine","Nathaniel","Neal","Nicole","Nina","Noel","Norma","Olive","Olivia","Ollie","Omar","Pamela","Patrick","Patsy","Paul","Paulette","Pedro","Philip","Phillip","Rachel","Randolph","Raymond","Rebecca","Reginald","Rex","Richard","Rickey","Robert","Roberto","Roderick","Rogelio","Roman","Ron","Ronald","Rosa","Roy","Ruby","Rudolph","Rudy","Russell","Sam","Samuel","Scott","Sean","Seth","Shannon","Shelia","Sheri","Sheryl","Shirley","Stephanie","Stephen","Steven","Sue","Susan","Tabitha","Tami","Terry","Timothy","Tina","Tommie","Tony","Tracy","Vernon","Vickie","Virgil","Virginia","Vivian","Walter","Wendell","Wilfred","Willard","William","Wm","Woodrow"]
+
+      people = (@generatePerson(index, names[index]) for index in [0...names.length])
+      people = @addBaggage(people)
+
+    generatePerson: (index, name) ->
+      id: index
+      first_name: name
+      last_name: 'Lastname'
+      age: parseInt(Math.random()*30+18)
+      sex: (['m','f'])[parseInt(Math.random()*2)]
+      ath: parseInt(Math.random()*6)
+      exp: parseInt(Math.random()*6)
+      skill: parseInt(Math.random()*6)
+      vec: parseInt(Math.random()*6)
+      height: parseInt(Math.random()*50+150)
+      position: 'not sure'
+
+    addBaggage: (people) ->
+      for index, person of people
+        if(typeof person.baggage is "undefined" and Math.random() > .5)
+          otherIndex = parseInt(Math.random() * people.length)
+          otherIndex = (otherIndex + 1) % people.length if otherIndex is index
+
+          if typeof people[otherIndex].baggage is "undefined"
+            people[otherIndex].baggage = parseInt(index)
+            person.baggage = otherIndex
+      people

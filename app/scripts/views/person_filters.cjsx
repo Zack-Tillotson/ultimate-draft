@@ -13,7 +13,7 @@ define [
       max_skill = parseInt($('[name=max-skill-filter]').val())
       min_height = parseInt($('[name=min-height-filter]').val())
       max_height = parseInt($('[name=max-height-filter]').val())
-      name = $('[name=name-filter]').val()
+      first_name = $('[name=first-name-filter]').val()
       sex = $('[name=sex-filter]').val()
       has_baggage = $('[name=has-baggage-filter]').val()
 
@@ -24,7 +24,7 @@ define [
         max_skill: max_skill
         min_height: min_height
         max_height: max_height
-        name: name
+        first_name: first_name
         sex: sex
         has_baggage: has_baggage
 
@@ -70,9 +70,9 @@ define [
           <input name="max-height-filter" type='range' value={@props.filters.max_height} min={@props.min_height} max={@props.max_height} onChange={@changeHandler}></input>
           <span>{@heightDisplay(@props.filters.max_height)}</span>
         </div>
-        <div className="filter name">
-          <label for="name-filter">Name</label>
-          <input name="name-filter" type='text' value={@props.filters.name} onChange={@changeHandler}></input>
+        <div className="filter first-name">
+          <label for="first-name-filter">First Name</label>
+          <input name="first-name-filter" type='text' value={@props.filters.name} onChange={@changeHandler}></input>
         </div>
         <div className="filter sex">
           <label for="sex-filter">Sex</label>
