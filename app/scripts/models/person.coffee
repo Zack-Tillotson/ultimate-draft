@@ -3,8 +3,7 @@ class Person
   constructor: (options) ->
     _.extend this, options
 
-  passesFilters: (filters) ->
-    person = @
+  @passesFilters: (person, filters) ->
     ret = true
     filters.forEach (filter) ->
       switch filter.type

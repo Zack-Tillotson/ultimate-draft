@@ -6,7 +6,7 @@ define [
   'views/person'
   'models/person'
   'models/people'
-], (zt, React, PersonFilters, ViewOptions, PersonView, Person) ->
+], (zt, React, PersonFilters, ViewOptions, PersonView) ->
 
   DraftState = React.createClass
 
@@ -31,7 +31,7 @@ define [
       @setState view_options: options
 
     sortClickHandler: (sortBy) ->
-      dir = if sortBy is @state.sort.by and @state.sort.dir is "asc" then "desc" else "asc"
+      dir = if sortBy is @state.sort?.by and @state.sort?.dir is 'asc' then 'desc' else 'asc'
       @setState 
         sort: 
           by: sortBy
@@ -50,32 +50,28 @@ define [
     # Rendering functions
 
     filterPersons: (people) ->
-      person for person in people when person.passesFilters(@state.filters)
+      person for person in people when Person.passesFilters(person, @state.filters)
 
     sortPersons: (people, sort) ->
-      people.sort people.sortFunction(sort.by, sort.dir) if sort?.by? and sort?.dir?
+      people.sort Person.sortFunction(sort.by, sort.dir) if sort?.by? and sort?.dir?
       people
 
-
     getPersonView: (person) ->
-      <PersonView {...person}></PersonView>
+      <PersonView attrs={person}></PersonView>
 
     render: ->
       people = (@getPersonView(person) for person in @sortPersons @filterPersons(@state.people.list), @state.sort)
-
+      table_columns = ((
+        <td className="column-header person-attribute #{attr_name}" onClick={@sortClickHandler.bind(this, attr_name)}>{attr_name}</td>
+      ) for attr_name, attr of @state.people.list[0])
+      
       <div className="ultimate-draft ultd">
         <PersonFilters filters={@state.filters} changeHandler={@filterChangeHandler} resetHandler={@filterResetHandler} />
         <ViewOptions options={@state.view_options} changeHandler={@viewOptionChangeHandler} />
         <table className="players-list">
           <thead>
             <tr>
-              <td className="selected" onClick={@sortClickHandler.bind(this, 'selected')}>Selected</td>
-              <td className="first-name" onClick={@sortClickHandler.bind(this, 'first-name')}>First Name</td>
-              <td onClick={@sortClickHandler.bind(this, 'age')}>Age</td>
-              <td onClick={@sortClickHandler.bind(this, 'sex')}>Sex</td>
-              <td onClick={@sortClickHandler.bind(this, 'baggage')}>Has Baggage</td>
-              <td onClick={@sortClickHandler.bind(this, 'skill')}>Skill</td>
-              <td onClick={@sortClickHandler.bind(this, 'height')}>Height</td>
+              {table_columns}
             </tr>
           </thead>
           <tbody>

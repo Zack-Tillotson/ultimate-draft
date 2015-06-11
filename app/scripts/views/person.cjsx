@@ -12,14 +12,9 @@ define [
       alert 'clicked person!'      
 
     render: ->
-      (    
-        <tr className="#{if @props.selected then 'selected' else ''}" onClick={@clickHandler}>
-          <td className="selected">{if @props.selected then "X" else ""}</td>
-          <td className="name">{@props.first_name}</td>
-          <td className="age">{@props.age}</td>
-          <td className="sex">{@props.sex}</td>
-          <td className="has-baggage">{if @props.baggage? then "Y" else "N"}</td>
-          <td className="skill">{@props.skill}</td>
-          <td className="height">{@heightDisplay(@props.height)}</td>
-        </tr>
-      )
+      attrs = ((
+        <td className="person-attribute #{attr}">{attr}</td>
+      ) for attr_name, attr of @props.attrs)
+      <tr className="#{if @props.selected then 'selected' else ''}" onClick={@personClickHandler}>
+        {attrs}
+      </tr>
