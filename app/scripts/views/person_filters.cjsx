@@ -13,8 +13,8 @@ define [
         continue if filter.type is 'no-filter'
         switch filter.type
           when "number"
-              filter.min_value = parseInt($(".filter input[name=min-#{filter.name}-filter").val())
-              filter.max_value = parseInt($(".filter input[name=max-#{filter.name}-filter").val())
+              filter.min_value = parseInt($(".filter input[name=min-#{filter.name}-filter]").val())
+              filter.max_value = parseInt($(".filter input[name=max-#{filter.name}-filter]").val())
           else
               filter.value = $(".filter [name=#{filter.name}-filter]").val()
 

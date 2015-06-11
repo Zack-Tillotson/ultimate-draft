@@ -57,7 +57,7 @@ define [
       people
 
     getPersonView: (person) ->
-      <PersonView attrs={person} baggage={@state.people.list[person.baggage]} ></PersonView>
+      <PersonView attrs={person} baggage={@state.people.list[person.baggage]} key={person.id} ></PersonView>
 
     render: ->
       filtered_persons = @filterPersons(@state.people.list)
