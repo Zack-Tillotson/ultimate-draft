@@ -55,7 +55,7 @@ class People
 
   getDefaultFilters: ->
     ((
-      
+
       ret = 
         name: name
         type: dataType

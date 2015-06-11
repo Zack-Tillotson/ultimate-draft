@@ -14,7 +14,7 @@ class Person
         when 'option'
           ret = false if filter.value and person[filter.name] isnt filter.value
         when 'exists'
-          ret = false if filter.value is 'Y' and not person[filter.name] or filter.value is 'N' and person[filter.name]
+          ret = false if (filter.value is 'Y' and person[filter.name] is undefined) or (filter.value is 'N' and person[filter.name] isnt undefined)
     return ret
 
   @sortFunction: (sortBy, sortDir) ->

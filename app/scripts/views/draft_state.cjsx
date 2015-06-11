@@ -57,15 +57,23 @@ define [
       people
 
     getPersonView: (person) ->
-      <PersonView attrs={person}></PersonView>
+      <PersonView attrs={person} baggage={@state.people.list[person.baggage]} ></PersonView>
 
     render: ->
       filtered_persons = @filterPersons(@state.people.list)
 
       people = (@getPersonView(person) for person in @sortPersons filtered_persons, @state.sort)
+
       table_columns = ((
         <td className="column-header person-attribute #{attr_name}" onClick={@sortClickHandler.bind(this, attr_name)}>{attr_name}</td>
       ) for attr_name, attr of @state.people.list[0])
+      table_columns.push [(
+        <td className="column-header person-attribute baggage-first-name">Baggage First Name</td>
+      ), (
+        <td className="column-header person-attribute baggage-last-name">Baggage Last Name</td>
+      ), (
+        <td className="column-header person-attribute baggage-vec">Baggage Vec</td>
+      )]
       
       <div className="ultimate-draft ultd">
         <PersonFilters filters={@state.filters} changeHandler={@filterChangeHandler} resetHandler={@filterResetHandler} />
