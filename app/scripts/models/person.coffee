@@ -13,6 +13,8 @@ class Person
           ret = false if not new RegExp(filter.value).test(person[filter.name])
         when 'option'
           ret = false if filter.value and person[filter.name] isnt filter.value
+        when 'exists'
+          ret = false if filter.value is 'Y' and not person[filter.name] or filter.value is 'N' and person[filter.name]
     return ret
 
   @sortFunction: (sortBy, sortDir) ->

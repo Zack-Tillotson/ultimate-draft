@@ -26,20 +26,30 @@ define [
     cleanName: (name) ->
       name.replace '_', ' '
 
+    getDispay: (name, value) ->
+      switch name
+        when 'height' then @heightDisplay value
+        else value
+
     numberFilter: (filter) ->
+      maxView = @getDispay(filter.name, filter.max)
+      minView = @getDispay(filter.name, filter.min)
+      maxValueView = @getDispay(filter.name, filter.max_value)
+      minValueView = @getDispay(filter.name, filter.min_value)
+
       [(
         <div className="filter number-filter min-#{filter.name}">
           <label for="min-#{filter.name}-filter">Minimum {@cleanName filter.name}</label>
-          <span>[{filter.min} - {filter.max}]</span>
+          <span>[{minView} - {maxView}]</span>
           <input name="min-#{filter.name}-filter" type='range' value={filter.min_value} min={filter.min} max={filter.max} onChange={@changeHandler}></input>
-          <span>{filter.min_value}</span>
+          <span>{minValueView}</span>
         </div>
       ), (
         <div className="filter number-filter max-#{filter.name}">
           <label for="max-#{filter.name}-filter">Maximum {@cleanName filter.name}</label>
-          <span>[{filter.min} - {filter.max}]</span>
+          <span>[{minView} - {maxView}]</span>
           <input name="max-#{filter.name}-filter" type='range' value={filter.max_value} min={filter.min} max={filter.max} onChange={@changeHandler}></input>
-          <span>{filter.max_value}</span>
+          <span>{maxValueView}</span>
         </div>
       )]
 
@@ -67,7 +77,7 @@ define [
           switch filter.type
             when 'number' then @numberFilter filter
             when 'string' then @stringFilter filter
-            when 'option' then @optionFilter filter
+            when 'option', 'exists' then @optionFilter filter
         ) for filter in @props.filters)
 
       <div className="person-filters">

@@ -12,6 +12,7 @@ class People
     vec: 'number'
     height: 'number'
     position: 'string'
+    baggage: 'exists'
 
   # TMP
   @createFauxData: ->
@@ -54,16 +55,28 @@ class People
 
   getDefaultFilters: ->
     ((
+      
       ret = 
         name: name
         type: dataType
-      ret.min = @minAttr(name, @list) if dataType is 'number'
-      ret.min_value = ret.min if dataType is 'number'
-      ret.max = @maxAttr(name, @list) if dataType is 'number'
-      ret.max_value = ret.max if dataType is 'number'
-      ret.value = '' if dataType is 'string'
-      ret.values = @pluckValues(name, @list) if dataType is 'option'
-      ret.value = ret.values[0] if dataType is 'option'
+
+      if dataType is 'number'
+        ret.min = @minAttr(name, @list) 
+        ret.min_value = ret.min
+        ret.max = @maxAttr(name, @list) 
+        ret.max_value = ret.max 
+      
+      if dataType is 'string'
+        ret.value = '' 
+
+      if dataType is 'option'
+        ret.values = @pluckValues(name, @list) 
+        ret.value = ret.values[0]
+
+      if dataType is 'exists'
+        ret.values = ['', 'Y', 'N']
+        ret.value = ''
+
       ret
     ) for name, dataType of People.dataTypes)
 

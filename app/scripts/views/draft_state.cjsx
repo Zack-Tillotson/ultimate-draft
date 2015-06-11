@@ -60,7 +60,9 @@ define [
       <PersonView attrs={person}></PersonView>
 
     render: ->
-      people = (@getPersonView(person) for person in @sortPersons @filterPersons(@state.people.list), @state.sort)
+      filtered_persons = @filterPersons(@state.people.list)
+
+      people = (@getPersonView(person) for person in @sortPersons filtered_persons, @state.sort)
       table_columns = ((
         <td className="column-header person-attribute #{attr_name}" onClick={@sortClickHandler.bind(this, attr_name)}>{attr_name}</td>
       ) for attr_name, attr of @state.people.list[0])
@@ -68,6 +70,11 @@ define [
       <div className="ultimate-draft ultd">
         <PersonFilters filters={@state.filters} changeHandler={@filterChangeHandler} resetHandler={@filterResetHandler} />
         <ViewOptions options={@state.view_options} changeHandler={@viewOptionChangeHandler} />
+        <div class="result-stats">
+          <div class="filtered-count">{filtered_persons.length}</div> 
+          /
+          <div class="total-count">{@state.people.list.length}</div>
+        </div>
         <table className="players-list">
           <thead>
             <tr>
