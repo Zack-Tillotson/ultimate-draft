@@ -18,11 +18,12 @@ define [
       sort: null
       view_options:
         selected: true
+        filters: false
 
     # Event Handlers
 
     filterChangeHandler: (filters) ->
-      @setState filters: filters
+      @setState view_options: _.extend {}, @state.view_options, filters: filters
 
     filterResetHandler: ->
       @setState filters: @state.people.getDefaultFilters()
@@ -47,6 +48,9 @@ define [
 
       @setState people: people
 
+    filterTitleClickHandler: (event) ->
+      @setState view_options: _.extend {}, @state.view_options, filters: not @state.view_options.filters
+
     # Rendering functions
 
     filterPersons: (people) ->
@@ -68,21 +72,23 @@ define [
         <td className="column-header person-attribute #{attr_name}" onClick={@sortClickHandler.bind(this, attr_name)}>{attr_name}</td>
       ) for attr_name, attr of @state.people.list[0])
       table_columns.push [(
-        <td className="column-header person-attribute baggage-first-name">Baggage First Name</td>
+        <td className="column-header person-attribute baggage-first-name">First Name</td>
       ), (
-        <td className="column-header person-attribute baggage-last-name">Baggage Last Name</td>
+        <td className="column-header person-attribute baggage-last-name">Last Name</td>
       ), (
-        <td className="column-header person-attribute baggage-vec">Baggage Vec</td>
+        <td className="column-header person-attribute baggage-vec">Vec</td>
       )]
       
       <div className="ultimate-draft ultd">
-        <PersonFilters filters={@state.filters} changeHandler={@filterChangeHandler} resetHandler={@filterResetHandler} />
+        <PersonFilters 
+          filters={@state.filters} 
+          visible={@state.view_options.filters} 
+          filterTitleClickHandler={@filterTitleClickHandler} 
+          changeHandler={@filterChangeHandler} 
+          resetHandler={@filterResetHandler} 
+          totalCount={@state.people.list.length}
+          filteredCount={filtered_persons.length} />
         <ViewOptions options={@state.view_options} changeHandler={@viewOptionChangeHandler} />
-        <div class="result-stats">
-          <div class="filtered-count">{filtered_persons.length}</div> 
-          /
-          <div class="total-count">{@state.people.list.length}</div>
-        </div>
         <table className="players-list">
           <thead>
             <tr>

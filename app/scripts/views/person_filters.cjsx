@@ -39,24 +39,24 @@ define [
 
       [(
         <div className="filter number-filter min-#{filter.name}">
-          <label for="min-#{filter.name}-filter">Minimum {@cleanName filter.name}</label>
-          <span>[{minView} - {maxView}]</span>
-          <input name="min-#{filter.name}-filter" type='range' value={filter.min_value} min={filter.min} max={filter.max} onChange={@changeHandler}></input>
-          <span>{minValueView}</span>
+          <label className="filter-name" for="min-#{filter.name}-filter">Minimum {@cleanName filter.name}</label>
+          <span className="filter-range">[{minView} - {maxView}]</span>
+          <input className="filter-input" name="min-#{filter.name}-filter" type='range' value={filter.min_value} min={filter.min} max={filter.max} onChange={@changeHandler}></input>
+          <span className="filter-value">{minValueView}</span>
         </div>
       ), (
         <div className="filter number-filter max-#{filter.name}">
-          <label for="max-#{filter.name}-filter">Maximum {@cleanName filter.name}</label>
-          <span>[{minView} - {maxView}]</span>
-          <input name="max-#{filter.name}-filter" type='range' value={filter.max_value} min={filter.min} max={filter.max} onChange={@changeHandler}></input>
-          <span>{maxValueView}</span>
+          <label className="filter-name" for="max-#{filter.name}-filter">Maximum {@cleanName filter.name}</label>
+          <span className="filter-range">[{minView} - {maxView}]</span>
+          <input className="filter-input" name="max-#{filter.name}-filter" type='range' value={filter.max_value} min={filter.min} max={filter.max} onChange={@changeHandler}></input>
+          <span className="filter-value">{maxValueView}</span>
         </div>
       )]
 
     stringFilter: (filter) ->
       <div className="filter string-filter #{filter.name}">
-        <label for="#{filter.name}-filter">{@cleanName filter.name}</label>
-        <input name="#{filter.name}-filter" type='text' value={filter.value} onChange={@changeHandler}></input>
+        <label className="filter-name" for="#{filter.name}-filter">{@cleanName filter.name}</label>
+        <input className="filter-input" name="#{filter.name}-filter" type='text' value={filter.value} onChange={@changeHandler}></input>
       </div>
 
     optionFilter: (filter) ->
@@ -64,9 +64,9 @@ define [
         <option value="#{option}">{option}</option>
       ) for option in filter.values)
 
-      <div className="filter option-filter {filter.name}">
-        <label for="#{filter.name}-filter">{@cleanName filter.name}</label>
-        <select name="#{filter.name}-filter" value={filter.value} onChange={@changeHandler}>
+      <div className="filter option-filter #{filter.name}">
+        <label className="filter-name" for="#{filter.name}-filter">{@cleanName filter.name}</label>
+        <select className="filter-input" name="#{filter.name}-filter" value={filter.value} onChange={@changeHandler}>
           {options}  
         </select>
       </div>
@@ -79,8 +79,16 @@ define [
             when 'string' then @stringFilter filter
             when 'option', 'exists' then @optionFilter filter
         ) for filter in @props.filters)
+      filterViewClass = if @props.visible then "shown" else "not-shown"
 
-      <div className="person-filters">
-        {filterList}
-        <button onClick={@props.resetHandler}>Reset Filters</button>
+      <div className="person-filters #{filterViewClass}">
+        <div className="filter-inputs">
+          <div className="filter-inputs-inner">
+            {filterList}
+            <button onClick={@props.resetHandler}>Reset Filters</button>
+          </div>  
+        </div>
+        <div className="filter-title" onClick={@props.filterTitleClickHandler}>
+          Filter ({@props.filteredCount} / {@props.totalCount})
+        </div>
       </div>

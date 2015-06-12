@@ -6,12 +6,9 @@ define [
   ViewOptions = React.createClass
 
     changeHandler: (event) ->        
-
-      baggage = $('[name=baggage-option]')[0]?.checked or false
       selected = $('[name=selected-option]')[0]?.checked or false
       
       @props.changeHandler
-        baggage: baggage
         selected: selected
     
     render: ->
