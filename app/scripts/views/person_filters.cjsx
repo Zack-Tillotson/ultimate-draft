@@ -24,7 +24,7 @@ define [
       "#{Math.floor(cm / 2.54 / 12)}' #{Math.floor(cm / 2.54 % 12)}\"" 
 
     cleanName: (name) ->
-      name.replace '_', ' '
+      name.replace('_', ' ').split(' ').map((item) -> item.charAt(0).toUpperCase() + item.substr(1)).join(' ')
 
     getDispay: (name, value) ->
       switch name

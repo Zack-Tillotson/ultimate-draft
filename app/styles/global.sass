@@ -69,6 +69,21 @@
   margin-top: 10px
   border-collapse: collapse
 
+  thead
+
+    .inactive::after
+      color: #ccc
+
+    .asc::after
+      font-size: 12px
+      margin-left: 10px
+      content: "\25B2"
+
+    .desc::after
+      font-size: 12px
+      margin-left: 10px
+      content: "\25BC"
+
   td
     text-align: right
 
@@ -78,3 +93,7 @@
 
   .baggage
     background: #ccc
+
+  .inch
+    display: inline-block
+    width: 30px

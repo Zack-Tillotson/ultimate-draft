@@ -19,6 +19,7 @@ define [
       view_options:
         selected: true
         filters: false
+        baggage: false
 
     # Event Handlers
 
@@ -29,7 +30,7 @@ define [
       @setState filters: @state.people.getDefaultFilters()
 
     viewOptionChangeHandler: (options) ->
-      @setState view_options: options
+      @setState view_options: _.extend {}, @state.view_options, options
 
     sortClickHandler: (sortBy) ->
       dir = if sortBy is @state.sort?.by and @state.sort?.dir is 'asc' then 'desc' else 'asc'
@@ -61,23 +62,35 @@ define [
       people
 
     getPersonView: (person) ->
-      <PersonView attrs={person} baggage={@state.people.list[person.baggage]} key={person.id} ></PersonView>
+      <PersonView attrs={person} baggage={@state.people.list[person.baggage]} key={person.id} view_baggage={@state.view_options.baggage}></PersonView>
+
+    cleanName: (name) ->
+      name.replace('_', ' ').split(' ').map((item) -> item.charAt(0).toUpperCase() + item.substr(1)).join(' ')
 
     render: ->
       filtered_persons = @filterPersons(@state.people.list)
 
       people = (@getPersonView(person) for person in @sortPersons filtered_persons, @state.sort)
 
+      sortBy = @state.sort?.by
+      sortDesc = @state.sort?.dir
       table_columns = ((
-        <td className="column-header person-attribute #{attr_name}" onClick={@sortClickHandler.bind(this, attr_name)}>{attr_name}</td>
+        <td 
+          className="column-header person-attribute #{attr_name} #{if attr_name is sortBy then sortDesc else 'inactive asc'}" 
+          onClick={@sortClickHandler.bind(this, attr_name)}>
+            {@cleanName attr_name}
+        </td>
       ) for attr_name, attr of @state.people.list[0])
+      table_columns.push(
+        <td className="column-header person-attribute baggage">Baggage</td>
+      ) if not @state.people.list[0].baggage
       table_columns.push [(
         <td className="column-header person-attribute baggage-first-name">First Name</td>
       ), (
         <td className="column-header person-attribute baggage-last-name">Last Name</td>
       ), (
         <td className="column-header person-attribute baggage-vec">Vec</td>
-      )]
+      )] if @state.view_options.baggage
       
       <div className="ultimate-draft ultd">
         <PersonFilters 

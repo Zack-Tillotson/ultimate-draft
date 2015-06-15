@@ -6,7 +6,11 @@ define [
   Person = React.createClass
 
     heightDisplay: (cm) ->
-      "#{Math.floor(cm / 2.54 / 12)}' #{Math.floor(cm / 2.54 % 12)}\"" 
+      [(
+        <span className="ft">{Math.floor(cm / 2.54 / 12) + "'"}</span>
+      ),(
+        <span className="inch">{Math.floor(cm / 2.54 % 12) + '"'}</span>
+      )] 
 
     personClickHandler: (person) ->
       alert 'clicked person!'      
@@ -20,13 +24,16 @@ define [
       attrs = ((
         <td className="person-attribute #{attr_name}">{@getView(attr_name, attr)}</td>
       ) for attr_name, attr of @props.attrs)
+      attrs.push(
+        <td className="person-attribute baggage"></td>
+      ) if not @props.baggage?
       attrs.push [(
         <td className="person-attribute baggage first-name">{@props.baggage?.first_name}</td>
       ), (
         <td className="person-attribute baggage last-name">{@props.baggage?.last_name}</td>
       ), (
         <td className="person-attribute baggage vec">{@props.baggage?.vec}</td>
-      )]
+      )] if @props.view_baggage
 
       <tr className="#{if @props.selected then 'selected' else ''}" onClick={@personClickHandler}>
         {attrs}
