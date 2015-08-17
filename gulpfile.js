@@ -1,11 +1,12 @@
 require('coffee-script/register');
 
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var coffee = require('gulp-coffee');
-var cjsx = require('gulp-cjsx');
-var sass = require('gulp-sass');
-var del = require('del');
+var gulp = require('gulp')
+  , gutil = require('gulp-util')
+  , coffee = require('gulp-coffee')
+  , cjsx = require('gulp-cjsx')
+  , sass = require('gulp-sass')
+  , del = require('del')
+ ;
 
 gulp.task('clean', function(cb) {
   del(['public/**/*']);
@@ -53,6 +54,10 @@ gulp.task('spec-files', function () {
   gulp.src('./spec/libs/**/*')
     .pipe(gulp.dest('./public/libs'));
 });
+
+gulp.task('watch', ['build-development'], function() {
+  gulp.watch('./app/**/*', ['build-development']);
+})
 
 gulp.task('build-development', ['coffee', 'spec-coffee', 'cjsx', 'sass', 'js-libs', 'html-files', 'spec-files']);
 gulp.task('build-production', ['coffee', 'spec-coffee', 'cjsx', 'sass', 'js-libs', 'html-files']);

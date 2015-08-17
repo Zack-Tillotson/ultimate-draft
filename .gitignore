@@ -32,3 +32,6 @@ app/scripts/*/*/*.js
 spec/scripts/*.js
 spec/scripts/*/*.js
 spec/scripts/*/*/*.js
+*.csv
+
+node_modules/

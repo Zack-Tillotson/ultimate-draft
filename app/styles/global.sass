@@ -1,8 +1,8 @@
 #main-container
-  max-width: 1280px
+  max-width: calc(100% - 50px)
   margin-left: auto
   margin-right: auto
-  background: #fff;
+  background: #fff
 
 .person-filters
   text-align: center
@@ -11,7 +11,6 @@
     text-align: left
     background: #e5e5e5
     overflow: hidden
-    transition: max-height .66s linear
     box-shadow: 0px 3px 3px #666
 
     .filter-inputs-inner
@@ -40,8 +39,11 @@
     border-radius: 0 0 10px 10px
     display: inline-block
     padding: 5px 15px
-    border: solid 1px #666;
-    border-top: none;
+    border: solid 1px #666
+    border-top: none
+    &:hover
+      color: #666
+      cursor: pointer
 
     &::after
       font-size: 12px
@@ -54,13 +56,10 @@
       max-height: 0
 
     .filter-title::after
-      content: "\25BA"
+      content: "\25BC"
       
   &.shown
   
-    .filter-inputs
-      max-height: 700
-
     .filter-title::after
       content: "\25B2"
       
@@ -68,6 +67,8 @@
   width: 100%
   margin-top: 10px
   border-collapse: collapse
+  font-size: 12px
+  padding: 0 5px
 
   thead
 
@@ -76,12 +77,10 @@
 
     .asc::after
       font-size: 12px
-      margin-left: 10px
       content: "\25B2"
 
     .desc::after
       font-size: 12px
-      margin-left: 10px
       content: "\25BC"
 
   td
@@ -91,9 +90,44 @@
     border-bottom: solid 1px black
     font-weight: bold
 
-  .baggage
+  .baggage, .baggage-first-name, .baggage-last-name, .baggage-vec
     background: #ccc
 
   .inch
     display: inline-block
-    width: 30px
+    width: 20px
+
+.menu
+
+  .open-icon
+    position: fixed
+    left: 10px
+    top: 0px
+    color: white
+    font-size: 50px
+    line-height: 20px
+
+    &:hover
+      color: #ccc
+      cursor: pointer
+
+  .close-icon
+    font-size: 50px
+    line-height: 20px
+    z-index: 5
+
+    &:hover
+      color: #333
+      cursor: pointer
+
+  .menu-container
+    position: fixed
+    width: 100%
+    height: 100%
+    top: 0
+    bottom: 0
+    background: white
+    left: -100%
+
+    &.open
+      left: 0

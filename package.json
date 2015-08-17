@@ -22,6 +22,7 @@
     "gulp-jasmine": "^2.0.1",
     "gulp-sass": "^1.3.3",
     "gulp-util": "^3.0.4",
+    "gulp-watch": "^4.3.4",
     "jasmine": "https://github.com/pivotal/jasmine-npm/archive/master.tar.gz",
     "jasmine-reporters": "^2.0.5",
     "requirejs": "^2.1.17"

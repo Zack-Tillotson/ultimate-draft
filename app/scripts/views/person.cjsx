@@ -17,23 +17,13 @@ define [
 
     getView: (type, value) ->
       switch type
-        when 'height' then @heightDisplay value
+        when 'Height' then @heightDisplay value
         else value
 
     render: ->
       attrs = ((
-        <td className="person-attribute #{attr_name}">{@getView(attr_name, attr)}</td>
-      ) for attr_name, attr of @props.attrs)
-      attrs.push(
-        <td className="person-attribute baggage"></td>
-      ) if not @props.baggage?
-      attrs.push [(
-        <td className="person-attribute baggage first-name">{@props.baggage?.first_name}</td>
-      ), (
-        <td className="person-attribute baggage last-name">{@props.baggage?.last_name}</td>
-      ), (
-        <td className="person-attribute baggage vec">{@props.baggage?.vec}</td>
-      )] if @props.view_baggage
+        <td className="person-attribute #{attr_name}">{@getView(attr_name, @props.attrs[attr_name])}</td>
+      ) for attr_name in @props.columns)
 
       <tr className="#{if @props.selected then 'selected' else ''}" onClick={@personClickHandler}>
         {attrs}

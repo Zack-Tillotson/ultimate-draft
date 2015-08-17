@@ -4,14 +4,15 @@ define [
   'views/person_filters'
   'views/view_options'
   'views/person'
+  'views/menu'
   'models/person'
   'models/people'
-], (zt, React, PersonFilters, ViewOptions, PersonView) ->
+], (zt, React, PersonFilters, ViewOptions, PersonView, Menu, Person, People) ->
 
   DraftState = React.createClass
 
     getInitialState: ->
-      people = People.createFauxData()
+      people = People.loadFromLocalStorage()
 
       people: people
       filters: people.getDefaultFilters()
@@ -20,6 +21,7 @@ define [
         selected: true
         filters: false
         baggage: false
+        hidden_fields: ['Team', 'Full', 'Email', 'Phone', 'Comments']
 
     # Event Handlers
 
@@ -52,45 +54,52 @@ define [
     filterTitleClickHandler: (event) ->
       @setState view_options: _.extend {}, @state.view_options, filters: not @state.view_options.filters
 
+    formHandler: (csvText) ->
+
+      people = People.parseCsv(csvText)
+
+      @setState 
+        people: people
+        filter: people.getDefaultFilters()
+        sort: null
+
     # Rendering functions
 
     filterPersons: (people) ->
+      return [] if not people?.length
       person for person in people when Person.passesFilters(person, @state.filters)
 
     sortPersons: (people, sort) ->
       people.sort Person.sortFunction(sort.by, sort.dir) if sort?.by? and sort?.dir?
       people
 
-    getPersonView: (person) ->
-      <PersonView attrs={person} baggage={@state.people.list[person.baggage]} key={person.id} view_baggage={@state.view_options.baggage}></PersonView>
+    getPersonView: (person, columns) ->
+      <PersonView attrs={person} key={person.id} columns={@filterColumns()}></PersonView>
 
     cleanName: (name) ->
       name.replace('_', ' ').split(' ').map((item) -> item.charAt(0).toUpperCase() + item.substr(1)).join(' ')
 
-    render: ->
-      filtered_persons = @filterPersons(@state.people.list)
+    filterColumns: ->
+      _.reject(Object.keys(People.dataTypes), (item) => 
+        _.contains(@state.view_options.hidden_fields, item)
+      )
 
-      people = (@getPersonView(person) for person in @sortPersons filtered_persons, @state.sort)
-
+    renderColumnHeaders: ->
       sortBy = @state.sort?.by
       sortDesc = @state.sort?.dir
-      table_columns = ((
+      (
         <td 
-          className="column-header person-attribute #{attr_name} #{if attr_name is sortBy then sortDesc else 'inactive asc'}" 
+          className="column-header person-attribute #{attr_name.replace(/[^A-Za-z]/g, '_')} #{if attr_name is sortBy then sortDesc else 'inactive asc'}" 
           onClick={@sortClickHandler.bind(this, attr_name)}>
             {@cleanName attr_name}
         </td>
-      ) for attr_name, attr of @state.people.list[0])
-      table_columns.push(
-        <td className="column-header person-attribute baggage">Baggage</td>
-      ) if not @state.people.list[0].baggage
-      table_columns.push [(
-        <td className="column-header person-attribute baggage-first-name">First Name</td>
-      ), (
-        <td className="column-header person-attribute baggage-last-name">Last Name</td>
-      ), (
-        <td className="column-header person-attribute baggage-vec">Vec</td>
-      )] if @state.view_options.baggage
+      ) for attr_name in @filterColumns()
+
+    render: ->
+
+      filtered_persons = @filterPersons(@state.people.list)
+      people = (@getPersonView(person) for person in @sortPersons filtered_persons, @state.sort)
+      table_columns = @renderColumnHeaders()
       
       <div className="ultimate-draft ultd">
         <PersonFilters 
@@ -112,4 +121,5 @@ define [
             {people}
           </tbody>
         </table>
+        <Menu formHandler={@formHandler} />
       </div>
