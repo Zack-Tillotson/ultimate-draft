@@ -35,3 +35,4 @@ spec/scripts/*/*/*.js
 *.csv
 
 node_modules/
+npm-debug.log
