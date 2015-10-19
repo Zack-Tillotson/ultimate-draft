@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "start": "webpack-dev-server --port 8888 --content-base src/ --inline --display-reasons --display-error-details",
+    "start": "webpack-dev-server --port 8888 --content-base app/ --inline --display-reasons --display-error-details",
     "build": "webpack"
   },
   "author": "Zack Tillotson",

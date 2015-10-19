@@ -5,11 +5,13 @@ var buildEnv = process.env.BUILD || 'dev';
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    create: './src/entry/create.js',
+    draft: './src/entry/draft.js'
   },
   output: {
-    filename: '[name].js',
-    path: path.join(__dirname, 'dist')
+    filename: '[name]_app.js',
+    path: path.join(__dirname, 'app/assets'),
+    publicPath: 'http://localhost:8080/assets' // Required for webpack-dev-server
   },
   resolve: {
     root: [
