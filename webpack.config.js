@@ -17,14 +17,15 @@ module.exports = {
     root: [
       __dirname
     ],
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.jsx', '.raw.less']
   },
   node: {
     fs: "empty"
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel?stage=2', exclude: /node_modules/ },
+      { test: /\.jsx?$/, loader: 'babel?stage=2', exclude: /node_modules/ },
+      { test: /\.raw\.less$/, loader: 'raw!less'},
     ]
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
