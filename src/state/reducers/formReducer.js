@@ -6,8 +6,17 @@ function CsvDataEntry(state, action) {
     type: 'Form',
     key: uuid.v4(),
     valid: action.valid,
-    csvString: action.validation.find(input => input.name === 'csvText').value
+    csvText: action.validation.find(input => input.name === 'csvText').value
   });
 }
 
-export default {CsvDataEntry};
+function CsvDataConfiguration(state, action) {
+  return Immutable.fromJS({
+    type: 'Form',
+    key: uuid.v4(),
+    valid: action.valid,
+    columns: action.validation
+  });
+}
+
+export default {CsvDataEntry, CsvDataConfiguration};

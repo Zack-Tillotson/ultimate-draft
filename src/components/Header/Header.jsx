@@ -10,6 +10,7 @@ export default React.createClass({
         <header>
           Header
         </header>
+        <div className="bottomBorder"> </div>
       </InlineCss>
     );
   }

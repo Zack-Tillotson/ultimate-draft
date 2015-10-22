@@ -5,9 +5,9 @@ const creators = {
   submitForm(validation) {
     return {
       type: actions.submitForm, 
-      formName: 'CsvDataEntry',
+      formName: 'CsvDataConfiguration',
       validation,
-      valid: validation.reduce((valid, input) => valid && input.valid, true)
+      valid: validation.reduce((soFar, item) => soFar && item.valid, true)
     };
   }
 };

@@ -57,7 +57,10 @@ function getInitialState() {
     draft: 'draft',
     players: [],
     teams: [],
-    wizard: {},
+    wizard: {
+      step: 0,
+      totalSteps: 4
+    },
     objects: {
       draft: {type: 'Draft', key: 'draft'}
     }
@@ -92,6 +95,7 @@ function wizardReducer(state, action) {
 
       state = state.setIn(['wizard', action.formName], newFormObject.get('key'));
       state = state.setIn(['objects', newFormObject.get('key')], newFormObject);
+      state = state.updateIn(['wizard', 'step'], step => step + 1);
 
       break;
   }

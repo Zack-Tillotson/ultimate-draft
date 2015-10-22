@@ -5,12 +5,13 @@ function attemptParse(csvString) {
 }
 
 export default function(inputs) {
-  return inputs.map(input => {
-    switch(input.name) {
+  return Object.keys(inputs).map(name => {
+    const value = inputs[name];
+    switch(name) {
       case 'csvText':
-        const parseResult = attemptParse(input.value);
+        const parseResult = attemptParse(value);
         const valid = parseResult.data.length > 0;
-        return {...input, valid};
+        return {name, value, valid};
     }
   })
 }

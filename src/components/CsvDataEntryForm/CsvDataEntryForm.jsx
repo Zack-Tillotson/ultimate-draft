@@ -1,5 +1,7 @@
 import React from 'react';
 import InlineCss from "react-inline-css";
+import Formsy from 'formsy-react';
+import {Textarea} from 'formsy-react-components';
 
 import {connect} from 'react-redux';
 
@@ -8,30 +10,31 @@ import selector from './selector.js';
 import {dispatcher} from './actions.js';
 
 export default connect(selector, dispatcher)(React.createClass({
-  clickHandler(event) {
-    event.preventDefault();
-    this.props.dispatch.submitCsvDataEntryForm(this.getInputData());
+  
+  submitHandler(inputs) {
+    this.props.dispatch.submitForm(inputs);
   },
-  getInputData() {
-    return [{name: 'csvText', value: this.refs.csvText.value}];
-  },
+
   render() {
     return (
       <InlineCss stylesheet={styles} componentName="container">
-        <h3>Enter player data</h3>
-        <ul>
-          <li>Data must be in CSV format</li>
-        </ul>
-        <div>
-          <textarea ref="csvText" width="50" height="8"></textarea>
-        </div>
-        {this.props.validation && !this.props.validation.valid && (
-          <div>
-            Sorry, this text is not in the correct form.
-          </div>
-        )}
+        <h3>Enter</h3>
+
+        <Formsy.Form onSubmit={this.submitHandler}>
+
+          <Textarea name="csvText" rows={8} cols={100} label="Data in CSV form"></Textarea>
+
+          {this.props.validation && !this.props.validation.valid && (
+            <div>
+              Copy the CSV text into the form in order to continue.
+            </div>
+          )}
+          
+          <button type='submit'>Next</button>
+
+        </Formsy.Form>
+
         
-        <button type='submit' onClick={this.clickHandler}>Next</button>
       </InlineCss>
     );
   }
