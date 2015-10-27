@@ -1,3 +1,6 @@
 export default {
-  submitForm: 'submitForm'
+  submitForm: 'submitForm',
+  previousForm: 'previousForm',
+  startSave: 'startSave',
+  finishSave: 'finishSave'
 };

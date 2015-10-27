@@ -5,14 +5,16 @@ import styles from './styles';
 
 import Header from '../Header';
 import Footer from '../Footer';
-import Body from '../Body';
 
 export default React.createClass({
+  getChildren() {
+    return this.props.children;
+  },
   render() {
     return (
       <InlineCss stylesheet={styles} componentName="container">
         <Header />
-        <Body />
+        {this.getChildren()}
         <Footer />
       </InlineCss>
     );

@@ -1,24 +1,25 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import selector from './selector';
 
-import CsvDataEntryForm from '../CsvDataEntryForm';
-import CsvDataConfigurationForm from '../CsvDataConfigurationForm';
-
-const Wizard = React.createClass({
+export default React.createClass({
+  propTypes: {
+    totalSteps: React.PropTypes.number,
+    currentStep: React.PropTypes.number.isRequired,
+    maxVisibleStep: React.PropTypes.number
+  },
+  getNavigation() {
+    return <div>Step {this.props.currentStep} / {this.props.totalSteps}</div>;
+  },
+  getCurrentStep() {
+    return React.Children.toArray(this.props.children).filter(child => {
+      return child.props.step === this.props.currentStep;
+    });
+  },
   render() {
     return (
       <div>
-        <div>Step {this.props.step + 1} / {this.props.totalSteps}</div>
-        {this.props.step === 0 && (
-          <CsvDataEntryForm />
-        )}
-        {this.props.step === 1 && (
-          <CsvDataConfigurationForm />
-        )}
+        {this.getNavigation()}
+        {this.getCurrentStep()}
       </div>
     );
   }
 });
-
-export default connect(selector)(Wizard);
