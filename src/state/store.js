@@ -8,7 +8,12 @@ export default function buildStore(reducer) {
     LoggerMiddleware({
       level: 'info',
       predicate: (state, action) => true,
-      transformer: (state) => state.toJS()
+      transformer: (state) => {
+        const keys = Object.keys(state);
+        const ret = {};
+        keys.forEach(key => ret[key] = state[key].toJS());
+        return ret;
+      }
     })
   )(createStore)(reducer);
 }

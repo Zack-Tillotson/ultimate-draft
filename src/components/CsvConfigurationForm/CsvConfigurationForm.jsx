@@ -12,8 +12,17 @@ import columnTypes from './columnTypes';
 
 const CsvConfigurationForm = React.createClass({
 
-  submitHandler(columns) {
-    this.props.dispatch.submitForm(columns);
+  propTypes: {
+    inputs: React.PropTypes.shape({
+      csvText: React.PropTypes.string
+    }).isRequired,
+    valid: React.PropTypes.bool,
+    columns: React.PropTypes.array,
+    navigateBackButton: React.PropTypes.object
+  },
+
+  submitHandler(inputs) {
+    this.props.dispatch.submitForm(this.props.name, inputs, this.props.players);
   },
 
   clickPrevHandler(event) {
@@ -66,7 +75,7 @@ const CsvConfigurationForm = React.createClass({
                 <Input 
                     name={'column' + index + 'origName'}
                     type="hidden" 
-                    value={column.name} />
+                    value={column.originalName} />
 
                 <div className="name">
                   <Input 
@@ -92,12 +101,12 @@ const CsvConfigurationForm = React.createClass({
 
           {!this.props.valid && (
             <div>
-              You must specify these columns: ID, Baggage ID.
+              You must specify these column types: ID, Baggage ID.
             </div>
           )}
 
+          {this.props.navigateBackButton}
           <button type='submit'>Next</button>
-          <button onClick={this.clickPrevHandler}>Prev</button>
 
         </Formsy.Form>
 

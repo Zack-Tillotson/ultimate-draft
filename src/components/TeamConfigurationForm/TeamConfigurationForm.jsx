@@ -10,12 +10,18 @@ import {dispatcher} from './actions.js';
 
 const TeamConfigurationForm = React.createClass({
 
+  propTypes: {
+    inputs: React.PropTypes.object.isRequired,
+    valid: React.PropTypes.bool,
+    navigateBackButton: React.PropTypes.object
+  },
+
   getInitialState() {
     return {numTeams: 10};
   },
 
   submitHandler(teams) {
-    this.props.dispatch.submitForm(teams);
+    this.props.dispatch.submitForm(this.props.name, teams);
   },
 
   numTeamsSubmitHandler(inputs) {
@@ -88,6 +94,7 @@ const TeamConfigurationForm = React.createClass({
             </div>
           )}
 
+          {this.props.navigateBackButton}
           <button type='submit'>Next</button>
 
         </Formsy.Form>

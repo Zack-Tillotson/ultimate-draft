@@ -7,9 +7,24 @@ import {dispatcher} from './actions.js';
 
 const SaveDraftForm = React.createClass({
 
+  propTypes: {
+    columns: React.PropTypes.object, 
+    players: React.PropTypes.object, 
+    teams: React.PropTypes.object, 
+    data: React.PropTypes.object, 
+    shareLink: React.PropTypes.string,
+    navigateBackButton: React.PropTypes.object
+  },
+
   saveHandler(event) {
     event.preventDefault();
     this.props.dispatch.saveDraft(this.props.data);
+  },
+
+  getShareLink() {
+    return this.props.shareLink
+      ? '/draft/' + this.props.shareLink
+      : '';
   },
 
   render() {
@@ -36,11 +51,12 @@ const SaveDraftForm = React.createClass({
             This is the link for this draft. Share with the captains and save it - this is
             the only way to access this draft.
             <div>
-              <a href={this.props.shareLink}>{this.props.shareLink}</a>
+              <a href={this.getShareLink()}>{this.getShareLink()}</a>
             </div>
           </div>
         )}
 
+        {this.props.navigateBackButton}
       </InlineCss>
     );
   }

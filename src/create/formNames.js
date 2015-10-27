@@ -1,1 +1,1 @@
-export default ['DataEntryForm','CsvConfigurationForm','TeamConfigurationForm','SaveDraftForm'];
+export default ['Enter Data','Setup Data','Set Up Teams','Review and Save'];

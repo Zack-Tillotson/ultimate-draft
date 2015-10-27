@@ -1,3 +1,12 @@
+import {createSelector} from 'reselect';
+
+const name = (state, props) => props.name;
+const wizard = (state) => state.wizard;
+const forms = createSelector(wizard, (wizard) => wizard.get('forms'));
+const form = createSelector(name, forms, (name, forms) => 
+  forms.filter(form => form.get('name') === name).get(0).toJS()
+);
+
 function transformColumns(columns) {
   return columns.map(column => {
     const {name, type} = column;
@@ -23,20 +32,19 @@ function buildData(columns, players, teams) {
   }
 }
 
-export default (state) => {
+const columns = state => state.columns;
+const players = state => state.players;
+const teams = state => state.teams;
+const draft = state => state.draft;
 
-  const columns = state.getIn(
-    ['objects', state.getIn(['wizard', 'CsvConfiguration']), 'columns']
-  ).toJS();
-  const players = state.getIn(
-    ['objects', state.getIn(['wizard', 'DataEntry']), 'data']
-  ).toJS();
-  const teams = state.getIn(
-    ['objects', state.getIn(['wizard', 'TeamConfiguration']), 'teams']
-  ).toJS();
+export default createSelector(draft, columns, players, teams, (draft, columns, players, teams) => {
+
+  columns = columns.toJS();
+  players = players.toJS();
+  teams = teams.toJS();
 
   const data = buildData(columns, players, teams);
-  const shareLink = state.getIn('url') || '';
-  
+  const shareLink = draft.get('url');
+
   return {columns, players, teams, data, shareLink};
-} 
+});

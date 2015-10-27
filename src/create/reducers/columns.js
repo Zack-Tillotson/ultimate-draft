@@ -1,20 +1,17 @@
 import Immutable from 'immutable';
 import actions from '../../state/actions';
+import formNames from '../formNames';
 
 function getInitialState() {
-  return Immutable.fromJS({
-    name: 'Draft',
-    url: ''
-  });
+  return  Immutable.fromJS([]);
 }
 
 export default function(state = getInitialState(), action) {
   switch(action.type) {
-    case actions.finishSave:
-      if(action.success) {
-        state = state.set('url', action.url);
+    case actions.submitForm:
+      if(action.name === formNames[1] && action.valid) {
+        state = Immutable.fromJS(action.inputs);
       }
-      break;
   }
   return state;
 }

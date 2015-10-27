@@ -10,9 +10,17 @@ import selector from './selector.js';
 import {dispatcher} from './actions.js';
 
 const DataEntryForm = React.createClass({
+
+  propTypes: {
+    inputs: React.PropTypes.shape({
+      csvText: React.PropTypes.string
+    }).isRequired,
+    valid: React.PropTypes.bool,
+    navigateBackButton: React.PropTypes.object
+  },
   
   submitHandler(inputs) {
-    this.props.dispatch.submitForm(inputs);
+    this.props.dispatch.submitForm(this.props.name, inputs);
   },
 
   render() {
@@ -23,7 +31,8 @@ const DataEntryForm = React.createClass({
         <Formsy.Form onSubmit={this.submitHandler}>
 
           <Textarea 
-            name="csvText" rows={8} cols={100} label="Data in CSV form" value={this.props.csvText} />
+            name="csvText" rows={8} cols={100} label="Data in CSV form" 
+            value={this.props.inputs.csvText} />
 
           {!this.props.valid && (
             <div>
@@ -31,6 +40,7 @@ const DataEntryForm = React.createClass({
             </div>
           )}
           
+          {this.props.navigateBackButton}
           <button type='submit'>Next</button>
 
         </Formsy.Form>

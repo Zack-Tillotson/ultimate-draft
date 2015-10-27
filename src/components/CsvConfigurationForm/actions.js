@@ -2,31 +2,38 @@ import actions from '../../state/actions';
 import validator from './validator';
 
 const creators = {
-  submitForm(inputs, valid) {
+
+  submitForm(name, inputs, valid, players) {
     return {
       type: actions.submitForm, 
-      formName: 'CsvConfiguration',
+      name,
       inputs,
-      valid
+      valid,
+      players
     };
   },
+
   previousForm() {
     return {
       type: actions.previousForm
     }
   }
+
 };
 
 const dispatcher = (dispatch) => {
   return {
     dispatch: {
-      submitForm(inputs) {
+
+      submitForm(name, inputs, players) {
         const valid = validator(inputs);
-        dispatch(creators.submitForm(inputs, valid));
+        dispatch(creators.submitForm(name, inputs, valid, players));
       },
+
       previousForm() {
         dispatch(creators.previousForm());
       }
+
     }
   }
 }

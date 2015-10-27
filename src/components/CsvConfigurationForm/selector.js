@@ -1,5 +1,7 @@
+import {createSelector} from 'reselect';
 import columnTypes from './columnTypes';
 import {id, baggageId} from './columnTypes';
+import papaparse from 'papaparse';
 
 function guessColumnType(name) {
   switch(name.toLowerCase()) {
@@ -15,24 +17,35 @@ function guessColumnType(name) {
   }
 }
 
+function cleanName(name) {
+  return name.replace(/\.|\$|\#|\[|\]|\//, '_');
+}
+
 function transformFieldMetadata(fields) {
-  return fields.map(name => {
+  return fields.map(originalName => {
+    const name = cleanName(originalName);
     return {
+      originalName,
       name,
       type: guessColumnType(name)
     };
   });
 }
 
-export default (state) => {
+const name = (state, props) => props.name;
+const wizard = (state) => state.wizard;
+const forms = createSelector(wizard, (wizard) => wizard.get('forms'));
+const form = createSelector(name, forms, (name, forms) => 
+  forms.filter(form => form.get('name') === name).get(0).toJS()
+);
 
-  const dataEntryKey = state.getIn(['wizard', 'DataEntry']);
-  
-  const players = state.getIn(['objects', dataEntryKey, 'data']).toJS();
-  const fields = state.getIn(['objects', dataEntryKey, 'columns']).toJS();
-  
-  const columns = transformFieldMetadata(fields);
+const csvText = (state) => state.wizard.get('forms').get(0).get('inputs').get('csvText');
 
-  return {players, columns};
+export default createSelector(form, csvText, (form, csvText) => {
 
-}
+  const parseResult = papaparse.parse(csvText, {header: true});
+  const players = parseResult.data;
+  const columns = transformFieldMetadata(parseResult.meta.fields);
+
+  return {...form, columns, players};
+});

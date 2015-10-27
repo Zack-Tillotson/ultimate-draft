@@ -1,3 +1,3 @@
-export default function(csvText) {
-  return !!csvText;
+export default function(inputs) {
+  return !!inputs.csvText;
 }

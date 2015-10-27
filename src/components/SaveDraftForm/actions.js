@@ -3,7 +3,7 @@ import firebase from './firebase';
 
 const creators = {
   startingSave() {return {type: actions.startSave}},
-  finishedSave(success, data) {return {type: actions.finishSave, success, data}},
+  finishedSave(success, url) {return {type: actions.finishSave, success, url}},
   saveDraft(data) {
     return dispatch => {
       dispatch(this.startingSave());

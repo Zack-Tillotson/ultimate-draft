@@ -2,11 +2,11 @@ import actions from '../../state/actions';
 import validator from './validator';
 
 const creators = {
-  submitForm(teams, valid) {
+  submitForm(name, inputs, valid) {
     return {
       type: actions.submitForm, 
-      formName: 'TeamConfiguration',
-      teams,
+      name,
+      inputs,
       valid
     };
   }
@@ -15,9 +15,9 @@ const creators = {
 const dispatcher = (dispatch) => {
   return {
     dispatch: {
-      submitForm(inputs) {
+      submitForm(name, inputs) {
         const valid = validator(inputs);
-        dispatch(creators.submitForm(inputs, valid));
+        dispatch(creators.submitForm(name, inputs, valid));
       }
     }
   }
