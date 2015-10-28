@@ -55,8 +55,8 @@ const DraftPage = React.createClass({
 
   getLoadingSpinner() {
     return !this.props.firebase.connected && (
-      <div className="loading">
-        <div className="spinner">Spinning!</div>
+      <div className="error">
+        <div className="spinner">Loading draft, please wait!</div>
       </div>
     );
   },

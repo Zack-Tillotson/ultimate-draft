@@ -26,7 +26,7 @@ const SaveDraftForm = React.createClass({
 
   getShareLink() {
     return this.props.shareLink
-      ? 'http://' + document.location.host + '/draft?' + this.props.shareLink
+      ? 'http://' + document.location.host + '/draft?id=/' + this.props.shareLink
       : '';
   },
 
