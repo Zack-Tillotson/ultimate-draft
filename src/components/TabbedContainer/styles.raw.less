@@ -1,0 +1,32 @@
+component {
+
+  .tabs {
+    text-align: center;
+    border-bottom: solid 1px black;
+
+    .tab {
+      border: solid 1px black;
+      display: inline-block;
+      width: 30%;
+      max-width: 400px;
+      position: relative;
+      bottom: -1px;
+      border-radius: 5px 5px 0 0;
+      margin: 0 2px;
+
+      &.active {
+        border-bottom: solid 1px white;
+      }
+
+      &.inactive {
+        background: #9BC0C6;
+
+        &:hover {
+          background: #DCF2F9;
+        }
+      }
+
+    }
+  }
+  
+}

@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import Application from '../../components/Application';
 import Wizard from '../../components/Wizard';
 
-import DataEntryForm from '../../components/DataEntryForm';
-import CsvConfigurationForm from '../../components/CsvConfigurationForm';
-import TeamConfigurationForm from '../../components/TeamConfigurationForm';
-import SaveDraftForm from '../../components/SaveDraftForm';
+import DataEntryForm from '../../components/create/DataEntryForm';
+import CsvConfigurationForm from '../../components/create/CsvConfigurationForm';
+import TeamConfigurationForm from '../../components/create/TeamConfigurationForm';
+import SaveDraftForm from '../../components/create/SaveDraftForm';
 
 import selector from '../selector';
 import actions from '../actions';

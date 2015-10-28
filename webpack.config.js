@@ -5,7 +5,8 @@ var buildEnv = process.env.BUILD || 'dev';
 
 module.exports = {
   entry: {
-    create: './src/create/entry.js'
+    create: './src/create/entry.js',
+    draft: './src/draft/entry.js'
   },
   output: {
     filename: '[name]_app.js',
