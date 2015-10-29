@@ -3,13 +3,14 @@ export default {
   previousForm: 'previousForm',
   startSave: 'startSave',
   finishSave: 'finishSave',
-  chooseCurrenTeam: 'chooseCurrenTeam',
+
   tabClick: 'tabClick',
   viewModal: 'viewModal',
-  confirmwModal: 'confirmModal',
   cancelModal: 'cancelModal',
-  draftPlayer: 'draftPlayer',
+  updateModal: 'updateModal',
   sortPlayers: 'sortPlayers',
+  
   firebase: 'firebase',
-  blowup: 'blowup'
+  blowup: 'blowup',
+  syncing: 'syncing'
 };

@@ -12,12 +12,10 @@ function getInitialState() {
 export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.firebase:
-      if(action.path === 'firebase') {
-        if(action.success) {
-          state = state.merge({connected: true});
-        } else {
-          state = state.merge({connected: true, broken: true});
-        }
+      if(action.success) {
+        state = state.merge({connected: true});
+      } else {
+        state = state.merge({connected: true, broken: true});
       }
       break;
   }

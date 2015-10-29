@@ -1,4 +1,6 @@
 import actions from '../state/actions';
+import utils from './utils';
+import Firebase from '../firebase';
 
 const creators = {
   tabClick(tabName) {
@@ -7,17 +9,34 @@ const creators = {
   viewModal(modalName, data) {
     return {type: actions.viewModal, modalName, data};
   },
-  confirmModal(modalName, data) {
-    return {type: actions.confirmModal, modalName, data}
+  updateModal(data) {
+    return {type: actions.updateModal, data};
+  },
+  confirmModal: (modalName, data) => (dispatch) => {
+    dispatch(creators.uploadStarting());
+    const firebaseId = utils.getFirebaseId();
+    const draftsRef = Firebase.connect(firebaseId + '/drafts');
+    const draftRef = draftsRef.child(data.index).set(data.draft, (error) => {
+      if(error) {
+        dispatch(creators.blowup(error));
+      }
+      dispatch(creators.uploadFinished());
+    });
   },
   cancelModal(modalName) {
     return {type: actions.cancelModal, modalName};
   },
-  firebase(path, success, data = {}) {
-    return {type: actions.firebase, path, success, data};
+  firebase(success, data) {
+    return {type: actions.firebase, success, data};
   },
   blowup(message) {
     return {type: actions.blowup, message};
+  },
+  uploadStarting() {
+    return {type: actions.syncing, inProgress: true};
+  },
+  uploadFinished() {
+    return {type: actions.syncing, inProgress: false};
   }
 };
 
@@ -30,17 +49,20 @@ const dispatcher = (dispatch) => {
       viewModal(modalName, data = {}) {
         dispatch(creators.viewModal(modalName, data));
       },
-      confirmModal(modalName, data = {}) {
-        dispatch(creators.confirmModal(modalName, data));
+      updateModal(data = {}) {
+        dispatch(creators.updateModal(data));
       },
       cancelModal(modalName) {
         dispatch(creators.cancelModal(modalName));
       },
-      firebase(path, success, data) {
-        dispatch(creators.firebase(path, success, data));
+      firebase(success, data = {}) {
+        dispatch(creators.firebase(success, data));
       },
       blowup(message) {
         dispatch(creators.blowup(message));
+      },
+      confirmModal(modalName, data = {}) {
+        dispatch(creators.confirmModal(modalName, data));
       }
     }
   }

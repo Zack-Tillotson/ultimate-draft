@@ -16,22 +16,44 @@ export default React.createClass({
       return child.props.modalName === this.props.currentModalName;
     });
     if(child.length) {
-      return React.cloneElement(child[0], {});
+      return React.cloneElement(child[0], {ref: 'modal'});
     } else {
       return "";
     }
   },
 
+  backgroundCancelHandler(event) {
+    if(event.target.classList.contains('background')) {
+      this.cancelHandler(event);
+    }
+  },
+
   cancelHandler(event) {
+    event.preventDefault();
     this.props.cancelHandler(this.props.currentModalName);
+  },
+
+  confirmHandler(event) {
+    event.preventDefault();
+    this.props.confirmHandler(this.props.currentModalName, this.props.modalData);
   },
 
   render() {
     if(this.props.currentModalName) {
       return (
         <InlineCss componentName="component" stylesheet={styles}>
-          <div className="background" onClick={this.cancelHandler}>
-            {this.getCurrentModal()}
+          <div className="background" onClick={this.backgroundCancelHandler}>
+            <div className="foreground">
+              {this.getCurrentModal()}
+              <div className="modalNav">
+                <div className="buttonContainer">
+                  <button onClick={this.cancelHandler}>Cancel</button>
+                </div>
+                <div className="buttonContainer">
+                  <button onClick={this.confirmHandler}>Confirm</button>
+                </div>
+              </div>
+            </div>
           </div>
         </InlineCss>
       );

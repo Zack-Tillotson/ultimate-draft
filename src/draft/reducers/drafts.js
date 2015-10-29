@@ -9,7 +9,7 @@ export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.firebase:
       if(action.success) {
-        state = Immutable.fromJS(action.data.players);
+        state = Immutable.fromJS(action.data.drafts || []);
       }
   }
   return state;

@@ -8,8 +8,8 @@ function getInitialState() {
 export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.firebase:
-      if(action.success && action.path === 'columns') {
-        state = Immutable.fromJS(action.data);
+      if(action.success) {
+        state = Immutable.fromJS(action.data.columns);
       }
   }
   return state;

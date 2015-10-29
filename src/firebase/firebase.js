@@ -6,7 +6,7 @@ const version = 'v0_1';
 const alpha = ['A','B','C','D','E','F','G','H','J','K','M','N','P','Q','R','S','T','W','X','Y'];
 const numeric = ['3','4','5','6','7','8','9'];
 
-const onceChildren = ['players', 'teams', 'columns'];
+const children = ['players', 'teams', 'columns', 'drafts'];
 
 function dispatchData(dispatch, child) {
   return function(snapshot) {
@@ -46,6 +46,7 @@ function getFirebaseUrl(path) {
 }
 
 export default {
+
   save(data) {
     return new Promise((resolve, reject) => {
       const path = getFirebasePath();
@@ -61,38 +62,31 @@ export default {
       });
     });
   },
-  connect(path, dispatch) {
+
+  sync(path, dispatch) {
 
     const firebaseUrl = getFirebaseUrl(path);
     const ref = new Firebase(firebaseUrl);
 
-    const promises = onceChildren.map(child => new Promise((resolve, reject) => {
-      ref.child(child).once(
-        'value', 
-        snapshot => {
-          if(snapshot.exists()) {
-            dispatch(child, true, snapshot.val());
-            resolve();  
-          } else {
-            dispatch(child, false);
-            reject();
-          }
-        }, 
-        error => {
-          dispatch(child, false);
-          reject(error);
+    ref.on(
+      'value', 
+      snapshot => {
+        if(snapshot.exists()) {
+          dispatch(true, snapshot.val());
+        } else {
+          dispatch(false);
         }
-      );
-    }));
+      }, 
+      error => {
+        dispatch(child, false);
+      }
+    );
 
-    Promise.all(promises)
-      .then(() => {
-        dispatch('firebase', true);
-      })
-      .catch(() => {
-        dispatch('firebase', false);
-      });
-    
     return ref;
+  },
+
+  connect(path) {
+    const firebaseUrl = getFirebaseUrl(path);
+    return new Firebase(firebaseUrl);
   }
 }

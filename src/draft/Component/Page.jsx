@@ -41,7 +41,7 @@ const DraftPage = React.createClass({
   connectToFirebase() {
     const firebaseId = Utils.getFirebaseId();
     if(firebaseId) {
-      this.firebaseRef = Firebase.connect(firebaseId, this.props.dispatch.firebase);
+      this.firebaseRef = Firebase.sync(firebaseId, this.props.dispatch.firebase);
     } else {
       this.props.dispatch.blowup('Draft not found, please check to make sure the URL is correct');
     }
@@ -71,30 +71,52 @@ const DraftPage = React.createClass({
     return (
       <Application>
         <InlineCss stylesheet={styles} componentName="container">
-          {this.getError()}
-          {this.getLoadingSpinner()}
+
           <CurrentTeamView />
+
           <TabbedContainer 
               currentTabName={this.props.ui.tab}
               tabClickHandler={this.props.dispatch.tabClick} >
+
             <Players 
-              columns={this.props.columns}
               tabName={tabNames.players}
+              columns={this.props.columns}
               players={this.props.players}
+              drafts={this.props.drafts}
+              viewModal={this.props.dispatch.viewModal} 
+              currentTeam={this.props.user.currentTeam} />
+            <Teams 
+              tabName={tabNames.teams}
+              columns={this.props.columns}
+              teams={this.props.teams}
               viewModal={this.props.dispatch.viewModal} />
-            <Teams tabName={tabNames.teams} />
-            <History tabName={tabNames.history} />
+            <History 
+              tabName={tabNames.history}
+              drafts={this.props.drafts} />
+
           </TabbedContainer>
+
           <ModalContainer 
               currentModalName={this.props.ui.modal}
+              modalData={this.props.ui.modalData}
               confirmHandler={this.props.dispatch.confirmModal}
               cancelHandler={this.props.dispatch.cancelModal}>
+
             <ChooseCurrentTeam modalName={modalNames.chooseCurrentTeam} />
             <FilterColumns modalName={modalNames.filterColumns} />
             <FilterPlayers modalName={modalNames.filterRows} />
-            <DraftPlayer modalName={modalNames.draftPlayer} />
+            <DraftPlayer 
+              updateModal={this.props.dispatch.updateModal}
+              modalName={modalNames.draftPlayer}
+              data={this.props.ui.modalData} 
+              teams={this.props.teams} />
             <UndraftPlayer modalName={modalNames.undraftPlayer} />
+
           </ModalContainer>
+
+          {this.getError()}
+          {this.getLoadingSpinner()}
+
         </InlineCss>
       </Application>
     );

@@ -6,7 +6,9 @@ function getInitialState() {
   return Immutable.fromJS({
     tab: tabNames.players,
     modal: '',
-    error: ''
+    error: '',
+    modalData: {},
+    saving: false
   });
 }
 
@@ -19,17 +21,30 @@ export default function(state = getInitialState(), action) {
       break;
     case actions.viewModal:
       state = state.merge({
-        modal: action.modalName
+        modal: action.modalName,
+        modalData: action.data
       });
       break;
     case actions.cancelModal:
+    case actions.syncing:
       state = state.merge({
-        modal: ''
+        modal: '',
+        modalData: {}
+      });
+      break;
+    case actions.updateModal:
+      state = state.merge({
+        modalData: action.data
       });
       break;
     case actions.blowup:
       state = state.merge({
         error: action.message
+      });
+      break;
+    case actions.syncing:
+      state = state.merge({
+        saving: !action.inProgress
       });
       break;
   }

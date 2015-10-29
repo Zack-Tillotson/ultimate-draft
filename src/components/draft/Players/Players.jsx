@@ -7,12 +7,22 @@ import styles from './styles';
 export default React.createClass({
 
   propTypes: {
+    currentTeam: React.PropTypes.number.isRequired,
     players: React.PropTypes.array.isRequired,
-    viewModal: React.PropTypes.func.isRequired
+    viewModal: React.PropTypes.func.isRequired,
+    drafts: React.PropTypes.array.isRequired
   },
 
-  modalClickHandler(name) {
-    this.props.viewModal(name);
+  modalClickHandler(name, data = {}) {
+    this.props.viewModal(name, data);
+  },
+
+  draftPlayerHandler(playerId) {
+    const teamId = this.props.currentTeam;
+    this.modalClickHandler(
+      modalNames.draftPlayer, 
+      {index: this.props.drafts.length, draft: {playerId, teamId}}
+    ); 
   },
 
   getFilteredColumns() {
@@ -38,25 +48,8 @@ export default React.createClass({
   },
 
   getPlayerId(player) {
-    const idColumn = this.getFilteredColumns().find(column => column.type === 'id');
-    if(idColumn) {
-      return player[idColumn];  
-    } else {
-      return Math.random();
-    }
-    
-  },
-
-  getPlayerColumns(player, index) {
-    return (
-      <tr key={this.getPlayerId(player)}>
-        {this.getFilteredColumns().map(column => (
-          <td key={column.name}>
-            {player[column.name]}
-          </td>
-        ))}
-      </tr>
-    );
+    const idColumn = this.props.columns.find(column => column.type === 'ID');
+    return player[idColumn.name];  
   },
 
   sortColumn(column) {
@@ -71,8 +64,25 @@ export default React.createClass({
     ));
   },
 
+
+
+  getPlayer(player, index) {
+    const className="";
+    return (
+      <tr 
+          key={this.getPlayerId(player)} 
+          onClick={this.draftPlayerHandler.bind(this, this.getPlayerId(player))}>
+        {this.getFilteredColumns().map(column => (
+          <td key={column.name} className={className}>
+            {player[column.name]}
+          </td>
+        ))}
+      </tr>
+    );
+  },
+
   getPlayers() {
-    return this.props.players.map((player, index) => this.getPlayerColumns(player, index));
+    return this.props.players.map((player, index) => this.getPlayer(player, index));
   },
 
   render() {
@@ -82,8 +92,7 @@ export default React.createClass({
           {this.getColumnFilterModalLink()}
           {this.getRowFilterModalLink()}
         </div>
-        <h5>{this.props.players.length} Players</h5>
-        <table>
+        <table className="players">
           <thead>
             <tr>
               {this.getColumns()}
