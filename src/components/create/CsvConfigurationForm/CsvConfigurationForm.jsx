@@ -1,7 +1,7 @@
 import React from 'react';
 import InlineCss from "react-inline-css";
 import Formsy from 'formsy-react';
-import {Input, Select} from 'formsy-react-components';
+import {Input, Select, Checkbox} from 'formsy-react-components';
 import {connect} from 'react-redux';
 
 import styles from './styles';
@@ -36,7 +36,8 @@ const CsvConfigurationForm = React.createClass({
       return {
         originalName: inputs['column' + index + 'origName'],
         name: inputs['column' + index + 'name'],
-        type: inputs['column' + index + 'type']
+        type: inputs['column' + index + 'type'],
+        visible: inputs['column' + index + 'visible'],
       };
     });
 
@@ -83,6 +84,13 @@ const CsvConfigurationForm = React.createClass({
                     label="Column Name"
                     type="text" 
                     value={column.name} />
+                </div>
+
+                <div className="name">
+                  <Checkbox 
+                    name={'column' + index + 'visible'}
+                    label="Default Visibile"
+                    value={column.visible} />
                 </div>
 
                 <div className="type">

@@ -15,6 +15,10 @@ export default React.createClass({
     this.props.viewModal(name);
   },
 
+  getFilteredColumns() {
+    return this.props.columns.filter(column => column.visible);
+  },
+
   getColumnFilterModalLink() {
     const name = modalNames.filterColumns;
     return (
@@ -33,6 +37,44 @@ export default React.createClass({
     );
   },
 
+  getPlayerId(player) {
+    const idColumn = this.getFilteredColumns().find(column => column.type === 'id');
+    if(idColumn) {
+      return player[idColumn];  
+    } else {
+      return Math.random();
+    }
+    
+  },
+
+  getPlayerColumns(player, index) {
+    return (
+      <tr key={this.getPlayerId(player)}>
+        {this.getFilteredColumns().map(column => (
+          <td key={column.name}>
+            {player[column.name]}
+          </td>
+        ))}
+      </tr>
+    );
+  },
+
+  sortColumn(column) {
+
+  },
+
+  getColumns() {
+    return this.getFilteredColumns().map(column => (
+      <td  key={column.name} onClick={this.sortColumn.bind(this, column.name)}>
+        {column.name}
+      </td>
+    ));
+  },
+
+  getPlayers() {
+    return this.props.players.map((player, index) => this.getPlayerColumns(player, index));
+  },
+
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
@@ -40,7 +82,17 @@ export default React.createClass({
           {this.getColumnFilterModalLink()}
           {this.getRowFilterModalLink()}
         </div>
-        {this.props.players.length} Players
+        <h5>{this.props.players.length} Players</h5>
+        <table>
+          <thead>
+            <tr>
+              {this.getColumns()}
+            </tr>
+          </thead>
+          <tbody>
+            {this.getPlayers()}
+          </tbody>
+        </table>
       </InlineCss>
     );
   }

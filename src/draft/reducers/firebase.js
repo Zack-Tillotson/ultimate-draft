@@ -5,17 +5,19 @@ import tabNames from '../tabNames.js';
 function getInitialState() {
   return Immutable.fromJS({
     connected: false,
-    message: ''
+    broken: false
   });
 }
 
 export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.firebase:
-      if(action.success) {
-        state = state.merge({connected: true});
-      } else {
-        state = state.merge({connected: false, message: action.data});
+      if(action.path === 'firebase') {
+        if(action.success) {
+          state = state.merge({connected: true});
+        } else {
+          state = state.merge({connected: true, broken: true});
+        }
       }
       break;
   }

@@ -9,8 +9,8 @@ const form = createSelector(name, forms, (name, forms) =>
 
 function transformColumns(columns) {
   return columns.map(column => {
-    const {name, type} = column;
-    return {name, type};
+    const {name, type, visible} = column;
+    return {name, type, visible};
   });
 }
 

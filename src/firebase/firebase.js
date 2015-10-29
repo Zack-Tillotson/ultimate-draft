@@ -6,7 +6,7 @@ const version = 'v0_1';
 const alpha = ['A','B','C','D','E','F','G','H','J','K','M','N','P','Q','R','S','T','W','X','Y'];
 const numeric = ['3','4','5','6','7','8','9'];
 
-const children = ['players', 'teams', 'columns'];
+const onceChildren = ['players', 'teams', 'columns'];
 
 function dispatchData(dispatch, child) {
   return function(snapshot) {
@@ -66,9 +66,32 @@ export default {
     const firebaseUrl = getFirebaseUrl(path);
     const ref = new Firebase(firebaseUrl);
 
-    children.forEach(child => {
-      ref.child(child).on('value', dispatchData(dispatch, child), dispatchError(dispatch, child));
-    });
+    const promises = onceChildren.map(child => new Promise((resolve, reject) => {
+      ref.child(child).once(
+        'value', 
+        snapshot => {
+          if(snapshot.exists()) {
+            dispatch(child, true, snapshot.val());
+            resolve();  
+          } else {
+            dispatch(child, false);
+            reject();
+          }
+        }, 
+        error => {
+          dispatch(child, false);
+          reject(error);
+        }
+      );
+    }));
+
+    Promise.all(promises)
+      .then(() => {
+        dispatch('firebase', true);
+      })
+      .catch(() => {
+        dispatch('firebase', false);
+      });
     
     return ref;
   }

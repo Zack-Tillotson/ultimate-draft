@@ -27,7 +27,8 @@ function transformFieldMetadata(fields) {
     return {
       originalName,
       name,
-      type: guessColumnType(name)
+      type: guessColumnType(name),
+      visible: true
     };
   });
 }

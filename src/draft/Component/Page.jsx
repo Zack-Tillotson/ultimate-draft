@@ -62,8 +62,8 @@ const DraftPage = React.createClass({
   },
 
   getError() {
-    return this.props.ui.error && (
-      <div className="error">{this.props.ui.error}</div>
+    return this.props.firebase.broken && (
+      <div className="error">Unable to connect to the draft - please check the URL and try again.</div>
     );
   },
 
@@ -78,6 +78,7 @@ const DraftPage = React.createClass({
               currentTabName={this.props.ui.tab}
               tabClickHandler={this.props.dispatch.tabClick} >
             <Players 
+              columns={this.props.columns}
               tabName={tabNames.players}
               players={this.props.players}
               viewModal={this.props.dispatch.viewModal} />

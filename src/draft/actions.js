@@ -13,7 +13,7 @@ const creators = {
   cancelModal(modalName) {
     return {type: actions.cancelModal, modalName};
   },
-  firebase(path, success, data) {
+  firebase(path, success, data = {}) {
     return {type: actions.firebase, path, success, data};
   },
   blowup(message) {
