@@ -6,7 +6,9 @@ import styles from './styles';
 export default React.createClass({
 
   propTypes: {
-    currentModalName: React.PropTypes.string
+    currentModalName: React.PropTypes.string,
+    confirmHandler: React.PropTypes.func.isRequired,
+    cancelHandler: React.PropTypes.func.isRequired
   },
 
   getCurrentModal() {
@@ -19,12 +21,22 @@ export default React.createClass({
       return "";
     }
   },
-  
+
+  cancelHandler(event) {
+    this.props.cancelHandler(this.props.currentModalName);
+  },
+
   render() {
-    return (
-      <InlineCss componentName="component" stylesheet={styles}>
-        {this.getCurrentModal()}
-      </InlineCss>
-    );
+    if(this.props.currentModalName) {
+      return (
+        <InlineCss componentName="component" stylesheet={styles}>
+          <div className="background" onClick={this.cancelHandler}>
+            {this.getCurrentModal()}
+          </div>
+        </InlineCss>
+      );
+    } else {
+      return null;
+    }
   }
 });

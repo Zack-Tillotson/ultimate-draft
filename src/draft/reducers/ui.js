@@ -17,6 +17,16 @@ export default function(state = getInitialState(), action) {
         tab: action.tabName
       });
       break;
+    case actions.viewModal:
+      state = state.merge({
+        modal: action.modalName
+      });
+      break;
+    case actions.cancelModal:
+      state = state.merge({
+        modal: ''
+      });
+      break;
     case actions.blowup:
       state = state.merge({
         error: action.message

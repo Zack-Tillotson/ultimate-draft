@@ -4,6 +4,9 @@ const creators = {
   tabClick(tabName) {
     return {type: actions.tabClick, tabName}
   },
+  viewModal(modalName, data) {
+    return {type: actions.viewModal, modalName, data};
+  },
   confirmModal(modalName, data) {
     return {type: actions.confirmModal, modalName, data}
   },
@@ -23,6 +26,9 @@ const dispatcher = (dispatch) => {
     dispatch: {
       tabClick(tabName) {
         dispatch(creators.tabClick(tabName));
+      },
+      viewModal(modalName, data = {}) {
+        dispatch(creators.viewModal(modalName, data));
       },
       confirmModal(modalName, data = {}) {
         dispatch(creators.confirmModal(modalName, data));

@@ -79,7 +79,8 @@ const DraftPage = React.createClass({
               tabClickHandler={this.props.dispatch.tabClick} >
             <Players 
               tabName={tabNames.players}
-              players={this.props.players} />
+              players={this.props.players}
+              viewModal={this.props.dispatch.viewModal} />
             <Teams tabName={tabNames.teams} />
             <History tabName={tabNames.history} />
           </TabbedContainer>
