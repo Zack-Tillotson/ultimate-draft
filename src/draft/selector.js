@@ -53,16 +53,22 @@ const uiWithData = createSelector(uiJs, playerMap, draftsJs, (ui, playerMap, dra
 
   switch(ui.modal) {
     case ModalNames.draftPlayer:
-      modalData.player = playerMap[modalData.draft.playerId];
-      modalData.draftIndex = drafts.length;
+      modalData.player = playerMap[modalData.playerId];
+      break;
+    case ModalNames.chooseCurrentPlayer:
       break;
   }
 
   return {...ui, modalData};
 });
 
+const userWithData = createSelector(userJs, teamMap, (user, teamMap) => {
+  const team = user.currentTeam >= 0 ? teamMap[user.currentTeam] : null;
+  return {...user, team}
+});
+
 export default createSelector(
-  [userJs, uiWithData, playersJs, teamsWithPlayers, columnsJs, draftsWithTeamsAndPlayers, firebaseJs],
+  [userWithData, uiWithData, playersJs, teamsWithPlayers, columnsJs, draftsWithTeamsAndPlayers, firebaseJs],
   (user, ui, players, teams, columns, drafts, firebase) => {
   return {user, ui, players, teams, columns, drafts, firebase};
 });

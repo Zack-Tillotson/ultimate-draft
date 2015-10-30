@@ -6,13 +6,20 @@ import styles from './styles';
 
 export default React.createClass({
   propTypes: {
-    drafts: React.PropTypes.array.isRequired
+    drafts: React.PropTypes.array.isRequired,
+    columns: React.PropTypes.array.isRequired
   },
+
+  getPlayerId(player) {
+    const idColumn = this.props.columns.find(column => column.type === 'ID');
+    return player[idColumn.name];  
+  },
+
 
   getPlayer(draft) {
     return (
       <div className="player" key={Math.random()}>
-        {JSON.stringify(draft.player)}
+        #{this.getPlayerId(draft.player)}
       </div>
     );
   },
@@ -28,7 +35,7 @@ export default React.createClass({
   getDraft(draft, index) {
     return (
       <div className="draft" key={index}>
-        {this.getTeam(draft)} chose {this.getPlayer(draft)}
+        {this.getTeam(draft)} chose Player {this.getPlayer(draft)}
       </div>
     );
   },

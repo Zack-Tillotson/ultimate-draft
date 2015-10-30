@@ -7,6 +7,7 @@ export default {
   tabClick: 'tabClick',
   viewModal: 'viewModal',
   cancelModal: 'cancelModal',
+  confirmModal: 'confirmModal',
   updateModal: 'updateModal',
   sortPlayers: 'sortPlayers',
   

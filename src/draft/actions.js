@@ -11,17 +11,39 @@ function validateDraft(draft) {
 }
 
 function putDraft(dispatch, data) {
-  const validation = validateDraft(data.draft);
+  const validation = validateDraft(data);
   if(validation.valid) {
     dispatch(creators.uploadStarting());
     const firebaseId = utils.getFirebaseId();
     const draftsRef = Firebase.connect(firebaseId + '/drafts');
-    const draftRef = draftsRef.child(data.index).set(data.draft, (error) => {
-      if(error) {
-        dispatch(creators.blowup(error));
-      }
-      dispatch(creators.uploadFinished());
-    });
+    const draftRef = draftsRef.transaction(
+
+      // Upate function
+      (currentData) => {
+
+        currentData = currentData || [];
+        
+        if(!currentData instanceof Array) {
+          currentData = Object.keys(currentData).sort().map(key => currentData[key]);
+        }
+
+        currentData.push(data);
+
+        return currentData;
+
+      },
+
+      // On Complete
+      (error, committed, snapshot) => {
+        if(error) {
+          dispatch(creators.blowup(error));
+        }
+        dispatch(creators.uploadFinished());
+      }, 
+
+      // Dont see intermediate states
+      false 
+    );
   }
 }
 
@@ -35,11 +57,12 @@ const creators = {
   updateModal(data) {
     return {type: actions.updateModal, data};
   },
-  confirmModal: (modalName, data) => (dispatch) => {
+  confirmModal(modalName, data) { 
     switch(modalName) {
       case modalNames.draftPlayer:
-        putDraft(dispatch, data);
-        break;
+        return (dispatch) => putDraft(dispatch, data);
+      case modalNames.chooseCurrentTeam:
+        return {type: actions.confirmModal, modal: modalName, data};
     }
   },
   cancelModal(modalName) {

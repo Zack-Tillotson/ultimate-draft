@@ -1,10 +1,15 @@
 import React from 'react';
+import InlineCss from 'react-inline-css';
+import PlayerTable from '../PlayerTable';
+
+import styles from './styles';
 
 export default React.createClass({
   propTypes: {
     updateModal: React.PropTypes.func.isRequired,
     data: React.PropTypes.object.isRequired,
-    teams: React.PropTypes.array.isRequired
+    teams: React.PropTypes.array.isRequired,
+    columns: React.PropTypes.array.isRequired
   },
 
   getInputs() {
@@ -15,28 +20,29 @@ export default React.createClass({
 
   changeHandler(event) {
     event.preventDefault();
-    this.props.updateModal({index: this.props.data.draftIndex, draft: this.getInputs()});
+    this.props.updateModal(this.getInputs());
   },
 
   getPlayerForm() {
     return (
-      <div className="player">
+      <div className="playerForm">
+        Player ID
         <input 
           ref="playerId"
           name="playerId" 
           type='text'
-          defaultValue={this.props.data.draft.playerId} 
+          defaultValue={this.props.data.playerId} 
           onChange={this.changeHandler}>
         </input>
-        {JSON.stringify(this.props.data.player)}
       </div>
     );
   },
 
   getTeamForm() {
-    const defaultValue = this.props.data.draft.teamId >= 0 ? this.props.data.draft.teamId : "";
+    const defaultValue = this.props.data.teamId >= 0 ? this.props.data.teamId : "";
     return (
       <div className="teamForm">
+        Team
         <select 
             ref="teamId" 
             name="teamId" 
@@ -51,13 +57,22 @@ export default React.createClass({
     );
   },
 
+  getPlayer() {
+    return <PlayerTable players={[this.props.data.player]} columns={this.props.columns} />
+  },
+
   render() {
     return (
-      <div>
+      <InlineCss componentName="component" stylesheet={styles}>
         <h3>Draft Player</h3>
-        {this.getPlayerForm()}
-        {this.getTeamForm()}
-      </div>
+        <div className="draftForm">
+          {this.getPlayerForm()}
+          {this.getTeamForm()}
+        </div>
+        <div className="playerReview">
+          {this.getPlayer()}
+        </div>
+      </InlineCss>
     );
   }
 });

@@ -25,6 +25,7 @@ export default function(state = getInitialState(), action) {
         modalData: action.data
       });
       break;
+    case actions.confirmModal:
     case actions.cancelModal:
     case actions.syncing:
       state = state.merge({

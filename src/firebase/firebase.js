@@ -89,4 +89,5 @@ export default {
     const firebaseUrl = getFirebaseUrl(path);
     return new Firebase(firebaseUrl);
   }
+  
 }
