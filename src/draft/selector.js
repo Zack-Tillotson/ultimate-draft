@@ -33,7 +33,7 @@ const teamMap = createSelector(teamsJs, (teams) => {
 const teamsWithPlayers = createSelector(playerMap, teamsJs, draftsJs, (playerMap, teams, drafts) => {
   return teams.map(team => {
     const players = drafts
-      .filter(draft => draft.teamId === team.id)
+      .filter(draft => draft.teamId == team.id)
       .map(draft => playerMap[draft.playerId]);
     return {...team, players: players};
   });

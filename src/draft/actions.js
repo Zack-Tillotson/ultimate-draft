@@ -1,6 +1,29 @@
 import actions from '../state/actions';
 import utils from './utils';
 import Firebase from '../firebase';
+import modalNames from './modalNames';
+
+// Saving a draft
+function validateDraft(draft) {
+  return {
+    valid: (draft.playerId && draft.teamId >= 0)
+  }
+}
+
+function putDraft(dispatch, data) {
+  const validation = validateDraft(data.draft);
+  if(validation.valid) {
+    dispatch(creators.uploadStarting());
+    const firebaseId = utils.getFirebaseId();
+    const draftsRef = Firebase.connect(firebaseId + '/drafts');
+    const draftRef = draftsRef.child(data.index).set(data.draft, (error) => {
+      if(error) {
+        dispatch(creators.blowup(error));
+      }
+      dispatch(creators.uploadFinished());
+    });
+  }
+}
 
 const creators = {
   tabClick(tabName) {
@@ -13,15 +36,11 @@ const creators = {
     return {type: actions.updateModal, data};
   },
   confirmModal: (modalName, data) => (dispatch) => {
-    dispatch(creators.uploadStarting());
-    const firebaseId = utils.getFirebaseId();
-    const draftsRef = Firebase.connect(firebaseId + '/drafts');
-    const draftRef = draftsRef.child(data.index).set(data.draft, (error) => {
-      if(error) {
-        dispatch(creators.blowup(error));
-      }
-      dispatch(creators.uploadFinished());
-    });
+    switch(modalName) {
+      case modalNames.draftPlayer:
+        putDraft(dispatch, data);
+        break;
+    }
   },
   cancelModal(modalName) {
     return {type: actions.cancelModal, modalName};

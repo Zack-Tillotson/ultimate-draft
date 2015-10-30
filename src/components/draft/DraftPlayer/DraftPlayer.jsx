@@ -42,6 +42,7 @@ export default React.createClass({
             name="teamId" 
             defaultValue={defaultValue} 
             onChange={this.changeHandler}>
+            <option key="default" value={""}>Choose A Team</option>
           {this.props.teams.map(team => (
             <option key={team.id} value={team.id}>{team.name}</option>
           ))}

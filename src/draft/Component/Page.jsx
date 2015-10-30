@@ -54,7 +54,7 @@ const DraftPage = React.createClass({
   },
 
   getLoadingSpinner() {
-    return !this.props.firebase.connected && (
+    return !this.props.firebase.connected && !this.props.ui.error && (
       <div className="error">
         <div className="spinner">Loading draft, please wait!</div>
       </div>
@@ -62,8 +62,10 @@ const DraftPage = React.createClass({
   },
 
   getError() {
-    return this.props.firebase.broken && (
-      <div className="error">Unable to connect to the draft - please check the URL and try again.</div>
+    return (this.props.firebase.broken || this.props.ui.error) && (
+      <div className="error">
+        Unable to connect to the draft. Please check the URL and reload the page.
+      </div>
     );
   },
 
