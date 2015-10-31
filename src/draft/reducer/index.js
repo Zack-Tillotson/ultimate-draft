@@ -13,6 +13,13 @@ State: {
 */
 
 import {combineReducers} from 'redux';
-import {ui, user, players, firebase, columns, teams, drafts} from './reducers';
+
+import ui from './ui';
+import players from './players';
+import firebase from './firebase';
+import teams from './teams';
+import columns from './columns';
+import drafts from './drafts';
+import user from './user';
 
 export default combineReducers({ui, user, players, firebase, columns, teams, drafts});

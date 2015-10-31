@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import actions from '../../state/actions';
+import actions from '../actionNames';
 import tabNames from '../tabNames.js';
 
 function getInitialState() {

@@ -1,7 +1,7 @@
-import actions from '../state/actions';
-import utils from './utils';
-import Firebase from '../firebase';
-import modalNames from './modalNames';
+import actions from '../actionNames';
+import utils from '../utils';
+import Firebase from '../../firebase';
+import modalNames from '../modalNames';
 
 // Saving a draft
 function validateDraft(draft) {

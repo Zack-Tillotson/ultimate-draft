@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import ModalNames from './modalNames';
+import ModalNames from '../modalNames';
 
 const user = state => state.user;
 const ui = state => state.ui;
@@ -53,7 +53,7 @@ const uiWithData = createSelector(uiJs, playerMap, draftsJs, (ui, playerMap, dra
 
   switch(ui.modal) {
     case ModalNames.draftPlayer:
-      modalData.player = playerMap[modalData.playerId];
+      modalData.player = playerMap[modalData.playerId.value];
       break;
     case ModalNames.chooseCurrentPlayer:
       break;

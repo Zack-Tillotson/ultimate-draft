@@ -24,6 +24,8 @@ export default React.createClass({
   },
 
   getPlayerForm() {
+    const value = this.props.data.playerId.value;
+    const className = this.props.data.player ? 'valid' : 'invalid';
     return (
       <div className="playerForm">
         Player ID
@@ -31,7 +33,8 @@ export default React.createClass({
           ref="playerId"
           name="playerId" 
           type='text'
-          defaultValue={this.props.data.playerId} 
+          className={className}
+          defaultValue={value}
           onChange={this.changeHandler}>
         </input>
       </div>
@@ -40,12 +43,14 @@ export default React.createClass({
 
   getTeamForm() {
     const defaultValue = this.props.data.teamId >= 0 ? this.props.data.teamId : "";
+    const className = !!defaultValue ? 'valid' : 'invalid';
     return (
       <div className="teamForm">
         Team
         <select 
             ref="teamId" 
-            name="teamId" 
+            name="teamId"
+            className={className}
             defaultValue={defaultValue} 
             onChange={this.changeHandler}>
             <option key="default" value={""}>Choose A Team</option>

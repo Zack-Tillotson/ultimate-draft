@@ -9,7 +9,7 @@ import selector from '../selector';
 import actions from '../actions';
 import tabNames from '../tabNames';
 import modalNames from '../modalNames';
-import styles from './styles.raw.less';
+import styles from './styles';
 
 import Application from '../../components/Application';
 import TabbedContainer from '../../components/TabbedContainer';

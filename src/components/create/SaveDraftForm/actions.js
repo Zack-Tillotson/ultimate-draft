@@ -1,4 +1,4 @@
-import actions from '../../../state/actions';
+import actions from '../../../create/actionNames';
 import firebase from '../../../firebase';
 
 const creators = {

@@ -1,4 +1,4 @@
-import actions from '../state/actions';
+import actions from './actionNames';
 
 const creators = {
   goBack() {

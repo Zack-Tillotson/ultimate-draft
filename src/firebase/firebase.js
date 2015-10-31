@@ -1,10 +1,5 @@
 import Firebase from 'firebase';
-
-const firebaseUrlBase = 'https://diskdraft.firebaseio.com';
-const version = 'v0_1';
-
-const alpha = ['A','B','C','D','E','F','G','H','J','K','M','N','P','Q','R','S','T','W','X','Y'];
-const numeric = ['3','4','5','6','7','8','9'];
+import utils from './utils';
 
 const children = ['players', 'teams', 'columns', 'drafts'];
 
@@ -20,37 +15,12 @@ function dispatchError(dispatch, child) {
   }
 }
 
-function getAlpha() {
-  return alpha[parseInt(Math.random() * alpha.length)]; 
-}
-
-function getNumeric() {
-  return numeric[parseInt(Math.random() * numeric.length)]; 
-}
-
-function getUniqueId() {
-  return getAlpha()
-    + getAlpha()
-    + getAlpha()
-    + getAlpha()
-    + getNumeric()
-    + getNumeric()
-    + getNumeric();
-}
-
-function getFirebasePath() {
-  return [version, getUniqueId()].join('/');
-}
-function getFirebaseUrl(path) {
-  return [firebaseUrlBase, path, ''].join('/');
-}
-
 export default {
 
   save(data) {
     return new Promise((resolve, reject) => {
-      const path = getFirebasePath();
-      const firebaseUrl = getFirebaseUrl(path);
+      const path = utils.getFirebasePath();
+      const firebaseUrl = utils.getFirebaseUrl(path);
       const firebase = new Firebase(firebaseUrl);
       firebase.set(data, (error) => {
         firebase.off();
@@ -65,7 +35,7 @@ export default {
 
   sync(path, dispatch) {
 
-    const firebaseUrl = getFirebaseUrl(path);
+    const firebaseUrl = utils.getFirebaseUrl(path);
     const ref = new Firebase(firebaseUrl);
 
     ref.on(
@@ -86,7 +56,7 @@ export default {
   },
 
   connect(path) {
-    const firebaseUrl = getFirebaseUrl(path);
+    const firebaseUrl = utils.getFirebaseUrl(path);
     return new Firebase(firebaseUrl);
   }
   

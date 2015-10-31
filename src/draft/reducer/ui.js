@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
-import actions from '../../state/actions';
+import actions from '../actionNames';
 import tabNames from '../tabNames.js';
+import modals from '../modalUtil';
 
 function getInitialState() {
   return Immutable.fromJS({
@@ -13,6 +14,8 @@ function getInitialState() {
 }
 
 export default function(state = getInitialState(), action) {
+  let modalData = {};
+
   switch(action.type) {
     case actions.tabClick:
       state = state.merge({
@@ -20,9 +23,10 @@ export default function(state = getInitialState(), action) {
       });
       break;
     case actions.viewModal:
+      modalData = modals.validate(state.get('modal'), action.data);
       state = state.merge({
         modal: action.modalName,
-        modalData: action.data
+        modalData
       });
       break;
     case actions.confirmModal:
@@ -30,13 +34,12 @@ export default function(state = getInitialState(), action) {
     case actions.syncing:
       state = state.merge({
         modal: '',
-        modalData: {}
+        modalData
       });
       break;
     case actions.updateModal:
-      state = state.merge({
-        modalData: action.data
-      });
+      modalData = modals.validate(state.get('modal'), action.data);
+      state = state.merge({modalData});
       break;
     case actions.blowup:
       state = state.merge({
