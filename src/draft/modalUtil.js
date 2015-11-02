@@ -20,6 +20,14 @@ function validateModalInput(modal, name, value) {
           return !!value;
       }
       break;
+    case modalNames.filterRows:
+      switch(name) {
+        case 'viewOtherTeam':
+        case 'viewYourTeam':
+        case 'viewUndraftable':
+          return true;
+      }
+      break;
     case modalNames.undraftPlayer:
       break;
   }

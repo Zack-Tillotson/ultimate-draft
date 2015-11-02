@@ -90,7 +90,8 @@ const Page = React.createClass({
               players={this.props.players}
               drafts={this.props.drafts}
               viewModal={this.props.dispatch.viewModal} 
-              currentTeam={this.props.user.currentTeam} />
+              currentTeam={this.props.user.currentTeam}
+              rowFilters={this.props.user.rowFilters} />
             <Teams 
               tabName={tabNames.teams}
               columns={this.props.columns}
@@ -116,7 +117,10 @@ const Page = React.createClass({
               teams={this.props.teams}
               currentTeam={this.props.user.currentTeam} />
             <FilterColumns modalName={modalNames.filterColumns} />
-            <FilterPlayers modalName={modalNames.filterRows} />
+            <FilterPlayers 
+              modalName={modalNames.filterRows}
+              updateModal={this.props.dispatch.updateModal}
+              data={this.props.ui.modalData} />
             <DraftPlayer
               modalName={modalNames.draftPlayer}
               updateModal={this.props.dispatch.updateModal}
@@ -138,4 +142,4 @@ const Page = React.createClass({
   }
 });
 
-export default connect(selector, actions.dispatcher)(Page);
+export default connect(selector, actions)(Page);

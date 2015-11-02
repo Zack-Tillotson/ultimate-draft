@@ -9,6 +9,7 @@ export default React.createClass({
 
   propTypes: {
     currentTeam: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
+    rowFilters: React.PropTypes.object.isRequired,
     players: React.PropTypes.array.isRequired,
     viewModal: React.PropTypes.func.isRequired,
     drafts: React.PropTypes.array.isRequired
@@ -37,8 +38,9 @@ export default React.createClass({
 
   getRowFilterModalLink() {
     const name = modalNames.filterRows;
+    const data = this.props.rowFilters;
     return (
-      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name, {})}>
+      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name, data)}>
         {name}
       </span>
     );
@@ -53,8 +55,10 @@ export default React.createClass({
         </div>
         <PlayerTable 
           players={this.props.players} 
-          columns={this.props.columns} 
-          filterColumns={true} 
+          filterColumns={true}
+          columns={this.props.columns}
+          filterRows={true}
+          rowFilters={this.props.rowFilters}
           playerClickHandler={this.draftPlayerHandler} />
       </InlineCss>
     );

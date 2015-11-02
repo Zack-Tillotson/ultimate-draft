@@ -12,7 +12,6 @@ export default React.createClass({
   },
 
   clickHandler(event) {
-    event.preventDefault();
     this.props.viewModal(modalNames.chooseCurrentTeam);
   },
 
@@ -28,7 +27,7 @@ export default React.createClass({
           )}
         </div>
         <div className="controls">
-          <button onClick={this.clickHandler}>Select Team</button>
+          <div className="link" onClick={this.clickHandler}>Select Team</div>
         </div>
       </InlineCss>
     );

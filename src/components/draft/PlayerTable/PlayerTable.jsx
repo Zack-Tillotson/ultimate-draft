@@ -9,11 +9,16 @@ export default React.createClass({
     players: React.PropTypes.array.isRequired,
     columns: React.PropTypes.array.isRequired,
     filterColumns: React.PropTypes.bool,
+    filterRows: React.PropTypes.bool,
+    rowFilters: React.PropTypes.object,
     playerClickHandler: React.PropTypes.func
   },
 
   getDefaultProps() {
-    return {filterColumns: false};
+    return {
+      filterColumns: false,
+      rowFilters: false
+    };
   },
 
   getColumns() {
@@ -40,13 +45,27 @@ export default React.createClass({
     );
   },
 
+  getFilteredPlayers() {
+    return this.props.players.filter(player => {
+      if(!this.props.filterRows) {
+        return true;
+      } else {
+        const otherTeam = !this.props.rowFilters.viewOtherTeam && (player.draftStatus.otherTeamsDraft || player.draftStatus.otherTeamsBaggage);
+        const thisTeam = !this.props.rowFilters.viewYourTeam && player.draftStatus.currentTeamsDraft;
+        const thisBag = !this.props.rowFilters.viewYourTeam && player.draftStatus.currentTeamsBaggage;
+        const undraftable = !this.props.rowFilters.viewUndraftable && player.draftStatus.currentTeamUndraftablel;
+        return !otherTeam && !thisTeam && !thisBag && !undraftable;
+      }
+    })
+  },
+
   getBodyRows() {
     if(this.props.players.length === 0) {
       return (
         <tr><td colSpan={this.props.columns.length}>No players yet.</td></tr>
       );
     }
-    return this.props.players.map(player => player ? this.getBodyRow(player) : null);
+    return this.getFilteredPlayers().map(player => player ? this.getBodyRow(player) : null);
   },
 
   playerClickHandler(playerId) {

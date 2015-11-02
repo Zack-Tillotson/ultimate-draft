@@ -6,9 +6,7 @@ import styles from './styles';
 
 export default React.createClass({
   propTypes: {
-    updateModal: React.PropTypes.func.isRequired,
     data: React.PropTypes.object.isRequired,
-    team: React.PropTypes.array.isRequired,
     columns: React.PropTypes.array.isRequired
   },
 

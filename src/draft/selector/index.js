@@ -23,7 +23,10 @@ function getTeamForPlayer(playerId, drafts) {
   return draft ? draft.teamId : null;
 }
 
-function getCurrentlyUndraftable() {
+// Team has undrafted baggage vector >= player.vector
+// ie For team with undrafted baggage with vectors 5 and 10, players with vectors
+// 1, 6, 9, and 10 are undraftable. 11 is allowed.
+function getCurrentlyUndraftable(playerId, players, columns, drafts) {
   return false;
 }
 

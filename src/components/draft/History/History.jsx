@@ -19,7 +19,7 @@ export default React.createClass({
   getPlayer(draft) {
     return (
       <div className="player" key={draft.playerId}>
-        #{draft.playerId}
+        Player #{draft.playerId}
       </div>
     );
   },
@@ -36,7 +36,7 @@ export default React.createClass({
     return (
       <div className="draft" key={index}>
         <div className="info">
-          {this.getTeam(draft)} chose Player {this.getPlayer(draft)}
+          {index + 1}. {this.getTeam(draft)} drafts {this.getPlayer(draft)}
         </div>
         <div className="controls">
           <div 
