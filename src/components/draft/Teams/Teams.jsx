@@ -11,12 +11,13 @@ export default React.createClass({
     columns: React.PropTypes.array.isRequired
   },
 
-
   getTeam(team) {
     return (
       <div className="team" key={team.id}>
         <h5>{team.name}</h5>
-        <PlayerTable players={team.players} columns={this.props.columns} />
+        <PlayerTable 
+          players={team.players} 
+          columns={this.props.columns} />
       </div>
     );
   },

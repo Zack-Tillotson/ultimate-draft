@@ -99,7 +99,8 @@ const Page = React.createClass({
             <History 
               tabName={tabNames.history}
               columns={this.props.columns}
-              drafts={this.props.drafts} />
+              drafts={this.props.drafts}
+              viewModal={this.props.dispatch.viewModal} />
 
           </TabbedContainer>
 
@@ -122,7 +123,10 @@ const Page = React.createClass({
               data={this.props.ui.modalData} 
               teams={this.props.teams}
               columns={this.props.columns} />
-            <UndraftPlayer modalName={modalNames.undraftPlayer} />
+            <UndraftPlayer
+              modalName={modalNames.undraftPlayer}
+              data={this.props.ui.modalData}
+              columns={this.props.columns} />
 
           </ModalContainer>
 

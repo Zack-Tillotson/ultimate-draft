@@ -24,7 +24,7 @@ export default React.createClass({
   },
 
   getPlayerForm() {
-    const value = this.props.data.playerId.value;
+    const value = this.props.data.inputs.playerId.value;
     const className = this.props.data.player ? 'valid' : 'invalid';
     return (
       <div className="playerForm">
@@ -42,8 +42,8 @@ export default React.createClass({
   },
 
   getTeamForm() {
-    const defaultValue = this.props.data.teamId >= 0 ? this.props.data.teamId : "";
-    const className = !!defaultValue ? 'valid' : 'invalid';
+    const defaultValue = this.props.data.inputs.teamId.value >= 0 ? this.props.data.inputs.teamId.value : "";
+    const className = this.props.data.inputs.teamId.valid? 'valid' : 'invalid';
     return (
       <div className="teamForm">
         Team

@@ -1,10 +1,26 @@
 component {
 
-  color: #666;
-
-  .team, .player {
+  .info {
     display: inline-block;
-    color: #000;
+    width: 80%;
+    text-align: left;
+    padding-left: 25px;
+  }
+
+  .controls {
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+
+    .undo {
+      background: red;
+      border: solid 1px black;
+      cursor: pointer;
+
+      &:hover {
+        background: black;
+      }
+    }
   }
   
 }

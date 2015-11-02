@@ -23,7 +23,7 @@ export default React.createClass({
   },
 
   getTeamForm() {
-    const defaultValue = this.props.currentTeam && this.props.currentTeam.value >= 0 
+    const defaultValue = this.props.currentTeam && this.props.currentTeam >= 0 
       ? this.props.currentTeam 
       : "";
     return (

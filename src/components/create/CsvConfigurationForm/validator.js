@@ -1,4 +1,4 @@
-import {id, baggageId} from './columnTypes';
+import {id, baggageId} from '../../../columnTypes';
 
 export default function(inputs) {
   let idCount = 0, baggageIdCount = 0, foundError = false;

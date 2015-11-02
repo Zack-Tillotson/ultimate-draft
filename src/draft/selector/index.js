@@ -1,5 +1,6 @@
 import {createSelector} from 'reselect';
 import ModalNames from '../modalNames';
+import utils from '../utils';
 
 const user = state => state.user;
 const ui = state => state.ui;
@@ -17,7 +18,39 @@ const columnsJs = createSelector(columns, columns => columns.toJS());
 const draftsJs = createSelector(drafts, drafts => drafts.toJS());
 const firebaseJs = createSelector(firebase, firebase => firebase.toJS());
 
-const playerMap = createSelector(playersJs, columnsJs, (players, columns) => {
+function getTeamForPlayer(playerId, drafts) {
+  const draft = drafts.find(draft => draft.playerId == playerId);
+  return draft ? draft.teamId : null;
+}
+
+function getCurrentlyUndraftable() {
+  return false;
+}
+
+const playersWithMeta = createSelector(playersJs, draftsJs, userJs, columnsJs, 
+  (players, drafts, user, columns) => {
+    return players.map(player => {
+
+      const teamId = getTeamForPlayer(utils.getPlayerId(player, columns), drafts)
+      const baggageTeamId = getTeamForPlayer(utils.getBaggageId(player, columns), drafts)
+
+      const otherTeamsDraft = teamId ? (teamId != user.currentTeam) : false;
+      const otherTeamsBaggage = baggageTeamId ? (baggageTeamId != user.currentTeam) : false;
+      const currentTeamsDraft = teamId ? (teamId == user.currentTeam) : false;
+      const currentTeamsBaggage = baggageTeamId ? (baggageTeamId == user.currentTeam) : false;
+      const currentTeamUndraftable = getCurrentlyUndraftable();
+
+      return {...player, draftStatus: {
+        otherTeamsDraft, 
+        otherTeamsBaggage, 
+        currentTeamsDraft, 
+        currentTeamsBaggage, 
+        currentTeamUndraftable
+      }};
+    });
+});
+
+const playerMap = createSelector(playersWithMeta, columnsJs, (players, columns) => {
   const idColumn = columns.find(column => column.type === 'ID');
   const ret = {};
   players.forEach(player => ret[player[idColumn.name]] = player);
@@ -53,9 +86,8 @@ const uiWithData = createSelector(uiJs, playerMap, draftsJs, (ui, playerMap, dra
 
   switch(ui.modal) {
     case ModalNames.draftPlayer:
-      modalData.player = playerMap[modalData.playerId.value];
-      break;
-    case ModalNames.chooseCurrentPlayer:
+    case ModalNames.undraftPlayer:
+      modalData.player = playerMap[modalData.inputs.playerId.value];
       break;
   }
 
@@ -68,7 +100,7 @@ const userWithData = createSelector(userJs, teamMap, (user, teamMap) => {
 });
 
 export default createSelector(
-  [userWithData, uiWithData, playersJs, teamsWithPlayers, columnsJs, draftsWithTeamsAndPlayers, firebaseJs],
+  [userWithData, uiWithData, playersWithMeta, teamsWithPlayers, columnsJs, draftsWithTeamsAndPlayers, firebaseJs],
   (user, ui, players, teams, columns, drafts, firebase) => {
   return {user, ui, players, teams, columns, drafts, firebase};
 });

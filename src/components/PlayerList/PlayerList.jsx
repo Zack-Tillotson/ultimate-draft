@@ -1,5 +1,6 @@
 import React from 'react';
 import InlineCss from "react-inline-css";
+import utils from '../../draft/utils';
 import styles from './styles';
 
 export default React.createClass({
@@ -21,7 +22,7 @@ export default React.createClass({
 
   getPlayerRows() {
     return this.props.players.map(player => (
-      <tr key={player[this.getColumnOfType('ID').name]}>
+      <tr key={utils.getPlayerid(player, this.props.columns)}>
         {this.props.columns.map(column => <td key={column.name}>{player[column.name]}</td>)}
       </tr>
     ));

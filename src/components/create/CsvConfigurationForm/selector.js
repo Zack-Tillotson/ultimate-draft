@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
-import columnTypes from './columnTypes';
-import {id, baggageId} from './columnTypes';
+import columnTypes from '../../../columnTypes';
+import {id, baggageId} from '../../../columnTypes';
 import papaparse from 'papaparse';
 
 function guessColumnType(name) {

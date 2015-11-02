@@ -12,7 +12,7 @@ export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.confirmModal:
       if(action.modal === modalNames.chooseCurrentTeam) {
-        state = state.merge({currentTeam: action.data.currentTeam})
+        state = state.merge({currentTeam: action.data.inputs.currentTeam.value})
       }
   }
   return state;

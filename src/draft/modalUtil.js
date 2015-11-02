@@ -1,3 +1,5 @@
+import modalNames from './modalNames';
+
 function validateModalInput(modal, name, value) {
   switch(modal) {
     case modalNames.chooseCurrentTeam:
@@ -6,11 +8,11 @@ function validateModalInput(modal, name, value) {
           return value != -1;
       }
       break;
-    case filterColumns:
+    case modalNames.filterColumns:
       break;
-    case filterRows:
+    case modalNames.filterRows:
       break;
-    case draftPlayer:
+    case modalNames.draftPlayer:
       switch(name) {
         case 'teamId':
           return value != -1;
@@ -18,7 +20,7 @@ function validateModalInput(modal, name, value) {
           return !!value;
       }
       break;
-    case undraftPlayer:
+    case modalNames.undraftPlayer:
       break;
   }
   return true;
@@ -35,6 +37,6 @@ export default {
       return input;
     });
     const valid = inputs.filter(input => !input.valid).length === 0;
-    return {inputs, valid};
+    return {inputs: ret, valid};
   }
 }

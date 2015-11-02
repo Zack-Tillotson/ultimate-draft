@@ -1,6 +1,7 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
 import modalNames from '../../../draft/modalNames';
+import PlayerTable from '../PlayerTable';
 
 import styles from './styles';
 
@@ -25,14 +26,10 @@ export default React.createClass({
     ); 
   },
 
-  getFilteredColumns() {
-    return this.props.columns.filter(column => column.visible);
-  },
-
   getColumnFilterModalLink() {
     const name = modalNames.filterColumns;
     return (
-      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name)}>
+      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name, {})}>
         {name}
       </span>
     );
@@ -41,48 +38,10 @@ export default React.createClass({
   getRowFilterModalLink() {
     const name = modalNames.filterRows;
     return (
-      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name)}>
+      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name, {})}>
         {name}
       </span>
     );
-  },
-
-  getPlayerId(player) {
-    const idColumn = this.props.columns.find(column => column.type === 'ID');
-    return player[idColumn.name];  
-  },
-
-  sortColumn(column) {
-
-  },
-
-  getColumns() {
-    return this.getFilteredColumns().map(column => (
-      <td  key={column.name} onClick={this.sortColumn.bind(this, column.name)}>
-        {column.name}
-      </td>
-    ));
-  },
-
-
-
-  getPlayer(player, index) {
-    const className="";
-    return (
-      <tr 
-          key={this.getPlayerId(player)} 
-          onClick={this.draftPlayerHandler.bind(this, this.getPlayerId(player))}>
-        {this.getFilteredColumns().map(column => (
-          <td key={column.name} className={className}>
-            {player[column.name]}
-          </td>
-        ))}
-      </tr>
-    );
-  },
-
-  getPlayers() {
-    return this.props.players.map((player, index) => this.getPlayer(player, index));
   },
 
   render() {
@@ -92,16 +51,11 @@ export default React.createClass({
           {this.getColumnFilterModalLink()}
           {this.getRowFilterModalLink()}
         </div>
-        <table className="players">
-          <thead>
-            <tr>
-              {this.getColumns()}
-            </tr>
-          </thead>
-          <tbody>
-            {this.getPlayers()}
-          </tbody>
-        </table>
+        <PlayerTable 
+          players={this.props.players} 
+          columns={this.props.columns} 
+          filterColumns={true} 
+          playerClickHandler={this.draftPlayerHandler} />
       </InlineCss>
     );
   }

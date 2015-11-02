@@ -8,7 +8,7 @@ import styles from './styles';
 import selector from './selector.js';
 import {dispatcher} from './actions.js';
 
-import columnTypes from './columnTypes';
+import columnTypes from '../../../columnTypes';
 
 const CsvConfigurationForm = React.createClass({
 

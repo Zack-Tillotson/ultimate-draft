@@ -21,6 +21,13 @@ function getUniqueId() {
     + getAlpha()
     + getNumeric()
     + getNumeric()
+    + getNumeric()
+    + getAlpha()
+    + getAlpha()
+    + getAlpha()
+    + getAlpha()
+    + getNumeric()
+    + getNumeric()
     + getNumeric();
 }
 
@@ -31,4 +38,4 @@ function getFirebaseUrl(path) {
   return [firebaseUrlBase, path, ''].join('/');
 }
 
-export {getUniqueId, getFirebasePath, getFirebaseUrl};
+export default {getUniqueId, getFirebasePath, getFirebaseUrl};

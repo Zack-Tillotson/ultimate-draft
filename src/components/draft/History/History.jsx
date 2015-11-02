@@ -1,25 +1,25 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
 import modalNames from '../../../draft/modalNames';
+import utils from '../../../draft/utils';
 
 import styles from './styles';
 
 export default React.createClass({
   propTypes: {
     drafts: React.PropTypes.array.isRequired,
-    columns: React.PropTypes.array.isRequired
+    columns: React.PropTypes.array.isRequired,
+    viewModal: React.PropTypes.func.isRequired,
   },
 
-  getPlayerId(player) {
-    const idColumn = this.props.columns.find(column => column.type === 'ID');
-    return player[idColumn.name];  
+  handleUndraftClick(draft) {
+    this.props.viewModal(modalNames.undraftPlayer, draft);
   },
-
 
   getPlayer(draft) {
     return (
-      <div className="player" key={Math.random()}>
-        #{this.getPlayerId(draft.player)}
+      <div className="player" key={draft.playerId}>
+        #{draft.playerId}
       </div>
     );
   },
@@ -35,7 +35,14 @@ export default React.createClass({
   getDraft(draft, index) {
     return (
       <div className="draft" key={index}>
-        {this.getTeam(draft)} chose Player {this.getPlayer(draft)}
+        <div className="info">
+          {this.getTeam(draft)} chose Player {this.getPlayer(draft)}
+        </div>
+        <div className="controls">
+          <div 
+            className="undo"
+            onClick={this.handleUndraftClick.bind(this, draft)}>X</div>
+        </div>
       </div>
     );
   },

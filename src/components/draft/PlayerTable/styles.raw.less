@@ -1,14 +1,60 @@
 component {
   overflow: scroll;  
 
-  table {
+  .players {
+    margin: 0 10px;
+    border-spacing: 0;
+    border-collapse: collapse;
     width: 2500px;
-    cell-spacing: 0px;
-    cell-collapse: collapse;
 
     thead td {
       font-weight: bold;
-      border-bottom: solid 1px #666;
+      border-bottom: solid 2px black;
+    }
+
+    tbody tr {
+      &:hover {
+        background: #ccc;
+      }
     }
   }
+
+  .otherTeam {
+    background: #ddd;
+    color: #333;
+  }
+
+  .drafted {
+    background: #AADAFF;
+    color: #000;
+  }
+
+  .draftedBaggage {
+    background: #BDFFB7;
+    color: #000;
+  }
+
+  .draftable {
+    background: #fff;
+    color: #000;
+  }
+
+  .tableColors {
+    text-align: center;
+    font-size: 12px;
+    margin: 5px 30px;
+
+    h5 {
+      font-size: 12px;
+      margin: 0px;
+      padding: 0;
+    }
+
+    .tableColor {
+      display: inline-block;
+      width: calc( 25% - 10px );
+      margin: 5px;
+    }
+  }
+
 }

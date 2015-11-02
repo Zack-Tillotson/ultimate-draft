@@ -3,17 +3,14 @@ import utils from '../utils';
 import Firebase from '../../firebase';
 import modalNames from '../modalNames';
 
-// Saving a draft
-function validateDraft(draft) {
-  return {
-    valid: (draft.playerId && draft.teamId >= 0)
-  }
-}
-
 function putDraft(dispatch, data) {
-  const validation = validateDraft(data);
-  if(validation.valid) {
+  if(data.valid) {
+
+    const teamId = data.inputs.teamId.value;
+    const playerId = data.inputs.playerId.value;
+
     dispatch(creators.uploadStarting());
+    
     const firebaseId = utils.getFirebaseId();
     const draftsRef = Firebase.connect(firebaseId + '/drafts');
     const draftRef = draftsRef.transaction(
@@ -27,7 +24,48 @@ function putDraft(dispatch, data) {
           currentData = Object.keys(currentData).sort().map(key => currentData[key]);
         }
 
-        currentData.push(data);
+        currentData.push({teamId, playerId});
+
+        return currentData;
+
+      },
+
+      // On Complete
+      (error, committed, snapshot) => {
+        if(error) {
+          dispatch(creators.blowup(error));
+        }
+        dispatch(creators.uploadFinished());
+      }, 
+
+      // Dont see intermediate states
+      false 
+    );
+  }
+}
+
+function unputDraft(dispatch, data) {
+  if(data.valid) {
+
+    const teamId = data.inputs.teamId.value;
+    const playerId = data.inputs.playerId.value;
+
+    dispatch(creators.uploadStarting());
+    
+    const firebaseId = utils.getFirebaseId();
+    const draftsRef = Firebase.connect(firebaseId + '/drafts');
+    const draftRef = draftsRef.transaction(
+
+      // Upate function
+      (currentData) => {
+
+        currentData = currentData || [];
+        
+        if(!currentData instanceof Array) {
+          currentData = Object.keys(currentData).sort().map(key => currentData[key]);
+        }
+
+        currentData = currentData.filter(draft => draft.playerId != playerId || draft.teamId != teamId);
 
         return currentData;
 
@@ -61,6 +99,8 @@ const creators = {
     switch(modalName) {
       case modalNames.draftPlayer:
         return (dispatch) => putDraft(dispatch, data);
+      case modalNames.undraftPlayer:
+        return (dispatch) => unputDraft(dispatch, data);
       case modalNames.chooseCurrentTeam:
         return {type: actions.confirmModal, modal: modalName, data};
     }

@@ -2,11 +2,12 @@ import Immutable from 'immutable';
 import actions from '../actionNames';
 import tabNames from '../tabNames.js';
 import modals from '../modalUtil';
+import modalNames from '../modalNames';
 
 function getInitialState() {
   return Immutable.fromJS({
     tab: tabNames.players,
-    modal: '',
+    modal: modalNames.chooseCurrentTeam,
     error: '',
     modalData: {},
     saving: false
@@ -23,7 +24,7 @@ export default function(state = getInitialState(), action) {
       });
       break;
     case actions.viewModal:
-      modalData = modals.validate(state.get('modal'), action.data);
+      modalData = modals.validate(action.modalName, action.data);
       state = state.merge({
         modal: action.modalName,
         modalData
