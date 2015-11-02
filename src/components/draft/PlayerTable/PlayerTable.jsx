@@ -81,15 +81,19 @@ export default React.createClass({
   },
 
   getColorDescriptions() {
-    return (
-      <div className="tableColors">
-        <h5>Legend</h5>
-        <div className="tableColor otherTeam">Another team</div>
-        <div className="tableColor drafted">Your team</div>
-        <div className="tableColor draftedBaggage">Your team&#39;s undrafted baggage</div>
-        <div className="tableColor undraftable">Currently undraftable*</div>
-      </div>
-    );
+    if(this.props.players.length > 0) {
+      return (
+        <div className="tableColors">
+          <h5>Legend</h5>
+          <div className="tableColor otherTeam">Another team</div>
+          <div className="tableColor drafted">Your team</div>
+          <div className="tableColor draftedBaggage">Your team&#39;s undrafted baggage</div>
+          <div className="tableColor undraftable">Currently undraftable*</div>
+        </div>
+      );
+    } else {
+      return null;
+    }
   },
 
   render() {
