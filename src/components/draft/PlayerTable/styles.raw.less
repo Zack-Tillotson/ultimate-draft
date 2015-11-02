@@ -5,7 +5,8 @@ component {
     margin: 0 10px;
     border-spacing: 0;
     border-collapse: collapse;
-    width: 2500px;
+    table-layout: auto;
+    min-width: 100%;
 
     thead td {
       font-weight: bold;
@@ -20,7 +21,7 @@ component {
   }
 
   .otherTeam {
-    background: #ddd;
+    background: #FFD17E;
     color: #333;
   }
 
@@ -37,6 +38,11 @@ component {
   .draftable {
     background: #fff;
     color: #000;
+  }
+
+  .undraftable {
+    background: #ddd;
+    color: #666;
   }
 
   .tableColors {

@@ -52,9 +52,8 @@ export default React.createClass({
       } else {
         const otherTeam = !this.props.rowFilters.viewOtherTeam && (player.draftStatus.otherTeamsDraft || player.draftStatus.otherTeamsBaggage);
         const thisTeam = !this.props.rowFilters.viewYourTeam && player.draftStatus.currentTeamsDraft;
-        const thisBag = !this.props.rowFilters.viewYourTeam && player.draftStatus.currentTeamsBaggage;
-        const undraftable = !this.props.rowFilters.viewUndraftable && player.draftStatus.currentTeamUndraftablel;
-        return !otherTeam && !thisTeam && !thisBag && !undraftable;
+        const undraftable = !this.props.rowFilters.viewUndraftable && player.draftStatus.currentTeamUndraftable;
+        return !otherTeam && !thisTeam && !undraftable;
       }
     })
   },
@@ -95,6 +94,8 @@ export default React.createClass({
       return 'drafted';
     } else if(player.draftStatus.currentTeamsBaggage) {
       return 'draftedBaggage';
+    } else if(player.draftStatus.currentTeamUndraftable) {
+      return 'undraftable';
     }
     return 'draftable';
   },
