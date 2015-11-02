@@ -16,6 +16,11 @@ export default {
   getBaggageId(player, columns) {
     const idColumn = columns.find(column => column.type === baggageId.name);
     return player[idColumn.name];  
+  },
+
+  getVector(player, columns) {
+    const idColumn = columns.find(column => column.name.toLowerCase() === 'vector' || column.name.toLowerCase() === 'vec');
+    return player[idColumn.name];  
   }
 
 }
