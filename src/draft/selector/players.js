@@ -2,8 +2,7 @@ import {createSelector} from 'reselect';
 import ModalNames from '../modalNames';
 import utils from '../utils';
 
-import base from './base';
-const {user, ui, players, teams, columns, drafts, firebase} = base;
+import {players, ui, teams, drafts, columns, firebase, user} from './base';
 
 function getTeamForPlayer(playerId, drafts) {
   const draft = drafts.find(draft => draft.playerId == playerId);
@@ -61,4 +60,11 @@ const playersWithMeta = createSelector(
     });
 });
 
-export default playersWithMeta;
+const playerMap = createSelector(playersWithMeta, columns, (players, columns) => {
+  const idColumn = columns.find(column => column.type === 'ID');
+  const ret = {};
+  players.forEach(player => ret[player[idColumn.name]] = player);
+  return ret;
+});
+
+export default {players: playersWithMeta, playerMap};

@@ -29,8 +29,9 @@ export default React.createClass({
 
   getColumnFilterModalLink() {
     const name = modalNames.filterColumns;
+    const data = this.props.columns;
     return (
-      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name, {})}>
+      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name, data)}>
         {name}
       </span>
     );

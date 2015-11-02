@@ -44,7 +44,9 @@ export default React.createClass({
         <InlineCss componentName="component" stylesheet={styles}>
           <div className="background" onClick={this.backgroundCancelHandler}>
             <div className="foreground">
-              {this.getCurrentModal()}
+              <div className="modalChild">
+                {this.getCurrentModal()}
+              </div>
               <div className="modalNav">
                 <div className="buttonContainer">
                   <button onClick={this.cancelHandler}>Cancel</button>

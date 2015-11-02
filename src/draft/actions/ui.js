@@ -22,6 +22,7 @@ export default {
         return (dispatch) => firebase.unputDraft(dispatch, data);
       case modalNames.chooseCurrentTeam:
       case modalNames.filterRows:
+      case modalNames.filterColumns:
         return {type: actions.confirmModal, modal: modalName, data};
     }
   },

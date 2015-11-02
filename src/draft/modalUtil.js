@@ -36,7 +36,7 @@ function validateModalInput(modal, name, value) {
 
 export default {
   validate(modal, inputs) {
-    const ret = {};
+    const ret = inputs instanceof Array ? [] : {};
     inputs = Object.keys(inputs).map(name => {
       const value = inputs[name];
       const valid = validateModalInput(modal, name, value);

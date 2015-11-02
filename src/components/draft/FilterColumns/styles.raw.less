@@ -1,3 +1,29 @@
 component {
-  
+  .options {
+    text-align: center;
+    padding: 0 100px;
+
+    .header {
+      font-weight: bold;
+      border-bottom: solid 2px black;
+    }
+
+    .option {
+      .columnName {
+        display: inline-block;
+        width: 85%;
+        text-align: left;
+      }
+      .visible {
+        float: right;
+        text-align: center;
+        width: 50px;
+        margin-right: 100px;
+      }
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+  }
 }
