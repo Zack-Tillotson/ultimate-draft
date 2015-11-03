@@ -5,15 +5,15 @@ import styles from './styles';
 import selector from './selector.js';
 import {dispatcher} from './actions.js';
 
-import PlayerList from '../../PlayerList';
+import PlayerTable from '../../draft/PlayerTable';
 import TeamList from '../../TeamList';
 
 const SaveDraftForm = React.createClass({
 
   propTypes: {
-    columns: React.PropTypes.object, 
-    players: React.PropTypes.object, 
-    teams: React.PropTypes.object, 
+    columns: React.PropTypes.array, 
+    players: React.PropTypes.array, 
+    teams: React.PropTypes.array, 
     data: React.PropTypes.object, 
     shareLink: React.PropTypes.string,
     navigateBackButton: React.PropTypes.object
@@ -36,7 +36,7 @@ const SaveDraftForm = React.createClass({
         <h3>Save</h3>
 
         <h5>{this.props.players.length} Players</h5>
-        <PlayerList players={this.props.players} columns={this.props.columns} />
+        <PlayerTable players={this.props.players} columns={this.props.columns} />
 
         <h5>{this.props.teams.length} Teams</h5>
         <TeamList teams={this.props.teams} />

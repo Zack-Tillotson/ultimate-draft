@@ -17,30 +17,47 @@ export default React.createClass({
   getDefaultProps() {
     return {
       filterColumns: false,
-      rowFilters: false
+      filterRows: false
     };
   },
 
-  getColumns() {
-    if(this.props.filterColumns) {
-      return this.props.columns.filter(column => column.visible);  
-    } else {
-      return this.props.columns;
+  getInitialState() {
+    return {
+      sort: '',
+      sortDir: 1
     }
   },
 
-  sortColumn(column) {
+  getColumns() {
+    return this.props.filterColumns
+      ? this.props.columns.filter(column => column.visible)
+      : this.props.columns;
+  },
 
+  sortColumnHandler(column) {
+    if(this.state.sort == column) {
+      this.setState({sortDir: this.state.sortDir * -1});
+    } else {
+      this.setState({sort: column, sortDir: 1});
+    }
   },
 
   getHeaderRow() {
     return (
       <tr>
-        {this.getColumns().map(column => (
-          <td key={column.name} onClick={this.sortColumn.bind(this, column.name)}>
-            {column.name}
-          </td>
-        ))}
+        {this.getColumns().map(column => {
+          const isSortColumn = column.name == this.state.sort;
+          const isSortAsc = this.state.sortDir == 1;
+          const columnClassName = isSortColumn ? (isSortAsc ? 'sortAsc' : 'sortDesc') : 'noSort';
+          return (
+            <td 
+              key={column.name} 
+              onClick={this.sortColumnHandler.bind(this, column.name)}
+              className={'columnHead ' + columnClassName}>
+              {column.name}
+            </td>
+          );
+        })}
       </tr>
     );
   },
@@ -56,6 +73,28 @@ export default React.createClass({
         return !otherTeam && !thisTeam && !undraftable;
       }
     })
+    .sort(this.sortTwoPlayers);
+  },
+
+  sortTwoPlayers(a,b) {
+    if(!this.state.sort) {
+      return 0;
+    }
+    const columnType = this.props.columns.find(column => column.name == this.state.sort).type;
+    const aValue = a[this.state.sort];
+    const bValue = b[this.state.sort];
+    switch(columnType) {
+      case 'Text':
+      case 'ID':
+      case 'Baggage ID':
+        return  aValue.toLowerCase() > bValue.toLowerCase() ? this.state.sortDir : -1 * this.state.sortDir;
+      case 'Number':
+      case 'Vector':
+        return  Number.parseFloat(aValue) > Number.parseFloat(bValue) ? this.state.sortDir : -1 * this.state.sortDir;
+      default:
+        return aValue > bValue ? this.state.sortDir : -1 * this.state.sortDir;
+    }
+    
   },
 
   getBodyRows() {
@@ -88,6 +127,9 @@ export default React.createClass({
   },
 
   getPlayerClassName(player) {
+    if(!player.draftStatus) {
+      return 'draftable';
+    }
     if(player.draftStatus.otherTeamsDraft || player.draftStatus.otherTeamsBaggage) {
       return 'otherTeam';
     } else if(player.draftStatus.currentTeamsDraft) {

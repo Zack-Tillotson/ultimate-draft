@@ -11,6 +11,14 @@ component {
     thead td {
       font-weight: bold;
       border-bottom: solid 2px black;
+
+      &.sortAsc:after {
+        content: '\25B2';
+      }
+
+      &.sortDesc:after {
+        content: '\25BC';
+      }
     }
 
     tbody tr {
