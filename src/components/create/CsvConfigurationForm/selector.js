@@ -28,7 +28,8 @@ function transformFieldMetadata(fields) {
       originalName,
       name,
       type: guessColumnType(name),
-      visible: true
+      visible: true,
+      include: true
     };
   });
 }
@@ -36,9 +37,10 @@ function transformFieldMetadata(fields) {
 const name = (state, props) => props.name;
 const wizard = (state) => state.wizard;
 const forms = createSelector(wizard, (wizard) => wizard.get('forms'));
-const form = createSelector(name, forms, (name, forms) => 
-  forms.filter(form => form.get('name') === name).get(0).toJS()
-);
+const form = createSelector(name, forms, (name, forms) => {
+  const currentForm = forms.filter(form => form.get('name') == name).get(0);
+  return currentForm ? currentForm.toJS() : {inputs: {}};
+});
 
 const csvText = (state) => state.wizard.get('forms').get(0).get('inputs').get('csvText');
 
@@ -47,6 +49,13 @@ export default createSelector(form, csvText, (form, csvText) => {
   const parseResult = papaparse.parse(csvText, {header: true});
   const players = parseResult.data;
   const columns = transformFieldMetadata(parseResult.meta.fields);
+
+  form.inputs = columns.map((column, index) => {
+    const input = Object.keys(form.inputs)
+      .filter(key => form.inputs[key].originalName == column.originalName)
+      .map(key => form.inputs[key]);
+    return {...column, ...input};
+  });
 
   return {...form, columns, players};
 });

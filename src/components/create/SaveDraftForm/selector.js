@@ -8,10 +8,12 @@ const form = createSelector(name, forms, (name, forms) =>
 );
 
 function transformColumns(columns) {
-  return columns.map(column => {
-    const {name, type, visible} = column;
-    return {name, type, visible};
-  });
+  return columns
+    .filter(column => column.include)
+    .map(column => {
+      const {name, type, visible} = column;
+      return {name, type, visible};
+    });
 }
 
 function transformPlayers(players, columns) {
@@ -46,5 +48,5 @@ export default createSelector(draft, columns, players, teams, (draft, columns, p
   const data = buildData(columns, players, teams);
   const shareLink = draft.get('url');
 
-  return {columns, players, teams, data, shareLink};
+  return {...data, data, shareLink};
 });

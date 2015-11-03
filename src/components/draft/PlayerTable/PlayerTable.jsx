@@ -2,6 +2,7 @@ import React from 'react';
 import InlineCss from 'react-inline-css';
 import utils from '../../../draft/utils';
 import styles from './styles';
+import columnTypes from '../../../columnTypes';
 
 export default React.createClass({
 
@@ -36,7 +37,11 @@ export default React.createClass({
 
   sortColumnHandler(column) {
     if(this.state.sort == column) {
-      this.setState({sortDir: this.state.sortDir * -1});
+      const sortDir = this.state.sortDir == 0 ? 1
+        : this.state.sortDir == 1 ? -1
+        : 0;
+        const sort = sortDir === 0 ? '' : this.state.sort;
+      this.setState({sort, sortDir});
     } else {
       this.setState({sort: column, sortDir: 1});
     }
@@ -80,21 +85,10 @@ export default React.createClass({
     if(!this.state.sort) {
       return 0;
     }
-    const columnType = this.props.columns.find(column => column.name == this.state.sort).type;
-    const aValue = a[this.state.sort];
-    const bValue = b[this.state.sort];
-    switch(columnType) {
-      case 'Text':
-      case 'ID':
-      case 'Baggage ID':
-        return  aValue.toLowerCase() > bValue.toLowerCase() ? this.state.sortDir : -1 * this.state.sortDir;
-      case 'Number':
-      case 'Vector':
-        return  Number.parseFloat(aValue) > Number.parseFloat(bValue) ? this.state.sortDir : -1 * this.state.sortDir;
-      default:
-        return aValue > bValue ? this.state.sortDir : -1 * this.state.sortDir;
-    }
+    const type = this.props.columns.find(column => column.name == this.state.sort).type;
+    const sort = columnTypes.find(column => column.name == type).sort;
     
+    return this.state.sortDir * sort(a[this.state.sort],b[this.state.sort]);    
   },
 
   getBodyRows() {

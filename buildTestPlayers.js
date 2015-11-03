@@ -26993,7 +26993,7 @@ function getTourney() {
 }
 
 function getEmail(name) {
-  return name + parseInt(Math.random()) * 999 + '@gmail.com';
+  return name + parseInt(Math.random() * 999) + '@gmail.com';
 }
 
 function getPhone() {

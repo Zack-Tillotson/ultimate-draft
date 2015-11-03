@@ -6,8 +6,8 @@ function getInitialState() {
   return Immutable.fromJS({
     currentTeam: -1,
     rowFilters: {
-      viewOtherTeam: false,
-      viewYourTeam: false,
+      viewOtherTeam: true,
+      viewYourTeam: true,
       viewUndraftable: true
     },
     columnFilters: []

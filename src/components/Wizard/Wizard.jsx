@@ -12,7 +12,7 @@ export default React.createClass({
     return <div>Step {this.props.step} / {this.props.totalSteps} {this.props.currentStep}</div>;
   },
   getNavigateBackButton() {
-    return <button onClick={this.goBackClickHandler}>Back</button>
+    return <button onClick={this.goBackClickHandler} tabIndex="999">Back</button>
   },
   goBackClickHandler(event) {
     event.preventDefault();
@@ -23,6 +23,9 @@ export default React.createClass({
       return child.props.name === this.props.currentStep;
     })[0];
     return React.cloneElement(child, {navigateBackButton: this.getNavigateBackButton()});
+  },
+  componentWillUpdate() {
+    window.scroll(0,0);
   },
   render() {
     return (

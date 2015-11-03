@@ -35,16 +35,6 @@ const SaveDraftForm = React.createClass({
       <InlineCss stylesheet={styles} componentName="container">
         <h3>Save</h3>
 
-        <h5>{this.props.players.length} Players</h5>
-        <PlayerTable players={this.props.players} columns={this.props.columns} />
-
-        <h5>{this.props.teams.length} Teams</h5>
-        <TeamList teams={this.props.teams} />
-
-        <div>
-          <button type='submit' onClick={this.saveHandler}>Save Draft</button>
-        </div>
-
         {!!this.props.shareLink && (
           <div>
             <h4>Important!</h4>
@@ -55,6 +45,16 @@ const SaveDraftForm = React.createClass({
             </div>
           </div>
         )}
+
+        <h5>{this.props.players.length} Players</h5>
+        <PlayerTable players={this.props.players} columns={this.props.columns} />
+
+        <h5>{this.props.teams.length} Teams</h5>
+        <TeamList teams={this.props.teams} />
+
+        <div>
+          <button type='submit' onClick={this.saveHandler}>Save Draft</button>
+        </div>
 
         {this.props.navigateBackButton}
       </InlineCss>

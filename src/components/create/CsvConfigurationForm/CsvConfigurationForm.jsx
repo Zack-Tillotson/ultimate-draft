@@ -2,6 +2,7 @@ import React from 'react';
 import InlineCss from "react-inline-css";
 import Formsy from 'formsy-react';
 import {Input, Select, Checkbox} from 'formsy-react-components';
+import PlayerTable from '../../draft/PlayerTable';
 import {connect} from 'react-redux';
 
 import styles from './styles';
@@ -13,9 +14,7 @@ import columnTypes from '../../../columnTypes';
 const CsvConfigurationForm = React.createClass({
 
   propTypes: {
-    inputs: React.PropTypes.shape({
-      csvText: React.PropTypes.string
-    }).isRequired,
+    inputs: React.PropTypes.array.isRequired,
     valid: React.PropTypes.bool,
     columns: React.PropTypes.array,
     navigateBackButton: React.PropTypes.object
@@ -38,17 +37,16 @@ const CsvConfigurationForm = React.createClass({
         name: inputs['column' + index + 'name'],
         type: inputs['column' + index + 'type'],
         visible: inputs['column' + index + 'visible'],
+        include: inputs['column' + index + 'include']
       };
     });
 
   },
 
-  getFirstPlayer() {
-    if(this.props.players.length > 0) {
-      return JSON.stringify(this.props.players[0]);
-    } else {
-      return "-- no players --";
-    }
+  getPlayers() {
+    return (
+      <PlayerTable players={this.props.players} columns={this.props.columns} />
+    );
   },
 
   render() {
@@ -56,11 +54,10 @@ const CsvConfigurationForm = React.createClass({
       <InlineCss stylesheet={styles} componentName="container">
         <h3>Configure</h3>
 
-        <h5>Players</h5>
+        <h5>{this.props.players.length} Players</h5>
         <div>
-          {this.props.players.length} Players, for example:
-          <div>
-            {this.getFirstPlayer()}
+          <div className="playerTableContainer">
+            {this.getPlayers()}
           </div>
         </div>
 
@@ -70,7 +67,7 @@ const CsvConfigurationForm = React.createClass({
           mapping={this.mapInputs}>
 
           <ol className="columnList">
-            {this.props.columns.map((column, index) => (
+            {this.props.inputs.map((column, index) => (
               <li className="columnItem" key={"column" + index}>
 
                 <Input 
@@ -84,6 +81,13 @@ const CsvConfigurationForm = React.createClass({
                     label="Column Name"
                     type="text" 
                     value={column.name} />
+                </div>
+
+                <div className="name">
+                  <Checkbox 
+                    name={'column' + index + 'include'}
+                    label="Include"
+                    value={column.include} />
                 </div>
 
                 <div className="name">
@@ -109,7 +113,8 @@ const CsvConfigurationForm = React.createClass({
 
           {!this.props.valid && (
             <div>
-              You must specify these column types: ID, Baggage ID.
+              You must specify these column types: 
+              {columnTypes.filter(type => type.required).map(type => type.name).join(', ')}
             </div>
           )}
 
