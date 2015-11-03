@@ -20,16 +20,16 @@ function getCurrentlyUndraftable(playerId, teamId, player, players, teams, colum
 
   const team = teams.find(team => team.id == teamId);
   const baggageIds = players
-    .filter(player => {
-      const pid = utils.getPlayerId(player, columns);
-      const baggageTeamless = !getTeamForPlayer(utils.getBaggageId(player, columns), drafts);
+    .filter(filterPlayer => {
+      const pid = utils.getPlayerId(filterPlayer, columns);
+      const baggageTeamless = getTeamForPlayer(utils.getBaggageId(filterPlayer, columns), drafts) === null;
       return getTeamForPlayer(pid, drafts) == teamId && pid != playerId && baggageTeamless;
     })
-    .map(player => utils.getBaggageId(player, columns));
+    .map(filterPlayer => utils.getBaggageId(filterPlayer, columns));
 
   const maxVector = players // Any player...
-    .filter(player => baggageIds.indexOf(utils.getPlayerId(player, columns)) >= 0)
-    .reduce((maxVector, player) => Math.max(maxVector, utils.getVector(player, columns)), 0);
+    .filter(filterPlayer => baggageIds.indexOf(utils.getPlayerId(filterPlayer, columns)) >= 0)
+    .reduce((maxVector, filterPlayer) => Math.max(maxVector, utils.getVector(filterPlayer, columns)), 0);
 
   return utils.getVector(player, columns) <= maxVector;
 }

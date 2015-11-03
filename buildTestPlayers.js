@@ -27062,12 +27062,12 @@ function getValidIndex(players, exclude) {
 function baggagePlayers(players) {
   var firstI = getValidIndex(players, -1);
   var secondI = getValidIndex(players, firstI);
-  players[firstI][6] = secondI;
-  players[secondI][6] = firstI;
+  players[firstI][6] = players[secondI][1];
+  players[secondI][6] = players[firstI][1];
 }
 
-var playerCount = 300;
-var baggageCount = 75;
+var playerCount = 175;
+var baggageCount = 65;
 
 var players = [];
 for(var i = 0 ; i < playerCount ; i++) {
