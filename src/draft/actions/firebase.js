@@ -5,30 +5,27 @@ import modalNames from '../modalNames';
 import overlay from './overlay';
 
 function transformDraft(dispatch, data, tranformationFn) {
-  if(data.valid) {
+  const teamId = data.teamId;
+  const playerId = data.playerId;
 
-    const teamId = data.inputs.teamId.value;
-    const playerId = data.inputs.playerId.value;
+  dispatch(overlay.uploadStarting());
+  
+  const firebaseId = utils.getFirebaseId();
+  const draftsRef = Firebase.connect(firebaseId + '/drafts');
+  const draftRef = draftsRef.transaction(
+    tranformationFn,
 
-    dispatch(overlay.uploadStarting());
-    
-    const firebaseId = utils.getFirebaseId();
-    const draftsRef = Firebase.connect(firebaseId + '/drafts');
-    const draftRef = draftsRef.transaction(
-      tranformationFn,
+    // On Complete
+    (error, committed, snapshot) => {
+      if(error) {
+        dispatch(overlay.blowup(error));
+      }
+      dispatch(overlay.uploadFinished());
+    }, 
 
-      // On Complete
-      (error, committed, snapshot) => {
-        if(error) {
-          dispatch(overlay.blowup(error));
-        }
-        dispatch(overlay.uploadFinished());
-      }, 
-
-      // Dont see intermediate states
-      false 
-    );
-  }
+    // Dont see intermediate states
+    false 
+  );
 }
 
 function putDraft(dispatch, data) {
@@ -37,8 +34,8 @@ function putDraft(dispatch, data) {
     // Upate function
     (currentData) => {
 
-      const teamId = data.inputs.teamId.value;
-      const playerId = data.inputs.playerId.value;
+      const teamId = data.teamId;
+      const playerId = data.playerId;
 
       currentData = currentData || [];
       
@@ -60,8 +57,8 @@ function unputDraft(dispatch, data) {
     // Upate function
     (currentData) => {
 
-      const teamId = data.inputs.teamId.value;
-      const playerId = data.inputs.playerId.value;
+      const teamId = data.teamId;
+      const playerId = data.playerId;
 
       currentData = currentData || [];
       

@@ -12,13 +12,15 @@ export default React.createClass({
     filterColumns: React.PropTypes.bool,
     filterRows: React.PropTypes.bool,
     rowFilters: React.PropTypes.object,
-    playerClickHandler: React.PropTypes.func
+    playerClickHandler: React.PropTypes.func,
+    colors: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       filterColumns: false,
-      filterRows: false
+      filterRows: false,
+      colors: true
     };
   },
 
@@ -121,6 +123,9 @@ export default React.createClass({
   },
 
   getPlayerClassName(player) {
+    if(!this.props.colors) { 
+      return '';
+    }
     if(!player.draftStatus) {
       return 'draftable';
     }
@@ -163,7 +168,7 @@ export default React.createClass({
             {this.getBodyRows()}
           </tbody>
         </table>
-        {this.getColorDescriptions()}
+        {this.props.colors && this.getColorDescriptions()}
       </InlineCss>
     );
   }

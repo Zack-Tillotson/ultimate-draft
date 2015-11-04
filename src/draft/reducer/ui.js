@@ -28,13 +28,6 @@ export default function(state = getInitialState(), action) {
       });
       break;
     case actions.confirmModal:
-      if(action.valid) {
-        state = state.merge({
-          modal: '',
-          modalData: {}
-        });
-      }
-      break;
     case actions.syncing:
     case actions.cancelModal:
       state = state.merge({

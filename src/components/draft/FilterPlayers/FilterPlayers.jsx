@@ -33,7 +33,7 @@ export default React.createClass({
               name="viewOtherTeam"
               ref="viewOtherTeam"
               onChange={this.changeHandler}
-              defaultChecked={!this.props.data.inputs.viewOtherTeam.value} />
+              defaultChecked={!this.props.data.viewOtherTeam} />
           </div>
           <div className="option">
             <label htmlFor="viewYourTeam">Hide players drafted by your team.</label>
@@ -42,7 +42,7 @@ export default React.createClass({
               name="viewYourTeam"
               ref="viewYourTeam"
               onChange={this.changeHandler}
-              defaultChecked={!this.props.data.inputs.viewYourTeam.value} />
+              defaultChecked={!this.props.data.viewYourTeam} />
           </div>
           <div className="option">
             <label htmlFor="viewUndraftable">Hide players your team is not currently allowed to draft.</label>
@@ -51,7 +51,7 @@ export default React.createClass({
               name="viewUndraftable"
               ref="viewUndraftable"
               onChange={this.changeHandler}
-              defaultChecked={!this.props.data.inputs.viewUndraftable.value} />
+              defaultChecked={!this.props.data.viewUndraftable} />
           </div>
         </div>
       </InlineCss>

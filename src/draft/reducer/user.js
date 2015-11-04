@@ -15,22 +15,20 @@ function getInitialState() {
 }
 
 export default function(state = getInitialState(), action) {
-  if(action.type === actions.confirmModal && action.valid) {
+  if(action.type === actions.confirmModal) {
     switch(action.modal) {
       case modalNames.chooseCurrentTeam:
-        state = state.merge({currentTeam: action.data.inputs.currentTeam.value});
+        state = state.merge({currentTeam: action.data.currentTeam});
         break;
       case modalNames.filterRows:
         state = state.merge({rowFilters: {
-          viewOtherTeam: action.data.inputs.viewOtherTeam.value,
-          viewYourTeam: action.data.inputs.viewYourTeam.value,
-          viewUndraftable: action.data.inputs.viewUndraftable.value
+          viewOtherTeam: action.data.viewOtherTeam,
+          viewYourTeam: action.data.viewYourTeam,
+          viewUndraftable: action.data.viewUndraftable
         }});
         break;
       case modalNames.filterColumns:
-        state = state.merge({columnFilters: action.data.inputs.map(input => {
-          return input.value;
-        })});
+        state = state.merge({columnFilters: action.data});
         break;
     }
   }

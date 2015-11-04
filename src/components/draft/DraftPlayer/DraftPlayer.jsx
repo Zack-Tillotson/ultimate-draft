@@ -12,6 +12,24 @@ export default React.createClass({
     columns: React.PropTypes.array.isRequired
   },
 
+  validate(data) {
+    return this.validatePlayer(data) && this.validateTeam(data);
+  },
+
+  validatePlayer(data) {
+    return !!data.player
+      && data.player.draftStatus
+      && !data.player.draftStatus.currentTeamUndraftable
+      && !data.player.draftStatus.otherTeamsDraft
+      && !data.player.draftStatus.otherTeamBaggage
+      && !data.player.draftStatus.currentTeamsBaggage
+      && !data.player.draftStatus.currenTeamsDraft;
+  },
+
+  validateTeam(data) {
+    return parseInt(data.teamId) >= 0 && !!this.props.teams.find(team => team.id == data.teamId);
+  },
+
   getInputs() {
     const playerId = this.refs.playerId.value;
     const teamId = this.refs.teamId.value;
@@ -24,8 +42,8 @@ export default React.createClass({
   },
 
   getPlayerForm() {
-    const value = this.props.data.inputs.playerId.value;
-    const className = this.props.data.player ? 'valid' : 'invalid';
+    const value = this.props.data.playerId;
+    const className = this.validatePlayer(this.props.data) ? 'valid' : 'invalid';
     return (
       <div className="playerForm">
         Player ID
@@ -42,8 +60,8 @@ export default React.createClass({
   },
 
   getTeamForm() {
-    const defaultValue = this.props.data.inputs.teamId.value >= 0 ? this.props.data.inputs.teamId.value : "";
-    const className = this.props.data.inputs.teamId.valid? 'valid' : 'invalid';
+    const defaultValue = this.props.data.teamId >= 0 ? this.props.data.teamId : "";
+    const className = this.validateTeam(this.props.data) ? 'valid' : 'invalid';
     return (
       <div className="teamForm">
         Team

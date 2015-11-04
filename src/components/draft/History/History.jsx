@@ -17,41 +17,51 @@ export default React.createClass({
   },
 
   getPlayer(draft) {
-    return (
-      <div className="player" key={draft.playerId}>
-        Player #{draft.playerId}
-      </div>
-    );
+    return "Player #" + draft.playerId;
   },
 
   getTeam(draft) {
-    return (
-      <div className="team" key={draft.team.id}>
-        {draft.team.name}
-      </div>
-    );
+    return draft.team.name;
   },
 
   getDraft(draft, index) {
     return (
-      <div className="draft" key={index}>
-        <div className="info">
-          {index + 1}. {this.getTeam(draft)} drafts {this.getPlayer(draft)}
-        </div>
-        <div className="controls">
+      <tr className="draft" key={index}>
+        <td className="index">
+          {index}.
+        </td>
+        <td className="team">
+          {this.getTeam(draft)}
+        </td>
+        <td className="player">
+          {this.getPlayer(draft)}
+        </td>
+        <td className="controls">
           <div 
             className="undo"
-            onClick={this.handleUndraftClick.bind(this, draft)}>X</div>
-        </div>
-      </div>
+            onClick={this.handleUndraftClick.bind(this, draft)}>
+            X
+          </div>
+        </td>
+      </tr>
     );
   },
 
   getDrafts(drafts) {
     return (
-      <div className="drafts">
-        {drafts.map((draft, index) => this.getDraft(draft, index))}
-      </div>
+      <table className="drafts">
+        <thead>
+          <tr>
+            <td>#</td>
+            <td>Team</td>
+            <td>Player</td>
+            <td>Undo</td>
+          </tr>
+        </thead>
+        <tbody>
+          {drafts.reverse().map((draft, index) => this.getDraft(draft, drafts.length - index))}
+        </tbody>
+      </table>
     );
   },
 

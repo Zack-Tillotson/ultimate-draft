@@ -10,16 +10,20 @@ export default React.createClass({
     columns: React.PropTypes.array.isRequired
   },
 
+  validate(data) {
+    return !!data.player && !!data.team;
+  },
+
   getTeam() {
     return (
       <div className="teamForm">
-        {this.props.data.inputs.team.name}
+        {this.props.data.team.name}
       </div>
     );
   },
 
   getPlayer() {
-    return <PlayerTable players={[this.props.data.inputs.player.value]} columns={this.props.columns} />
+    return <PlayerTable players={[this.props.data.player]} columns={this.props.columns} colors={false} />
   },
 
   render() {

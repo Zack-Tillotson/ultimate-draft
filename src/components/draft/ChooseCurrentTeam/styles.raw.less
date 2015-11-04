@@ -7,7 +7,8 @@ component {
     background: white;
     box-shadow: 2px 2px 3px #666;
     display: inline-block;
-
+    cursor: pointer;
+    
     &.current {
       background: #DCF2F9;
     }
@@ -15,6 +16,10 @@ component {
     &.selected {
       background: #9BC0C6;
       border: solid 1px #333;
+
+      &:hover {
+        background: #9BC0C6;
+      }
     }
 
     &:hover {

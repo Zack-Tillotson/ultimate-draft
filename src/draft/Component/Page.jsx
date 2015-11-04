@@ -115,6 +115,7 @@ const Page = React.createClass({
               modalName={modalNames.chooseCurrentTeam}
               updateModal={this.props.dispatch.updateModal}
               teams={this.props.teams}
+              data={this.props.ui.modalData}
               currentTeam={this.props.user.currentTeam} />
             <FilterColumns 
               modalName={modalNames.filterColumns}

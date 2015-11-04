@@ -37,7 +37,7 @@ const uiWithData = createSelector(ui, playerMap, drafts, (ui, playerMap, drafts)
   switch(ui.modal) {
     case ModalNames.draftPlayer:
     case ModalNames.undraftPlayer:
-      modalData.player = playerMap[modalData.inputs.playerId.value];
+      modalData.player = playerMap[modalData.playerId];
       break;
   }
 

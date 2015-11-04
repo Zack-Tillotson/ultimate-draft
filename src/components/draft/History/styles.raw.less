@@ -1,42 +1,39 @@
 component {
 
-  .draft {
-    padding: 5px 25px;
+  .drafts {
+    width: 100%;
 
-    &:hover {
-        background: #ccc;
+    thead td {
+      border-bottom : solid 1px #000;
+      font-weight: solid;
     }
   
-    .info {
-      display: inline-block;
-      width: 80%;
-      text-align: left;
-      margin: 0;
-      padding: 0;
+    .draft {
+      padding: 5px 25px;
 
-      .team, .player {
-        display: inline-block;
+      &:hover {
+          background: #ccc;
       }
-    }
+    
+      .team, .player {
+        text-align: left;
+      }
 
-    .controls {
-      display: inline-block;
-      width: 20%;
-      margin: 0;
-      padding: 0;
-      text-align: center;
+      .controls {
+        text-align: center;
 
-      .undo {
-        background: #F97171;
-        border: solid 1px black;
-        cursor: pointer;
-        width: 25px;
-        border-radius: 7px;
+        .undo {
+          background: #F97171;
+          border: solid 1px black;
+          cursor: pointer;
+          width: 25px;
+          border-radius: 7px;
 
-        &:hover {
-          background: red;
+          &:hover {
+            background: red;
+          }
         }
       }
-    }
+    }  
   }  
 }

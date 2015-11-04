@@ -15,7 +15,8 @@ export default React.createClass({
         <h5>{team.name}</h5>
         <PlayerTable 
           players={team.players} 
-          columns={this.props.columns} />
+          columns={this.props.columns} 
+          colors={false} />
       </div>
     );
   },
