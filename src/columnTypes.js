@@ -72,6 +72,7 @@ export const vector = {
   required: true,
   sort: numberSort
 };
+
 export const height = {
   name: 'Height', 
   description: 'A players height in inches and feet', 
@@ -80,9 +81,16 @@ export const height = {
   sort: heightSort
 };
 
+export const number = {
+  name: 'Number', 
+  description: 'A numerical value', 
+  unique: false, 
+  required: false, 
+  sort: numberSort
+}
+
 export default [
   {name: 'Text', description: 'Words and such', unique: false, required: false, sort: defaultSort},
   {name: 'Boolean', description: 'Exists or not', unique: false, required: false, sort: boolSort},
-  {name: 'Number', description: 'A numerical value', unique: false, required: false, sort: numberSort},
-  id, baggageId, vector, height
+  id, baggageId, vector, height, number
 ];

@@ -5,14 +5,16 @@ export function getInitialState(name) {
   return {
     name,
     valid: false,
+    submitted: false,
     inputs: {}
   };
 }
 
 function formReducer(state, action) {
   if(state.get('name') === action.name) {
-    const {valid, inputs} = action;
-    state = state.merge({valid, inputs});
+    const {inputs, valid} = action;
+    const submitted = state.get('submitted') || action.type === actions.submitForm;
+    state = state.merge({valid, inputs, submitted});
   }
   return state;
 }

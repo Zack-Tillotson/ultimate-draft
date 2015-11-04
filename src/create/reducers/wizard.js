@@ -12,10 +12,12 @@ function getInitialState() {
   });
 }
 
-function getNextStep(currentStep) {
-  const index = formNames.indexOf(currentStep);
-  const nextIndex = (index + 1) % formNames.length;
-  return formNames[nextIndex];
+function getNextStep(action, currentStep) {
+  let index = formNames.indexOf(currentStep);
+  if(action.valid) {
+    index = (index + 1) % formNames.length;
+  }
+  return formNames[index];
 }
 
 function getPreviousStep(currentStep) {
@@ -28,7 +30,7 @@ export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.submitForm:
       state = state.merge({
-        currentStep: getNextStep(state.get('currentStep')),
+        currentStep: getNextStep(action, state.get('currentStep')),
         forms: formsReducer(state.get('forms'), action)
       });
       break;

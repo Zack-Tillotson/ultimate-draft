@@ -1,6 +1,6 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
-import PlayerTable from '../PlayerTable';
+import TeamTable from '../../TeamTable';
 
 import modalNames from '../../../draft/modalNames';
 import styles from './styles';
@@ -11,29 +11,10 @@ export default React.createClass({
     columns: React.PropTypes.array.isRequired
   },
 
-  getTeam(team) {
-    return (
-      <div className="team" key={team.id}>
-        <h5>{team.name}</h5>
-        <PlayerTable 
-          players={team.players} 
-          columns={this.props.columns} />
-      </div>
-    );
-  },
-
-  getTeams(teams) {
-    return (
-      <div className="teams">
-        {teams.map(team => this.getTeam(team))}
-      </div>
-    );
-  },
-
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        {this.getTeams(this.props.teams)}
+        <TeamTable teams={this.props.teams} columns={this.props.columns} />
       </InlineCss>
     );
   }

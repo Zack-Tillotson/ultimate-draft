@@ -15,8 +15,6 @@ function getInitialState() {
 }
 
 export default function(state = getInitialState(), action) {
-  let modalData = {};
-
   switch(action.type) {
     case actions.tabClick:
       state = state.merge({
@@ -24,23 +22,28 @@ export default function(state = getInitialState(), action) {
       });
       break;
     case actions.viewModal:
-      modalData = modals.validate(action.modalName, action.data);
       state = state.merge({
         modal: action.modalName,
-        modalData
+        modalData: action.data
       });
       break;
     case actions.confirmModal:
-    case actions.cancelModal:
+      if(action.valid) {
+        state = state.merge({
+          modal: '',
+          modalData: {}
+        });
+      }
+      break;
     case actions.syncing:
+    case actions.cancelModal:
       state = state.merge({
         modal: '',
-        modalData
+        modalData: {}
       });
       break;
     case actions.updateModal:
-      modalData = modals.validate(state.get('modal'), action.data);
-      state = state.merge({modalData});
+      state = state.merge({modalData: action.data});
       break;
     case actions.blowup:
       state = state.merge({

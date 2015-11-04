@@ -1,3 +1,24 @@
 component {
-  
+
+  .teamChoice {
+    width: calc(50% - 10px);
+    margin: 4px;
+    border: solid 1px #ccc;
+    background: white;
+    box-shadow: 2px 2px 3px #666;
+    display: inline-block;
+
+    &.current {
+      background: #DCF2F9;
+    }
+
+    &.selected {
+      background: #9BC0C6;
+      border: solid 1px #333;
+    }
+
+    &:hover {
+      background: #eee;
+    }
+  }  
 }

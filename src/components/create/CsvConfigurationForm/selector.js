@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 import columnTypes from '../../../columnTypes';
-import {id, baggageId} from '../../../columnTypes';
+import {id, baggageId, vector, height, number} from '../../../columnTypes';
 import papaparse from 'papaparse';
 
 function guessColumnType(name) {
@@ -12,6 +12,19 @@ function guessColumnType(name) {
     case 'bag id':
     case 'b':
       return baggageId.name;
+    case 'vector':
+    case 'vec':
+    case 'c':
+      return vector.name;
+    case 'height':
+      return height.name;
+    case 'age':
+    case 'yr started':
+    case 'ath':
+    case 'exp':
+    case 'skill':
+    case 'weeks missed':
+      return number.name;
     default:
       return columnTypes[0].name;
   }
@@ -42,7 +55,7 @@ const form = createSelector(name, forms, (name, forms) => {
   return currentForm ? currentForm.toJS() : {inputs: {}};
 });
 
-const csvText = (state) => state.wizard.get('forms').get(0).get('inputs').get('csvText');
+const csvText = (state) => state.wizard.get('forms').get(0).get('inputs').get('csvText').get('value');
 
 export default createSelector(form, csvText, (form, csvText) => {
 
@@ -53,7 +66,7 @@ export default createSelector(form, csvText, (form, csvText) => {
   form.inputs = columns.map((column, index) => {
     const input = Object.keys(form.inputs)
       .filter(key => form.inputs[key].originalName == column.originalName)
-      .map(key => form.inputs[key]);
+      .map(key => form.inputs[key])[0];
     return {...column, ...input};
   });
 

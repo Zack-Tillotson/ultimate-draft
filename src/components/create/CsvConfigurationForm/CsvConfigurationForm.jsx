@@ -2,7 +2,7 @@ import React from 'react';
 import InlineCss from "react-inline-css";
 import Formsy from 'formsy-react';
 import {Input, Select, Checkbox} from 'formsy-react-components';
-import PlayerTable from '../../draft/PlayerTable';
+import PlayerTable from '../../PlayerTable';
 import {connect} from 'react-redux';
 
 import styles from './styles';
@@ -31,8 +31,9 @@ const CsvConfigurationForm = React.createClass({
 
   mapInputs(inputs) {
 
-    return this.props.columns.map((column, index) => {
-      return {
+    const ret = {};
+    this.props.columns.forEach((column, index) => {
+      ret[index] = {
         originalName: inputs['column' + index + 'origName'],
         name: inputs['column' + index + 'name'],
         type: inputs['column' + index + 'type'],
@@ -40,6 +41,7 @@ const CsvConfigurationForm = React.createClass({
         include: inputs['column' + index + 'include']
       };
     });
+    return ret;
 
   },
 
@@ -66,54 +68,63 @@ const CsvConfigurationForm = React.createClass({
           onSubmit={this.submitHandler}
           mapping={this.mapInputs}>
 
-          <ol className="columnList">
-            {this.props.inputs.map((column, index) => (
-              <li className="columnItem" key={"column" + index}>
+          <table className="columnList">
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>Include</td>
+                <td>Defaults Visible</td>
+                <td>Type</td>
+              </tr>
+            </thead>
+            <tbody>
+            {this.props.inputs.map((column, index) => {
+              const className = !this.props.submitted || column.valid ? 'valid' : 'invalid';
+              return (
+                <tr className={"columnItem " + className} key={"column" + index}>
 
-                <Input 
-                    name={'column' + index + 'origName'}
-                    type="hidden" 
-                    value={column.originalName} />
+                  <td className="name">
+                    <Input 
+                        name={'column' + index + 'origName'}
+                        type="hidden" 
+                        value={column.originalName} />
+                    <Input 
+                      name={'column' + index + 'name'}
+                      type="text" 
+                      value={column.name} />
+                  </td>
 
-                <div className="name">
-                  <Input 
-                    name={'column' + index + 'name'}
-                    label="Column Name"
-                    type="text" 
-                    value={column.name} />
-                </div>
+                  <td className="booleanOption">
+                    <Checkbox 
+                      name={'column' + index + 'include'}
+                      value={column.include} />
+                  </td>
 
-                <div className="name">
-                  <Checkbox 
-                    name={'column' + index + 'include'}
-                    label="Include"
-                    value={column.include} />
-                </div>
+                  <td className="booleanOption">
+                    <Checkbox 
+                      name={'column' + index + 'visible'}
+                      value={column.visible} />
+                  </td>
 
-                <div className="name">
-                  <Checkbox 
-                    name={'column' + index + 'visible'}
-                    label="Default Visibile"
-                    value={column.visible} />
-                </div>
+                  <td className="selectOption">
+                    <Select
+                      name={'column' + index + 'type'}
+                      value={column.type} 
+                      options={columnTypes.map(type => {
+                        return {value: type.name, label: type.name}
+                      })} />
+                  </td>
 
-                <div className="type">
-                  <Select
-                    name={'column' + index + 'type'}
-                    label="Type"
-                    value={column.type} 
-                    options={columnTypes.map(type => {
-                      return {value: type.name, label: type.name}
-                    })} />
-                </div>
+                </tr>
+              )
+            })}
+            </tbody>
+          </table>
 
-              </li>
-            ))}
-          </ol>
-
-          {!this.props.valid && (
+          {!this.props.valid && this.props.submitted && (
             <div>
-              You must specify these column types: 
+              These column types are required, please ensure they are set:
+              <br />
               {columnTypes.filter(type => type.required).map(type => type.name).join(', ')}
             </div>
           )}

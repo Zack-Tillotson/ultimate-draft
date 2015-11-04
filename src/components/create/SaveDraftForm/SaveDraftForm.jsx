@@ -5,7 +5,7 @@ import styles from './styles';
 import selector from './selector.js';
 import {dispatcher} from './actions.js';
 
-import PlayerTable from '../../draft/PlayerTable';
+import PlayerTable from '../../PlayerTable';
 import TeamList from '../../TeamList';
 
 const SaveDraftForm = React.createClass({

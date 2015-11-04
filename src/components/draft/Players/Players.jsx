@@ -1,7 +1,7 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
 import modalNames from '../../../draft/modalNames';
-import PlayerTable from '../PlayerTable';
+import PlayerTable from '../../PlayerTable';
 
 import styles from './styles';
 

@@ -8,13 +8,13 @@ export default {
   tabClick(tabName) {
     return {type: actions.tabClick, tabName}
   },
-  viewModal(modalName, data) {
+  viewModal(modalName, data, valid = false) {
     return {type: actions.viewModal, modalName, data};
   },
-  updateModal(data) {
-    return {type: actions.updateModal, data};
+  updateModal(data, valid = true) {
+    return {type: actions.updateModal, valid, data};
   },
-  confirmModal(modalName, data) { 
+  confirmModal(modalName, data, valid = true) { 
     switch(modalName) {
       case modalNames.draftPlayer:
         return (dispatch) => firebase.putDraft(dispatch, data);
@@ -23,7 +23,7 @@ export default {
       case modalNames.chooseCurrentTeam:
       case modalNames.filterRows:
       case modalNames.filterColumns:
-        return {type: actions.confirmModal, modal: modalName, data};
+        return {type: actions.confirmModal, modal: modalName, valid, data};
     }
   },
   cancelModal(modalName) {

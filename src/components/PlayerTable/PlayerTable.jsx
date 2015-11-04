@@ -1,8 +1,8 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
-import utils from '../../../draft/utils';
+import utils from '../../draft/utils';
 import styles from './styles';
-import columnTypes from '../../../columnTypes';
+import columnTypes from '../../columnTypes';
 
 export default React.createClass({
 

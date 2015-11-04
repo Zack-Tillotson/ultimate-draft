@@ -12,10 +12,9 @@ import {dispatcher} from './actions.js';
 const DataEntryForm = React.createClass({
 
   propTypes: {
-    inputs: React.PropTypes.shape({
-      csvText: React.PropTypes.string
-    }).isRequired,
-    valid: React.PropTypes.bool,
+    inputs: React.PropTypes.object.isRequired,
+    valid: React.PropTypes.bool.isRequired,
+    submitted: React.PropTypes.bool.isRequired,
     navigateBackButton: React.PropTypes.object
   },
   
@@ -24,6 +23,7 @@ const DataEntryForm = React.createClass({
   },
 
   render() {
+    const csvTextValue = this.props.inputs.csvText ? this.props.inputs.csvText.value : '';
     return (
       <InlineCss stylesheet={styles} componentName="container">
         <h3>Enter</h3>
@@ -32,9 +32,9 @@ const DataEntryForm = React.createClass({
 
           <Textarea 
             name="csvText" rows={8} cols={100} label="Data in CSV form" 
-            value={this.props.inputs.csvText} />
+            value={csvTextValue} />
 
-          {!this.props.valid && (
+          {!this.props.valid && this.props.submitted && (
             <div>
               Copy the CSV text into the form in order to continue.
             </div>

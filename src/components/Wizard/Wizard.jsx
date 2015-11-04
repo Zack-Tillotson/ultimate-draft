@@ -24,8 +24,10 @@ export default React.createClass({
     })[0];
     return React.cloneElement(child, {navigateBackButton: this.getNavigateBackButton()});
   },
-  componentWillUpdate() {
-    window.scroll(0,0);
+  componentWillUpdate(nextProps) {
+    if(this.props.step != nextProps.step) {
+      window.scroll(0,0);
+    }
   },
   render() {
     return (

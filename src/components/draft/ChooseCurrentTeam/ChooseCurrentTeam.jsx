@@ -12,34 +12,33 @@ export default React.createClass({
     updateModal: React.PropTypes.func.isRequired
   },
 
-  changeHandler(event) {
-    event.preventDefault();
-    this.props.updateModal(this.getInputs());
-  },
-
-  getInputs() {
-    const currentTeam = this.refs.teamId.value;
-    return {currentTeam};
+  clickHandler(currentTeam) {
+    const value = currentTeam;
+    const valid = !!currentTeam;
+    this.props.updateModal({valid: true, inputs: {currentTeam: {value, valid}}});
   },
 
   getTeamForm() {
-    const defaultValue = this.props.currentTeam && this.props.currentTeam >= 0 
-      ? this.props.currentTeam 
-      : "";
     return (
       <div className="teamForm">
-        <select 
-            ref="teamId" 
-            name="teamId" 
-            defaultValue={defaultValue} 
-            onChange={this.changeHandler}>
-          {!defaultValue && (
-            <option key="default" value={""}>Choose A Team</option>
-          )}
-          {this.props.teams.map(team => (
-            <option key={team.id} value={team.id}>{team.name}</option>
-          ))}
-        </select>
+        {this.props.teams.map(team => {
+          let selected = '';
+          if(this.props.modalData && this.props.modalData.inputs.currentTeam.value == team.id) {
+            selected = 'selected';
+          }
+          let current = '';
+          if(this.props.currentTeam == team.id) {
+            current = 'current';
+          }
+          const className = [selected, current, 'teamChoice'].join(' ');
+          return (
+            <div key={team.id}
+              className={className}
+              onClick={this.clickHandler.bind(this, team.id)} >
+              {team.name}
+            </div>
+          );
+        })}
       </div>
     );
   },
