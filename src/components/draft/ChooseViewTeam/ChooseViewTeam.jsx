@@ -8,25 +8,25 @@ export default React.createClass({
 
   propTypes: {
     teams: React.PropTypes.array.isRequired,
-    currentTeam: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
+    viewTeam: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
     updateModal: React.PropTypes.func.isRequired,
     data: React.PropTypes.object
   },
 
   validate(data) {
-    return this.props.teams.find(team => team.id == data.currentTeam);
+    return this.props.teams.find(team => team.id == data.viewTeam);
   },
 
-  clickHandler(currentTeam) {
-    this.props.updateModal({currentTeam});
+  clickHandler(viewTeam) {
+    this.props.updateModal({viewTeam});
   },
 
   getTeamForm() {
-    const currentTeam = this.props.data ? this.props.data.currentTeam : this.props.currentTeam;
+    const viewTeam = this.props.data ? this.props.data.viewTeam : this.props.viewTeam;
     return (
       <div className="teamForm">
         {this.props.teams.map(team => {
-          const selected = currentTeam == team.id ? 'selected' : '';
+          const selected = viewTeam == team.id ? 'selected' : '';
           const className = [selected, 'teamChoice'].join(' ');
           return (
             <div key={team.id}

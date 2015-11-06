@@ -1,0 +1,49 @@
+component {
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: #fff;
+  border: solid 2px #666;
+  border-bottom: none;
+  box-shadow: 0 -3px 3px #ccc;
+  width: 100%;
+  overflow-x: hidden;
+
+  .draftOrders {
+
+    width: 2500px;
+    height: 46px;
+    text-align: left;
+
+    h5 {
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+
+      &:after {
+        content: '\2192';
+      }
+    }
+
+    .draftOrder {
+      display: inline-block;
+      margin: 0;
+      width: 150px;
+      text-align: center;
+      font-size: 14px;
+      margin: 0 1px;
+      border-bottom: solid 12px white;
+    }
+  }
+
+  .link {
+    display: inline-block;
+    color: black;
+    font-size: 12px;
+    margin-left: 25px;
+  }
+  
+}

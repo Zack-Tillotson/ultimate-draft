@@ -2,37 +2,17 @@ import {createSelector} from 'reselect';
 import ModalNames from '../modalNames';
 import utils from '../utils';
 
-import {ui, teams, drafts, firebase} from './base';
+import {ui, firebase} from './base';
 import {players, playerMap} from './players';
+import {teams, teamMap} from './teams';
+import drafts from './drafts';
 import user from './user';
 import columns from './columns';
-
-const teamMap = createSelector(teams, (teams) => {
-  const ret = {};
-  teams.forEach(team => ret[team.id] = team);
-  return ret;
-});
-
-const teamsWithPlayers = createSelector(playerMap, teams, drafts, (playerMap, teams, drafts) => {
-  return teams.map(team => {
-    const players = drafts
-      .filter(draft => draft.teamId == team.id)
-      .map(draft => playerMap[draft.playerId]);
-    return {...team, players: players};
-  });
-});
-
-const draftsWithTeamsAndPlayers = createSelector(drafts, playerMap, teamMap, (drafts, playerMap, teamMap) => {
-  return drafts.map(draft => {
-    const team = teamMap[draft.teamId];
-    const player = playerMap[draft.playerId];
-    return {...draft, team, player}
-  })
-});
+import status from './status';
 
 const uiWithData = createSelector(ui, playerMap, drafts, (ui, playerMap, drafts) => {
 
-  const modalData = ui.modalData;
+  const {modalData} = ui;
 
   switch(ui.modal) {
     case ModalNames.draftPlayer:
@@ -44,9 +24,8 @@ const uiWithData = createSelector(ui, playerMap, drafts, (ui, playerMap, drafts)
   return {...ui, modalData};
 });
 
-
 export default createSelector(
-  [user, uiWithData, players, teamsWithPlayers, columns, draftsWithTeamsAndPlayers, firebase],
-  (user, ui, players, teams, columns, drafts, firebase) => {
-  return {user, ui, players, teams, columns, drafts, firebase};
+  [user, uiWithData, players, teams, columns, drafts, firebase, status],
+  (user, ui, players, teams, columns, drafts, firebase, status) => {
+  return {user, ui, players, teams, columns, drafts, firebase, status};
 });

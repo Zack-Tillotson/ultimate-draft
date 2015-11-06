@@ -8,11 +8,12 @@ import styles from './styles';
 export default React.createClass({
 
   propTypes: {
-    currentTeam: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
+    viewTeam: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
     rowFilters: React.PropTypes.object.isRequired,
     players: React.PropTypes.array.isRequired,
     viewModal: React.PropTypes.func.isRequired,
-    drafts: React.PropTypes.array.isRequired
+    drafts: React.PropTypes.array.isRequired,
+    status: React.PropTypes.object.isRequired
   },
 
   modalClickHandler(name, data = {}) {
@@ -20,7 +21,7 @@ export default React.createClass({
   },
 
   draftPlayerHandler(playerId) {
-    const teamId = this.props.currentTeam;
+    const teamId = this.props.status.draftOrder[0].id;
     this.modalClickHandler(
       modalNames.draftPlayer, 
       {playerId, teamId}

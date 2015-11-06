@@ -2,7 +2,7 @@ import modalNames from './modalNames';
 
 function validateModalInput(modal, name, value) {
   switch(modal) {
-    case modalNames.chooseCurrentTeam:
+    case modalNames.chooseViewTeam:
       switch(name) {
         case 'teamId':
           return value != -1;

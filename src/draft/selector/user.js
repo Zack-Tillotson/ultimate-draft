@@ -1,6 +1,7 @@
 import {createSelector} from 'reselect';
 
-import {user, teams} from './base';
+import {user} from './base';
+import {teams} from './teams';
 
 const teamMap = createSelector(teams, (teams) => {
   const ret = {};
@@ -9,7 +10,7 @@ const teamMap = createSelector(teams, (teams) => {
 });
 
 const userWithData = createSelector(user, teamMap, (user, teamMap) => {
-  const team = user.currentTeam >= 0 ? teamMap[user.currentTeam] : null;
+  const team = user.viewTeam >= 0 ? teamMap[user.viewTeam] : null;
   return {...user, team}
 });
 

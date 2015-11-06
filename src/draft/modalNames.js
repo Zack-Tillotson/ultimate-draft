@@ -1,5 +1,5 @@
 export default {
-  'chooseCurrentTeam': 'Choose Your Team',
+  'chooseViewTeam': 'Choose Your Team',
   'filterColumns': 'Show/Hide Columns',
   'filterRows': 'Filter Players',
   'draftPlayer': 'Draft Player',

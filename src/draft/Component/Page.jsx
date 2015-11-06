@@ -14,7 +14,7 @@ import styles from './styles';
 import Application from '../../components/Application';
 import TabbedContainer from '../../components/TabbedContainer';
 import ModalContainer from '../../components/ModalContainer';
-import CurrentTeamView from '../../components/draft/CurrentTeamView';
+import StatusView from '../../components/draft/StatusView';
 
 // Tabs
 import Players from '../../components/draft/Players'
@@ -22,7 +22,7 @@ import Teams from '../../components/draft/Teams';
 import History from '../../components/draft/History';
 
 // Modals
-import ChooseCurrentTeam from '../../components/draft/ChooseCurrentTeam';
+import ChooseViewTeam from '../../components/draft/ChooseViewTeam';
 import FilterColumns from '../../components/draft/FilterColumns';
 import FilterPlayers from '../../components/draft/FilterPlayers';
 import DraftPlayer from '../../components/draft/DraftPlayer';
@@ -85,8 +85,9 @@ const Page = React.createClass({
               columns={this.props.columns}
               players={this.props.players}
               drafts={this.props.drafts}
+              status={this.props.status}
               viewModal={this.props.dispatch.viewModal} 
-              currentTeam={this.props.user.currentTeam}
+              viewTeam={this.props.user.viewTeam}
               rowFilters={this.props.user.rowFilters} />
             <Teams 
               tabName={tabNames.teams}
@@ -107,12 +108,12 @@ const Page = React.createClass({
               confirmHandler={this.props.dispatch.confirmModal}
               cancelHandler={this.props.dispatch.cancelModal}>
 
-            <ChooseCurrentTeam
-              modalName={modalNames.chooseCurrentTeam}
+            <ChooseViewTeam
+              modalName={modalNames.chooseViewTeam}
               updateModal={this.props.dispatch.updateModal}
               teams={this.props.teams}
               data={this.props.ui.modalData}
-              currentTeam={this.props.user.currentTeam} />
+              viewTeam={this.props.user.viewTeam} />
             <FilterColumns 
               modalName={modalNames.filterColumns}
               updateModal={this.props.dispatch.updateModal}
@@ -136,8 +137,10 @@ const Page = React.createClass({
 
           </ModalContainer>
 
-          <CurrentTeamView 
+          <StatusView 
             team={this.props.user.team}
+            status={this.props.status}
+            columns={this.props.columns}
             viewModal={this.props.dispatch.viewModal} />
 
           {this.getStatusOverlay()}

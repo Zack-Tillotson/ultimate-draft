@@ -4,7 +4,7 @@ import modalNames from '../modalNames.js';
 
 function getInitialState() {
   return Immutable.fromJS({
-    currentTeam: -1,
+    viewTeam: -1,
     rowFilters: {
       viewOtherTeam: true,
       viewYourTeam: true,
@@ -17,8 +17,8 @@ function getInitialState() {
 export default function(state = getInitialState(), action) {
   if(action.type === actions.confirmModal) {
     switch(action.modal) {
-      case modalNames.chooseCurrentTeam:
-        state = state.merge({currentTeam: action.data.currentTeam});
+      case modalNames.chooseViewTeam:
+        state = state.merge({viewTeam: action.data.viewTeam});
         break;
       case modalNames.filterRows:
         state = state.merge({rowFilters: {

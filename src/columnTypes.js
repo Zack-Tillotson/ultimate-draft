@@ -97,7 +97,15 @@ export const bool = {
   sort: boolSort
 };
 
+export const gender = {
+  name: 'Gender', 
+  description: 'M or F', 
+  unique: false, 
+  required: false, 
+  sort: defaultSort
+};
+
 export default [
   {name: 'Text', description: 'Words and such', unique: false, required: false, sort: defaultSort},
-  bool, id, baggageId, vector, height, number
+  bool, id, baggageId, vector, height, number, gender
 ];

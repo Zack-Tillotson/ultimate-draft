@@ -1,5 +1,5 @@
 import QueryString from 'query-string';
-import {id, baggageId, vector} from '../columnTypes';
+import {id, baggageId, vector, gender} from '../columnTypes';
 
 function getPlayerId(player, columns) {
   const idColumn = columns.find(column => column.type === id.name);
@@ -22,6 +22,12 @@ function getVector(player, columns) {
 function getTeamForPlayer(playerId, drafts) {
   const draft = drafts.find(draft => draft.playerId == playerId);
   return draft ? draft.teamId : null;
+}
+
+function getGender(player, columns) {
+  const gColumn = columns.find(column => column.type === gender.name);
+  const data = player.data || player;
+  return data[gColumn.name];  
 }
 
 // Team has undrafted baggage vector >= player.vector
@@ -77,6 +83,6 @@ export default {
       };
   },
 
-  getPlayerId, getBaggageId, getVector
+  getPlayerId, getBaggageId, getVector, getGender
 
 }
