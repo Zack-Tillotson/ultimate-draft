@@ -130,6 +130,8 @@ const Page = React.createClass({
               updateModal={this.props.dispatch.updateModal}
               data={this.props.ui.modalData} 
               teams={this.props.teams}
+              players={this.props.players}
+              drafts={this.props.drafts}
               columns={this.props.columns} />
             <UndraftPlayer
               modalName={modalNames.undraftPlayer}

@@ -1,6 +1,8 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
 import PlayerTable from '../../PlayerTable';
+import PlayerSummary from '../../PlayerSummary';
+import utils from '../../../draft/utils';
 
 import styles from './styles';
 
@@ -9,7 +11,9 @@ export default React.createClass({
     updateModal: React.PropTypes.func.isRequired,
     data: React.PropTypes.object.isRequired,
     teams: React.PropTypes.array.isRequired,
-    columns: React.PropTypes.array.isRequired
+    columns: React.PropTypes.array.isRequired,
+    drafts: React.PropTypes.array.isRequired,
+    players: React.PropTypes.array.isRequired
   },
 
   validate(data) {
@@ -17,13 +21,16 @@ export default React.createClass({
   },
 
   validatePlayer(data) {
-    return !!data.player
-      && data.player.draftStatus
-      && !data.player.draftStatus.currentTeamUndraftable
-      && !data.player.draftStatus.otherTeamsDraft
-      && !data.player.draftStatus.otherTeamBaggage
-      && !data.player.draftStatus.currentTeamsBaggage
-      && !data.player.draftStatus.currenTeamsDraft;
+    if(!data.player) {
+      return false;
+    }
+
+    const draftStatus = utils.getDraftStatus(data.teamId, data.player, this.props.players, this.props.drafts, this.props.columns);
+    return !draftStatus.currentTeamUndraftable
+        && !draftStatus.otherTeamsDraft
+        && !draftStatus.otherTeamBaggage
+        && !draftStatus.currentTeamsBaggage
+        && !draftStatus.currenTeamsDraft;
   },
 
   validateTeam(data) {
@@ -80,8 +87,24 @@ export default React.createClass({
     );
   },
 
-  getPlayer() {
-    return <PlayerTable players={[this.props.data.player]} columns={this.props.columns} />
+  getPlayerDetail() {
+    const players = [this.props.data.player];
+    if(this.props.data.player.baggage) {
+      players.push(this.props.data.player.baggage);
+    }
+    return <PlayerTable players={players} columns={this.props.columns} includeBaggageSummary={false} />
+  },
+
+  getPlayerSummary() {
+    return <PlayerSummary player={this.props.data.player} columns={this.props.columns} />
+  },
+
+  getBaggageSummary() {
+    if(!this.props.data.player.baggage) {
+      return 'No Baggage';
+    } else {
+      return <PlayerSummary player={this.props.data.player.baggage} columns={this.props.columns} />
+    }
   },
 
   render() {
@@ -93,7 +116,13 @@ export default React.createClass({
           {this.getTeamForm()}
         </div>
         <div className="playerReview">
-          {this.getPlayer()}
+          <h5>Player Summary</h5>
+          {this.getPlayerSummary()}
+          <h5>Baggage Summary</h5>
+          {this.getBaggageSummary()}
+        </div>
+        <div className="playerDetail">
+          {this.getPlayerDetail()}
         </div>
       </InlineCss>
     );

@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 import columnTypes from '../../../columnTypes';
-import {id, baggageId, vector, height, number} from '../../../columnTypes';
+import {id, baggageId, vector, height, number, bool} from '../../../columnTypes';
 import papaparse from 'papaparse';
 
 function guessColumnType(name) {
@@ -25,8 +25,64 @@ function guessColumnType(name) {
     case 'skill':
     case 'weeks missed':
       return number.name;
+    case 'dump':
+    case 'fore':
+    case 'back':
+    case 'huck back':
+    case 'huck fore':
+    case 'w_ mark':
+    case 'anti mark':
+    case 'wind':
+      return bool.name;
     default:
       return columnTypes[0].name;
+  }
+}
+
+function guessColumnInclude(name) {
+  switch(name.toLowerCase()) {
+    case 'team':
+    case 'baggage name':
+    case 'bag vec':
+      return false;
+    default:
+      return true;
+  }
+}
+
+function guessColumnVisible(name) {
+  switch(name.toLowerCase()) {
+    case 'first':
+    case 'last':
+    case 'position':
+    case 'dump':
+    case 'fore':
+    case 'back':
+    case 'huck back':
+    case 'huck fore':
+    case 'w_ mark':
+    case 'anti mark':
+    case 'wind':
+    case 'weeks missed':
+    case 'miss tourney?':
+    case 'email':
+    case 'phone':
+    case 'comments':
+      return false;
+    default:
+      return true;
+  }
+}
+
+function guessColumnSummary(name) {
+  switch(name.toLowerCase()) {
+    case 'id':
+    case 'g':
+    case 'full':
+    case 'vector':
+      return true;
+    default:
+      return false;
   }
 }
 
@@ -41,8 +97,9 @@ function transformFieldMetadata(fields) {
       originalName,
       name,
       type: guessColumnType(name),
-      visible: true,
-      include: true
+      visible: guessColumnVisible(name),
+      include: guessColumnInclude(name),
+      summary: guessColumnSummary(name)
     };
   });
 }

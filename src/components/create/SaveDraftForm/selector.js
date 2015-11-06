@@ -11,8 +11,8 @@ function transformColumns(columns) {
   return columns
     .filter(column => column.include)
     .map(column => {
-      const {name, type, visible} = column;
-      return {name, type, visible};
+      const {name, type, visible, summary} = column;
+      return {name, type, visible, summary};
     });
 }
 

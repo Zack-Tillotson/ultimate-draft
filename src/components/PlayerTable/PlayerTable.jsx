@@ -3,6 +3,7 @@ import InlineCss from 'react-inline-css';
 import utils from '../../draft/utils';
 import styles from './styles';
 import columnTypes from '../../columnTypes';
+import {baggageId as baggageColumnType} from '../../columnTypes';
 
 export default React.createClass({
 
@@ -13,28 +14,51 @@ export default React.createClass({
     filterRows: React.PropTypes.bool,
     rowFilters: React.PropTypes.object,
     playerClickHandler: React.PropTypes.func,
-    colors: React.PropTypes.bool
+    colors: React.PropTypes.bool,
+    includeBaggageSummary: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       filterColumns: false,
       filterRows: false,
-      colors: true
+      colors: true,
+      includeBaggageSummary: true
     };
   },
 
   getInitialState() {
     return {
-      sort: '',
+      sort: -1,
       sortDir: 1
     }
   },
 
   getColumns() {
-    return this.props.filterColumns
+    const cols = this.props.filterColumns
       ? this.props.columns.filter(column => column.visible)
-      : this.props.columns;
+      : this.props.columns.slice(0);
+    return this.addBaggageColumns(cols);
+  },
+
+  addBaggageColumns(columns) {
+
+    if(this.props.includeBaggageSummary) {
+
+      const bagIdIndex = columns.findIndex(column => column.type == baggageColumnType.name);
+      if(bagIdIndex >= 0) {
+        columns.splice(bagIdIndex, 1, ...this.getBaggageSummaryColumns(columns));
+      }
+    }
+
+    return columns;
+
+  },
+
+  getBaggageSummaryColumns(columns) {
+    return columns.filter(column => column.summary).map(column => {
+      return {...column, baggage: true};
+    })
   },
 
   sortColumnHandler(column) {
@@ -42,31 +66,48 @@ export default React.createClass({
       const sortDir = this.state.sortDir == 0 ? 1
         : this.state.sortDir == 1 ? -1
         : 0;
-        const sort = sortDir === 0 ? '' : this.state.sort;
+        const sort = sortDir === 0 ? -1 : this.state.sort;
       this.setState({sort, sortDir});
     } else {
       this.setState({sort: column, sortDir: 1});
     }
   },
 
-  getHeaderRow() {
-    return (
+  getHeaderRows() {
+    
+    const rows = [];
+    const columns = this.getColumns();
+
+    if(this.props.includeBaggageSummary) {
+      const bagIdIndex = columns.findIndex(column => column.baggage);
+      const baggageColumns = columns.filter(column => column.baggage);
+      rows.push(
+        <tr>
+          <td colSpan={bagIdIndex}></td>
+          <td className="baggageColumn baggageHeader" colSpan={baggageColumns.length}>Baggage</td>
+        </tr>
+      );
+    }
+
+    rows.push(
       <tr>
-        {this.getColumns().map(column => {
-          const isSortColumn = column.name == this.state.sort;
+        {columns.map((column, index) => {
+          const isSortColumn = index == this.state.sort;
           const isSortAsc = this.state.sortDir == 1;
           const columnClassName = isSortColumn ? (isSortAsc ? 'sortAsc' : 'sortDesc') : 'noSort';
+          const baggageClassName = column.baggage ? 'baggageColumn' : 'playerColumn';
           return (
             <td 
-              key={column.name} 
-              onClick={this.sortColumnHandler.bind(this, column.name)}
-              className={'columnHead ' + columnClassName}>
+              key={column.name + (column.baggage ? 'bag' : '')} 
+              onClick={this.sortColumnHandler.bind(this, index)}
+              className={['columnHead', columnClassName, baggageClassName].join(' ')}>
               {column.name}
             </td>
           );
         })}
       </tr>
     );
+    return rows;
   },
 
   getFilteredPlayers() {
@@ -84,13 +125,14 @@ export default React.createClass({
   },
 
   sortTwoPlayers(a,b) {
-    if(!this.state.sort) {
+    if(this.state.sort < 0) {
       return 0;
     }
-    const type = this.props.columns.find(column => column.name == this.state.sort).type;
-    const sort = columnTypes.find(column => column.name == type).sort;
+    const column = this.getColumns()[this.state.sort];
+    const type = this.getColumns()[this.state.sort].type;
+    const sortFn = columnTypes.find(column => column.name == type).sort;
     
-    return this.state.sortDir * sort(a[this.state.sort],b[this.state.sort]);    
+    return this.state.sortDir * sortFn(this.getValueOfColumnForPlayer(column, a), this.getValueOfColumnForPlayer(column, b));
   },
 
   getBodyRows() {
@@ -115,11 +157,25 @@ export default React.createClass({
         key={utils.getPlayerId(player, this.props.columns)} 
         className={className}
         onClick={this.playerClickHandler.bind(this, utils.getPlayerId(player, this.props.columns))}>
-        {this.getColumns().map(column => (
-          <td key={column.name}>{player[column.name]}</td>
-        ))}
+        {this.getColumns().map((column) => {
+          const baggageClassName = column.baggage ? 'baggageColumn' : 'playerColumn';
+          return (
+            <td key={column.name + (column.baggage ? 'bag' : '')} className={baggageClassName}>
+              {this.getValueOfColumnForPlayer(column, player)}
+            </td>
+          );
+        })}
       </tr>
     );
+  },
+
+  getValueOfColumnForPlayer(column, player) {
+    if(column.baggage) {
+      const bagPlayer = player.baggage;
+      return bagPlayer ? bagPlayer.data[column.name] : '';
+    } else {
+      return player.data[column.name]
+    }
   },
 
   getPlayerClassName(player) {
@@ -162,7 +218,7 @@ export default React.createClass({
       <InlineCss componentName="component" stylesheet={styles}>
         <table className="players">
           <thead>
-            {this.getHeaderRow()}
+            {this.getHeaderRows()}
           </thead>
           <tbody>
             {this.getBodyRows()}

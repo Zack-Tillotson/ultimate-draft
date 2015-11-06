@@ -38,7 +38,8 @@ const CsvConfigurationForm = React.createClass({
         name: inputs['column' + index + 'name'],
         type: inputs['column' + index + 'type'],
         visible: inputs['column' + index + 'visible'],
-        include: inputs['column' + index + 'include']
+        include: !inputs['column' + index + 'include'],
+        summary: inputs['column' + index + 'summary']
       };
     });
     return ret;
@@ -47,7 +48,7 @@ const CsvConfigurationForm = React.createClass({
 
   getPlayers() {
     return (
-      <PlayerTable players={this.props.players} columns={this.props.columns} />
+      <PlayerTable players={this.props.players} columns={this.props.columns} colors={false} />
     );
   },
 
@@ -64,17 +65,17 @@ const CsvConfigurationForm = React.createClass({
         </div>
 
         <Formsy.Form 
-          onChange={this.changeHandler}
           onSubmit={this.submitHandler}
           mapping={this.mapInputs}>
 
           <table className="columnList">
             <thead>
               <tr>
+                <td>Remove</td>
                 <td>Name</td>
-                <td>Include</td>
-                <td>Defaults Visible</td>
                 <td>Type</td>
+                <td>Visible</td>
+                <td>Summary</td>
               </tr>
             </thead>
             <tbody>
@@ -82,6 +83,12 @@ const CsvConfigurationForm = React.createClass({
               const className = !this.props.submitted || column.valid ? 'valid' : 'invalid';
               return (
                 <tr className={"columnItem " + className} key={"column" + index}>
+
+                  <td className="booleanOption">
+                    <Checkbox 
+                      name={'column' + index + 'include'}
+                      value={!column.include} />
+                  </td>
 
                   <td className="name">
                     <Input 
@@ -94,10 +101,13 @@ const CsvConfigurationForm = React.createClass({
                       value={column.name} />
                   </td>
 
-                  <td className="booleanOption">
-                    <Checkbox 
-                      name={'column' + index + 'include'}
-                      value={column.include} />
+                  <td className="selectOption">
+                    <Select
+                      name={'column' + index + 'type'}
+                      value={column.type} 
+                      options={columnTypes.map(type => {
+                        return {value: type.name, label: type.name}
+                      })} />
                   </td>
 
                   <td className="booleanOption">
@@ -106,13 +116,10 @@ const CsvConfigurationForm = React.createClass({
                       value={column.visible} />
                   </td>
 
-                  <td className="selectOption">
-                    <Select
-                      name={'column' + index + 'type'}
-                      value={column.type} 
-                      options={columnTypes.map(type => {
-                        return {value: type.name, label: type.name}
-                      })} />
+                  <td className="booleanOption">
+                    <Checkbox 
+                      name={'column' + index + 'summary'}
+                      value={column.summary} />
                   </td>
 
                 </tr>

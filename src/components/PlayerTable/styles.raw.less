@@ -5,19 +5,27 @@ component {
     margin: 0 0;
     border-spacing: 0;
     border-collapse: collapse;
-    table-layout: auto;
     min-width: 100%;
 
-    thead td {
-      font-weight: bold;
-      border-bottom: solid 2px black;
-
-      &.sortAsc:after {
-        content: '\25B2';
+    thead {
+      tr:last-of-type {
+        border-bottom: solid 2px black;
       }
 
-      &.sortDesc:after {
-        content: '\25BC';
+      td {
+        font-weight: bold;
+
+        &.baggageHeader {
+          text-align: center;
+        }
+        
+        &.sortAsc:after {
+          content: '\25B2';
+        }
+
+        &.sortDesc:after {
+          content: '\25BC';
+        }
       }
     }
 
@@ -26,6 +34,10 @@ component {
         background: #ccc;
       }
     }
+  }
+
+  .baggageColumn {
+    background: #eee;
   }
 
   .otherTeam {

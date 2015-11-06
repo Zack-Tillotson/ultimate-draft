@@ -87,10 +87,17 @@ export const number = {
   unique: false, 
   required: false, 
   sort: numberSort
-}
+};
+
+export const bool = {
+  name: 'Boolean', 
+  description: 'Exists or not', 
+  unique: false, 
+  required: false, 
+  sort: boolSort
+};
 
 export default [
   {name: 'Text', description: 'Words and such', unique: false, required: false, sort: defaultSort},
-  {name: 'Boolean', description: 'Exists or not', unique: false, required: false, sort: boolSort},
-  id, baggageId, vector, height, number
+  bool, id, baggageId, vector, height, number
 ];
