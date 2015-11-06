@@ -1,21 +1,32 @@
 component {
 
+  text-align: center;
+
   .teamChoice {
-    width: calc(50% - 10px);
-    margin: 4px;
-    border: solid 1px #ccc;
+    width: 80%;
+    margin: 4px auto;
+    padding: 5px;
+    border: solid 1px #ddd;
     background: white;
     box-shadow: 2px 2px 3px #666;
-    display: inline-block;
     cursor: pointer;
-    
-    &.current {
-      background: #DCF2F9;
+
+    .teamColor {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 3px;
+      border: solid 1px #000;
+      margin: 0px 10px;
     }
 
+    .teamName {
+      display: inline-block;
+    }
+    
     &.selected {
       background: #9BC0C6;
-      border: solid 1px #333;
+      border: solid 1px #000;
 
       &:hover {
         background: #9BC0C6;
@@ -23,7 +34,7 @@ component {
     }
 
     &:hover {
-      background: #eee;
+      border: solid 1px #666;
     }
   }  
 }

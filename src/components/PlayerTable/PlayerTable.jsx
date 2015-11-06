@@ -82,7 +82,7 @@ export default React.createClass({
       const bagIdIndex = columns.findIndex(column => column.baggage);
       const baggageColumns = columns.filter(column => column.baggage);
       rows.push(
-        <tr>
+        <tr key="baggage">
           <td colSpan={bagIdIndex}></td>
           <td className="baggageColumn baggageHeader" colSpan={baggageColumns.length}>Baggage</td>
         </tr>
@@ -90,7 +90,7 @@ export default React.createClass({
     }
 
     rows.push(
-      <tr>
+      <tr key="columnheaders">
         {columns.map((column, index) => {
           const isSortColumn = index == this.state.sort;
           const isSortAsc = this.state.sortDir == 1;
@@ -138,7 +138,7 @@ export default React.createClass({
   getBodyRows() {
     if(this.props.players.length === 0) {
       return (
-        <tr><td colSpan={this.props.columns.length}>No players yet.</td></tr>
+        <tr key="nobody"><td colSpan={this.props.columns.length}>No players yet.</td></tr>
       );
     }
     return this.getFilteredPlayers().map(player => player ? this.getBodyRow(player) : null);

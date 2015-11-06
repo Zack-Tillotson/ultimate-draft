@@ -76,10 +76,6 @@ const Page = React.createClass({
       <Application>
         <InlineCss stylesheet={styles} componentName="container">
 
-          <CurrentTeamView 
-            team={this.props.user.team}
-            viewModal={this.props.dispatch.viewModal} />
-
           <TabbedContainer 
               currentTabName={this.props.ui.tab}
               tabClickHandler={this.props.dispatch.tabClick} >
@@ -139,6 +135,10 @@ const Page = React.createClass({
               columns={this.props.columns} />
 
           </ModalContainer>
+
+          <CurrentTeamView 
+            team={this.props.user.team}
+            viewModal={this.props.dispatch.viewModal} />
 
           {this.getStatusOverlay()}
 

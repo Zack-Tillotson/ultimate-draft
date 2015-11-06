@@ -30,6 +30,10 @@ const SaveDraftForm = React.createClass({
       : '';
   },
 
+  getPlayersArray() {
+    return this.props.players.map(player => {{data: player}});
+  },
+
   render() {
     return (
       <InlineCss stylesheet={styles} componentName="container">
@@ -47,7 +51,7 @@ const SaveDraftForm = React.createClass({
         )}
 
         <h5>{this.props.players.length} Players</h5>
-        <PlayerTable players={this.props.players} columns={this.props.columns} />
+        <PlayerTable players={this.getPlayersArray()} columns={this.props.columns} />
 
         <h5>{this.props.teams.length} Teams</h5>
         <TeamList teams={this.props.teams} />

@@ -32,7 +32,8 @@ export default React.createClass({
             <div key={team.id}
               className={className}
               onClick={this.clickHandler.bind(this, team.id)} >
-              {team.name}
+              <div className="teamColor" style={{background: team.color}} />
+              <div className="teamName">{team.name}</div>
             </div>
           );
         })}

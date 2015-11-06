@@ -3,6 +3,7 @@ import InlineCss from "react-inline-css";
 import Formsy from 'formsy-react';
 import {Input, Select} from 'formsy-react-components';
 import {connect} from 'react-redux';
+import ColorPicker from 'react-color';
 
 import styles from './styles';
 import selector from './selector.js';
@@ -17,7 +18,9 @@ const TeamConfigurationForm = React.createClass({
   },
 
   getInitialState() {
-    return {numTeams: 10};
+    return {
+      numTeams: 10
+    };
   },
 
   submitHandler(teams) {
@@ -36,14 +39,21 @@ const TeamConfigurationForm = React.createClass({
       const namespace = 'team' + i;
       ret.push(
         <div key={namespace}>
+
           <Input
             name={namespace + 'id'}
             type="hidden"
             value={i}/>
+
           <Input
             name={namespace + 'name'}
             label="Team Name"
-            value={"Team " + (i + 1)}/>
+            value={"Team " + (i + 1)} />
+
+          <Input
+            name={namespace + 'color'}
+            label="Color"
+            value={'#fff'} />
         </div>
       );
     }
@@ -59,7 +69,8 @@ const TeamConfigurationForm = React.createClass({
       const namespace = 'team' + i;
       ret.push({
         id: inputs[namespace + 'id'],
-        name: inputs[namespace + 'name']
+        name: inputs[namespace + 'name'],
+        color: inputs[namespace + 'color']
       });
     }
 
@@ -87,6 +98,10 @@ const TeamConfigurationForm = React.createClass({
           onSubmit={this.submitHandler}>
 
           {this.getTeamsInputs()}
+
+          <div className="colorHelper">
+            <ColorPicker type="chrome" />
+          </div>
 
           {!this.props.valid && (
             <div>

@@ -25,6 +25,7 @@
     "radium": "^0.14.1",
     "raw-loader": "^0.5.1",
     "react": "^0.14.0",
+    "react-color": "^1.2.1",
     "react-dom": "^0.14.0",
     "react-hotkey": "^0.4.0",
     "react-inline-css": "^2.0.0",

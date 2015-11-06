@@ -23,6 +23,7 @@ export default React.createClass({
         {this.props.teams.map((team, index) => {
           return (
             <div key={index}>
+              <div className="colorView" style={{background: team.color}} />
               {team.name}
             </div>
           );
