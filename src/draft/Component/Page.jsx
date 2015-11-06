@@ -32,10 +32,12 @@ const Page = React.createClass({
   
   componentDidMount() {
     this.connectToFirebase()
+    document.addEventListener('keydown', this.keyPressHandler);
   },
 
   componenWillUnmount() {
     this.disconnectFirebase();
+    document.removeEventListener('keydown', this.keyPressHandler);
   },
 
   connectToFirebase() {
@@ -71,6 +73,38 @@ const Page = React.createClass({
     }
   },
 
+  keyPressHandler(event) {
+    switch(event.keyCode) {
+      case 68: // d
+        const teamId = this.props.status.draftOrder[0].id;
+        this.props.dispatch.viewModal(modalNames.draftPlayer, {playerId: 1, teamId});
+        break;
+      case 13: // Enter
+        this.refs.modals.confirmHandler(event);
+        break;
+      case 27: // Esc
+        if(this.props.ui.modal) {
+          this.props.dispatch.cancelModal();
+        }
+        break;
+      case 49: // 1
+        if(!this.props.ui.modal) {
+          this.props.dispatch.tabClick(tabNames.players);
+        }
+        break;
+      case 50: // 2
+        if(!this.props.ui.modal) {
+          this.props.dispatch.tabClick(tabNames.teams);
+        }
+        break;
+      case 51: // 3
+        if(!this.props.ui.modal) {
+          this.props.dispatch.tabClick(tabNames.history);
+        }
+        break;
+    }
+  },
+
   render() {
     return (
       <Application>
@@ -103,6 +137,7 @@ const Page = React.createClass({
           </TabbedContainer>
 
           <ModalContainer 
+              ref="modals"
               currentModalName={this.props.ui.modal}
               modalData={this.props.ui.modalData}
               confirmHandler={this.props.dispatch.confirmModal}
