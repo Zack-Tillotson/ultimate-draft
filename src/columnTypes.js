@@ -97,6 +97,14 @@ export const bool = {
   sort: boolSort
 };
 
+export const team = {
+  name: 'Team', 
+  description: 'What team a player is on', 
+  unique: true, 
+  required: false, 
+  sort: defaultSort
+}
+
 export const gender = {
   name: 'Gender', 
   description: 'M or F', 

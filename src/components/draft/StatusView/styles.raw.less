@@ -10,40 +10,89 @@ component {
   border-bottom: none;
   box-shadow: 0 -3px 3px #ccc;
   width: 100%;
-  overflow-x: hidden;
+  text-align: left;
 
   .draftOrders {
+    overflow-x: hidden;
+    background: #eee;
+    clear: both;
 
-    width: 2500px;
-    height: 46px;
-    text-align: left;
+    .draftOrdersInner {
 
-    h5 {
-      font-size: 12px;
-      margin: 0;
-      padding: 0;
+      width: 5000px;
+      height: 46px;
+      text-align: left;
 
-      &:after {
-        content: '\2192';
+      h5 {
+        display: inline-block;
+        font-size: 12px;
+        margin: 5px 0 0 0;
+        padding: 0;
+
+        &:after {
+          content: '\2192';
+        }
       }
-    }
 
-    .draftOrder {
-      display: inline-block;
-      margin: 0;
-      width: 150px;
-      text-align: center;
-      font-size: 14px;
-      margin: 0 1px;
-      border-bottom: solid 12px white;
+      .draftOrder {
+        display: inline-block;
+        margin: 0;
+        text-align: center;
+        font-size: 14px;
+        border: solid 3px rgba(0,0,0,0);
+
+        &.do0 {
+          border: solid 3px #000;
+        }
+        
+        .draftOrderInner {
+          width: 150px;
+          margin: 0 1px;
+          display: inline-block;
+          border-bottom: solid 12px rgba(0,0,0,0);
+        }
+      }
     }
   }
 
-  .link {
-    display: inline-block;
-    color: black;
-    font-size: 12px;
-    margin-left: 25px;
+  .controls {
+    float: left;
+    margin-top: 10px;
+
+    .link {
+      display: inline-block;
+      color: black;
+      font-size: 14px;
+      margin-left: 25px;
+      border: solid 1px #999;
+      background: #ccc;
+      width: 100px;
+      text-align: center;
+    }
+  }
+
+  .teamSummary {
+    margin-left: 150px;
+    padding: 5px;
+    border-top: solid 10px rgba(0,0,0,0);
+    border-bottom: solid 10px rgba(0,0,0,0);
+
+    .teamName {
+      display: inline-block;
+      background: rgba(255,255,255,.7);
+      width: 200px;
+      overflow: hidden;
+    }
+
+    .teamDrafts {
+      display: inline-block;
+      background: rgba(255,255,255,.7);
+    }
+
+    .teamGenders {
+      display: inline-block;
+      background: rgba(255,255,255,.7);
+    }
   }
   
 }

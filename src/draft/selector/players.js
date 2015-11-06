@@ -2,14 +2,16 @@ import {createSelector} from 'reselect';
 import ModalNames from '../modalNames';
 import utils from '../utils';
 
-import {players, ui, drafts, columns, firebase, user} from './base';
+import {players, ui, drafts, columns, firebase, user, teams} from './base';
 
 const playersWithMeta = createSelector(
-   players, drafts, user, columns,
-  (players, drafts, user, columns) => {
+   players, drafts, user, columns, teams,
+  (players, drafts, user, columns, teams) => {
     return players.map(player => {
-      const draftStatus = utils.getDraftStatus(user.currentTeam, player, players, drafts, columns);
-      return {data: player, draftStatus};
+      const draft = drafts.find(draft => draft.playerId == utils.getPlayerId(player, columns));
+      const team = !draft ? null : teams.find(team => team.id == draft.teamId);
+      const draftStatus = utils.getDraftStatus(user.viewTeam, player, players, drafts, columns);
+      return {data: player, draftStatus, team};
     });
 });
 

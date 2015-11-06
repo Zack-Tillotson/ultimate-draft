@@ -3,7 +3,7 @@ import InlineCss from 'react-inline-css';
 import utils from '../../draft/utils';
 import styles from './styles';
 import columnTypes from '../../columnTypes';
-import {baggageId as baggageColumnType} from '../../columnTypes';
+import {baggageId as baggageColumnType, team as teamColumnType} from '../../columnTypes';
 
 export default React.createClass({
 
@@ -173,6 +173,8 @@ export default React.createClass({
     if(column.baggage) {
       const bagPlayer = player.baggage;
       return bagPlayer ? bagPlayer.data[column.name] : '';
+    } else if(column.name == teamColumnType.name) {
+      return player.team ? player.team.name : '';
     } else {
       return player.data[column.name]
     }

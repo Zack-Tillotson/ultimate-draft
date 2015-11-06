@@ -21,17 +21,20 @@ export default React.createClass({
   getDraftOrder() {
     return (
       <div className="draftOrders">
-        <h5>Draft Order</h5>
-        {this.props.status.draftOrder.map((team, index) => {
-          return (
-            <div 
-              className={["draftOrder", index].join(' ')}
-              key={index}
-              style={{borderBottomColor: team.color}}>
-              {team.name}
-            </div>
-          );
-        })}
+        <div className="draftOrdersInner">
+          <h5>Draft Order</h5>
+          {this.props.status.draftOrder.map((team, index) => {
+            return (
+              <div 
+                className={["draftOrder", 'do' + index].join(' ')}
+                key={index}>
+                <div className="draftOrderInner" style={{borderBottomColor: team.color}}>
+                  {team.name}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   },
@@ -56,8 +59,7 @@ export default React.createClass({
       return null;
     }
     return (
-      <div className="team">
-        <span className="title">You:</span>
+      <div className="teamSummary" style={{borderColor: team.color}}>
         <div className="teamName">{team.name}</div>
         <div className="teamDrafts">{team.players.length} Players</div>
         <div className="teamGenders">
@@ -73,9 +75,9 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        {this.getDraftOrder()}
         {this.getChooseTeamLink()}
         {this.getTeamSummary()}
+        {this.getDraftOrder()}
       </InlineCss>
     );
   }
