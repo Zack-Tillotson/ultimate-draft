@@ -25,12 +25,8 @@ const orderedDraftIds = createSelector(drafts, teamMap, (drafts, teamMap) => {
     });
 });
 
-const emptyDrafts = [0,1,2].map(key => {
-  return {teamId: -1};
-})
-
 const previousDrafts = createSelector(drafts, (drafts) => {
-  return emptyDrafts.concat(drafts).slice(-3);
+  return drafts.slice(-2);
 });
 
 const draftOrder = createSelector(previousDrafts, orderedDraftIds, teamMap, (prevDrafts, drafts, teams) => {

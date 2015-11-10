@@ -13,7 +13,10 @@ const teamsWithPlayers = createSelector(playerMap, teams, drafts, (playerMap, te
     const players = drafts
       .filter(draft => draft.teamId == team.id)
       .map(draft => playerMap[draft.playerId]);
-    return {...team, players: players};
+    const baggage = players
+      .filter(player => player.baggage && !player.baggage.team)
+      .map(player => player.baggage);
+    return {...team, players, baggage};
   });
 });
 

@@ -21,10 +21,19 @@ export default React.createClass({
   getDraftOrder() {
     return (
       <div className="draftOrders">
-        <div className="draftOrderHeaders">
-          <div className="title">Draft Order</div>
-        </div>
         <div className="draftOrdersInner">
+          <div 
+            className={['draftOrder', 'legend'].join(' ')}>
+            <div className="draftOrderHeader">
+              Draft Order
+            </div>
+            <div className="draftOrderTeam">
+              Team
+            </div>
+            <div className="draftOrderPlayer">
+              Player
+            </div>
+          </div>
           {this.props.status.draftOrder.map((draftOrder, index) => {
             const current = draftOrder.current ? 'current' : '';
             const nextUp = draftOrder.next ? 'next' : '';
@@ -41,13 +50,13 @@ export default React.createClass({
                   )}
                   {draftOrder.next && (
                     'Next Up'
-                  )}
+                  )}&nbsp;
                 </div>
                 <div className="draftOrderTeam" style={{borderBottomColor: teamColor}}>
-                  {teamName}
+                  {teamName}&nbsp;
                 </div>
                 <div className="draftOrderPlayer">
-                  {playerId}
+                  {playerId}&nbsp;
                 </div>
               </div>
             );
@@ -58,9 +67,16 @@ export default React.createClass({
   },
 
   getChooseTeamLink() {
+    const hasTeamClass = this.props.team ? 'hasTeam' : 'noTeam';
     return (
-      <div className="controls">
-        <div className="link" onClick={this.clickHandler}>Select Team</div>
+      <div className={["controls", hasTeamClass].join(' ')}>
+        <div className="link" onClick={this.clickHandler}>
+          {!this.props.team && 'Select Team'}
+          {this.props.team && 'Change Team'}
+        </div>
+        {!this.props.team && (
+          <div className="explanation">Selecting a team lets you see which players are available for your team.</div>
+        )}
       </div>
     );
   },
@@ -77,15 +93,36 @@ export default React.createClass({
       return null;
     }
     return (
-      <div className="teamSummary" style={{borderColor: team.color}}>
-        <div className="teamName">{team.name}</div>
-        <div className="teamDrafts">{team.players.length} Players</div>
-        <div className="teamGenders">
-          (
-            {this.getPlayersOfGender('M')} M /
-            {this.getPlayersOfGender('F')} F
-          )
+      <div className="teamSummary">
+        <div className="label">Your Team:</div>
+        <div className="teamName">
+          <div className="teamColor" style={{background: team.color}} />
+          {team.name}
         </div>
+        <table className="teamStats">
+          <thead>
+            <tr>
+              <td>Players</td>
+              <td>Male</td>
+              <td>Female</td>
+              <td>Baggage Vectors</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{team.players.length}</td>
+              <td>{this.getPlayersOfGender('M')}</td>
+              <td>{this.getPlayersOfGender('F')}</td>
+              <td>
+                {this.props.team.baggage.map(player => 
+                  utils.getVector(player, this.props.columns))
+                .sort()
+                .join(', ')
+                }
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   },
