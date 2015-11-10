@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "116ae5caf009ad7715c4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "924696e905000ae1fb59"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -560,7 +560,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Component = __webpack_require__(425);
+	var _Component = __webpack_require__(471);
 
 	var _Component2 = _interopRequireDefault(_Component);
 
@@ -46102,17 +46102,13 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _styles = __webpack_require__(353);
-
-	var _styles2 = _interopRequireDefault(_styles);
-
-	var _Header = __webpack_require__(354);
+	var _Header = __webpack_require__(353);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Footer = __webpack_require__(357);
+	var _styles = __webpack_require__(356);
 
-	var _Footer2 = _interopRequireDefault(_Footer);
+	var _styles2 = _interopRequireDefault(_styles);
 
 	exports['default'] = _react2['default'].createClass({
 	  displayName: 'Application',
@@ -46125,8 +46121,7 @@
 	      _reactInlineCss2['default'],
 	      { stylesheet: _styles2['default'], componentName: 'container' },
 	      _react2['default'].createElement(_Header2['default'], null),
-	      this.getChildren(),
-	      _react2['default'].createElement(_Footer2['default'], null)
+	      this.getChildren()
 	    );
 	  }
 	});
@@ -46134,12 +46129,6 @@
 
 /***/ },
 /* 353 */
-/***/ function(module, exports) {
-
-	module.exports = "container {\n  font-family: sans-serif;\n  font-size: 22px;\n  background: #DCF2F9;\n}\ncontainer input,\ncontainer textarea,\ncontainer keygen,\ncontainer select,\ncontainer button {\n  font-size: 22px;\n}\n"
-
-/***/ },
-/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46150,7 +46139,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _Header = __webpack_require__(355);
+	var _Header = __webpack_require__(354);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
@@ -46158,7 +46147,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 355 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46177,7 +46166,7 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _stylesRawLess = __webpack_require__(356);
+	var _stylesRawLess = __webpack_require__(355);
 
 	var _stylesRawLess2 = _interopRequireDefault(_stylesRawLess);
 
@@ -46204,83 +46193,21 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 356 */
+/* 355 */
 /***/ function(module, exports) {
 
 	module.exports = "container {\n  margin-bottom: 10px;\n}\ncontainer header {\n  text-align: center;\n  padding: 10px;\n  background: #3379A9;\n  color: #FBFDFE;\n}\ncontainer .bottomBorder {\n  border-top: solid 5px #DCF2F9;\n  border-bottom: solid 5px #9BC0C6;\n}\n"
 
 /***/ },
-/* 357 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _Footer = __webpack_require__(358);
-
-	var _Footer2 = _interopRequireDefault(_Footer);
-
-	exports['default'] = _Footer2['default'];
-	module.exports = exports['default'];
-
-/***/ },
-/* 358 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _react = __webpack_require__(146);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactInlineCss = __webpack_require__(195);
-
-	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
-
-	var _styles = __webpack_require__(359);
-
-	var _styles2 = _interopRequireDefault(_styles);
-
-	exports['default'] = _react2['default'].createClass({
-	  displayName: 'Footer',
-
-	  render: function render() {
-	    return _react2['default'].createElement(
-	      _reactInlineCss2['default'],
-	      { stylesheet: _styles2['default'], componentName: 'container' },
-	      _react2['default'].createElement(
-	        'div',
-	        { className: 'topBorder' },
-	        ' '
-	      ),
-	      _react2['default'].createElement(
-	        'footer',
-	        null,
-	        'Footer'
-	      )
-	    );
-	  }
-	});
-	module.exports = exports['default'];
-
-/***/ },
-/* 359 */
+/* 356 */
 /***/ function(module, exports) {
 
-	module.exports = "container {\n  margin-top: 10px;\n}\ncontainer footer {\n  text-align: center;\n  padding: 10px;\n  background: #3379A9;\n  color: #FBFDFE;\n}\ncontainer .topBorder {\n  border-top: solid 5px #9BC0C6;\n  border-bottom: solid 5px #DCF2F9;\n}\n"
+	module.exports = "container {\n  font-family: sans-serif;\n  font-size: 22px;\n  background: #DCF2F9;\n}\ncontainer input,\ncontainer textarea,\ncontainer keygen,\ncontainer select,\ncontainer button {\n  font-size: 22px;\n}\n"
 
 /***/ },
+/* 357 */,
+/* 358 */,
+/* 359 */,
 /* 360 */,
 /* 361 */,
 /* 362 */,
@@ -46304,10 +46231,7 @@
 /* 380 */,
 /* 381 */,
 /* 382 */,
-/* 383 */,
-/* 384 */,
-/* 385 */,
-/* 386 */
+/* 383 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -46407,11 +46331,11 @@
 	}
 
 /***/ },
+/* 384 */,
+/* 385 */,
+/* 386 */,
 /* 387 */,
-/* 388 */,
-/* 389 */,
-/* 390 */,
-/* 391 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46422,7 +46346,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _PlayerTable = __webpack_require__(392);
+	var _PlayerTable = __webpack_require__(389);
 
 	var _PlayerTable2 = _interopRequireDefault(_PlayerTable);
 
@@ -46430,7 +46354,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 392 */
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46439,7 +46363,11 @@
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
 	var _react = __webpack_require__(146);
 
@@ -46449,15 +46377,15 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _draftUtils = __webpack_require__(393);
+	var _draftUtils = __webpack_require__(390);
 
 	var _draftUtils2 = _interopRequireDefault(_draftUtils);
 
-	var _styles = __webpack_require__(397);
+	var _styles = __webpack_require__(394);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
-	var _columnTypes = __webpack_require__(396);
+	var _columnTypes = __webpack_require__(393);
 
 	var _columnTypes2 = _interopRequireDefault(_columnTypes);
 
@@ -46470,59 +46398,111 @@
 	    filterColumns: _react2['default'].PropTypes.bool,
 	    filterRows: _react2['default'].PropTypes.bool,
 	    rowFilters: _react2['default'].PropTypes.object,
-	    playerClickHandler: _react2['default'].PropTypes.func
+	    playerClickHandler: _react2['default'].PropTypes.func,
+	    colors: _react2['default'].PropTypes.bool,
+	    includeBaggageSummary: _react2['default'].PropTypes.bool
 	  },
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      filterColumns: false,
-	      filterRows: false
+	      filterRows: false,
+	      colors: true,
+	      includeBaggageSummary: true
 	    };
 	  },
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      sort: '',
+	      sort: -1,
 	      sortDir: 1
 	    };
 	  },
 
 	  getColumns: function getColumns() {
-	    return this.props.filterColumns ? this.props.columns.filter(function (column) {
+	    var cols = this.props.filterColumns ? this.props.columns.filter(function (column) {
 	      return column.visible;
-	    }) : this.props.columns;
+	    }) : this.props.columns.slice(0);
+	    return this.addBaggageColumns(cols);
+	  },
+
+	  addBaggageColumns: function addBaggageColumns(columns) {
+
+	    if (this.props.includeBaggageSummary) {
+
+	      var bagIdIndex = columns.findIndex(function (column) {
+	        return column.type == _columnTypes.baggageId.name;
+	      });
+	      if (bagIdIndex >= 0) {
+	        columns.splice.apply(columns, [bagIdIndex, 1].concat(_toConsumableArray(this.getBaggageSummaryColumns(columns))));
+	      }
+	    }
+
+	    return columns;
+	  },
+
+	  getBaggageSummaryColumns: function getBaggageSummaryColumns(columns) {
+	    return columns.filter(function (column) {
+	      return column.summary;
+	    }).map(function (column) {
+	      return _extends({}, column, { baggage: true });
+	    });
 	  },
 
 	  sortColumnHandler: function sortColumnHandler(column) {
 	    if (this.state.sort == column) {
 	      var sortDir = this.state.sortDir == 0 ? 1 : this.state.sortDir == 1 ? -1 : 0;
-	      var sort = sortDir === 0 ? '' : this.state.sort;
+	      var sort = sortDir === 0 ? -1 : this.state.sort;
 	      this.setState({ sort: sort, sortDir: sortDir });
 	    } else {
 	      this.setState({ sort: column, sortDir: 1 });
 	    }
 	  },
 
-	  getHeaderRow: function getHeaderRow() {
+	  getHeaderRows: function getHeaderRows() {
 	    var _this = this;
 
-	    return _react2['default'].createElement(
+	    var rows = [];
+	    var columns = this.getColumns();
+
+	    if (this.props.includeBaggageSummary) {
+	      var bagIdIndex = columns.findIndex(function (column) {
+	        return column.baggage;
+	      });
+	      var baggageColumns = columns.filter(function (column) {
+	        return column.baggage;
+	      });
+	      rows.push(_react2['default'].createElement(
+	        'tr',
+	        { key: 'baggage' },
+	        _react2['default'].createElement('td', { colSpan: bagIdIndex }),
+	        _react2['default'].createElement(
+	          'td',
+	          { className: 'baggageColumn baggageHeader', colSpan: baggageColumns.length },
+	          'Baggage'
+	        )
+	      ));
+	    }
+
+	    rows.push(_react2['default'].createElement(
 	      'tr',
-	      null,
-	      this.getColumns().map(function (column) {
-	        var isSortColumn = column.name == _this.state.sort;
+	      { key: 'columnheaders' },
+	      columns.map(function (column, index) {
+	        var isSortColumn = index == _this.state.sort;
 	        var isSortAsc = _this.state.sortDir == 1;
 	        var columnClassName = isSortColumn ? isSortAsc ? 'sortAsc' : 'sortDesc' : 'noSort';
+	        var baggageClassName = column.baggage ? 'baggageColumn' : 'playerColumn';
 	        return _react2['default'].createElement(
 	          'td',
 	          {
-	            key: column.name,
-	            onClick: _this.sortColumnHandler.bind(_this, column.name),
-	            className: 'columnHead ' + columnClassName },
+	            key: column.name + (column.baggage ? 'bag' : ''),
+	            onClick: _this.sortColumnHandler.bind(_this, index),
+	            className: ['columnHead', columnClassName, baggageClassName].join(' ') },
 	          column.name
 	        );
 	      })
-	    );
+	    ));
+	    return rows;
 	  },
 
 	  getFilteredPlayers: function getFilteredPlayers() {
@@ -46541,28 +46521,25 @@
 	  },
 
 	  sortTwoPlayers: function sortTwoPlayers(a, b) {
-	    var _this3 = this;
-
-	    if (!this.state.sort) {
+	    if (this.state.sort < 0) {
 	      return 0;
 	    }
-	    var type = this.props.columns.find(function (column) {
-	      return column.name == _this3.state.sort;
-	    }).type;
-	    var sort = _columnTypes2['default'].find(function (column) {
+	    var column = this.getColumns()[this.state.sort];
+	    var type = this.getColumns()[this.state.sort].type;
+	    var sortFn = _columnTypes2['default'].find(function (column) {
 	      return column.name == type;
 	    }).sort;
 
-	    return this.state.sortDir * sort(a[this.state.sort], b[this.state.sort]);
+	    return this.state.sortDir * sortFn(this.getValueOfColumnForPlayer(column, a), this.getValueOfColumnForPlayer(column, b));
 	  },
 
 	  getBodyRows: function getBodyRows() {
-	    var _this4 = this;
+	    var _this3 = this;
 
 	    if (this.props.players.length === 0) {
 	      return _react2['default'].createElement(
 	        'tr',
-	        null,
+	        { key: 'nobody' },
 	        _react2['default'].createElement(
 	          'td',
 	          { colSpan: this.props.columns.length },
@@ -46571,7 +46548,7 @@
 	      );
 	    }
 	    return this.getFilteredPlayers().map(function (player) {
-	      return player ? _this4.getBodyRow(player) : null;
+	      return player ? _this3.getBodyRow(player) : null;
 	    });
 	  },
 
@@ -46582,6 +46559,8 @@
 	  },
 
 	  getBodyRow: function getBodyRow(player) {
+	    var _this4 = this;
+
 	    var className = this.getPlayerClassName(player);
 	    return _react2['default'].createElement(
 	      'tr',
@@ -46590,16 +46569,31 @@
 	        className: className,
 	        onClick: this.playerClickHandler.bind(this, _draftUtils2['default'].getPlayerId(player, this.props.columns)) },
 	      this.getColumns().map(function (column) {
+	        var baggageClassName = column.baggage ? 'baggageColumn' : 'playerColumn';
 	        return _react2['default'].createElement(
 	          'td',
-	          { key: column.name },
-	          player[column.name]
+	          { key: column.name + (column.baggage ? 'bag' : ''), className: baggageClassName },
+	          _this4.getValueOfColumnForPlayer(column, player)
 	        );
 	      })
 	    );
 	  },
 
+	  getValueOfColumnForPlayer: function getValueOfColumnForPlayer(column, player) {
+	    if (column.baggage) {
+	      var bagPlayer = player.baggage;
+	      return bagPlayer ? bagPlayer.data[column.name] : '';
+	    } else if (column.name == _columnTypes.team.name) {
+	      return player.team ? player.team.name : '';
+	    } else {
+	      return player.data[column.name];
+	    }
+	  },
+
 	  getPlayerClassName: function getPlayerClassName(player) {
+	    if (!this.props.colors) {
+	      return '';
+	    }
 	    if (!player.draftStatus) {
 	      return 'draftable';
 	    }
@@ -46661,7 +46655,7 @@
 	        _react2['default'].createElement(
 	          'thead',
 	          null,
-	          this.getHeaderRow()
+	          this.getHeaderRows()
 	        ),
 	        _react2['default'].createElement(
 	          'tbody',
@@ -46669,14 +46663,14 @@
 	          this.getBodyRows()
 	        )
 	      ),
-	      this.getColorDescriptions()
+	      this.props.colors && this.getColorDescriptions()
 	    );
 	  }
 	});
 	module.exports = exports['default'];
 
 /***/ },
-/* 393 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46687,11 +46681,77 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _queryString = __webpack_require__(394);
+	var _queryString = __webpack_require__(391);
 
 	var _queryString2 = _interopRequireDefault(_queryString);
 
-	var _columnTypes = __webpack_require__(396);
+	var _columnTypes = __webpack_require__(393);
+
+	function getPlayerId(player, columns) {
+	  var idColumn = columns.find(function (column) {
+	    return column.type === _columnTypes.id.name;
+	  });
+	  var data = player.data || player;
+	  return data[idColumn.name];
+	}
+
+	function getBaggageId(player, columns) {
+	  var idColumn = columns.find(function (column) {
+	    return column.type === _columnTypes.baggageId.name;
+	  });
+	  var data = player.data || player;
+	  return data[idColumn.name];
+	}
+
+	function getVector(player, columns) {
+	  var idColumn = columns.find(function (column) {
+	    return column.type === _columnTypes.vector.name;
+	  });
+	  var data = player.data || player;
+	  return data[idColumn.name];
+	}
+
+	function getTeamForPlayer(playerId, drafts) {
+	  var draft = drafts.find(function (draft) {
+	    return draft.playerId == playerId;
+	  });
+	  return draft ? draft.teamId : null;
+	}
+
+	function getGender(player, columns) {
+	  var gColumn = columns.find(function (column) {
+	    return column.type === _columnTypes.gender.name;
+	  });
+	  var data = player.data || player;
+	  return data[gColumn.name];
+	}
+
+	// Team has undrafted baggage vector >= player.vector
+	// ie For team with undrafted baggage with vectors 5 and 10, players with vectors
+	// 1, 6, 9, and 10 are undraftable. 11 is allowed.
+	function getCurrentlyUndraftable(playerId, teamId, player, players, columns, drafts) {
+
+	  if (teamId < 0) {
+	    return false;
+	  }
+
+	  var baggageIds = players.filter(function (filterPlayer) {
+	    var pid = getPlayerId(filterPlayer, columns);
+	    var baggageTeamless = getTeamForPlayer(getBaggageId(filterPlayer, columns), drafts) === null;
+	    return getTeamForPlayer(pid, drafts) == teamId && pid != playerId && baggageTeamless;
+	  }).map(function (filterPlayer) {
+	    return getBaggageId(filterPlayer, columns);
+	  });
+
+	  var maxVector = players // Any player...
+	  .filter(function (filterPlayer) {
+	    return baggageIds.indexOf(getPlayerId(filterPlayer, columns)) >= 0;
+	  }).reduce(function (maxVector, filterPlayer) {
+	    return Math.max(maxVector, getVector(filterPlayer, columns));
+	  }, 0);
+
+	  return getVector(player, columns) <= maxVector;
+	}
 
 	exports['default'] = {
 
@@ -46700,36 +46760,38 @@
 	    return params.id;
 	  },
 
-	  getPlayerId: function getPlayerId(player, columns) {
-	    var idColumn = columns.find(function (column) {
-	      return column.type === _columnTypes.id.name;
-	    });
-	    return player[idColumn.name];
+	  getDraftStatus: function getDraftStatus(contextTeamId, player, players, drafts, columns) {
+
+	    var playerId = getPlayerId(player, columns);
+	    var teamId = getTeamForPlayer(playerId, drafts);
+	    var baggageTeamId = getTeamForPlayer(getBaggageId(player, columns), drafts);
+
+	    var otherTeamsDraft = teamId ? teamId != contextTeamId : false;
+	    var otherTeamsBaggage = baggageTeamId ? baggageTeamId != contextTeamId : false;
+	    var currentTeamsDraft = teamId ? teamId == contextTeamId : false;
+	    var currentTeamsBaggage = baggageTeamId ? baggageTeamId == contextTeamId : false;
+	    var currentTeamUndraftable = !currentTeamsDraft && !currentTeamsBaggage && getCurrentlyUndraftable(playerId, contextTeamId, player, players, columns, drafts);
+
+	    return {
+	      otherTeamsDraft: otherTeamsDraft,
+	      otherTeamsBaggage: otherTeamsBaggage,
+	      currentTeamsDraft: currentTeamsDraft,
+	      currentTeamsBaggage: currentTeamsBaggage,
+	      currentTeamUndraftable: currentTeamUndraftable
+	    };
 	  },
 
-	  getBaggageId: function getBaggageId(player, columns) {
-	    var idColumn = columns.find(function (column) {
-	      return column.type === _columnTypes.baggageId.name;
-	    });
-	    return player[idColumn.name];
-	  },
-
-	  getVector: function getVector(player, columns) {
-	    var idColumn = columns.find(function (column) {
-	      return column.name.toLowerCase() === 'vector' || column.name.toLowerCase() === 'vec';
-	    });
-	    return player[idColumn.name];
-	  }
+	  getPlayerId: getPlayerId, getBaggageId: getBaggageId, getVector: getVector, getGender: getGender
 
 	};
 	module.exports = exports['default'];
 
 /***/ },
-/* 394 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var strictUriEncode = __webpack_require__(395);
+	var strictUriEncode = __webpack_require__(392);
 
 	exports.extract = function (str) {
 		return str.split('?')[1] || '';
@@ -46797,7 +46859,7 @@
 
 
 /***/ },
-/* 395 */
+/* 392 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -46809,7 +46871,7 @@
 
 
 /***/ },
-/* 396 */
+/* 393 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -46893,6 +46955,7 @@
 	  required: true,
 	  sort: numberSort
 	};
+
 	exports.vector = vector;
 	var height = {
 	  name: 'Height',
@@ -46903,15 +46966,54 @@
 	};
 
 	exports.height = height;
-	exports['default'] = [{ name: 'Text', description: 'Words and such', unique: false, required: false, sort: defaultSort }, { name: 'Boolean', description: 'Exists or not', unique: false, required: false, sort: boolSort }, { name: 'Number', description: 'A numerical value', unique: false, required: false, sort: numberSort }, id, baggageId, vector, height];
+	var number = {
+	  name: 'Number',
+	  description: 'A numerical value',
+	  unique: false,
+	  required: false,
+	  sort: numberSort
+	};
+
+	exports.number = number;
+	var bool = {
+	  name: 'Boolean',
+	  description: 'Exists or not',
+	  unique: false,
+	  required: false,
+	  sort: boolSort
+	};
+
+	exports.bool = bool;
+	var team = {
+	  name: 'Team',
+	  description: 'What team a player is on',
+	  unique: true,
+	  required: false,
+	  sort: defaultSort
+	};
+
+	exports.team = team;
+	var gender = {
+	  name: 'Gender',
+	  description: 'M or F',
+	  unique: false,
+	  required: false,
+	  sort: defaultSort
+	};
+
+	exports.gender = gender;
+	exports['default'] = [{ name: 'Text', description: 'Words and such', unique: false, required: false, sort: defaultSort }, bool, id, baggageId, vector, height, number, gender];
 
 /***/ },
-/* 397 */
+/* 394 */
 /***/ function(module, exports) {
 
-	module.exports = "component {\n  overflow: scroll;\n}\ncomponent .players {\n  margin: 0 0;\n  border-spacing: 0;\n  border-collapse: collapse;\n  table-layout: auto;\n  min-width: 100%;\n}\ncomponent .players thead td {\n  font-weight: bold;\n  border-bottom: solid 2px black;\n}\ncomponent .players thead td.sortAsc:after {\n  content: '\\25B2';\n}\ncomponent .players thead td.sortDesc:after {\n  content: '\\25BC';\n}\ncomponent .players tbody tr:hover {\n  background: #ccc;\n}\ncomponent .otherTeam {\n  background: #FFD17E;\n  color: #999;\n}\ncomponent .drafted {\n  background: #AADAFF;\n  color: #000;\n}\ncomponent .draftedBaggage {\n  background: #BDFFB7;\n  color: #000;\n}\ncomponent .draftable {\n  background: #fff;\n  color: #000;\n}\ncomponent .undraftable {\n  background: #ddd;\n  color: #666;\n}\ncomponent .tableColors {\n  text-align: center;\n  font-size: 12px;\n  margin: 5px 30px;\n}\ncomponent .tableColors h5 {\n  font-size: 12px;\n  margin: 0px;\n  padding: 0;\n}\ncomponent .tableColors .tableColor {\n  display: inline-block;\n  width: calc(15%);\n  margin: 5px;\n}\n"
+	module.exports = "component {\n  overflow: scroll;\n}\ncomponent .players {\n  margin: 0 0;\n  border-spacing: 0;\n  border-collapse: collapse;\n  min-width: 100%;\n}\ncomponent .players thead tr:last-of-type {\n  border-bottom: solid 2px black;\n}\ncomponent .players thead td {\n  font-weight: bold;\n}\ncomponent .players thead td.baggageHeader {\n  text-align: center;\n}\ncomponent .players thead td.sortAsc:after {\n  content: '\\25B2';\n}\ncomponent .players thead td.sortDesc:after {\n  content: '\\25BC';\n}\ncomponent .players tbody tr:hover {\n  background: #ccc;\n}\ncomponent .baggageColumn {\n  background: #eee;\n}\ncomponent .otherTeam {\n  background: #FFD17E;\n  color: #999;\n}\ncomponent .drafted {\n  background: #AADAFF;\n  color: #000;\n}\ncomponent .draftedBaggage {\n  background: #BDFFB7;\n  color: #000;\n}\ncomponent .draftable {\n  background: #fff;\n  color: #000;\n}\ncomponent .undraftable {\n  background: #ddd;\n  color: #666;\n}\ncomponent .tableColors {\n  text-align: center;\n  font-size: 12px;\n  margin: 5px 30px;\n}\ncomponent .tableColors h5 {\n  font-size: 12px;\n  margin: 0px;\n  padding: 0;\n}\ncomponent .tableColors .tableColor {\n  display: inline-block;\n  width: calc(15%);\n  margin: 5px;\n}\n"
 
 /***/ },
+/* 395 */,
+/* 396 */,
+/* 397 */,
 /* 398 */,
 /* 399 */,
 /* 400 */,
@@ -46928,7 +47030,53 @@
 /* 411 */,
 /* 412 */,
 /* 413 */,
-/* 414 */
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */,
+/* 458 */,
+/* 459 */,
+/* 460 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46939,7 +47087,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _firebase = __webpack_require__(415);
+	var _firebase = __webpack_require__(461);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
@@ -46947,7 +47095,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 415 */
+/* 461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46958,11 +47106,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _firebase = __webpack_require__(416);
+	var _firebase = __webpack_require__(462);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _utils = __webpack_require__(417);
+	var _utils = __webpack_require__(463);
 
 	var _utils2 = _interopRequireDefault(_utils);
 
@@ -47025,7 +47173,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 416 */
+/* 462 */
 /***/ function(module, exports) {
 
 	/*! @license Firebase v2.3.1
@@ -47300,7 +47448,7 @@
 
 
 /***/ },
-/* 417 */
+/* 463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47311,7 +47459,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _firebase = __webpack_require__(416);
+	var _firebase = __webpack_require__(462);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
@@ -47344,14 +47492,14 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 418 */,
-/* 419 */,
-/* 420 */,
-/* 421 */,
-/* 422 */,
-/* 423 */,
-/* 424 */,
-/* 425 */
+/* 464 */,
+/* 465 */,
+/* 466 */,
+/* 467 */,
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47362,7 +47510,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _Provider = __webpack_require__(426);
+	var _Provider = __webpack_require__(472);
 
 	var _Provider2 = _interopRequireDefault(_Provider);
 
@@ -47370,7 +47518,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 426 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47391,11 +47539,11 @@
 
 	var _stateStore2 = _interopRequireDefault(_stateStore);
 
-	var _reducer = __webpack_require__(427);
+	var _reducer = __webpack_require__(473);
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _Page = __webpack_require__(439);
+	var _Page = __webpack_require__(485);
 
 	var _Page2 = _interopRequireDefault(_Page);
 
@@ -47413,7 +47561,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 427 */
+/* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* 
@@ -47440,31 +47588,31 @@
 
 	var _redux = __webpack_require__(168);
 
-	var _ui = __webpack_require__(428);
+	var _ui = __webpack_require__(474);
 
 	var _ui2 = _interopRequireDefault(_ui);
 
-	var _players = __webpack_require__(433);
+	var _players = __webpack_require__(479);
 
 	var _players2 = _interopRequireDefault(_players);
 
-	var _firebase = __webpack_require__(434);
+	var _firebase = __webpack_require__(480);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _teams = __webpack_require__(435);
+	var _teams = __webpack_require__(481);
 
 	var _teams2 = _interopRequireDefault(_teams);
 
-	var _columns = __webpack_require__(436);
+	var _columns = __webpack_require__(482);
 
 	var _columns2 = _interopRequireDefault(_columns);
 
-	var _drafts = __webpack_require__(437);
+	var _drafts = __webpack_require__(483);
 
 	var _drafts2 = _interopRequireDefault(_drafts);
 
-	var _user = __webpack_require__(438);
+	var _user = __webpack_require__(484);
 
 	var _user2 = _interopRequireDefault(_user);
 
@@ -47472,7 +47620,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 428 */
+/* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47487,26 +47635,26 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
-	var _tabNamesJs = __webpack_require__(430);
+	var _tabNamesJs = __webpack_require__(476);
 
 	var _tabNamesJs2 = _interopRequireDefault(_tabNamesJs);
 
-	var _modalUtil = __webpack_require__(431);
+	var _modalUtil = __webpack_require__(477);
 
 	var _modalUtil2 = _interopRequireDefault(_modalUtil);
 
-	var _modalNames = __webpack_require__(432);
+	var _modalNames = __webpack_require__(478);
 
 	var _modalNames2 = _interopRequireDefault(_modalNames);
 
 	function getInitialState() {
 	  return _immutable2['default'].fromJS({
 	    tab: _tabNamesJs2['default'].players,
-	    modal: _modalNames2['default'].chooseCurrentTeam,
+	    modal: _modalNames2['default'].chooseViewTeam,
 	    error: '',
 	    modalData: {},
 	    saving: false
@@ -47516,8 +47664,6 @@
 	exports['default'] = function (state, action) {
 	  if (state === undefined) state = getInitialState();
 
-	  var modalData = {};
-
 	  switch (action.type) {
 	    case _actionNames2['default'].tabClick:
 	      state = state.merge({
@@ -47525,23 +47671,21 @@
 	      });
 	      break;
 	    case _actionNames2['default'].viewModal:
-	      modalData = _modalUtil2['default'].validate(action.modalName, action.data);
 	      state = state.merge({
 	        modal: action.modalName,
-	        modalData: modalData
+	        modalData: action.data
 	      });
 	      break;
 	    case _actionNames2['default'].confirmModal:
-	    case _actionNames2['default'].cancelModal:
 	    case _actionNames2['default'].syncing:
+	    case _actionNames2['default'].cancelModal:
 	      state = state.merge({
 	        modal: '',
-	        modalData: modalData
+	        modalData: {}
 	      });
 	      break;
 	    case _actionNames2['default'].updateModal:
-	      modalData = _modalUtil2['default'].validate(state.get('modal'), action.data);
-	      state = state.merge({ modalData: modalData });
+	      state = state.merge({ modalData: action.data });
 	      break;
 	    case _actionNames2['default'].blowup:
 	      state = state.merge({
@@ -47560,7 +47704,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 429 */
+/* 475 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -47588,7 +47732,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 430 */
+/* 476 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -47604,7 +47748,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 431 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47615,13 +47759,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _modalNames = __webpack_require__(432);
+	var _modalNames = __webpack_require__(478);
 
 	var _modalNames2 = _interopRequireDefault(_modalNames);
 
 	function validateModalInput(modal, name, value) {
 	  switch (modal) {
-	    case _modalNames2['default'].chooseCurrentTeam:
+	    case _modalNames2['default'].chooseViewTeam:
 	      switch (name) {
 	        case 'teamId':
 	          return value != -1;
@@ -47672,7 +47816,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 432 */
+/* 478 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -47681,7 +47825,7 @@
 	  value: true
 	});
 	exports['default'] = {
-	  'chooseCurrentTeam': 'Choose Your Team',
+	  'chooseViewTeam': 'Choose Your Team',
 	  'filterColumns': 'Show/Hide Columns',
 	  'filterRows': 'Filter Players',
 	  'draftPlayer': 'Draft Player',
@@ -47690,7 +47834,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 433 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47705,7 +47849,7 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
@@ -47728,7 +47872,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 434 */
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47743,11 +47887,11 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
-	var _tabNamesJs = __webpack_require__(430);
+	var _tabNamesJs = __webpack_require__(476);
 
 	var _tabNamesJs2 = _interopRequireDefault(_tabNamesJs);
 
@@ -47776,7 +47920,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 435 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47791,7 +47935,7 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
@@ -47814,7 +47958,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 436 */
+/* 482 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47829,7 +47973,7 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
@@ -47852,7 +47996,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 437 */
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47867,7 +48011,7 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
@@ -47898,7 +48042,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 438 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47913,17 +48057,17 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
-	var _modalNamesJs = __webpack_require__(432);
+	var _modalNamesJs = __webpack_require__(478);
 
 	var _modalNamesJs2 = _interopRequireDefault(_modalNamesJs);
 
 	function getInitialState() {
 	  return _immutable2['default'].fromJS({
-	    currentTeam: -1,
+	    viewTeam: -1,
 	    rowFilters: {
 	      viewOtherTeam: true,
 	      viewYourTeam: true,
@@ -47936,21 +48080,22 @@
 	exports['default'] = function (state, action) {
 	  if (state === undefined) state = getInitialState();
 
-	  switch (action.type) {
-	    case _actionNames2['default'].confirmModal:
-	      if (action.modal === _modalNamesJs2['default'].chooseCurrentTeam) {
-	        state = state.merge({ currentTeam: action.data.inputs.currentTeam.value });
-	      } else if (action.modal === _modalNamesJs2['default'].filterRows) {
+	  if (action.type === _actionNames2['default'].confirmModal) {
+	    switch (action.modal) {
+	      case _modalNamesJs2['default'].chooseViewTeam:
+	        state = state.merge({ viewTeam: action.data.viewTeam });
+	        break;
+	      case _modalNamesJs2['default'].filterRows:
 	        state = state.merge({ rowFilters: {
-	            viewOtherTeam: action.data.inputs.viewOtherTeam.value,
-	            viewYourTeam: action.data.inputs.viewYourTeam.value,
-	            viewUndraftable: action.data.inputs.viewUndraftable.value
+	            viewOtherTeam: action.data.viewOtherTeam,
+	            viewYourTeam: action.data.viewYourTeam,
+	            viewUndraftable: action.data.viewUndraftable
 	          } });
-	      } else if (action.modal === _modalNamesJs2['default'].filterColumns) {
-	        state = state.merge({ columnFilters: action.data.inputs.map(function (input) {
-	            return input.value;
-	          }) });
-	      }
+	        break;
+	      case _modalNamesJs2['default'].filterColumns:
+	        state = state.merge({ columnFilters: action.data });
+	        break;
+	    }
 	  }
 	  return state;
 	};
@@ -47958,7 +48103,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 439 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47979,31 +48124,31 @@
 
 	var _reactRedux = __webpack_require__(160);
 
-	var _utils = __webpack_require__(393);
+	var _utils = __webpack_require__(390);
 
 	var _utils2 = _interopRequireDefault(_utils);
 
-	var _firebase = __webpack_require__(414);
+	var _firebase = __webpack_require__(460);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _selector = __webpack_require__(440);
+	var _selector = __webpack_require__(486);
 
 	var _selector2 = _interopRequireDefault(_selector);
 
-	var _actions = __webpack_require__(445);
+	var _actions = __webpack_require__(494);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
-	var _tabNames = __webpack_require__(430);
+	var _tabNames = __webpack_require__(476);
 
 	var _tabNames2 = _interopRequireDefault(_tabNames);
 
-	var _modalNames = __webpack_require__(432);
+	var _modalNames = __webpack_require__(478);
 
 	var _modalNames2 = _interopRequireDefault(_modalNames);
 
-	var _styles = __webpack_require__(449);
+	var _styles = __webpack_require__(498);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -48011,51 +48156,51 @@
 
 	var _componentsApplication2 = _interopRequireDefault(_componentsApplication);
 
-	var _componentsTabbedContainer = __webpack_require__(450);
+	var _componentsTabbedContainer = __webpack_require__(499);
 
 	var _componentsTabbedContainer2 = _interopRequireDefault(_componentsTabbedContainer);
 
-	var _componentsModalContainer = __webpack_require__(453);
+	var _componentsModalContainer = __webpack_require__(502);
 
 	var _componentsModalContainer2 = _interopRequireDefault(_componentsModalContainer);
 
-	var _componentsDraftCurrentTeamView = __webpack_require__(456);
+	var _componentsDraftStatusView = __webpack_require__(505);
 
-	var _componentsDraftCurrentTeamView2 = _interopRequireDefault(_componentsDraftCurrentTeamView);
+	var _componentsDraftStatusView2 = _interopRequireDefault(_componentsDraftStatusView);
 
 	// Tabs
 
-	var _componentsDraftPlayers = __webpack_require__(459);
+	var _componentsDraftPlayers = __webpack_require__(508);
 
 	var _componentsDraftPlayers2 = _interopRequireDefault(_componentsDraftPlayers);
 
-	var _componentsDraftTeams = __webpack_require__(462);
+	var _componentsDraftTeams = __webpack_require__(511);
 
 	var _componentsDraftTeams2 = _interopRequireDefault(_componentsDraftTeams);
 
-	var _componentsDraftHistory = __webpack_require__(465);
+	var _componentsDraftHistory = __webpack_require__(517);
 
 	var _componentsDraftHistory2 = _interopRequireDefault(_componentsDraftHistory);
 
 	// Modals
 
-	var _componentsDraftChooseCurrentTeam = __webpack_require__(468);
+	var _componentsDraftChooseViewTeam = __webpack_require__(520);
 
-	var _componentsDraftChooseCurrentTeam2 = _interopRequireDefault(_componentsDraftChooseCurrentTeam);
+	var _componentsDraftChooseViewTeam2 = _interopRequireDefault(_componentsDraftChooseViewTeam);
 
-	var _componentsDraftFilterColumns = __webpack_require__(471);
+	var _componentsDraftFilterColumns = __webpack_require__(523);
 
 	var _componentsDraftFilterColumns2 = _interopRequireDefault(_componentsDraftFilterColumns);
 
-	var _componentsDraftFilterPlayers = __webpack_require__(474);
+	var _componentsDraftFilterPlayers = __webpack_require__(526);
 
 	var _componentsDraftFilterPlayers2 = _interopRequireDefault(_componentsDraftFilterPlayers);
 
-	var _componentsDraftDraftPlayer = __webpack_require__(477);
+	var _componentsDraftDraftPlayer = __webpack_require__(529);
 
 	var _componentsDraftDraftPlayer2 = _interopRequireDefault(_componentsDraftDraftPlayer);
 
-	var _componentsDraftUndraftPlayer = __webpack_require__(480);
+	var _componentsDraftUndraftPlayer = __webpack_require__(535);
 
 	var _componentsDraftUndraftPlayer2 = _interopRequireDefault(_componentsDraftUndraftPlayer);
 
@@ -48064,10 +48209,12 @@
 
 	  componentDidMount: function componentDidMount() {
 	    this.connectToFirebase();
+	    document.addEventListener('keydown', this.keyPressHandler);
 	  },
 
 	  componenWillUnmount: function componenWillUnmount() {
 	    this.disconnectFirebase();
+	    document.removeEventListener('keydown', this.keyPressHandler);
 	  },
 
 	  connectToFirebase: function connectToFirebase() {
@@ -48107,6 +48254,44 @@
 	    }
 	  },
 
+	  keyPressHandler: function keyPressHandler(event) {
+	    switch (event.keyCode) {
+	      case 68:
+	        // d
+	        var teamId = this.props.status.draftOrder[0].id;
+	        this.props.dispatch.viewModal(_modalNames2['default'].draftPlayer, { playerId: 1, teamId: teamId });
+	        break;
+	      case 13:
+	        // Enter
+	        this.refs.modals.confirmHandler(event);
+	        break;
+	      case 27:
+	        // Esc
+	        if (this.props.ui.modal) {
+	          this.props.dispatch.cancelModal();
+	        }
+	        break;
+	      case 49:
+	        // 1
+	        if (!this.props.ui.modal) {
+	          this.props.dispatch.tabClick(_tabNames2['default'].players);
+	        }
+	        break;
+	      case 50:
+	        // 2
+	        if (!this.props.ui.modal) {
+	          this.props.dispatch.tabClick(_tabNames2['default'].teams);
+	        }
+	        break;
+	      case 51:
+	        // 3
+	        if (!this.props.ui.modal) {
+	          this.props.dispatch.tabClick(_tabNames2['default'].history);
+	        }
+	        break;
+	    }
+	  },
+
 	  render: function render() {
 	    return _react2['default'].createElement(
 	      _componentsApplication2['default'],
@@ -48114,9 +48299,6 @@
 	      _react2['default'].createElement(
 	        _reactInlineCss2['default'],
 	        { stylesheet: _styles2['default'], componentName: 'container' },
-	        _react2['default'].createElement(_componentsDraftCurrentTeamView2['default'], {
-	          team: this.props.user.team,
-	          viewModal: this.props.dispatch.viewModal }),
 	        _react2['default'].createElement(
 	          _componentsTabbedContainer2['default'],
 	          {
@@ -48127,8 +48309,9 @@
 	            columns: this.props.columns,
 	            players: this.props.players,
 	            drafts: this.props.drafts,
+	            status: this.props.status,
 	            viewModal: this.props.dispatch.viewModal,
-	            currentTeam: this.props.user.currentTeam,
+	            viewTeam: this.props.user.viewTeam,
 	            rowFilters: this.props.user.rowFilters }),
 	          _react2['default'].createElement(_componentsDraftTeams2['default'], {
 	            tabName: _tabNames2['default'].teams,
@@ -48144,15 +48327,17 @@
 	        _react2['default'].createElement(
 	          _componentsModalContainer2['default'],
 	          {
+	            ref: 'modals',
 	            currentModalName: this.props.ui.modal,
 	            modalData: this.props.ui.modalData,
 	            confirmHandler: this.props.dispatch.confirmModal,
 	            cancelHandler: this.props.dispatch.cancelModal },
-	          _react2['default'].createElement(_componentsDraftChooseCurrentTeam2['default'], {
-	            modalName: _modalNames2['default'].chooseCurrentTeam,
+	          _react2['default'].createElement(_componentsDraftChooseViewTeam2['default'], {
+	            modalName: _modalNames2['default'].chooseViewTeam,
 	            updateModal: this.props.dispatch.updateModal,
 	            teams: this.props.teams,
-	            currentTeam: this.props.user.currentTeam }),
+	            data: this.props.ui.modalData,
+	            viewTeam: this.props.user.viewTeam }),
 	          _react2['default'].createElement(_componentsDraftFilterColumns2['default'], {
 	            modalName: _modalNames2['default'].filterColumns,
 	            updateModal: this.props.dispatch.updateModal,
@@ -48166,12 +48351,19 @@
 	            updateModal: this.props.dispatch.updateModal,
 	            data: this.props.ui.modalData,
 	            teams: this.props.teams,
+	            players: this.props.players,
+	            drafts: this.props.drafts,
 	            columns: this.props.columns }),
 	          _react2['default'].createElement(_componentsDraftUndraftPlayer2['default'], {
 	            modalName: _modalNames2['default'].undraftPlayer,
 	            data: this.props.ui.modalData,
 	            columns: this.props.columns })
 	        ),
+	        _react2['default'].createElement(_componentsDraftStatusView2['default'], {
+	          team: this.props.user.team,
+	          status: this.props.status,
+	          columns: this.props.columns,
+	          viewModal: this.props.dispatch.viewModal }),
 	        this.getStatusOverlay()
 	      )
 	    );
@@ -48182,7 +48374,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 440 */
+/* 486 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48195,76 +48387,58 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _reselect = __webpack_require__(386);
+	var _reselect = __webpack_require__(383);
 
-	var _modalNames = __webpack_require__(432);
+	var _modalNames = __webpack_require__(478);
 
 	var _modalNames2 = _interopRequireDefault(_modalNames);
 
-	var _utils = __webpack_require__(393);
+	var _utils = __webpack_require__(390);
 
 	var _utils2 = _interopRequireDefault(_utils);
 
-	var _base = __webpack_require__(441);
+	var _base = __webpack_require__(487);
 
-	var _players = __webpack_require__(442);
+	var _players = __webpack_require__(488);
 
-	var _user = __webpack_require__(443);
+	var _teams = __webpack_require__(489);
+
+	var _drafts = __webpack_require__(490);
+
+	var _drafts2 = _interopRequireDefault(_drafts);
+
+	var _user = __webpack_require__(491);
 
 	var _user2 = _interopRequireDefault(_user);
 
-	var _columns = __webpack_require__(444);
+	var _columns = __webpack_require__(492);
 
 	var _columns2 = _interopRequireDefault(_columns);
 
-	var teamMap = (0, _reselect.createSelector)(_base.teams, function (teams) {
-	  var ret = {};
-	  teams.forEach(function (team) {
-	    return ret[team.id] = team;
-	  });
-	  return ret;
-	});
+	var _status = __webpack_require__(493);
 
-	var teamsWithPlayers = (0, _reselect.createSelector)(_players.playerMap, _base.teams, _base.drafts, function (playerMap, teams, drafts) {
-	  return teams.map(function (team) {
-	    var players = drafts.filter(function (draft) {
-	      return draft.teamId == team.id;
-	    }).map(function (draft) {
-	      return playerMap[draft.playerId];
-	    });
-	    return _extends({}, team, { players: players });
-	  });
-	});
+	var _status2 = _interopRequireDefault(_status);
 
-	var draftsWithTeamsAndPlayers = (0, _reselect.createSelector)(_base.drafts, _players.playerMap, teamMap, function (drafts, playerMap, teamMap) {
-	  return drafts.map(function (draft) {
-	    var team = teamMap[draft.teamId];
-	    var player = playerMap[draft.playerId];
-	    return _extends({}, draft, { team: team, player: player });
-	  });
-	});
-
-	var uiWithData = (0, _reselect.createSelector)(_base.ui, _players.playerMap, _base.drafts, function (ui, playerMap, drafts) {
-
+	var uiWithData = (0, _reselect.createSelector)(_base.ui, _players.playerMap, _drafts2['default'], function (ui, playerMap, drafts) {
 	  var modalData = ui.modalData;
 
 	  switch (ui.modal) {
 	    case _modalNames2['default'].draftPlayer:
 	    case _modalNames2['default'].undraftPlayer:
-	      modalData.player = playerMap[modalData.inputs.playerId.value];
+	      modalData.player = playerMap[modalData.playerId];
 	      break;
 	  }
 
 	  return _extends({}, ui, { modalData: modalData });
 	});
 
-	exports['default'] = (0, _reselect.createSelector)([_user2['default'], uiWithData, _players.players, teamsWithPlayers, _columns2['default'], draftsWithTeamsAndPlayers, _base.firebase], function (user, ui, players, teams, columns, drafts, firebase) {
-	  return { user: user, ui: ui, players: players, teams: teams, columns: columns, drafts: drafts, firebase: firebase };
+	exports['default'] = (0, _reselect.createSelector)([_user2['default'], uiWithData, _players.players, _teams.teams, _columns2['default'], _drafts2['default'], _base.firebase, _status2['default']], function (user, ui, players, teams, columns, drafts, firebase, status) {
+	  return { user: user, ui: ui, players: players, teams: teams, columns: columns, drafts: drafts, firebase: firebase, status: status };
 	});
 	module.exports = exports['default'];
 
 /***/ },
-/* 441 */
+/* 487 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48273,7 +48447,7 @@
 	  value: true
 	});
 
-	var _reselect = __webpack_require__(386);
+	var _reselect = __webpack_require__(383);
 
 	var userIm = function userIm(state) {
 	  return state.user;
@@ -48323,7 +48497,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 442 */
+/* 488 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48336,94 +48510,66 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _reselect = __webpack_require__(386);
+	var _reselect = __webpack_require__(383);
 
-	var _modalNames = __webpack_require__(432);
+	var _modalNames = __webpack_require__(478);
 
 	var _modalNames2 = _interopRequireDefault(_modalNames);
 
-	var _utils = __webpack_require__(393);
+	var _utils = __webpack_require__(390);
 
 	var _utils2 = _interopRequireDefault(_utils);
 
-	var _base = __webpack_require__(441);
-
-	function getTeamForPlayer(playerId, drafts) {
-	  var draft = drafts.find(function (draft) {
-	    return draft.playerId == playerId;
-	  });
-	  return draft ? draft.teamId : null;
-	}
-
-	// Team has undrafted baggage vector >= player.vector
-	// ie For team with undrafted baggage with vectors 5 and 10, players with vectors
-	// 1, 6, 9, and 10 are undraftable. 11 is allowed.
-	function getCurrentlyUndraftable(playerId, teamId, player, players, teams, columns, drafts) {
-
-	  if (teamId < 0) {
-	    return false;
-	  }
-
-	  var team = teams.find(function (team) {
-	    return team.id == teamId;
-	  });
-	  var baggageIds = players.filter(function (filterPlayer) {
-	    var pid = _utils2['default'].getPlayerId(filterPlayer, columns);
-	    var baggageTeamless = getTeamForPlayer(_utils2['default'].getBaggageId(filterPlayer, columns), drafts) === null;
-	    return getTeamForPlayer(pid, drafts) == teamId && pid != playerId && baggageTeamless;
-	  }).map(function (filterPlayer) {
-	    return _utils2['default'].getBaggageId(filterPlayer, columns);
-	  });
-
-	  var maxVector = players // Any player...
-	  .filter(function (filterPlayer) {
-	    return baggageIds.indexOf(_utils2['default'].getPlayerId(filterPlayer, columns)) >= 0;
-	  }).reduce(function (maxVector, filterPlayer) {
-	    return Math.max(maxVector, _utils2['default'].getVector(filterPlayer, columns));
-	  }, 0);
-
-	  return _utils2['default'].getVector(player, columns) <= maxVector;
-	}
+	var _base = __webpack_require__(487);
 
 	var playersWithMeta = (0, _reselect.createSelector)(_base.players, _base.drafts, _base.user, _base.columns, _base.teams, function (players, drafts, user, columns, teams) {
 	  return players.map(function (player) {
-
-	    var playerId = _utils2['default'].getPlayerId(player, columns);
-	    var teamId = getTeamForPlayer(playerId, drafts);
-	    var baggageTeamId = getTeamForPlayer(_utils2['default'].getBaggageId(player, columns), drafts);
-
-	    var otherTeamsDraft = teamId ? teamId != user.currentTeam : false;
-	    var otherTeamsBaggage = baggageTeamId ? baggageTeamId != user.currentTeam : false;
-	    var currentTeamsDraft = teamId ? teamId == user.currentTeam : false;
-	    var currentTeamsBaggage = baggageTeamId ? baggageTeamId == user.currentTeam : false;
-	    var currentTeamUndraftable = !currentTeamsDraft && !currentTeamsBaggage && getCurrentlyUndraftable(playerId, user.currentTeam, player, players, teams, columns, drafts);
-
-	    return _extends({}, player, { draftStatus: {
-	        otherTeamsDraft: otherTeamsDraft,
-	        otherTeamsBaggage: otherTeamsBaggage,
-	        currentTeamsDraft: currentTeamsDraft,
-	        currentTeamsBaggage: currentTeamsBaggage,
-	        currentTeamUndraftable: currentTeamUndraftable
-	      } });
+	    var draft = drafts.find(function (draft) {
+	      return draft.playerId == _utils2['default'].getPlayerId(player, columns);
+	    });
+	    var team = !draft ? null : teams.find(function (team) {
+	      return team.id == draft.teamId;
+	    });
+	    var draftStatus = _utils2['default'].getDraftStatus(user.viewTeam, player, players, drafts, columns);
+	    return { data: player, draftStatus: draftStatus, team: team };
 	  });
 	});
 
-	var playerMap = (0, _reselect.createSelector)(playersWithMeta, _base.columns, function (players, columns) {
+	var soloPlayerMap = (0, _reselect.createSelector)(playersWithMeta, _base.columns, function (players, columns) {
 	  var idColumn = columns.find(function (column) {
 	    return column.type === 'ID';
 	  });
 	  var ret = {};
 	  players.forEach(function (player) {
-	    return ret[player[idColumn.name]] = player;
+	    return ret[_utils2['default'].getPlayerId(player, columns)] = player;
 	  });
 	  return ret;
 	});
 
-	exports['default'] = { players: playersWithMeta, playerMap: playerMap };
+	var playersWithBaggage = (0, _reselect.createSelector)(playersWithMeta, soloPlayerMap, _base.columns, function (players, playerMap, columns) {
+	  return players.map(function (player) {
+	    var baggageId = _utils2['default'].getBaggageId(player, columns);
+	    var baggage = baggageId ? playerMap[baggageId] : null;
+	    return _extends({}, player, { baggage: baggage });
+	  });
+	});
+
+	var playerMap = (0, _reselect.createSelector)(playersWithBaggage, _base.columns, function (players, columns) {
+	  var idColumn = columns.find(function (column) {
+	    return column.type === 'ID';
+	  });
+	  var ret = {};
+	  players.forEach(function (player) {
+	    return ret[_utils2['default'].getPlayerId(player, columns)] = player;
+	  });
+	  return ret;
+	});
+
+	exports['default'] = { players: playersWithBaggage, playerMap: playerMap };
 	module.exports = exports['default'];
 
 /***/ },
-/* 443 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48434,9 +48580,11 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _reselect = __webpack_require__(386);
+	var _reselect = __webpack_require__(383);
 
-	var _base = __webpack_require__(441);
+	var _base = __webpack_require__(487);
+
+	var _players = __webpack_require__(488);
 
 	var teamMap = (0, _reselect.createSelector)(_base.teams, function (teams) {
 	  var ret = {};
@@ -48446,16 +48594,22 @@
 	  return ret;
 	});
 
-	var userWithData = (0, _reselect.createSelector)(_base.user, teamMap, function (user, teamMap) {
-	  var team = user.currentTeam >= 0 ? teamMap[user.currentTeam] : null;
-	  return _extends({}, user, { team: team });
+	var teamsWithPlayers = (0, _reselect.createSelector)(_players.playerMap, _base.teams, _base.drafts, function (playerMap, teams, drafts) {
+	  return teams.map(function (team) {
+	    var players = drafts.filter(function (draft) {
+	      return draft.teamId == team.id;
+	    }).map(function (draft) {
+	      return playerMap[draft.playerId];
+	    });
+	    return _extends({}, team, { players: players });
+	  });
 	});
 
-	exports['default'] = userWithData;
+	exports['default'] = { teams: teamsWithPlayers, teamMap: teamMap };
 	module.exports = exports['default'];
 
 /***/ },
-/* 444 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48468,26 +48622,114 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _reselect = __webpack_require__(386);
+	var _reselect = __webpack_require__(383);
 
-	var _user = __webpack_require__(443);
+	var _base = __webpack_require__(487);
+
+	var _players = __webpack_require__(488);
+
+	var _teams = __webpack_require__(489);
+
+	var _user = __webpack_require__(491);
 
 	var _user2 = _interopRequireDefault(_user);
 
-	var _base = __webpack_require__(441);
+	var _columns = __webpack_require__(492);
+
+	var _columns2 = _interopRequireDefault(_columns);
+
+	var draftsWithTeamsAndPlayers = (0, _reselect.createSelector)(_base.drafts, _players.playerMap, _teams.teamMap, function (drafts, playerMap, teamMap) {
+	  return drafts.map(function (draft) {
+	    var team = teamMap[draft.teamId];
+	    var player = playerMap[draft.playerId];
+	    return _extends({}, draft, { team: team, player: player });
+	  });
+	});
+
+	exports['default'] = draftsWithTeamsAndPlayers;
+	module.exports = exports['default'];
+
+/***/ },
+/* 491 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _reselect = __webpack_require__(383);
+
+	var _base = __webpack_require__(487);
+
+	var _teams = __webpack_require__(489);
+
+	var teamMap = (0, _reselect.createSelector)(_teams.teams, function (teams) {
+	  var ret = {};
+	  teams.forEach(function (team) {
+	    return ret[team.id] = team;
+	  });
+	  return ret;
+	});
+
+	var userWithData = (0, _reselect.createSelector)(_base.user, teamMap, function (user, teamMap) {
+	  var team = user.viewTeam >= 0 ? teamMap[user.viewTeam] : null;
+	  return _extends({}, user, { team: team });
+	});
+
+	exports['default'] = userWithData;
+	module.exports = exports['default'];
+
+/***/ },
+/* 492 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
+	var _reselect = __webpack_require__(383);
+
+	var _columnTypes = __webpack_require__(393);
+
+	var _user = __webpack_require__(491);
+
+	var _user2 = _interopRequireDefault(_user);
+
+	var _base = __webpack_require__(487);
+
+	function getTeamColumn() {
+	  var name = _columnTypes.team.name;
+	  var summary = _columnTypes.team.summary;
+	  var type = _columnTypes.team.type;
+
+	  return { name: name, summary: summary, type: type, visible: true };
+	}
 
 	exports['default'] = (0, _reselect.createSelector)(_user2['default'], _base.columns, function (user, columns) {
-	  return columns.map(function (column) {
+	  var cols = columns.map(function (column) {
 	    var userCol = user.columnFilters.find(function (userCol) {
 	      return userCol.name == column.name;
 	    }) || {};
 	    return _extends({}, column, userCol);
 	  });
+	  return [getTeamColumn()].concat(_toConsumableArray(cols));
 	});
 	module.exports = exports['default'];
 
 /***/ },
-/* 445 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48498,27 +48740,76 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _actionNames = __webpack_require__(429);
+	var _reselect = __webpack_require__(383);
+
+	var _base = __webpack_require__(487);
+
+	var _drafts = __webpack_require__(490);
+
+	var _drafts2 = _interopRequireDefault(_drafts);
+
+	function getSnakeTeamIndexes(teamCount) {
+	  var ret = [];
+	  for (var i = 0; i < teamCount; i++) {
+	    ret.push(i);
+	  }for (var i = 0; i < teamCount; i++) {
+	    ret.push(teamCount - 1 - i);
+	  }return ret;
+	}
+
+	var orderedDraftIds = (0, _reselect.createSelector)(_drafts2['default'], _base.teams, function (drafts, teams) {
+	  if (!teams.length) {
+	    return [];
+	  }
+	  var teamIds = getSnakeTeamIndexes(teams.length);
+	  var cyclcalIndex = drafts.length % (2 * teams.length);
+	  return teamIds.slice(cyclcalIndex).concat(teamIds.slice(0, cyclcalIndex));
+	});
+
+	var draftOrder = (0, _reselect.createSelector)(orderedDraftIds, _base.teams, function (drafts, teams) {
+	  return drafts.map(function (id) {
+	    return teams[id];
+	  });
+	});
+
+	exports['default'] = (0, _reselect.createSelector)(draftOrder, function (draftOrder) {
+	  return { draftOrder: draftOrder };
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 494 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
-	var _utils = __webpack_require__(393);
+	var _utils = __webpack_require__(390);
 
 	var _utils2 = _interopRequireDefault(_utils);
 
-	var _modalNames = __webpack_require__(432);
+	var _modalNames = __webpack_require__(478);
 
 	var _modalNames2 = _interopRequireDefault(_modalNames);
 
-	var _firebase2 = __webpack_require__(446);
+	var _firebase2 = __webpack_require__(495);
 
 	var _firebase3 = _interopRequireDefault(_firebase2);
 
-	var _overlay = __webpack_require__(447);
+	var _overlay = __webpack_require__(496);
 
 	var _overlay2 = _interopRequireDefault(_overlay);
 
-	var _ui = __webpack_require__(448);
+	var _ui = __webpack_require__(497);
 
 	var _ui2 = _interopRequireDefault(_ui);
 
@@ -48561,7 +48852,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 446 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48572,49 +48863,46 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
-	var _utils = __webpack_require__(393);
+	var _utils = __webpack_require__(390);
 
 	var _utils2 = _interopRequireDefault(_utils);
 
-	var _firebase = __webpack_require__(414);
+	var _firebase = __webpack_require__(460);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _modalNames = __webpack_require__(432);
+	var _modalNames = __webpack_require__(478);
 
 	var _modalNames2 = _interopRequireDefault(_modalNames);
 
-	var _overlay = __webpack_require__(447);
+	var _overlay = __webpack_require__(496);
 
 	var _overlay2 = _interopRequireDefault(_overlay);
 
 	function transformDraft(dispatch, data, tranformationFn) {
-	  if (data.valid) {
+	  var teamId = data.teamId;
+	  var playerId = data.playerId;
 
-	    var teamId = data.inputs.teamId.value;
-	    var playerId = data.inputs.playerId.value;
+	  dispatch(_overlay2['default'].uploadStarting());
 
-	    dispatch(_overlay2['default'].uploadStarting());
+	  var firebaseId = _utils2['default'].getFirebaseId();
+	  var draftsRef = _firebase2['default'].connect(firebaseId + '/drafts');
+	  var draftRef = draftsRef.transaction(tranformationFn,
 
-	    var firebaseId = _utils2['default'].getFirebaseId();
-	    var draftsRef = _firebase2['default'].connect(firebaseId + '/drafts');
-	    var draftRef = draftsRef.transaction(tranformationFn,
+	  // On Complete
+	  function (error, committed, snapshot) {
+	    if (error) {
+	      dispatch(_overlay2['default'].blowup(error));
+	    }
+	    dispatch(_overlay2['default'].uploadFinished());
+	  },
 
-	    // On Complete
-	    function (error, committed, snapshot) {
-	      if (error) {
-	        dispatch(_overlay2['default'].blowup(error));
-	      }
-	      dispatch(_overlay2['default'].uploadFinished());
-	    },
-
-	    // Dont see intermediate states
-	    false);
-	  }
+	  // Dont see intermediate states
+	  false);
 	}
 
 	function putDraft(dispatch, data) {
@@ -48623,8 +48911,8 @@
 	  // Upate function
 	  function (currentData) {
 
-	    var teamId = data.inputs.teamId.value;
-	    var playerId = data.inputs.playerId.value;
+	    var teamId = data.teamId;
+	    var playerId = data.playerId;
 
 	    currentData = currentData || [];
 
@@ -48646,8 +48934,8 @@
 	  // Upate function
 	  function (currentData) {
 
-	    var teamId = data.inputs.teamId.value;
-	    var playerId = data.inputs.playerId.value;
+	    var teamId = data.teamId;
+	    var playerId = data.playerId;
 
 	    currentData = currentData || [];
 
@@ -48675,7 +48963,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 447 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48686,7 +48974,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
@@ -48704,7 +48992,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 448 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48715,23 +49003,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _actionNames = __webpack_require__(429);
+	var _actionNames = __webpack_require__(475);
 
 	var _actionNames2 = _interopRequireDefault(_actionNames);
 
-	var _utils = __webpack_require__(393);
+	var _utils = __webpack_require__(390);
 
 	var _utils2 = _interopRequireDefault(_utils);
 
-	var _firebase = __webpack_require__(446);
+	var _firebase = __webpack_require__(495);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
-	var _modalNames = __webpack_require__(432);
+	var _modalNames = __webpack_require__(478);
 
 	var _modalNames2 = _interopRequireDefault(_modalNames);
 
-	var _overlay = __webpack_require__(447);
+	var _overlay = __webpack_require__(496);
 
 	var _overlay2 = _interopRequireDefault(_overlay);
 
@@ -48755,7 +49043,7 @@
 	        return function (dispatch) {
 	          return _firebase2['default'].unputDraft(dispatch, data);
 	        };
-	      case _modalNames2['default'].chooseCurrentTeam:
+	      case _modalNames2['default'].chooseViewTeam:
 	      case _modalNames2['default'].filterRows:
 	      case _modalNames2['default'].filterColumns:
 	        return { type: _actionNames2['default'].confirmModal, modal: modalName, data: data };
@@ -48768,13 +49056,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 449 */
+/* 498 */
 /***/ function(module, exports) {
 
-	module.exports = "container {\n  text-align: center;\n  margin: 10px;\n  padding: 10px;\n  background: white;\n  border-radius: 8px;\n  box-shadow: 0px 3px 6px #666;\n}\ncontainer .error {\n  background: rgba(0, 0, 0, 0.9);\n  color: white;\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  z-index: 9;\n  padding: 10%;\n}\n"
+	module.exports = "container {\n  text-align: center;\n  margin: 10px 10px 150px 10px;\n  padding: 10px 10px 0 10px;\n  background: white;\n  border-radius: 8px 8px 0 0;\n  box-shadow: 0px 3px 6px #666;\n}\ncontainer .error {\n  background: rgba(0, 0, 0, 0.9);\n  color: white;\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  z-index: 9;\n  padding: 10%;\n}\n"
 
 /***/ },
-/* 450 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48785,7 +49073,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _TabbedContainer = __webpack_require__(451);
+	var _TabbedContainer = __webpack_require__(500);
 
 	var _TabbedContainer2 = _interopRequireDefault(_TabbedContainer);
 
@@ -48793,7 +49081,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 451 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48812,7 +49100,7 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _styles = __webpack_require__(452);
+	var _styles = __webpack_require__(501);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -48878,13 +49166,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 452 */
+/* 501 */
 /***/ function(module, exports) {
 
 	module.exports = "component .tabs {\n  text-align: center;\n  border-bottom: solid 1px black;\n}\ncomponent .tabs .tab {\n  border: solid 1px black;\n  display: inline-block;\n  width: 30%;\n  max-width: 400px;\n  position: relative;\n  bottom: -1px;\n  border-radius: 5px 5px 0 0;\n  margin: 0 2px;\n}\ncomponent .tabs .tab.active {\n  border-bottom: solid 1px white;\n}\ncomponent .tabs .tab.inactive {\n  background: #9BC0C6;\n}\ncomponent .tabs .tab.inactive:hover {\n  background: #DCF2F9;\n}\n"
 
 /***/ },
-/* 453 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48895,7 +49183,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _ModalContainer = __webpack_require__(454);
+	var _ModalContainer = __webpack_require__(503);
 
 	var _ModalContainer2 = _interopRequireDefault(_ModalContainer);
 
@@ -48903,7 +49191,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 454 */
+/* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48922,7 +49210,7 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _styles = __webpack_require__(455);
+	var _styles = __webpack_require__(504);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -48961,7 +49249,9 @@
 
 	  confirmHandler: function confirmHandler(event) {
 	    event.preventDefault();
-	    this.props.confirmHandler(this.props.currentModalName, this.props.modalData);
+	    if (!this.refs.modal.validate || this.refs.modal.validate(this.props.modalData)) {
+	      this.props.confirmHandler(this.props.currentModalName, this.props.modalData);
+	    }
 	  },
 
 	  render: function render() {
@@ -49013,13 +49303,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 455 */
+/* 504 */
 /***/ function(module, exports) {
 
-	module.exports = "component .background {\n  position: fixed;\n  z-index: 8;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.9);\n}\ncomponent .foreground {\n  background: white;\n  width: 75%;\n  margin: 5% auto;\n  border-radius: 7px;\n}\ncomponent .foreground .modalChild {\n  max-height: 80%;\n  overflow-y: scroll;\n}\ncomponent .foreground .modalNav {\n  background: #DCF2F9;\n  border-top: solid 1px black;\n  border-radius: 0 0 7px 7px;\n  margin-top: 10px;\n  padding: 3px;\n  text-align: center;\n}\ncomponent .foreground .modalNav .buttonContainer {\n  width: 50%;\n  margin: 0;\n  padding: 0;\n  display: inline-block;\n}\ncomponent .foreground .modalNav .buttonContainer button {\n  width: 100px;\n  text-align: center;\n}\n"
+	module.exports = "component .background {\n  position: fixed;\n  z-index: 8;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.8);\n}\ncomponent .foreground {\n  background: white;\n  width: 75%;\n  margin: 5% auto;\n  border-radius: 7px;\n}\ncomponent .foreground .modalChild {\n  max-height: 80%;\n  overflow-y: scroll;\n}\ncomponent .foreground .modalNav {\n  background: #DCF2F9;\n  border-top: solid 1px black;\n  border-radius: 0 0 7px 7px;\n  margin-top: 10px;\n  padding: 3px;\n  text-align: center;\n}\ncomponent .foreground .modalNav .buttonContainer {\n  width: 50%;\n  margin: 0;\n  padding: 0;\n  display: inline-block;\n}\ncomponent .foreground .modalNav .buttonContainer button {\n  width: 100px;\n  text-align: center;\n}\n"
 
 /***/ },
-/* 456 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49030,15 +49320,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _CurrentTeamView = __webpack_require__(457);
+	var _StatusView = __webpack_require__(506);
 
-	var _CurrentTeamView2 = _interopRequireDefault(_CurrentTeamView);
+	var _StatusView2 = _interopRequireDefault(_StatusView);
 
-	exports['default'] = _CurrentTeamView2['default'];
+	exports['default'] = _StatusView2['default'];
 	module.exports = exports['default'];
 
 /***/ },
-/* 457 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49057,58 +49347,133 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _draftModalNames = __webpack_require__(432);
+	var _draftModalNames = __webpack_require__(478);
 
 	var _draftModalNames2 = _interopRequireDefault(_draftModalNames);
 
-	var _stylesRawLess = __webpack_require__(458);
+	var _draftUtils = __webpack_require__(390);
+
+	var _draftUtils2 = _interopRequireDefault(_draftUtils);
+
+	var _stylesRawLess = __webpack_require__(507);
 
 	var _stylesRawLess2 = _interopRequireDefault(_stylesRawLess);
 
 	exports['default'] = _react2['default'].createClass({
-	  displayName: 'CurrentTeamView',
+	  displayName: 'StatusView',
 
 	  propTypes: {
 	    team: _react2['default'].PropTypes.object,
+	    status: _react2['default'].PropTypes.object.isRequired,
+	    columns: _react2['default'].PropTypes.array.isRequired,
 	    viewModal: _react2['default'].PropTypes.func.isRequired
 	  },
 
 	  clickHandler: function clickHandler(event) {
-	    this.props.viewModal(_draftModalNames2['default'].chooseCurrentTeam);
+	    this.props.viewModal(_draftModalNames2['default'].chooseViewTeam);
+	  },
+
+	  getDraftOrder: function getDraftOrder() {
+	    return _react2['default'].createElement(
+	      'div',
+	      { className: 'draftOrders' },
+	      _react2['default'].createElement(
+	        'div',
+	        { className: 'draftOrdersInner' },
+	        _react2['default'].createElement(
+	          'h5',
+	          null,
+	          'Draft Order'
+	        ),
+	        this.props.status.draftOrder.map(function (team, index) {
+	          return _react2['default'].createElement(
+	            'div',
+	            {
+	              className: ["draftOrder", 'do' + index].join(' '),
+	              key: index },
+	            _react2['default'].createElement(
+	              'div',
+	              { className: 'draftOrderInner', style: { borderBottomColor: team.color } },
+	              team.name
+	            )
+	          );
+	        })
+	      )
+	    );
+	  },
+
+	  getChooseTeamLink: function getChooseTeamLink() {
+	    return _react2['default'].createElement(
+	      'div',
+	      { className: 'controls' },
+	      _react2['default'].createElement(
+	        'div',
+	        { className: 'link', onClick: this.clickHandler },
+	        'Select Team'
+	      )
+	    );
+	  },
+
+	  getPlayersOfGender: function getPlayersOfGender(gender) {
+	    var _this = this;
+
+	    return this.props.team.players.filter(function (player) {
+	      return _draftUtils2['default'].getGender(player, _this.props.columns) == gender;
+	    }).length;
+	  },
+
+	  getTeamSummary: function getTeamSummary() {
+	    var team = this.props.team;
+
+	    if (!team) {
+	      return null;
+	    }
+	    return _react2['default'].createElement(
+	      'div',
+	      { className: 'teamSummary', style: { borderColor: team.color } },
+	      _react2['default'].createElement(
+	        'div',
+	        { className: 'teamName' },
+	        team.name
+	      ),
+	      _react2['default'].createElement(
+	        'div',
+	        { className: 'teamDrafts' },
+	        team.players.length,
+	        ' Players'
+	      ),
+	      _react2['default'].createElement(
+	        'div',
+	        { className: 'teamGenders' },
+	        '(',
+	        this.getPlayersOfGender('M'),
+	        ' M /',
+	        this.getPlayersOfGender('F'),
+	        ' F )'
+	      )
+	    );
 	  },
 
 	  render: function render() {
 	    return _react2['default'].createElement(
 	      _reactInlineCss2['default'],
 	      { componentName: 'component', stylesheet: _stylesRawLess2['default'] },
-	      _react2['default'].createElement(
-	        'div',
-	        { className: 'team' },
-	        this.props.team && 'Your Team: ' + this.props.team.name,
-	        !this.props.team && 'Which team do you captain?'
-	      ),
-	      _react2['default'].createElement(
-	        'div',
-	        { className: 'controls' },
-	        _react2['default'].createElement(
-	          'div',
-	          { className: 'link', onClick: this.clickHandler },
-	          'Select Team'
-	        )
-	      )
+	      this.getChooseTeamLink(),
+	      this.getTeamSummary(),
+	      this.getDraftOrder()
 	    );
 	  }
 	});
 	module.exports = exports['default'];
 
 /***/ },
-/* 458 */
+/* 507 */
 /***/ function(module, exports) {
 
-	module.exports = "component .link {\n  display: inline-block;\n  color: black;\n  font-size: 12px;\n  margin-left: 25px;\n}\n"
+	module.exports = "component {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: 100px;\n  background: #fff;\n  border: solid 2px #666;\n  border-bottom: none;\n  box-shadow: 0 -3px 3px #ccc;\n  width: 100%;\n  text-align: left;\n}\ncomponent .draftOrders {\n  overflow-x: hidden;\n  background: #eee;\n  clear: both;\n}\ncomponent .draftOrders .draftOrdersInner {\n  width: 5000px;\n  height: 46px;\n  text-align: left;\n}\ncomponent .draftOrders .draftOrdersInner h5 {\n  display: inline-block;\n  font-size: 12px;\n  margin: 5px 0 0 0;\n  padding: 0;\n}\ncomponent .draftOrders .draftOrdersInner h5:after {\n  content: '\\2192';\n}\ncomponent .draftOrders .draftOrdersInner .draftOrder {\n  display: inline-block;\n  margin: 0;\n  text-align: center;\n  font-size: 14px;\n  border: solid 3px rgba(0, 0, 0, 0);\n}\ncomponent .draftOrders .draftOrdersInner .draftOrder.do0 {\n  border: solid 3px #000;\n}\ncomponent .draftOrders .draftOrdersInner .draftOrder .draftOrderInner {\n  width: 150px;\n  margin: 0 1px;\n  display: inline-block;\n  border-bottom: solid 12px rgba(0, 0, 0, 0);\n}\ncomponent .controls {\n  float: left;\n  margin-top: 10px;\n}\ncomponent .controls .link {\n  display: inline-block;\n  color: black;\n  font-size: 14px;\n  margin-left: 25px;\n  border: solid 1px #999;\n  background: #ccc;\n  width: 100px;\n  text-align: center;\n}\ncomponent .teamSummary {\n  margin-left: 150px;\n  padding: 5px;\n  border-top: solid 10px rgba(0, 0, 0, 0);\n  border-bottom: solid 10px rgba(0, 0, 0, 0);\n}\ncomponent .teamSummary .teamName {\n  display: inline-block;\n  background: rgba(255, 255, 255, 0.7);\n  width: 200px;\n  overflow: hidden;\n}\ncomponent .teamSummary .teamDrafts {\n  display: inline-block;\n  background: rgba(255, 255, 255, 0.7);\n}\ncomponent .teamSummary .teamGenders {\n  display: inline-block;\n  background: rgba(255, 255, 255, 0.7);\n}\n"
 
 /***/ },
-/* 459 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49119,7 +49484,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _Players = __webpack_require__(460);
+	var _Players = __webpack_require__(509);
 
 	var _Players2 = _interopRequireDefault(_Players);
 
@@ -49127,7 +49492,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 460 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49146,15 +49511,15 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _draftModalNames = __webpack_require__(432);
+	var _draftModalNames = __webpack_require__(478);
 
 	var _draftModalNames2 = _interopRequireDefault(_draftModalNames);
 
-	var _PlayerTable = __webpack_require__(391);
+	var _PlayerTable = __webpack_require__(388);
 
 	var _PlayerTable2 = _interopRequireDefault(_PlayerTable);
 
-	var _styles = __webpack_require__(461);
+	var _styles = __webpack_require__(510);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -49162,11 +49527,12 @@
 	  displayName: 'Players',
 
 	  propTypes: {
-	    currentTeam: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.string]).isRequired,
+	    viewTeam: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.string]).isRequired,
 	    rowFilters: _react2['default'].PropTypes.object.isRequired,
 	    players: _react2['default'].PropTypes.array.isRequired,
 	    viewModal: _react2['default'].PropTypes.func.isRequired,
-	    drafts: _react2['default'].PropTypes.array.isRequired
+	    drafts: _react2['default'].PropTypes.array.isRequired,
+	    status: _react2['default'].PropTypes.object.isRequired
 	  },
 
 	  modalClickHandler: function modalClickHandler(name) {
@@ -49176,7 +49542,7 @@
 	  },
 
 	  draftPlayerHandler: function draftPlayerHandler(playerId) {
-	    var teamId = this.props.currentTeam;
+	    var teamId = this.props.status.draftOrder[0].id;
 	    this.modalClickHandler(_draftModalNames2['default'].draftPlayer, { playerId: playerId, teamId: teamId });
 	  },
 
@@ -49223,13 +49589,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 461 */
+/* 510 */
 /***/ function(module, exports) {
 
 	module.exports = "component .configs {\n  text-align: center;\n}\ncomponent .configs .modalLink {\n  font-size: 14px;\n  margin-right: 10px;\n}\n"
 
 /***/ },
-/* 462 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49240,7 +49606,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _Teams = __webpack_require__(463);
+	var _Teams = __webpack_require__(512);
 
 	var _Teams2 = _interopRequireDefault(_Teams);
 
@@ -49248,7 +49614,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 463 */
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49267,20 +49633,85 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _PlayerTable = __webpack_require__(391);
+	var _TeamTable = __webpack_require__(513);
 
-	var _PlayerTable2 = _interopRequireDefault(_PlayerTable);
+	var _TeamTable2 = _interopRequireDefault(_TeamTable);
 
-	var _draftModalNames = __webpack_require__(432);
+	var _draftModalNames = __webpack_require__(478);
 
 	var _draftModalNames2 = _interopRequireDefault(_draftModalNames);
 
-	var _styles = __webpack_require__(464);
+	var _styles = __webpack_require__(516);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
 	exports['default'] = _react2['default'].createClass({
 	  displayName: 'Teams',
+
+	  propTypes: {
+	    teams: _react2['default'].PropTypes.array.isRequired,
+	    columns: _react2['default'].PropTypes.array.isRequired
+	  },
+
+	  render: function render() {
+	    return _react2['default'].createElement(
+	      _reactInlineCss2['default'],
+	      { componentName: 'component', stylesheet: _styles2['default'] },
+	      _react2['default'].createElement(_TeamTable2['default'], { teams: this.props.teams, columns: this.props.columns })
+	    );
+	  }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 513 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _TeamTable = __webpack_require__(514);
+
+	var _TeamTable2 = _interopRequireDefault(_TeamTable);
+
+	exports['default'] = _TeamTable2['default'];
+	module.exports = exports['default'];
+
+/***/ },
+/* 514 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(146);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactInlineCss = __webpack_require__(195);
+
+	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
+
+	var _PlayerTable = __webpack_require__(388);
+
+	var _PlayerTable2 = _interopRequireDefault(_PlayerTable);
+
+	var _styles = __webpack_require__(515);
+
+	var _styles2 = _interopRequireDefault(_styles);
+
+	exports['default'] = _react2['default'].createClass({
+	  displayName: 'TeamTable',
 
 	  propTypes: {
 	    teams: _react2['default'].PropTypes.array.isRequired,
@@ -49298,7 +49729,8 @@
 	      ),
 	      _react2['default'].createElement(_PlayerTable2['default'], {
 	        players: team.players,
-	        columns: this.props.columns })
+	        columns: this.props.columns,
+	        colors: false })
 	    );
 	  },
 
@@ -49325,13 +49757,19 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 464 */
+/* 515 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 465 */
+/* 516 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49342,7 +49780,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _History = __webpack_require__(466);
+	var _History = __webpack_require__(518);
 
 	var _History2 = _interopRequireDefault(_History);
 
@@ -49350,7 +49788,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 466 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49369,15 +49807,15 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _draftModalNames = __webpack_require__(432);
+	var _draftModalNames = __webpack_require__(478);
 
 	var _draftModalNames2 = _interopRequireDefault(_draftModalNames);
 
-	var _draftUtils = __webpack_require__(393);
+	var _draftUtils = __webpack_require__(390);
 
 	var _draftUtils2 = _interopRequireDefault(_draftUtils);
 
-	var _styles = __webpack_require__(467);
+	var _styles = __webpack_require__(519);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -49395,37 +49833,35 @@
 	  },
 
 	  getPlayer: function getPlayer(draft) {
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: 'player', key: draft.playerId },
-	      'Player #',
-	      draft.playerId
-	    );
+	    return "Player #" + draft.playerId;
 	  },
 
 	  getTeam: function getTeam(draft) {
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: 'team', key: draft.team.id },
-	      draft.team.name
-	    );
+	    return draft.team.name;
 	  },
 
 	  getDraft: function getDraft(draft, index) {
 	    return _react2['default'].createElement(
-	      'div',
+	      'tr',
 	      { className: 'draft', key: index },
 	      _react2['default'].createElement(
-	        'div',
-	        { className: 'info' },
-	        index + 1,
-	        '. ',
-	        this.getTeam(draft),
-	        ' drafts ',
+	        'td',
+	        { className: 'index' },
+	        index,
+	        '.'
+	      ),
+	      _react2['default'].createElement(
+	        'td',
+	        { className: 'team' },
+	        this.getTeam(draft)
+	      ),
+	      _react2['default'].createElement(
+	        'td',
+	        { className: 'player' },
 	        this.getPlayer(draft)
 	      ),
 	      _react2['default'].createElement(
-	        'div',
+	        'td',
 	        { className: 'controls' },
 	        _react2['default'].createElement(
 	          'div',
@@ -49442,11 +49878,43 @@
 	    var _this = this;
 
 	    return _react2['default'].createElement(
-	      'div',
+	      'table',
 	      { className: 'drafts' },
-	      drafts.map(function (draft, index) {
-	        return _this.getDraft(draft, index);
-	      })
+	      _react2['default'].createElement(
+	        'thead',
+	        null,
+	        _react2['default'].createElement(
+	          'tr',
+	          null,
+	          _react2['default'].createElement(
+	            'td',
+	            null,
+	            '#'
+	          ),
+	          _react2['default'].createElement(
+	            'td',
+	            null,
+	            'Team'
+	          ),
+	          _react2['default'].createElement(
+	            'td',
+	            null,
+	            'Player'
+	          ),
+	          _react2['default'].createElement(
+	            'td',
+	            null,
+	            'Undo'
+	          )
+	        )
+	      ),
+	      _react2['default'].createElement(
+	        'tbody',
+	        null,
+	        drafts.reverse().map(function (draft, index) {
+	          return _this.getDraft(draft, drafts.length - index);
+	        })
+	      )
 	    );
 	  },
 
@@ -49461,13 +49929,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 467 */
+/* 519 */
 /***/ function(module, exports) {
 
-	module.exports = "component .draft {\n  padding: 5px 25px;\n}\ncomponent .draft:hover {\n  background: #ccc;\n}\ncomponent .draft .info {\n  display: inline-block;\n  width: 80%;\n  text-align: left;\n  margin: 0;\n  padding: 0;\n}\ncomponent .draft .info .team,\ncomponent .draft .info .player {\n  display: inline-block;\n}\ncomponent .draft .controls {\n  display: inline-block;\n  width: 20%;\n  margin: 0;\n  padding: 0;\n  text-align: center;\n}\ncomponent .draft .controls .undo {\n  background: #F97171;\n  border: solid 1px black;\n  cursor: pointer;\n  width: 25px;\n  border-radius: 7px;\n}\ncomponent .draft .controls .undo:hover {\n  background: red;\n}\n"
+	module.exports = "component .drafts {\n  width: 100%;\n}\ncomponent .drafts thead td {\n  border-bottom: solid 1px #000;\n  font-weight: solid;\n}\ncomponent .drafts .draft {\n  padding: 5px 25px;\n}\ncomponent .drafts .draft:hover {\n  background: #ccc;\n}\ncomponent .drafts .draft .team,\ncomponent .drafts .draft .player {\n  text-align: left;\n}\ncomponent .drafts .draft .controls {\n  text-align: center;\n}\ncomponent .drafts .draft .controls .undo {\n  background: #F97171;\n  border: solid 1px black;\n  cursor: pointer;\n  width: 25px;\n  border-radius: 7px;\n}\ncomponent .drafts .draft .controls .undo:hover {\n  background: red;\n}\n"
 
 /***/ },
-/* 468 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49478,15 +49946,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _ChooseCurrentTeam = __webpack_require__(469);
+	var _ChooseViewTeam = __webpack_require__(521);
 
-	var _ChooseCurrentTeam2 = _interopRequireDefault(_ChooseCurrentTeam);
+	var _ChooseViewTeam2 = _interopRequireDefault(_ChooseViewTeam);
 
-	exports['default'] = _ChooseCurrentTeam2['default'];
+	exports['default'] = _ChooseViewTeam2['default'];
 	module.exports = exports['default'];
 
 /***/ },
-/* 469 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49505,58 +49973,57 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _draftModalNames = __webpack_require__(432);
+	var _draftModalNames = __webpack_require__(478);
 
 	var _draftModalNames2 = _interopRequireDefault(_draftModalNames);
 
-	var _stylesRawLess = __webpack_require__(470);
+	var _stylesRawLess = __webpack_require__(522);
 
 	var _stylesRawLess2 = _interopRequireDefault(_stylesRawLess);
 
 	exports['default'] = _react2['default'].createClass({
-	  displayName: 'ChooseCurrentTeam',
+	  displayName: 'ChooseViewTeam',
 
 	  propTypes: {
 	    teams: _react2['default'].PropTypes.array.isRequired,
-	    currentTeam: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.string]).isRequired,
-	    updateModal: _react2['default'].PropTypes.func.isRequired
+	    viewTeam: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.string]).isRequired,
+	    updateModal: _react2['default'].PropTypes.func.isRequired,
+	    data: _react2['default'].PropTypes.object
 	  },
 
-	  changeHandler: function changeHandler(event) {
-	    event.preventDefault();
-	    this.props.updateModal(this.getInputs());
+	  validate: function validate(data) {
+	    return this.props.teams.find(function (team) {
+	      return team.id == data.viewTeam;
+	    });
 	  },
 
-	  getInputs: function getInputs() {
-	    var currentTeam = this.refs.teamId.value;
-	    return { currentTeam: currentTeam };
+	  clickHandler: function clickHandler(viewTeam) {
+	    this.props.updateModal({ viewTeam: viewTeam });
 	  },
 
 	  getTeamForm: function getTeamForm() {
-	    var defaultValue = this.props.currentTeam && this.props.currentTeam >= 0 ? this.props.currentTeam : "";
+	    var _this = this;
+
+	    var viewTeam = this.props.data ? this.props.data.viewTeam : this.props.viewTeam;
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: 'teamForm' },
-	      _react2['default'].createElement(
-	        'select',
-	        {
-	          ref: 'teamId',
-	          name: 'teamId',
-	          defaultValue: defaultValue,
-	          onChange: this.changeHandler },
-	        !defaultValue && _react2['default'].createElement(
-	          'option',
-	          { key: 'default', value: "" },
-	          'Choose A Team'
-	        ),
-	        this.props.teams.map(function (team) {
-	          return _react2['default'].createElement(
-	            'option',
-	            { key: team.id, value: team.id },
+	      this.props.teams.map(function (team) {
+	        var selected = viewTeam == team.id ? 'selected' : '';
+	        var className = [selected, 'teamChoice'].join(' ');
+	        return _react2['default'].createElement(
+	          'div',
+	          { key: team.id,
+	            className: className,
+	            onClick: _this.clickHandler.bind(_this, team.id) },
+	          _react2['default'].createElement('div', { className: 'teamColor', style: { background: team.color } }),
+	          _react2['default'].createElement(
+	            'div',
+	            { className: 'teamName' },
 	            team.name
-	          );
-	        })
-	      )
+	          )
+	        );
+	      })
 	    );
 	  },
 
@@ -49576,13 +50043,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 470 */
+/* 522 */
 /***/ function(module, exports) {
 
-	module.exports = ""
+	module.exports = "component {\n  text-align: center;\n}\ncomponent .teamChoice {\n  width: 80%;\n  margin: 4px auto;\n  padding: 5px;\n  border: solid 1px #ddd;\n  background: white;\n  box-shadow: 2px 2px 3px #666;\n  cursor: pointer;\n}\ncomponent .teamChoice .teamColor {\n  display: inline-block;\n  width: 15px;\n  height: 15px;\n  border-radius: 3px;\n  border: solid 1px #000;\n  margin: 0px 10px;\n}\ncomponent .teamChoice .teamName {\n  display: inline-block;\n}\ncomponent .teamChoice.selected {\n  background: #9BC0C6;\n  border: solid 1px #000;\n}\ncomponent .teamChoice.selected:hover {\n  background: #9BC0C6;\n}\ncomponent .teamChoice:hover {\n  border: solid 1px #666;\n}\n"
 
 /***/ },
-/* 471 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49593,7 +50060,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _FilterColumns = __webpack_require__(472);
+	var _FilterColumns = __webpack_require__(524);
 
 	var _FilterColumns2 = _interopRequireDefault(_FilterColumns);
 
@@ -49601,7 +50068,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 472 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49622,11 +50089,11 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _PlayerTable = __webpack_require__(391);
+	var _PlayerTable = __webpack_require__(388);
 
 	var _PlayerTable2 = _interopRequireDefault(_PlayerTable);
 
-	var _styles = __webpack_require__(473);
+	var _styles = __webpack_require__(525);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -49705,13 +50172,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 473 */
+/* 525 */
 /***/ function(module, exports) {
 
 	module.exports = "component .options {\n  text-align: center;\n  padding: 0 100px;\n}\ncomponent .options .header {\n  font-weight: bold;\n  border-bottom: solid 2px black;\n}\ncomponent .options .option .columnName {\n  display: inline-block;\n  width: 85%;\n  text-align: left;\n}\ncomponent .options .option .visible {\n  float: right;\n  text-align: center;\n  width: 50px;\n  margin-right: 100px;\n}\ncomponent .options .option:hover {\n  background: #ddd;\n}\n"
 
 /***/ },
-/* 474 */
+/* 526 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49722,7 +50189,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _FilterPlayers = __webpack_require__(475);
+	var _FilterPlayers = __webpack_require__(527);
 
 	var _FilterPlayers2 = _interopRequireDefault(_FilterPlayers);
 
@@ -49730,7 +50197,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 475 */
+/* 527 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49749,11 +50216,11 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _PlayerTable = __webpack_require__(391);
+	var _PlayerTable = __webpack_require__(388);
 
 	var _PlayerTable2 = _interopRequireDefault(_PlayerTable);
 
-	var _styles = __webpack_require__(476);
+	var _styles = __webpack_require__(528);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -49801,7 +50268,7 @@
 	            name: 'viewOtherTeam',
 	            ref: 'viewOtherTeam',
 	            onChange: this.changeHandler,
-	            defaultChecked: !this.props.data.inputs.viewOtherTeam.value })
+	            defaultChecked: !this.props.data.viewOtherTeam })
 	        ),
 	        _react2['default'].createElement(
 	          'div',
@@ -49816,7 +50283,7 @@
 	            name: 'viewYourTeam',
 	            ref: 'viewYourTeam',
 	            onChange: this.changeHandler,
-	            defaultChecked: !this.props.data.inputs.viewYourTeam.value })
+	            defaultChecked: !this.props.data.viewYourTeam })
 	        ),
 	        _react2['default'].createElement(
 	          'div',
@@ -49831,7 +50298,7 @@
 	            name: 'viewUndraftable',
 	            ref: 'viewUndraftable',
 	            onChange: this.changeHandler,
-	            defaultChecked: !this.props.data.inputs.viewUndraftable.value })
+	            defaultChecked: !this.props.data.viewUndraftable })
 	        )
 	      )
 	    );
@@ -49840,13 +50307,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 476 */
+/* 528 */
 /***/ function(module, exports) {
 
 	module.exports = "component .options {\n  text-align: left;\n  padding: 0 100px;\n}\ncomponent .options .option label {\n  display: inline-block;\n  width: 55%;\n}\ncomponent .options .option input {\n  display: inline-block;\n  width: 25%;\n}\n"
 
 /***/ },
-/* 477 */
+/* 529 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49857,7 +50324,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _DraftPlayer = __webpack_require__(478);
+	var _DraftPlayer = __webpack_require__(530);
 
 	var _DraftPlayer2 = _interopRequireDefault(_DraftPlayer);
 
@@ -49865,7 +50332,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 478 */
+/* 530 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49884,11 +50351,19 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _PlayerTable = __webpack_require__(391);
+	var _PlayerTable = __webpack_require__(388);
 
 	var _PlayerTable2 = _interopRequireDefault(_PlayerTable);
 
-	var _styles = __webpack_require__(479);
+	var _PlayerSummary = __webpack_require__(531);
+
+	var _PlayerSummary2 = _interopRequireDefault(_PlayerSummary);
+
+	var _draftUtils = __webpack_require__(390);
+
+	var _draftUtils2 = _interopRequireDefault(_draftUtils);
+
+	var _styles = __webpack_require__(534);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -49899,7 +50374,28 @@
 	    updateModal: _react2['default'].PropTypes.func.isRequired,
 	    data: _react2['default'].PropTypes.object.isRequired,
 	    teams: _react2['default'].PropTypes.array.isRequired,
-	    columns: _react2['default'].PropTypes.array.isRequired
+	    columns: _react2['default'].PropTypes.array.isRequired,
+	    drafts: _react2['default'].PropTypes.array.isRequired,
+	    players: _react2['default'].PropTypes.array.isRequired
+	  },
+
+	  validate: function validate(data) {
+	    return this.validatePlayer(data) && this.validateTeam(data);
+	  },
+
+	  validatePlayer: function validatePlayer(data) {
+	    if (!data.player) {
+	      return false;
+	    }
+
+	    var draftStatus = _draftUtils2['default'].getDraftStatus(data.teamId, data.player, this.props.players, this.props.drafts, this.props.columns);
+	    return !draftStatus.currentTeamUndraftable && !draftStatus.otherTeamsDraft && !draftStatus.otherTeamBaggage && !draftStatus.currentTeamsBaggage && !draftStatus.currenTeamsDraft;
+	  },
+
+	  validateTeam: function validateTeam(data) {
+	    return parseInt(data.teamId) >= 0 && !!this.props.teams.find(function (team) {
+	      return team.id == data.teamId;
+	    });
 	  },
 
 	  getInputs: function getInputs() {
@@ -49914,8 +50410,8 @@
 	  },
 
 	  getPlayerForm: function getPlayerForm() {
-	    var value = this.props.data.inputs.playerId.value;
-	    var className = this.props.data.player ? 'valid' : 'invalid';
+	    var value = this.props.data.playerId;
+	    var className = this.validatePlayer(this.props.data) ? 'valid' : 'invalid';
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: 'playerForm' },
@@ -49931,8 +50427,8 @@
 	  },
 
 	  getTeamForm: function getTeamForm() {
-	    var defaultValue = this.props.data.inputs.teamId.value >= 0 ? this.props.data.inputs.teamId.value : "";
-	    var className = this.props.data.inputs.teamId.valid ? 'valid' : 'invalid';
+	    var defaultValue = this.props.data.teamId >= 0 ? this.props.data.teamId : "";
+	    var className = this.validateTeam(this.props.data) ? 'valid' : 'invalid';
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: 'teamForm' },
@@ -49961,8 +50457,24 @@
 	    );
 	  },
 
-	  getPlayer: function getPlayer() {
-	    return _react2['default'].createElement(_PlayerTable2['default'], { players: [this.props.data.player], columns: this.props.columns });
+	  getPlayerDetail: function getPlayerDetail() {
+	    var players = [this.props.data.player];
+	    if (this.props.data.player.baggage) {
+	      players.push(this.props.data.player.baggage);
+	    }
+	    return _react2['default'].createElement(_PlayerTable2['default'], { players: players, columns: this.props.columns, includeBaggageSummary: false });
+	  },
+
+	  getPlayerSummary: function getPlayerSummary() {
+	    return _react2['default'].createElement(_PlayerSummary2['default'], { player: this.props.data.player, columns: this.props.columns });
+	  },
+
+	  getBaggageSummary: function getBaggageSummary() {
+	    if (!this.props.data.player.baggage) {
+	      return 'No Baggage';
+	    } else {
+	      return _react2['default'].createElement(_PlayerSummary2['default'], { player: this.props.data.player.baggage, columns: this.props.columns });
+	    }
 	  },
 
 	  render: function render() {
@@ -49983,7 +50495,23 @@
 	      _react2['default'].createElement(
 	        'div',
 	        { className: 'playerReview' },
-	        this.getPlayer()
+	        _react2['default'].createElement(
+	          'h5',
+	          null,
+	          'Player Summary'
+	        ),
+	        this.getPlayerSummary(),
+	        _react2['default'].createElement(
+	          'h5',
+	          null,
+	          'Baggage Summary'
+	        ),
+	        this.getBaggageSummary()
+	      ),
+	      _react2['default'].createElement(
+	        'div',
+	        { className: 'playerDetail' },
+	        this.getPlayerDetail()
 	      )
 	    );
 	  }
@@ -49991,13 +50519,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 479 */
-/***/ function(module, exports) {
-
-	module.exports = "component .draftForm {\n  text-align: center;\n}\ncomponent .draftForm .playerForm {\n  display: inline-block;\n  margin-right: 25px;\n}\ncomponent .draftForm .teamForm {\n  display: inline-block;\n}\ncomponent .draftForm .valid {\n  border: solid 2px rgba(0, 0, 0, 0);\n}\ncomponent .draftForm .invalid {\n  border: solid 2px red;\n}\ncomponent .playerReview {\n  margin-top: 15px;\n  background: #ccc;\n}\n"
-
-/***/ },
-/* 480 */
+/* 531 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50008,15 +50530,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _UndraftPlayer = __webpack_require__(481);
+	var _PlayerSummary = __webpack_require__(532);
 
-	var _UndraftPlayer2 = _interopRequireDefault(_UndraftPlayer);
+	var _PlayerSummary2 = _interopRequireDefault(_PlayerSummary);
 
-	exports['default'] = _UndraftPlayer2['default'];
+	exports['default'] = _PlayerSummary2['default'];
 	module.exports = exports['default'];
 
 /***/ },
-/* 481 */
+/* 532 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50035,11 +50557,145 @@
 
 	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
 
-	var _PlayerTable = __webpack_require__(391);
+	var _draftUtils = __webpack_require__(390);
+
+	var _draftUtils2 = _interopRequireDefault(_draftUtils);
+
+	var _styles = __webpack_require__(533);
+
+	var _styles2 = _interopRequireDefault(_styles);
+
+	var _columnTypes = __webpack_require__(393);
+
+	var _columnTypes2 = _interopRequireDefault(_columnTypes);
+
+	exports['default'] = _react2['default'].createClass({
+	  displayName: 'PlayerSummary',
+
+	  propTypes: {
+	    player: _react2['default'].PropTypes.object.isRequired,
+	    columns: _react2['default'].PropTypes.array.isRequired
+	  },
+
+	  getColumns: function getColumns() {
+	    return this.props.columns.filter(function (column) {
+	      return column.summary;
+	    });
+	  },
+
+	  getHeaderRow: function getHeaderRow() {
+
+	    var columns = this.getColumns();
+
+	    return _react2['default'].createElement(
+	      'tr',
+	      null,
+	      columns.map(function (column, index) {
+	        return _react2['default'].createElement(
+	          'td',
+	          {
+	            key: column.name,
+	            className: 'columnHead' },
+	          column.name
+	        );
+	      })
+	    );
+	  },
+
+	  getBodyRow: function getBodyRow() {
+	    var player = this.props.player;
+	    return _react2['default'].createElement(
+	      'tr',
+	      { key: _draftUtils2['default'].getPlayerId(player, this.props.columns) },
+	      this.getColumns().map(function (column) {
+	        return _react2['default'].createElement(
+	          'td',
+	          { key: column.name },
+	          player.data[column.name]
+	        );
+	      })
+	    );
+	  },
+
+	  render: function render() {
+	    return _react2['default'].createElement(
+	      _reactInlineCss2['default'],
+	      { componentName: 'component', stylesheet: _styles2['default'] },
+	      _react2['default'].createElement(
+	        'table',
+	        { className: 'players' },
+	        _react2['default'].createElement(
+	          'thead',
+	          null,
+	          this.getHeaderRow()
+	        ),
+	        _react2['default'].createElement(
+	          'tbody',
+	          null,
+	          this.getBodyRow()
+	        )
+	      )
+	    );
+	  }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 533 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 534 */
+/***/ function(module, exports) {
+
+	module.exports = "component .draftForm {\n  text-align: center;\n}\ncomponent .draftForm .playerForm {\n  display: inline-block;\n  margin-right: 25px;\n}\ncomponent .draftForm .teamForm {\n  display: inline-block;\n}\ncomponent .draftForm .valid {\n  border: solid 2px rgba(0, 0, 0, 0);\n}\ncomponent .draftForm .invalid {\n  border: solid 2px red;\n}\ncomponent .playerDetail {\n  margin-top: 15px;\n}\n"
+
+/***/ },
+/* 535 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _UndraftPlayer = __webpack_require__(536);
+
+	var _UndraftPlayer2 = _interopRequireDefault(_UndraftPlayer);
+
+	exports['default'] = _UndraftPlayer2['default'];
+	module.exports = exports['default'];
+
+/***/ },
+/* 536 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(146);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactInlineCss = __webpack_require__(195);
+
+	var _reactInlineCss2 = _interopRequireDefault(_reactInlineCss);
+
+	var _PlayerTable = __webpack_require__(388);
 
 	var _PlayerTable2 = _interopRequireDefault(_PlayerTable);
 
-	var _styles = __webpack_require__(482);
+	var _styles = __webpack_require__(537);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -50051,16 +50707,20 @@
 	    columns: _react2['default'].PropTypes.array.isRequired
 	  },
 
+	  validate: function validate(data) {
+	    return !!data.player && !!data.team;
+	  },
+
 	  getTeam: function getTeam() {
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: 'teamForm' },
-	      this.props.data.inputs.team.name
+	      this.props.data.team.name
 	    );
 	  },
 
 	  getPlayer: function getPlayer() {
-	    return _react2['default'].createElement(_PlayerTable2['default'], { players: [this.props.data.inputs.player.value], columns: this.props.columns });
+	    return _react2['default'].createElement(_PlayerTable2['default'], { players: [this.props.data.player], columns: this.props.columns, colors: false });
 	  },
 
 	  render: function render() {
@@ -50093,7 +50753,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 482 */
+/* 537 */
 /***/ function(module, exports) {
 
 	module.exports = ""

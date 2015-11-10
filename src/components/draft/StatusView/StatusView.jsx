@@ -21,15 +21,33 @@ export default React.createClass({
   getDraftOrder() {
     return (
       <div className="draftOrders">
+        <div className="draftOrderHeaders">
+          <div className="title">Draft Order</div>
+        </div>
         <div className="draftOrdersInner">
-          <h5>Draft Order</h5>
-          {this.props.status.draftOrder.map((team, index) => {
+          {this.props.status.draftOrder.map((draftOrder, index) => {
+            const current = draftOrder.current ? 'current' : '';
+            const nextUp = draftOrder.next ? 'next' : '';
+            const teamColor = draftOrder.team ? draftOrder.team.color : '';
+            const teamName = draftOrder.team ? draftOrder.team.name : '';
+            const playerId = draftOrder.playerId !== '' ? 'Player ' + draftOrder.playerId : '';
             return (
               <div 
-                className={["draftOrder", 'do' + index].join(' ')}
+                className={["draftOrder", current].join(' ')}
                 key={index}>
-                <div className="draftOrderInner" style={{borderBottomColor: team.color}}>
-                  {team.name}
+                <div className="draftOrderHeader">
+                  {draftOrder.current && (
+                    'Current'
+                  )}
+                  {draftOrder.next && (
+                    'Next Up'
+                  )}
+                </div>
+                <div className="draftOrderTeam" style={{borderBottomColor: teamColor}}>
+                  {teamName}
+                </div>
+                <div className="draftOrderPlayer">
+                  {playerId}
                 </div>
               </div>
             );
@@ -75,9 +93,9 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
+        {this.getDraftOrder()}
         {this.getChooseTeamLink()}
         {this.getTeamSummary()}
-        {this.getDraftOrder()}
       </InlineCss>
     );
   }

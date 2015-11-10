@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {teams} from './base';
+import {teamMap} from './teams';
 import drafts from './drafts';
 
 function getSnakeTeamIndexes(teamCount) {
@@ -9,17 +9,42 @@ function getSnakeTeamIndexes(teamCount) {
   return ret;
 }
 
-const orderedDraftIds = createSelector(drafts, teams, (drafts, teams) => {
-  if(!teams.length) {
+const orderedDraftIds = createSelector(drafts, teamMap, (drafts, teamMap) => {
+  const teamsLength = Object.keys(teamMap).length;
+  if(!teamsLength) {
     return [];
   }
-  const teamIds = getSnakeTeamIndexes(teams.length);
-  const cyclcalIndex = drafts.length % (2 * teams.length);
-  return teamIds.slice(cyclcalIndex).concat(teamIds.slice(0, cyclcalIndex));
+  const teamIds = getSnakeTeamIndexes(teamsLength);
+  const cyclcalIndex = drafts.length % (2 * teamsLength);
+  return teamIds
+    .slice(cyclcalIndex)
+    .concat(teamIds.slice(0, cyclcalIndex))
+    .slice(0, 7)
+    .map(teamId => {
+      return {teamId}
+    });
 });
 
-const draftOrder = createSelector(orderedDraftIds, teams, (drafts, teams) => {
-  return drafts.map(id => teams[id]);
+const emptyDrafts = [0,1,2].map(key => {
+  return {teamId: -1};
+})
+
+const previousDrafts = createSelector(drafts, (drafts) => {
+  return emptyDrafts.concat(drafts).slice(-3);
+});
+
+const draftOrder = createSelector(previousDrafts, orderedDraftIds, teamMap, (prevDrafts, drafts, teams) => {
+
+  drafts.forEach((draft, index) => {
+    draft.current = index === 0;
+    draft.next = index === 1;
+  });
+
+  return prevDrafts.concat(drafts).map(draft => {
+    const playerId = typeof draft.playerId === 'undefined' ? '' : draft.playerId;
+    const team = teams[draft.teamId];
+    return {...draft, team, playerId}
+  });
 });
 
 export default createSelector(draftOrder, (draftOrder) => {

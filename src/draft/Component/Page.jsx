@@ -33,6 +33,7 @@ const Page = React.createClass({
   componentDidMount() {
     this.connectToFirebase()
     document.addEventListener('keydown', this.keyPressHandler);
+    //window.onbeforeunload = () => 'Are you sure you want to leave?';
   },
 
   componenWillUnmount() {
@@ -110,6 +111,12 @@ const Page = React.createClass({
       <Application>
         <InlineCss stylesheet={styles} componentName="container">
 
+        <StatusView 
+            team={this.props.user.team}
+            status={this.props.status}
+            columns={this.props.columns}
+            viewModal={this.props.dispatch.viewModal} />
+
           <TabbedContainer 
               currentTabName={this.props.ui.tab}
               tabClickHandler={this.props.dispatch.tabClick} >
@@ -171,12 +178,6 @@ const Page = React.createClass({
               columns={this.props.columns} />
 
           </ModalContainer>
-
-          <StatusView 
-            team={this.props.user.team}
-            status={this.props.status}
-            columns={this.props.columns}
-            viewModal={this.props.dispatch.viewModal} />
 
           {this.getStatusOverlay()}
 

@@ -1,15 +1,4 @@
 component {
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: #fff;
-  border: solid 2px #666;
-  border-bottom: none;
-  box-shadow: 0 -3px 3px #ccc;
-  width: 100%;
   text-align: left;
 
   .draftOrders {
@@ -17,22 +6,28 @@ component {
     background: #eee;
     clear: both;
 
-    .draftOrdersInner {
-
-      width: 5000px;
-      height: 46px;
+    .draftOrderHeaders {
+      font-size: 12px;
       text-align: left;
 
-      h5 {
-        display: inline-block;
-        font-size: 12px;
-        margin: 5px 0 0 0;
-        padding: 0;
+      .title {
 
         &:after {
           content: '\2192';
         }
       }
+
+      .current {
+        display: inline-block;
+        width: 150px;
+        border-bottom: solid 1px #000;
+      }
+    }
+
+    .draftOrdersInner {
+
+      width: 5000px;
+      height: 65px;
 
       .draftOrder {
         display: inline-block;
@@ -40,13 +35,22 @@ component {
         text-align: center;
         font-size: 14px;
         border: solid 3px rgba(0,0,0,0);
-
-        &.do0 {
-          border: solid 3px #000;
-        }
+        width: 150px;
         
-        .draftOrderInner {
-          width: 150px;
+        .draftOrderTeam {
+          margin: 0 1px;
+          display: inline-block;
+          width: 100%;
+          border-bottom: solid 12px rgba(0,0,0,0);
+        }
+
+        &.current {
+          border-left: solid 3px #000;
+          border-right: solid 3px #000;
+        }
+
+        .draftOrderPlayer {
+          width: 100%;
           margin: 0 1px;
           display: inline-block;
           border-bottom: solid 12px rgba(0,0,0,0);
