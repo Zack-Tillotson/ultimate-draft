@@ -8,7 +8,7 @@ import {baggageId as baggageColumnType} from '../../columnTypes';
 export default React.createClass({
 
   propTypes: {
-    player: React.PropTypes.object.isRequired,
+    player: React.PropTypes.object,
     columns: React.PropTypes.array.isRequired
   },
 
@@ -53,14 +53,21 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        <table className="players">
-          <thead>
-            {this.getHeaderRow()}
-          </thead>
-          <tbody>
-            {this.getBodyRow()}
-          </tbody>
-        </table>
+        {!this.props.player && (
+          <div className="noBaggage">
+            No Baggage
+          </div>
+        )}
+        {this.props.player && (
+          <table className="players">
+            <thead>
+              {this.getHeaderRow()}
+            </thead>
+            <tbody>
+              {this.getBodyRow()}
+            </tbody>
+          </table>
+        )}
       </InlineCss>
     );
   }

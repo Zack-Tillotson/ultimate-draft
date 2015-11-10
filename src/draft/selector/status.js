@@ -25,6 +25,13 @@ const orderedDraftIds = createSelector(drafts, teamMap, (drafts, teamMap) => {
     });
 });
 
+const nextDraft = createSelector(orderedDraftIds, (ids) => {
+  const teamId = ids.length > 0 ? ids[0].teamId : -1;
+  return {
+    teamId
+  }
+})
+
 const previousDrafts = createSelector(drafts, (drafts) => {
   return drafts.slice(-2);
 });
@@ -43,6 +50,6 @@ const draftOrder = createSelector(previousDrafts, orderedDraftIds, teamMap, (pre
   });
 });
 
-export default createSelector(draftOrder, (draftOrder) => {
-  return {draftOrder};
+export default createSelector(draftOrder, nextDraft, (draftOrder, nextDraft) => {
+  return {draftOrder, nextDraft};
 });

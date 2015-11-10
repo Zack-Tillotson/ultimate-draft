@@ -1,4 +1,5 @@
 component {
+  padding: 10px;
 
   .draftForm {
     text-align: center;
@@ -6,24 +7,74 @@ component {
     .playerForm {
       display: inline-block;
       margin-right: 25px;
+
+      input {
+        border: inset 3px #ccc;
+        text-align: right;
+        width: 100px;
+        margin-left: 15px;
+      }
     }
 
     .teamForm {
       display: inline-block;
+
+      .teamInput {
+        border: inset 3px #ccc;
+        text-align: right;
+        display: inline-block;
+        width: 100px;
+        margin-left: 15px;
+        background: #eee;
+      }
+    }
+  }
+
+  .draftErrors {
+    font-size: 15px;
+    color: red;
+  }
+
+  .draftPlayers {
+    margin-top: 15px;
+
+    .draftPlayer {
+      display: inline-block;
+      width: 40%;
     }
 
-    .valid {
-      border: solid 2px rgba(0,0,0,0);
+    .conjugate {
+      display: inline-block;
+      width: 10%;
+      font-size: 18px;
+      color: #999;
     }
 
-    .invalid { 
-      border: solid 2px red;  
-    }
-    
   }
 
   .playerDetail {
     margin-top: 15px;
+    width: 100%;
+    overflow-x: scroll;
+
+    h5 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .playerDetailInner {
+      width: 2500px;
+
+      table {
+        border: inset 3px #ccc;
+        width: 2500px;
+        background: #f5f5f5;
+
+        td {
+          padding: 3px;
+        }
+      }
+    }
   }
   
 }

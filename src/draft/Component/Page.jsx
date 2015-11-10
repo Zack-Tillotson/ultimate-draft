@@ -77,7 +77,7 @@ const Page = React.createClass({
   keyPressHandler(event) {
     switch(event.keyCode) {
       case 68: // d
-        const teamId = this.props.status.draftOrder[0].id;
+        const teamId = this.props.status.nextDraft.teamId;
         this.props.dispatch.viewModal(modalNames.draftPlayer, {playerId: 1, teamId});
         break;
       case 13: // Enter

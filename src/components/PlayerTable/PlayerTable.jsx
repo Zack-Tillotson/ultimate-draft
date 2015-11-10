@@ -15,7 +15,9 @@ export default React.createClass({
     rowFilters: React.PropTypes.object,
     playerClickHandler: React.PropTypes.func,
     colors: React.PropTypes.bool,
-    includeBaggageSummary: React.PropTypes.bool
+    includeBaggageSummary: React.PropTypes.bool,
+    topLegend: React.PropTypes.bool,
+    bottomLegend: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -23,7 +25,9 @@ export default React.createClass({
       filterColumns: false,
       filterRows: false,
       colors: true,
-      includeBaggageSummary: true
+      includeBaggageSummary: true,
+      topLegend: false,
+      bottomLegend: true
     };
   },
 
@@ -218,6 +222,7 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
+        {this.props.colors && this.props.topLegend && this.getColorDescriptions()}
         <table className="players">
           <thead>
             {this.getHeaderRows()}
@@ -226,7 +231,7 @@ export default React.createClass({
             {this.getBodyRows()}
           </tbody>
         </table>
-        {this.props.colors && this.getColorDescriptions()}
+        {this.props.colors && this.props.bottomLegend && this.getColorDescriptions()}
       </InlineCss>
     );
   }

@@ -105,7 +105,7 @@ export default React.createClass({
               <td>Players</td>
               <td>Male</td>
               <td>Female</td>
-              <td>Baggage Vectors</td>
+              <td>Baggage (Vectors)</td>
             </tr>
           </thead>
           <tbody>

@@ -21,7 +21,7 @@ export default React.createClass({
   },
 
   draftPlayerHandler(playerId) {
-    const teamId = this.props.status.draftOrder[0].id;
+    const teamId = this.props.status.nextDraft.teamId;
     this.modalClickHandler(
       modalNames.draftPlayer, 
       {playerId, teamId}
@@ -61,6 +61,8 @@ export default React.createClass({
           columns={this.props.columns}
           filterRows={true}
           rowFilters={this.props.rowFilters}
+          bottomLegend={true}
+          topLegend={true}
           playerClickHandler={this.draftPlayerHandler} />
       </InlineCss>
     );

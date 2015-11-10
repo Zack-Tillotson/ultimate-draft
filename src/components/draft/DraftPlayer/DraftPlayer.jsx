@@ -39,7 +39,7 @@ export default React.createClass({
 
   getInputs() {
     const playerId = this.refs.playerId.value;
-    const teamId = this.refs.teamId.value;
+    const teamId = this.props.data.teamId;
     return {playerId, teamId};
   },
 
@@ -67,32 +67,34 @@ export default React.createClass({
   },
 
   getTeamForm() {
-    const defaultValue = this.props.data.teamId >= 0 ? this.props.data.teamId : "";
-    const className = this.validateTeam(this.props.data) ? 'valid' : 'invalid';
+    const team = this.props.teams.find(team => team.id == this.props.data.teamId);
+    const name = team ? team.name : '';
+    const color = team ? team.color : '';
     return (
       <div className="teamForm">
         Team
-        <select 
-            ref="teamId" 
-            name="teamId"
-            className={className}
-            defaultValue={defaultValue} 
-            onChange={this.changeHandler}>
-            <option key="default" value={""}>Choose A Team</option>
-          {this.props.teams.map(team => (
-            <option key={team.id} value={team.id}>{team.name}</option>
-          ))}
-        </select>
+        <div className="teamInput">
+          <div className="teamColor" style={{backgroundColor: color}}>
+          </div>
+          {name}&nbsp;
+        </div>
       </div>
     );
   },
 
   getPlayerDetail() {
+    if(!this.props.data.player) {
+      return null;
+    }
     const players = [this.props.data.player];
     if(this.props.data.player.baggage) {
       players.push(this.props.data.player.baggage);
     }
-    return <PlayerTable players={players} columns={this.props.columns} includeBaggageSummary={false} />
+    return <PlayerTable 
+      players={players} 
+      columns={this.props.columns} 
+      includeBaggageSummary={false} 
+      colors={false} />
   },
 
   getPlayerSummary() {
@@ -100,11 +102,48 @@ export default React.createClass({
   },
 
   getBaggageSummary() {
-    if(!this.props.data.player.baggage) {
-      return 'No Baggage';
-    } else {
-      return <PlayerSummary player={this.props.data.player.baggage} columns={this.props.columns} />
+    const player = this.props.data.player ? this.props.data.player.baggage : null;
+    return <PlayerSummary player={player} columns={this.props.columns} />
+  },
+
+  getDraftErrors() {
+    const errors = [];
+    if(!this.props.data.player) {
+      errors.push('Enter a valid player ID');
     }
+
+    if(!this.props.data.teamId) {
+      errors.push('You have not selected a team.');
+    }
+
+    if(!errors.length) {
+      if(this.props.data.player.draftStatus.currentTeamUndraftable) {
+        errors.push('This player is not draftable by this team. You have undrafted baggage with' +
+        ' an equal or less vector.');
+      }
+      if(this.props.data.player.draftStatus.otherTeamsDraft) {
+        errors.push('This player is already on another team.');
+      }
+      if(this.props.data.player.draftStatus.otherTeamBaggage) {
+        errors.push('This player is baggaged by a player on another team.');
+      }
+      if(this.props.data.player.baggage) {
+        if(this.props.data.player.baggage.draftStatus.otherTeamsDraft) {
+          errors.push('This player\'s baggage is already on another team.');
+        }
+      }
+    }
+    return (
+      <div className="validationItems">
+        {errors.map(error => {
+          return (
+            <div className="validationItem" key={error}>
+              {error}
+            </div>
+          );
+        })}
+      </div>
+    );
   },
 
   render() {
@@ -115,14 +154,23 @@ export default React.createClass({
           {this.getPlayerForm()}
           {this.getTeamForm()}
         </div>
-        <div className="playerReview">
-          <h5>Player Summary</h5>
-          {this.getPlayerSummary()}
-          <h5>Baggage Summary</h5>
-          {this.getBaggageSummary()}
+        <div className="draftErrors">
+          {this.getDraftErrors()}
+        </div>
+        <div className="draftPlayers">
+          <div className="draftPlayer">
+            {this.getPlayerSummary()}
+          </div>
+          <span className="conjugate">bagagged with</span>
+          <div className="draftPlayer">
+            {this.getBaggageSummary()}
+          </div>
         </div>
         <div className="playerDetail">
-          {this.getPlayerDetail()}
+          <h5>Player Detail</h5>
+          <div className="playerDetailInner">
+            {this.getPlayerDetail()}
+          </div>
         </div>
       </InlineCss>
     );
