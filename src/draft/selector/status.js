@@ -19,7 +19,7 @@ const orderedDraftIds = createSelector(drafts, teamMap, (drafts, teamMap) => {
   return teamIds
     .slice(cyclcalIndex)
     .concat(teamIds.slice(0, cyclcalIndex))
-    .slice(0, 7)
+    .slice(0, 10)
     .map(teamId => {
       return {teamId}
     });

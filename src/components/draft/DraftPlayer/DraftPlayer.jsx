@@ -16,6 +16,10 @@ export default React.createClass({
     players: React.PropTypes.array.isRequired
   },
 
+  onComponentDidMount() {
+    this.refs.playerId.getInputDOMNode().focus();
+  },
+
   validate(data) {
     return this.validatePlayer(data) && this.validateTeam(data);
   },
@@ -29,7 +33,6 @@ export default React.createClass({
     return !draftStatus.currentTeamUndraftable
         && !draftStatus.otherTeamsDraft
         && !draftStatus.otherTeamBaggage
-        && !draftStatus.currentTeamsBaggage
         && !draftStatus.currenTeamsDraft;
   },
 
@@ -58,6 +61,7 @@ export default React.createClass({
           ref="playerId"
           name="playerId" 
           type='text'
+          tabIndex="1"
           className={className}
           defaultValue={value}
           onChange={this.changeHandler}>
@@ -107,28 +111,44 @@ export default React.createClass({
   },
 
   getDraftErrors() {
+
     const errors = [];
+    
     if(!this.props.data.player) {
       errors.push('Enter a valid player ID');
     }
 
-    if(!this.props.data.teamId) {
-      errors.push('You have not selected a team.');
-    }
-
     if(!errors.length) {
-      if(this.props.data.player.draftStatus.currentTeamUndraftable) {
-        errors.push('This player is not draftable by this team. You have undrafted baggage with' +
+
+      const draftStatus = utils.getDraftStatus(
+        this.props.data.teamId, 
+        this.props.data.player, 
+        this.props.players, 
+        this.props.drafts, 
+        this.props.columns
+      );
+
+      if(draftStatus.currentTeamUndraftable) {
+        errors.push('This is an illigal pick. The team has undrafted baggage with' +
         ' an equal or less vector.');
       }
-      if(this.props.data.player.draftStatus.otherTeamsDraft) {
+      if(draftStatus.otherTeamsDraft) {
         errors.push('This player is already on another team.');
       }
       if(this.props.data.player.draftStatus.otherTeamBaggage) {
         errors.push('This player is baggaged by a player on another team.');
       }
       if(this.props.data.player.baggage) {
-        if(this.props.data.player.baggage.draftStatus.otherTeamsDraft) {
+
+        const baggageDraftStatus = utils.getDraftStatus(
+          this.props.data.teamId, 
+          this.props.data.player.baggage, 
+          this.props.players, 
+          this.props.drafts, 
+          this.props.columns
+        );
+
+        if(baggageDraftStatus.otherTeamsDraft) {
           errors.push('This player\'s baggage is already on another team.');
         }
       }

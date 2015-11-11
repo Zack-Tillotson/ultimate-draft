@@ -12,9 +12,15 @@ export default React.createClass({
   getTeam(team) {
     return (
       <div className="team" key={team.id}>
-        <h5>{team.name}</h5>
+        <h5>{team.name} <div className="teamColor" style={{background: team.color}}></div></h5>
+        <h6>Drafted Players</h6>
         <PlayerTable 
           players={team.players}
+          columns={this.props.columns} 
+          colors={false} />
+        <h6>Undrafted Baggage</h6>
+        <PlayerTable 
+          players={team.baggage}
           columns={this.props.columns} 
           colors={false} />
       </div>

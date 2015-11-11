@@ -7,7 +7,7 @@ component {
     min-width: 100%;
 
     thead {
-      tr:last-of-type {
+      tr:last-of-type td {
         border-bottom: solid 2px black;
       }
 
@@ -45,6 +45,20 @@ component {
 
   .baggageColumn {
     position: relative;
+
+    &.first {
+      border-left: inset 3px rgba(150,150,150,.8);
+    }
+
+    &.last {
+      border-right: inset 3px rgba(150,150,150,.8);
+    }
+
+    &.top {
+      border-top: inset 3px rgba(150,150,150,.8);
+      background: #ccc;
+    }
+    
     &:before {
       content: ' ';
       position: absolute;

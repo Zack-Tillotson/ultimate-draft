@@ -1,5 +1,6 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
+import PlayerSummary from '../../PlayerSummary';
 import modalNames from '../../../draft/modalNames';
 import utils from '../../../draft/utils';
 
@@ -17,7 +18,9 @@ export default React.createClass({
   },
 
   getPlayer(draft) {
-    return "Player #" + draft.playerId;
+    return (
+      <PlayerSummary player={draft.player} columns={this.props.columns} />
+    );
   },
 
   getTeam(draft) {

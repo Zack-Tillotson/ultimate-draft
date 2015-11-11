@@ -51,7 +51,8 @@ export default React.createClass({
 
       const bagIdIndex = columns.findIndex(column => column.type == baggageColumnType.name);
       if(bagIdIndex >= 0) {
-        columns.splice(bagIdIndex, 1, ...this.getBaggageSummaryColumns(columns));
+        columns.splice(bagIdIndex, 1);
+        columns = columns.concat(...this.getBaggageSummaryColumns(columns));
       }
     }
 
@@ -60,9 +61,11 @@ export default React.createClass({
   },
 
   getBaggageSummaryColumns(columns) {
-    return columns.filter(column => column.summary).map(column => {
-      return {...column, baggage: true};
-    })
+    return columns
+      .filter(column => column.summary)
+      .map((column, index, ary) => {
+      return {...column, baggage: true, first: index == 0, last: index == ary.length - 1};
+    });
   },
 
   sortColumnHandler(column) {
@@ -88,7 +91,7 @@ export default React.createClass({
       rows.push(
         <tr key="baggage">
           <td colSpan={bagIdIndex}></td>
-          <td className="baggageColumn baggageHeader" colSpan={baggageColumns.length}>Baggage</td>
+          <td className="baggageColumn baggageHeader first last top" colSpan={baggageColumns.length}>Baggage</td>
         </tr>
       );
     }
@@ -100,11 +103,13 @@ export default React.createClass({
           const isSortAsc = this.state.sortDir == 1;
           const columnClassName = isSortColumn ? (isSortAsc ? 'sortAsc' : 'sortDesc') : 'noSort';
           const baggageClassName = column.baggage ? 'baggageColumn' : 'playerColumn';
+          const firstClassName = column.first ? 'first' : '';
+          const lastClassName = column.last ? 'last' : '';
           return (
             <td 
               key={column.name + (column.baggage ? 'bag' : '')} 
               onClick={this.sortColumnHandler.bind(this, index)}
-              className={['columnHead', columnClassName, baggageClassName].join(' ')}>
+              className={['columnHead', columnClassName, baggageClassName, firstClassName, lastClassName].join(' ')}>
               {column.name}
             </td>
           );
@@ -163,8 +168,12 @@ export default React.createClass({
         onClick={this.playerClickHandler.bind(this, utils.getPlayerId(player, this.props.columns))}>
         {this.getColumns().map((column) => {
           const baggageClassName = column.baggage ? 'baggageColumn' : 'playerColumn';
+          const firstClassName = column.first ? 'first' : '';
+          const lastClassName = column.last ? 'last' : '';
           return (
-            <td key={column.name + (column.baggage ? 'bag' : '')} className={baggageClassName}>
+            <td 
+              key={column.name + (column.baggage ? 'bag' : '')} 
+              className={[baggageClassName, firstClassName, lastClassName].join(' ')}>
               {this.getValueOfColumnForPlayer(column, player)}
             </td>
           );
@@ -211,7 +220,7 @@ export default React.createClass({
           <div className="tableColor otherTeam">Another team</div>
           <div className="tableColor drafted">Your team</div>
           <div className="tableColor draftedBaggage">Your team&#39;s undrafted baggage</div>
-          <div className="tableColor undraftable">Currently undraftable*</div>
+          <div className="tableColor undraftable">Illegal Draft</div>
         </div>
       );
     } else {

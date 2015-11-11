@@ -51,10 +51,10 @@ export default React.createClass({
               </div>
               <div className="modalNav">
                 <div className="buttonContainer">
-                  <button onClick={this.cancelHandler}>Cancel</button>
+                  <button tabIndex={99} onClick={this.cancelHandler}>Cancel</button>
                 </div>
                 <div className="buttonContainer">
-                  <button onClick={this.confirmHandler}>Confirm</button>
+                  <button tabIndex={2} onClick={this.confirmHandler}>Confirm</button>
                 </div>
               </div>
             </div>

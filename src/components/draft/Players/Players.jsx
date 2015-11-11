@@ -32,7 +32,7 @@ export default React.createClass({
     const name = modalNames.filterColumns;
     const data = this.props.columns;
     return (
-      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name, data)}>
+      <span className="columnFilters modalLink" onClick={this.modalClickHandler.bind(this, name, data)}>
         {name}
       </span>
     );
@@ -40,10 +40,32 @@ export default React.createClass({
 
   getRowFilterModalLink() {
     const name = modalNames.filterRows;
-    const data = this.props.rowFilters;
+    const {rowFilters} = this.props;
     return (
-      <span className="modalLink" onClick={this.modalClickHandler.bind(this, name, data)}>
-        {name}
+      <span className="rowFilters modalLink" onClick={this.modalClickHandler.bind(this, name, rowFilters)}>
+        <div className="title">
+          Filters
+        </div>
+        <div className="filterIcons">
+          <div className={
+            ['rowFilter', 'otherTeam', rowFilters.viewOtherTeam ? 'unfiltered' : 'filtered'].join(' ')
+          }>
+            Other Team
+            <div className="logo">{rowFilters.viewOtherTeam ? '\u2a09' : '\u2713'}</div>
+          </div>
+          <div className={
+            ['rowFilter', 'yourTeam', rowFilters.viewYourTeam ? 'unfiltered' : 'filtered'].join(' ')
+          }>
+            Your Team
+            <div className="logo">{rowFilters.viewYourTeam ? '\u2a09' : '\u2713'}</div>
+          </div>
+          <div className={
+            ['rowFilter', 'undraftable', rowFilters.viewUndraftable ? 'unfiltered' : 'filtered'].join(' ')
+          }>
+            Illegal Drafts
+            <div className="logo">{rowFilters.viewUndraftable ? '\u2a09' : '\u2713'}</div>
+          </div>
+        </div>
       </span>
     );
   },

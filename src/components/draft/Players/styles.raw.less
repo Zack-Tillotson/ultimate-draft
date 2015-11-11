@@ -1,10 +1,74 @@
 component {
   .configs {
     text-align: center;
+    font-size: 14px;
+    margin-top: 3px;
     
     .modalLink {
-      font-size: 14px;
       margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .title {
+      display: inline-block;
+    }
+
+    .columnFilters {
+      background: #eee;
+      border: solid 1px #ccc;
+      padding: 2px 5px;
+
+      &:hover {
+        background: #aaa;
+      }
+    }
+
+    .rowFilters {
+      display: inline-block;
+      background: #eee;
+      border: solid 1px #ccc;
+      padding: 2px 5px;
+
+      &:hover {
+        background: #aaa;
+      }
+
+      .filterIcons {
+        display: inline-block;
+
+        .rowFilter {
+
+          margin-left: 10px;
+          display: inline-block;
+          border-bottom: solid 2px rgba(0,0,0,.1);
+          text-align: center;
+          padding: 0 10px;
+
+          &.otherTeam {
+            background: #FFD17E;
+          }
+
+          &.yourTeam {
+            background: #AADAFF;
+          }
+
+          &.undraftable {
+            background: #ddd;
+          }
+
+          &.filtered .logo {
+            color: #000;
+          }
+
+          .logo {
+            font-size: 15px;
+            margin-left: 5px;
+            display: inline-block;
+            line-height: 12px;
+            color: #666;
+          }
+        }
+      }
     }
   }
 }

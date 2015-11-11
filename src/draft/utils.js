@@ -67,10 +67,10 @@ export default {
     const teamId = getTeamForPlayer(playerId, drafts)
     const baggageTeamId = getTeamForPlayer(getBaggageId(player, columns), drafts)
 
-    const otherTeamsDraft = teamId ? (teamId != contextTeamId) : false;
-    const otherTeamsBaggage = baggageTeamId ? (baggageTeamId != contextTeamId) : false;
-    const currentTeamsDraft = teamId ? (teamId == contextTeamId) : false;
-    const currentTeamsBaggage = baggageTeamId ? (baggageTeamId == contextTeamId) : false;
+    const otherTeamsDraft = teamId != null ? (teamId != contextTeamId) : false;
+    const otherTeamsBaggage = baggageTeamId != null ? (baggageTeamId != contextTeamId) : false;
+    const currentTeamsDraft = teamId != null ? (teamId == contextTeamId) : false;
+    const currentTeamsBaggage = baggageTeamId != null ? (baggageTeamId == contextTeamId) : false;
     const currentTeamUndraftable = !currentTeamsDraft && !currentTeamsBaggage &&
       getCurrentlyUndraftable(playerId, contextTeamId, player, players, columns, drafts);
 

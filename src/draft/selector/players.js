@@ -2,7 +2,7 @@ import {createSelector} from 'reselect';
 import ModalNames from '../modalNames';
 import utils from '../utils';
 
-import {players, ui, drafts, columns, firebase, user, teams} from './base';
+import {players, ui, drafts, user, columns, firebase, teams} from './base';
 
 const playersWithMeta = createSelector(
    players, drafts, user, columns, teams,
