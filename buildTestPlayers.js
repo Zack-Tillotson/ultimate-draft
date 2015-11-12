@@ -26942,7 +26942,7 @@ function getId() {
 }
 
 function getG() {
-  return ['M', 'F'][parseInt(Math.random()) * 2];
+  return ['M', 'F'][parseInt(Math.random() * 2)];
 }
 
 function getFirst() {

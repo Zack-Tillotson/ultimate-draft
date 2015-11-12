@@ -1,7 +1,7 @@
 import Firebase from 'firebase';
 
 const firebaseUrlBase = 'https://diskdraft.firebaseio.com';
-const version = 'v0_1';
+const version = '010';
 
 const alpha = ['A','B','C','D','E','F','G','H','J','K','M','N','P','Q','R','S','T','W','X','Y'];
 const numeric = ['3','4','5','6','7','8','9'];
