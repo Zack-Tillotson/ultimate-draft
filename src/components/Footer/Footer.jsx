@@ -9,14 +9,39 @@ export default React.createClass({
       <InlineCss stylesheet={styles} componentName="container">
         <footer>
           <a href="http://ZacheryTillotson.com">Created by Zack Tillotson</a>
-          Shortcuts:
-          1: Players tab
-          2: Teams tab
-          3: History tab
-          D: Draft form
-          C: Choose team form
-          Enter: Confirm form
-          Esc: Cancel form
+          <div className="shortcuts">
+              Shortcuts
+            <div className="shortcut">
+              <span className="label">1</span>
+              :
+              <span className="desc">Players tab</span>
+            </div>
+            <div className="shortcut">
+              <span className="label">2</span>
+              :
+              <span className="desc">Teams tab</span>
+            </div>
+            <div className="shortcut">
+              <span className="label">3</span>
+              :
+              <span className="desc">History tab</span>
+            </div>
+            <div className="shortcut">
+              <span className="label">D</span>
+              :
+              <span className="desc">Draft form</span>
+            </div>
+            <div className="shortcut">
+              <span className="label">Enter</span>
+              :
+              <span className="desc">Confirm form</span>
+            </div>
+            <div className="shortcut">
+              <span className="label">Esc</span>
+              :
+              <span className="desc">Cancel form</span>
+            </div>
+          </div>
         </footer>
       </InlineCss>
     );

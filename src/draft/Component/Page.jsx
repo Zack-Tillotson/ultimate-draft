@@ -139,6 +139,8 @@ const Page = React.createClass({
               tabName={tabNames.history}
               columns={this.props.columns}
               drafts={this.props.drafts}
+              teams={this.props.teams}
+              players={this.props.players}
               viewModal={this.props.dispatch.viewModal} />
 
           </TabbedContainer>

@@ -9,6 +9,8 @@ import styles from './styles';
 export default React.createClass({
   propTypes: {
     drafts: React.PropTypes.array.isRequired,
+    players: React.PropTypes.array.isRequired,
+    teams: React.PropTypes.array.isRequired,
     columns: React.PropTypes.array.isRequired,
     viewModal: React.PropTypes.func.isRequired,
   },
@@ -17,14 +19,12 @@ export default React.createClass({
     this.props.viewModal(modalNames.undraftPlayer, draft);
   },
 
-  getPlayer(draft) {
-    return (
-      <PlayerSummary player={draft.player} columns={this.props.columns} />
-    );
+  getSummaryColumns() {
+    return this.props.columns.filter(column => column.summary);
   },
 
-  getTeam(draft) {
-    return draft.team.name;
+  getPlayerColumn(player, column) {
+    return player.data[column.name];
   },
 
   getDraft(draft, index) {
@@ -34,11 +34,12 @@ export default React.createClass({
           {index}.
         </td>
         <td className="team">
-          {this.getTeam(draft)}
+          <div className="teamColor" style={{backgroundColor: draft.team.color}}></div>
+          {draft.team.name}
         </td>
-        <td className="player">
-          {this.getPlayer(draft)}
-        </td>
+        {this.getSummaryColumns().map(col => (
+          <td key={col.name}>{this.getPlayerColumn(draft.player, col)}</td>
+        ))}
         <td className="controls">
           <div 
             className="undo"
@@ -55,14 +56,22 @@ export default React.createClass({
       <table className="drafts">
         <thead>
           <tr>
+            <td></td>
+            <td></td>
+            <td colSpan={this.getSummaryColumns().length}>Player</td>
+            <td className="controls"></td>
+          </tr>
+          <tr>
             <td>#</td>
             <td>Team</td>
-            <td>Player</td>
-            <td>Undo</td>
+            {this.getSummaryColumns().map(col => (
+              <td key={col.name}>{col.name}</td>
+            ))}
+            <td className="controls">Undo</td>
           </tr>
         </thead>
         <tbody>
-          {drafts.reverse().map((draft, index) => this.getDraft(draft, drafts.length - index))}
+          {drafts.map((draft, index) => this.getDraft(draft, index + 1  ))}
         </tbody>
       </table>
     );
@@ -71,7 +80,16 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        {this.getDrafts(this.props.drafts)}
+        <div className="stats">
+          Round&nbsp;
+          {parseInt(this.props.drafts.length / this.props.teams.length) + 1}&nbsp;/&nbsp;
+          {parseInt(this.props.players.length / this.props.teams.length) + 1}
+          <br />
+          {this.props.drafts.length} / {this.props.players.length} Players chosen
+        </div>
+        <div className="draftTable">
+          {this.getDrafts(this.props.drafts)}
+        </div>
       </InlineCss>
     );
   }

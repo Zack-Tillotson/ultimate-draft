@@ -7,6 +7,34 @@ container {
     padding: 10px;
     background: #3379A9;
     color: #FBFDFE;
+
+    a:link, a:visited {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        color: #ccc;
+      }
+    }
+
+    .shortcuts {
+      display: inline-block;
+      font-size: 16px;
+      margin-left: 25px;
+
+      .shortcut {
+        display: inline-block;
+        margin-left: 8px;
+        color: rgba(255,255,255,.3);
+
+        .label {
+          color: blue;
+        }
+        .desc {
+          color: white;
+        }
+      }
+    }
   }
 
 }
