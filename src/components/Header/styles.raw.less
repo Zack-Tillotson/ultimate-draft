@@ -4,9 +4,74 @@ container {
   
   header {
     text-align: center;
-    padding: 10px;
-    background: #3379A9;
-    color: #FBFDFE;
+    color: white;
+    height: 40px;
+    position: relative;
+    background: #608cbc;
+    padding: 5px;
+
+    a:link, a:visited {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        color: #ccc;
+      }
+    }
+
+    h1 {
+      margin: 0;
+      padding: 3px 0;
+      position: relative;
+      display: inline-block;
+      width: 200px;
+      font-size: 24px;
+      border-radius: 5px;
+      overflow: hidden;
+
+      .title {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 3px;
+        font-weight: lighter;
+        z-index: 2;
+        text-shadow: 0 0 5px #000;
+        letter-spacing: 8px;
+      }
+
+      .bground {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        z-index: 1;
+
+        &:before {
+          content: ' ';
+          z-index: 1;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 50%;
+          right: 0;
+          background-color: #0D3D64;
+        }
+
+        &:after {
+          content: ' ';
+          z-index: 2;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 50%;
+          background-color: #4E7397;
+        }
+      }
+    }
   }
 
   .bottomBorder {

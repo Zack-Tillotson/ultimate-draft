@@ -8,7 +8,11 @@ export default React.createClass({
     return (
       <InlineCss stylesheet={styles} componentName="container">
         <header>
-          Header
+          <h1>
+            &nbsp;
+            <a className="title" href="">discdraft</a>
+            <div className="bground"></div>
+          </h1>
         </header>
         <div className="bottomBorder"> </div>
       </InlineCss>
