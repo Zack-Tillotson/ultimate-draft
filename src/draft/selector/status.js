@@ -4,8 +4,10 @@ import drafts from './drafts';
 
 function getSnakeTeamIndexes(teamCount) {
   const ret = [];
-  for(let i = 0 ; i < teamCount ; i++) ret.push(i);
-  for(let i = 0 ; i < teamCount ; i++) ret.push(teamCount - 1 - i);
+  while(ret.length < 10) {
+    for(let i = 0 ; i < teamCount ; i++) ret.push(i);
+    for(let i = 0 ; i < teamCount ; i++) ret.push(teamCount - 1 - i);
+  }
   return ret;
 }
 
