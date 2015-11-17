@@ -1,6 +1,7 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
 import { connect } from 'react-redux';
+import {PulseLoader} from 'halogen';
 
 import Utils from '../utils';
 import Firebase from '../../firebase';
@@ -66,7 +67,10 @@ const Page = React.createClass({
     } else if(!this.props.firebase.connected && !this.props.ui.error) {
       return (
         <div className="error">
-          <div className="spinner">Loading draft, please wait!</div>
+          <div className="spinner">
+            Connecting to database
+          </div>
+          <PulseLoader className="animatee" color="#999" />
         </div>
       );
     } else {
