@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 import columnTypes from '../../../columnTypes';
-import {id, baggageId, vector, height, number, bool} from '../../../columnTypes';
+import {id, baggageId, vector, height, gender, number, bool} from '../../../columnTypes';
 import papaparse from 'papaparse';
 
 function guessColumnType(name) {
@@ -34,6 +34,9 @@ function guessColumnType(name) {
     case 'anti mark':
     case 'wind':
       return bool.name;
+    case 'g':
+    case 'gender':
+      return gender.name;
     default:
       return columnTypes[0].name;
   }
@@ -79,6 +82,7 @@ function guessColumnSummary(name) {
     case 'id':
     case 'g':
     case 'full':
+    case 'vec':
     case 'vector':
       return true;
     default:

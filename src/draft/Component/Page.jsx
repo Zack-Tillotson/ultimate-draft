@@ -16,6 +16,7 @@ import Application from '../../components/Application';
 import TabbedContainer from '../../components/TabbedContainer';
 import ModalContainer from '../../components/ModalContainer';
 import StatusView from '../../components/draft/StatusView';
+import DraftNotifications from '../../components/draft/DraftNotifications';
 
 // Tabs
 import Players from '../../components/draft/Players'
@@ -83,6 +84,9 @@ const Page = React.createClass({
       case 68: // d
         const teamId = this.props.status.nextDraft.teamId;
         this.props.dispatch.viewModal(modalNames.draftPlayer, {playerId: 1, teamId});
+        break;
+      case 67: // c
+        this.props.dispatch.viewModal(modalNames.chooseViewTeam);
         break;
       case 13: // Enter
         this.refs.modals.confirmHandler(event);
@@ -186,6 +190,12 @@ const Page = React.createClass({
           </ModalContainer>
 
           {this.getStatusOverlay()}
+
+          <DraftNotifications
+            drafts={this.props.drafts}
+            teams={this.props.teams}
+            user={this.props.user}
+            status={this.props.status} />
 
         </InlineCss>
       </Application>

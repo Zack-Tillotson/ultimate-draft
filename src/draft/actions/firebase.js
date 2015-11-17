@@ -43,7 +43,9 @@ function putDraft(dispatch, data) {
         currentData = Object.keys(currentData).sort().map(key => currentData[key]);
       }
 
-      currentData.push({teamId, playerId});
+      const timestamp = Date.now();
+
+      currentData.push({teamId, playerId, timestamp});
 
       return currentData;
 

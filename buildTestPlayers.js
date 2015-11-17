@@ -27066,8 +27066,8 @@ function baggagePlayers(players) {
   players[secondI][6] = players[firstI][1];
 }
 
-var playerCount = 175;
-var baggageCount = 65;
+var playerCount = 20;
+var baggageCount = 6;
 
 var players = [];
 for(var i = 0 ; i < playerCount ; i++) {
