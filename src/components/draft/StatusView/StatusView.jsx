@@ -75,7 +75,7 @@ export default React.createClass({
           {this.props.team && 'Change Team'}
         </div>
         {!this.props.team && (
-          <div className="explanation">Selecting a team lets you see which players are available for your team.</div>
+          <div className="explanation">See which players are available to draft for your team.</div>
         )}
       </div>
     );

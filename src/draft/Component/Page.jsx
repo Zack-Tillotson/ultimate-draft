@@ -119,7 +119,8 @@ const Page = React.createClass({
       <Application>
         <InlineCss stylesheet={styles} componentName="container">
 
-        <StatusView 
+        
+          <StatusView 
             team={this.props.user.team}
             status={this.props.status}
             columns={this.props.columns}
@@ -197,7 +198,7 @@ const Page = React.createClass({
             user={this.props.user}
             status={this.props.status} />
 
-        </InlineCss>
+         </InlineCss>
       </Application>
     );
   }

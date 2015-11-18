@@ -1,16 +1,6 @@
-@keyframes changeBackground {
-  from {
-    background-color: #DCF2F9;
-  }
-
-  to {
-    background-color: #9BC0C6;
-  }
-}
-
 component {
   text-align: left;
-  margin-bottom: 10px;
+  margin: 0 10px 10px 10px;
 
   .draftOrders {
     overflow-x: hidden;
@@ -81,19 +71,6 @@ component {
       width: 100%;
       text-align: center;
       margin: 25px 0;
-
-      .link {
-        background-color: #DCF2F9;
-        animation-duration: 1.3s;
-        animation-name: changeBackground;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-        color: black;
-        border: solid 1px #999;
-        border-radius: 5px;
-        text-decoration: none;
-        width: 75%;
-      }
     }
 
     &.hasTeam {

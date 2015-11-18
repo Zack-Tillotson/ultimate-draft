@@ -56,8 +56,11 @@ export default React.createClass({
     const level = 'error';
     const position = 'tc';
     const autoDismiss = 0;
+    const dismissable = false;
 
-    this.refs.notificationSystem.addNotification({uid, title, message, level, position, autoDismiss});
+    this.refs.notificationSystem.addNotification(
+      {uid, title, message, level, position, autoDismiss, dismissable}
+    );
   },
 
   removeYourTeamDraftNotification() {
