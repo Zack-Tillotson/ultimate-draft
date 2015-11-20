@@ -26,7 +26,7 @@ export default React.createClass({
     }
 
     if(nextProps.user.team) {
-      if(nextProps.user.team.id == nextProps.status.nextDraft.teamId) {
+      if(nextProps.user.viewTeam >= 0 && nextProps.user.team.id == nextProps.status.nextDraft.teamId) {
         this.addYourTeamDraftNotification(); 
       } else {
         this.removeYourTeamDraftNotification();

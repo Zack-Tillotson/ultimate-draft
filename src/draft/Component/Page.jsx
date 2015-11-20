@@ -121,7 +121,7 @@ const Page = React.createClass({
 
         
           <StatusView 
-            team={this.props.user.team}
+            user={this.props.user}
             status={this.props.status}
             columns={this.props.columns}
             viewModal={this.props.dispatch.viewModal} />

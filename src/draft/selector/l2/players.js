@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 import utils from '../../utils';
 
-import {players, drafts, user, columns, teams} from '../l0';
+import {players, drafts, user, columns, teams} from '../l1';
 
 const playersWithMeta = createSelector(
    players, drafts, user, columns, teams,

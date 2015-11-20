@@ -14,7 +14,7 @@ export default React.createClass({
   },
 
   validate(data) {
-    return this.props.teams.find(team => team.id == data.viewTeam);
+    return true;
   },
 
   clickHandler(viewTeam) {
@@ -23,8 +23,15 @@ export default React.createClass({
 
   getTeamForm() {
     const viewTeam = this.props.data ? this.props.data.viewTeam : this.props.viewTeam;
+    const adminSelected = viewTeam == -1 ? 'selected' : '';
+    const adminClassName = [adminSelected, 'teamChoice'].join(' ');
     return (
       <div className="teamForm">
+        <div
+          className={adminClassName}
+          onClick={this.clickHandler.bind(this, -1)} >
+          <div className="teamName">Administrator</div>
+        </div>
         {this.props.teams.map(team => {
           const selected = viewTeam == team.id ? 'selected' : '';
           const className = [selected, 'teamChoice'].join(' ');

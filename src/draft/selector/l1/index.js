@@ -2,14 +2,8 @@
 
 import {createSelector} from 'reselect';
 
-import {players, ui, drafts, user, columns, firebase, teams} from '../l0';
-
-import {fullColumns} from './columns';
+import l0 from '../l0';
 import {orderedDraftIds, nextDraft, previousDrafts} from './drafts';
-import {playersWithBaggage, playerMap} from './players';
-import {teamMap} from './teams';
+import {fullColumns} from './columns';
 
-export default {
-  players, ui, drafts, user, columns, firebase, teams, fullColumns, orderedDraftIds, nextDraft, previousDrafts, 
-  playersWithBaggage, playerMap, teamMap
-}
+export default { ...l0, orderedDraftIds, nextDraft, previousDrafts, fullColumns };

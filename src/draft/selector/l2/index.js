@@ -1,18 +1,10 @@
-// Tranformations using level 1 selectors only
+// Tranformations using level 0 selectors only
 
 import {createSelector} from 'reselect';
 
-import {players, ui, drafts, user, columns, firebase, teams, fullColumns, orderedDraftIds, nextDraft, previousDrafts, playersWithBaggage, 
-    playerMap, teamMap} from '../l1';
+import l1 from '../l1';
 
-import {draftsWithTeamsAndPlayers} from './drafts';
-import {userWithData} from './user';
-import {draftOrder, statusWithDraftInfo} from './status';
-import {teamsWithPlayers} from './teams';
-import {uiWithData} from './ui';
+import {playersWithBaggage, playerMap} from './players';
+import {teamMap} from './teams';
 
-
-export default {
-  players, ui, drafts, user, columns, firebase, teams, fullColumns, orderedDraftIds, nextDraft, statusWithDraftInfo, previousDrafts, 
-  playersWithBaggage, playerMap, teamMap, draftsWithTeamsAndPlayers, uiWithData, draftOrder, teamsWithPlayers
-}
+export default { ...l1, playersWithBaggage, playerMap, teamMap };

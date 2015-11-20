@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {previousDrafts, orderedDraftIds, teamMap, nextDraft} from '../l1';
+import {previousDrafts, orderedDraftIds, teamMap, nextDraft} from '../l2';
 
 export const draftOrder = createSelector(previousDrafts, orderedDraftIds, teamMap, (prevDrafts, ids, teams) => {
 

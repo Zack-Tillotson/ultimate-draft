@@ -2,11 +2,11 @@
 
 import {createSelector} from 'reselect';
 import {
-  user, uiWithData, playersWithBaggage, teamsWithPlayers, fullColumns, draftsWithTeamsAndPlayers, firebase, statusWithDraftInfo
-} from './l2';
+  userWithData, uiWithData, playersWithBaggage, teamsWithPlayers, fullColumns, draftsWithTeamsAndPlayers, firebase, statusWithDraftInfo
+} from './l3';
 
 export default createSelector(
-  [user, uiWithData, playersWithBaggage, teamsWithPlayers, fullColumns, draftsWithTeamsAndPlayers, firebase, statusWithDraftInfo],
+  [userWithData, uiWithData, playersWithBaggage, teamsWithPlayers, fullColumns, draftsWithTeamsAndPlayers, firebase, statusWithDraftInfo],
   (user, ui, players, teams, columns, drafts, firebase, status) => {
   return {user, ui, players, teams, columns, drafts, firebase, status};
 });

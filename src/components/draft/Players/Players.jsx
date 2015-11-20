@@ -8,7 +8,6 @@ import styles from './styles';
 export default React.createClass({
 
   propTypes: {
-    viewTeam: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]).isRequired,
     rowFilters: React.PropTypes.object.isRequired,
     players: React.PropTypes.array.isRequired,
     viewModal: React.PropTypes.func.isRequired,

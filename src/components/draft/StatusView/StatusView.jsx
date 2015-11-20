@@ -8,7 +8,7 @@ import styles from './styles.raw.less';
 export default React.createClass({
 
   propTypes: {
-    team: React.PropTypes.object,
+    user: React.PropTypes.object.isRequired,
     status: React.PropTypes.object.isRequired,
     columns: React.PropTypes.array.isRequired,
     viewModal: React.PropTypes.func.isRequired
@@ -67,34 +67,33 @@ export default React.createClass({
   },
 
   getChooseTeamLink() {
-    const hasTeamClass = this.props.team ? 'hasTeam' : 'noTeam';
     return (
-      <div className={["controls", hasTeamClass].join(' ')}>
+      <div className={['controls', 'hasTeam'].join(' ')}>
         <div className="link" onClick={this.clickHandler}>
-          {!this.props.team && 'Select Team'}
-          {this.props.team && 'Change Team'}
+          {!this.props.user.team && 'Select Team'}
+          {this.props.user.team && 'Change Team'}
         </div>
-        {!this.props.team && (
-          <div className="explanation">See which players are available to draft for your team.</div>
-        )}
       </div>
     );
   },
 
   getPlayersOfGender(gender) {
-    return this.props.team.players.filter(player => 
+    return this.props.user.team.players.filter(player => 
       utils.getGender(player, this.props.columns) == gender
     ).length;
   },
 
   getTeamSummary() {
-    const {team} = this.props;
-    if(!team) {
+    if(!this.props.user || !this.props.user.team) {
       return null;
     }
+    const {team} = this.props.user;    
     return (
       <div className="teamSummary">
-        <div className="label">Your Team:</div>
+        <div className="label">
+          {this.props.user.viewTeam >= 0 && 'Your Team:'}
+          {this.props.user.viewTeam < 0 && 'The Current Team:'}
+        </div>
         <div className="teamName">
           <div className="teamColor" style={{background: team.color}} />
           {team.name}
@@ -114,7 +113,7 @@ export default React.createClass({
               <td>{this.getPlayersOfGender('M')}</td>
               <td>{this.getPlayersOfGender('F')}</td>
               <td>
-                {this.props.team.baggage.map(player => 
+                {this.props.user.team.baggage.map(player => 
                   utils.getVector(player, this.props.columns))
                 .sort()
                 .join(', ')
