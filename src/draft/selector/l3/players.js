@@ -1,15 +1,16 @@
 import {createSelector} from 'reselect';
 import utils from '../../utils';
 
-import {players, drafts, user, columns, teams} from '../l1';
+import {players, drafts, columns, teams} from '../l2';
+import {contextTeam} from '../l2';
 
 const playersWithMeta = createSelector(
-   players, drafts, user, columns, teams,
-  (players, drafts, user, columns, teams) => {
+   players, drafts, contextTeam, columns, teams,
+  (players, drafts, contextTeam, columns, teams) => {
     return players.map(player => {
       const draft = drafts.find(draft => draft.playerId == utils.getPlayerId(player, columns));
       const team = !draft ? null : teams.find(team => team.id == draft.teamId);
-      const draftStatus = utils.getDraftStatus(user.viewTeam, player, players, drafts, columns);
+      const draftStatus = utils.getDraftStatus(contextTeam, player, players, drafts, columns);
       return {data: player, draftStatus, team};
     });
 });

@@ -10,10 +10,12 @@ const columnsIm = state => state.columns;
 const draftsIm = state => state.drafts;
 const firebaseIm = state => state.firebase;
 
-export const user = createSelector(userIm, user => user.toJS());
-export const ui = createSelector(uiIm, ui => ui.toJS());
-export const players = createSelector(playersIm, players => players.toJS());
-export const teams = createSelector(teamsIm, teams => teams.toJS());
-export const columns = createSelector(columnsIm, columns => columns.toJS());
-export const drafts = createSelector(draftsIm, drafts => drafts.toJS());
-export const firebase = createSelector(firebaseIm, firebase => firebase.toJS());
+const user = createSelector(userIm, user => user.toJS());
+const ui = createSelector(uiIm, ui => ui.toJS());
+const players = createSelector(playersIm, players => players.toJS());
+const teams = createSelector(teamsIm, teams => teams.toJS());
+const columns = createSelector(columnsIm, columns => columns.toJS());
+const drafts = createSelector(draftsIm, drafts => drafts.toJS());
+const firebase = createSelector(firebaseIm, firebase => firebase.toJS());
+
+export default {user, ui, players, teams, columns, drafts, firebase};

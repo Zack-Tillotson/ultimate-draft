@@ -1,9 +1,13 @@
-// Tranformations using level 1 selectors only
+// Tranformations using lower level selectors only
 
 import {createSelector} from 'reselect';
 
 import l3 from '../l3';
 
-import {userWithData} from './user';
+import {draftsWithTeamsAndPlayers} from './drafts';
+import {draftOrder, statusWithDraftInfo} from './status';
+import {teamsWithPlayers, teamsWithPlayersMap} from './teams';
+import {uiWithData} from './ui';
 
-export default {...l3, userWithData};
+
+export default { ...l3, draftsWithTeamsAndPlayers, draftOrder, statusWithDraftInfo, teamsWithPlayers, teamsWithPlayersMap, uiWithData };

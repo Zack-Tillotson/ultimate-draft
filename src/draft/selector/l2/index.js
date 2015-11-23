@@ -4,7 +4,7 @@ import {createSelector} from 'reselect';
 
 import l1 from '../l1';
 
-import {playersWithBaggage, playerMap} from './players';
 import {teamMap} from './teams';
+import {contextTeam} from './user';
 
-export default { ...l1, playersWithBaggage, playerMap, teamMap };
+export default { ...l1, teamMap, contextTeam };

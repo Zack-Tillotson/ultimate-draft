@@ -3,11 +3,7 @@
 import {createSelector} from 'reselect';
 
 import l2 from '../l2';
-
-import {draftsWithTeamsAndPlayers} from './drafts';
-import {draftOrder, statusWithDraftInfo} from './status';
-import {teamsWithPlayers, teamsWithPlayersMap} from './teams';
-import {uiWithData} from './ui';
+import {playersWithBaggage, playerMap} from './players';
 
 
-export default { ...l2, draftsWithTeamsAndPlayers, draftOrder, statusWithDraftInfo, teamsWithPlayers, teamsWithPlayersMap, uiWithData };
+export default { ...l2, playersWithBaggage, playerMap };

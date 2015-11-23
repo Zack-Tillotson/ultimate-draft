@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 import ModalNames from '../../modalNames';
-import {ui, playerMap} from '../l2';
+import {ui, playerMap} from '../l3';
 
 export const uiWithData = createSelector(ui, playerMap, (ui, playerMap) => {
   const {modalData} = ui;
