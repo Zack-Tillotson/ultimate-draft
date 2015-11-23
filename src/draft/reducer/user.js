@@ -8,9 +8,10 @@ function getInitialState() {
     rowFilters: {
       viewOtherTeam: false,
       viewYourTeam: false,
-      viewUndraftable: false
+      viewUndraftable: true
     },
-    columnFilters: []
+    columnFilters: [],
+    tutorialStep: 1
   });
 }
 
@@ -30,6 +31,13 @@ export default function(state = getInitialState(), action) {
       case modalNames.filterColumns:
         state = state.merge({columnFilters: action.data});
         break;
+    }
+  } else if(action.type === actions.tutorialStep) {
+    if(action.isQuit) {
+      state = state.merge({tutorialStep: 0});
+    } else {
+      const tutorialStep = action.step || (state.get('tutorialStep') + 1) % 5;
+      state = state.merge({tutorialStep});
     }
   }
   return state;

@@ -28,6 +28,12 @@ export default (dispatch) => {
       },
       confirmModal(modalName, data = {}) {
         dispatch(ui.confirmModal(modalName, data));
+      },
+      nextTutorialStep(step) {
+        dispatch(ui.nextTutorialStep(step));
+      },
+      quitTutorial() {
+        dispatch(ui.quitTutorial());
       }
     }
   }

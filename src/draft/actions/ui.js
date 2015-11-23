@@ -28,5 +28,11 @@ export default {
   },
   cancelModal(modalName) {
     return {type: actions.cancelModal, modalName};
+  },
+  nextTutorialStep(step) {
+    return {type: actions.tutorialStep, isQuit: false, step};
+  },
+  quitTutorial() {
+    return {type: actions.tutorialStep, isQuit: true};
   }
 };

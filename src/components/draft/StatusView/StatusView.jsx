@@ -11,7 +11,7 @@ export default React.createClass({
     user: React.PropTypes.object.isRequired,
     status: React.PropTypes.object.isRequired,
     columns: React.PropTypes.array.isRequired,
-    viewModal: React.PropTypes.func.isRequired
+    viewModal: React.PropTypes.func.isRequired,
   },
 
   clickHandler(event) {
@@ -92,7 +92,7 @@ export default React.createClass({
       <div className="teamSummary">
         <div className="label">
           {this.props.user.viewTeam >= 0 && 'Your Team:'}
-          {this.props.user.viewTeam < 0 && 'The Current Team:'}
+          {this.props.user.viewTeam < 0 && 'Team Currently Drafting:'}
         </div>
         <div className="teamName">
           <div className="teamColor" style={{background: team.color}} />

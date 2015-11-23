@@ -7,7 +7,7 @@ import modalNames from '../modalNames';
 function getInitialState() {
   return Immutable.fromJS({
     tab: tabNames.players,
-    modal: modalNames.chooseViewTeam,
+    modal: '',
     error: '',
     modalData: {},
     saving: false

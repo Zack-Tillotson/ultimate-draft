@@ -17,6 +17,7 @@ import TabbedContainer from '../../components/TabbedContainer';
 import ModalContainer from '../../components/ModalContainer';
 import StatusView from '../../components/draft/StatusView';
 import DraftNotifications from '../../components/draft/DraftNotifications';
+import DraftTutorial from '../../components/draft/DraftTutorial';
 
 // Tabs
 import Players from '../../components/draft/Players'
@@ -114,89 +115,118 @@ const Page = React.createClass({
     }
   },
 
+  getStatusView() {
+    return (
+      <StatusView 
+        user={this.props.user}
+        status={this.props.status}
+        columns={this.props.columns}
+        viewModal={this.props.dispatch.viewModal} />
+    );
+  },
+
+  getTabs() {
+    return (
+      <TabbedContainer 
+          currentTabName={this.props.ui.tab}
+          tabClickHandler={this.props.dispatch.tabClick} >
+
+        <Players 
+          tabName={tabNames.players}
+          columns={this.props.columns}
+          players={this.props.players}
+          drafts={this.props.drafts}
+          status={this.props.status}
+          viewModal={this.props.dispatch.viewModal} 
+          viewTeam={this.props.user.viewTeam}
+          rowFilters={this.props.user.rowFilters} />
+        <Teams 
+          tabName={tabNames.teams}
+          columns={this.props.columns}
+          teams={this.props.teams}
+          viewModal={this.props.dispatch.viewModal} />
+        <History 
+          tabName={tabNames.history}
+          columns={this.props.columns}
+          drafts={this.props.drafts}
+          teams={this.props.teams}
+          players={this.props.players}
+          viewModal={this.props.dispatch.viewModal} />
+
+      </TabbedContainer>
+    );
+  },
+
+  getModal() {
+    return (
+      <ModalContainer 
+          ref="modals"
+          currentModalName={this.props.ui.modal}
+          modalData={this.props.ui.modalData}
+          confirmHandler={this.props.dispatch.confirmModal}
+          cancelHandler={this.props.dispatch.cancelModal}>
+
+        <ChooseViewTeam
+          modalName={modalNames.chooseViewTeam}
+          updateModal={this.props.dispatch.updateModal}
+          teams={this.props.teams}
+          data={this.props.ui.modalData}
+          viewTeam={this.props.user.viewTeam} />
+        <FilterColumns 
+          modalName={modalNames.filterColumns}
+          updateModal={this.props.dispatch.updateModal}
+          data={this.props.columns} />
+        <FilterPlayers 
+          modalName={modalNames.filterRows}
+          updateModal={this.props.dispatch.updateModal}
+          data={this.props.ui.modalData} />
+        <DraftPlayer
+          modalName={modalNames.draftPlayer}
+          updateModal={this.props.dispatch.updateModal}
+          data={this.props.ui.modalData} 
+          teams={this.props.teams}
+          players={this.props.players}
+          drafts={this.props.drafts}
+          columns={this.props.columns} />
+        <UndraftPlayer
+          modalName={modalNames.undraftPlayer}
+          data={this.props.ui.modalData}
+          columns={this.props.columns} />
+
+      </ModalContainer>
+    );
+  },
+
+  getNotifications() {
+    return (
+      <DraftNotifications
+        drafts={this.props.drafts}
+        teams={this.props.teams}
+        user={this.props.user}
+        status={this.props.status} />
+    );
+  },
+
+  getTutorial() {
+    return (
+      <DraftTutorial 
+        step={this.props.user.tutorialStep}
+        nextTutorialStep={this.props.dispatch.nextTutorialStep}
+        quitTutorial={this.props.dispatch.quitTutorial} />
+    );
+  },
+
   render() {
     return (
       <Application>
         <InlineCss stylesheet={styles} componentName="container">
 
-        
-          <StatusView 
-            user={this.props.user}
-            status={this.props.status}
-            columns={this.props.columns}
-            viewModal={this.props.dispatch.viewModal} />
-
-          <TabbedContainer 
-              currentTabName={this.props.ui.tab}
-              tabClickHandler={this.props.dispatch.tabClick} >
-
-            <Players 
-              tabName={tabNames.players}
-              columns={this.props.columns}
-              players={this.props.players}
-              drafts={this.props.drafts}
-              status={this.props.status}
-              viewModal={this.props.dispatch.viewModal} 
-              viewTeam={this.props.user.viewTeam}
-              rowFilters={this.props.user.rowFilters} />
-            <Teams 
-              tabName={tabNames.teams}
-              columns={this.props.columns}
-              teams={this.props.teams}
-              viewModal={this.props.dispatch.viewModal} />
-            <History 
-              tabName={tabNames.history}
-              columns={this.props.columns}
-              drafts={this.props.drafts}
-              teams={this.props.teams}
-              players={this.props.players}
-              viewModal={this.props.dispatch.viewModal} />
-
-          </TabbedContainer>
-
-          <ModalContainer 
-              ref="modals"
-              currentModalName={this.props.ui.modal}
-              modalData={this.props.ui.modalData}
-              confirmHandler={this.props.dispatch.confirmModal}
-              cancelHandler={this.props.dispatch.cancelModal}>
-
-            <ChooseViewTeam
-              modalName={modalNames.chooseViewTeam}
-              updateModal={this.props.dispatch.updateModal}
-              teams={this.props.teams}
-              data={this.props.ui.modalData}
-              viewTeam={this.props.user.viewTeam} />
-            <FilterColumns 
-              modalName={modalNames.filterColumns}
-              updateModal={this.props.dispatch.updateModal}
-              data={this.props.columns} />
-            <FilterPlayers 
-              modalName={modalNames.filterRows}
-              updateModal={this.props.dispatch.updateModal}
-              data={this.props.ui.modalData} />
-            <DraftPlayer
-              modalName={modalNames.draftPlayer}
-              updateModal={this.props.dispatch.updateModal}
-              data={this.props.ui.modalData} 
-              teams={this.props.teams}
-              players={this.props.players}
-              drafts={this.props.drafts}
-              columns={this.props.columns} />
-            <UndraftPlayer
-              modalName={modalNames.undraftPlayer}
-              data={this.props.ui.modalData}
-              columns={this.props.columns} />
-
-          </ModalContainer>
-
+          {this.getStatusView()}
+          {this.getTabs()}
+          {this.getModal()}
           {this.getStatusOverlay()}
-
-          <DraftNotifications
-            drafts={this.props.drafts}
-            teams={this.props.teams}
-            user={this.props.user}
-            status={this.props.status} />
+          {this.getNotifications()}
+          {this.getTutorial()}
 
          </InlineCss>
       </Application>

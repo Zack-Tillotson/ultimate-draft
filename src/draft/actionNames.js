@@ -9,7 +9,7 @@ export default {
   cancelModal: 'cancelModal',
   confirmModal: 'confirmModal',
   updateModal: 'updateModal',
-  helpScreen: 'helpScreen',
+  tutorialStep: 'tutorialStep',
   sortPlayers: 'sortPlayers',
   
   firebase: 'firebase',
