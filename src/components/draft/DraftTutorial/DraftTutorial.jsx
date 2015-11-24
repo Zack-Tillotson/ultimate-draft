@@ -13,7 +13,7 @@ export default React.createClass({
 
   tutorialLinkClickHandler(event) {
     if(this.props.step == 0) {
-      this.props.nextTutorialStep(2);
+      this.props.nextTutorialStep();
     } else {
       this.quitClickHandler(event);
     }
@@ -35,50 +35,58 @@ export default React.createClass({
         return '';
       case 1:
         return (
-          <div className="step step1">
-            <h3>Stress free drafting designed for captains like you.</h3>
-            <div className="promoImage"></div>
-            <div className="navLink quit" onClick={this.quitClickHandler}>
-              Get Started
+          <div className="step">
+            <div className="top step1">
             </div>
-            <div className="navLink nextStep" onClick={this.nextStepClickHandler}>
-              Learn More
+            <div className="bottom step1">
+              <h3>Stress free drafting made easy.</h3>
+              <div className="promoImage"></div>
+              <div className="navLink">
+                <span className="nextStep" onClick={this.nextStepClickHandler}>
+                  Learn More
+                </span>
+              </div>
             </div>
           </div>
         );
       case 2:
         return (
-          <div className="step step2">
-            <h3>See the draft order.</h3>
-            <div className="promoImage"></div>
-            <div className="navLink quit" onClick={this.quitClickHandler}>
-              Get Started
+          <div className="step">
+            <div className="top step2">
             </div>
-            <div className="navLink nextStep" onClick={this.nextStepClickHandler}>
-              Learn More
+            <div className="bottom step2">
+              <h3>The team draft order</h3>
+              <div className="navLink">
+                <span className="nextStep" onClick={this.nextStepClickHandler}>
+                  Learn More
+                </span>
+              </div>
             </div>
           </div>
         );
       case 3:
         return (
-          <div className="step step3">
-            <h3>Select your team.</h3>
-            <div className="promoImage"></div>
-            <div className="navLink quit" onClick={this.quitClickHandler}>
-              Get Started
+          <div className="step">
+            <div className="top step3">
             </div>
-            <div className="navLink nextStep" onClick={this.nextStepClickHandler}>
-              Learn More
+            <div className="bottom step3">
+              <h3>Select your team.</h3>
+              <div className="navLink">
+                <span className="nextStep" onClick={this.nextStepClickHandler}>
+                  Learn More
+                </span>
+              </div>
             </div>
           </div>
         );
       case 4:
         return (
-          <div className="step step4">
-            <h3>Choose players, review teams, see the draft history.</h3>
-            <div className="promoImage"></div>
-            <div className="navLink quit" onClick={this.quitClickHandler}>
-              Get Started
+          <div className="step">
+            <div className="top step4">
+              <h3>Click on a player to draft them.</h3>
+              <div className="promoImage"></div>
+            </div>
+            <div className="bottom step4">
             </div>
           </div>
         );
@@ -86,9 +94,12 @@ export default React.createClass({
   },
 
   render() {
+    const inTutorialClass = !!this.props.step ? 'active' : 'inactive';
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        <div className="tutorialLink" onClick={this.tutorialLinkClickHandler}>Help</div>
+        <div className={["tutorialLink", inTutorialClass].join(' ')} onClick={this.tutorialLinkClickHandler}>
+          {!!this.props.step && 'Close'} Help
+        </div>
         {!!this.props.step && (
           <div className="tutorial">
             {this.getCurrentStep()}

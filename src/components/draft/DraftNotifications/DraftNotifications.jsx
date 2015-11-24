@@ -43,7 +43,7 @@ export default React.createClass({
     const message = team.name + ' drafted Player #' + draft.playerId;
     const level = 'info';
     const position = 'bl';
-    const autoDismiss = 5;
+    const autoDismiss = 15;
 
     this.refs.notificationSystem.addNotification({title, message, level, position, autoDismiss});
   },
@@ -54,7 +54,7 @@ export default React.createClass({
     const title = 'Your Turn';
     const message = 'It is your team\'s turn to draft';
     const level = 'error';
-    const position = 'tc';
+    const position = 'bc';
     const autoDismiss = 0;
     const dismissable = false;
 

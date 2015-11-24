@@ -56,6 +56,12 @@ function getCurrentlyUndraftable(playerId, teamId, player, players, columns, dra
 
 export default {
 
+  hasSeenTutorial() {
+    const ret = !!localStorage.getItem('diskdraft:tutorial');
+    localStorage.setItem('diskdraft:tutorial', true);
+    return ret;
+  },
+
   getFirebaseId() {
     const params = QueryString.parse(location.search);
     return params.id;

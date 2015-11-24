@@ -70,8 +70,7 @@ export default React.createClass({
     return (
       <div className={['controls', 'hasTeam'].join(' ')}>
         <div className="link" onClick={this.clickHandler}>
-          {!this.props.user.team && 'Select Team'}
-          {this.props.user.team && 'Change Team'}
+          Select Team
         </div>
       </div>
     );

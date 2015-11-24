@@ -18,6 +18,14 @@ component {
       margin-right: 5px;
     }
 
+    &:hover:before {
+      border-color: #999;
+    }
+
+    &.active:before {
+      content: 'X';
+    }
+
     &:hover {
       color: #999;
     }
@@ -31,41 +39,62 @@ component {
 
     .step {
 
-      background: rgba(13, 61, 101, .95);
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      color: #ddd;
-      transition: top .75s ease-in-out;
-    
-      &.step1 {
+      .top {
+
+        background: rgba(13, 61, 101, .90);
+        position: fixed;
+        left: 0;
+        right: 0;
         top: 73px;
-      }
+        color: #ddd;
+        height: 0;
+        transition: height .55s ease-out;
 
-      &.step2 {
-        top: 175px;
-      }
-
-      &.step3 {
-        top: 260px;
-      }
-
-      &.step4 {
-        top: 600px;
-
-        h3 {
-          top: 0px;
+        &.step3 {
+          height: 98px;
         }
+
+        &.step4 {
+          height: 245px;
+        }
+
+      }
+
+      .bottom {
+
+        background: rgba(13, 61, 101, .90);
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        color: #ddd;
+        transition: top .55s ease-out;
+      
+        &.step1 {
+          top: 73px;
+        }
+
+        &.step2 {
+          top: 175px;
+        }
+
+        &.step3 {
+          top: 260px;
+        }
+
+        &.step4 {
+          top: 100%;
+        }
+
       }
 
       h3 {
         font-weight: normal;
         display: inline-block;
-        width: 300px;
+        width: 500px;
         position: absolute;
         left: 50px;
-        top: 50px;
+        top: 25px;
         font-size: 32px;
       }
 
@@ -73,25 +102,26 @@ component {
         font-weight: normal;
         display: inline-block;
         position: absolute;
-        border-radius: 1px;
-        padding: 3px 50px;
+        text-align: center;
+        bottom: 25px;
+        left: 15px;
+        right: 15px;
 
-        &.quit {
-          background: #ccc;
-          color: #000;
-          top: 25px;
-          left: 40%;
-          font-size: 16px;
-        }
-
-        &.nextStep {
+        .nextStep {
           text-decoration: underline;
-          left: 25px;
-          bottom: 25px;
-          font-size: 24px;
+          display: inline-block;
         }
-      }
 
+        .quit {
+          text-decoration: underline;
+          display: inline-block;
+        }
+
+        .conj {
+          margin: 0 25px;
+          display: inline-block;
+        } 
+      }
     }
   }
 }
