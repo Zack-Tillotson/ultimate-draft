@@ -1,4 +1,5 @@
 component {
+  cursor: pointer;
 
   .tutorialLink {
     position: absolute;
@@ -8,7 +9,6 @@ component {
     width: 150px;
     text-align: center;
     color: #fff;
-    cursor: pointer;
 
     &:before {
       content: '?';
@@ -41,7 +41,7 @@ component {
 
       .top {
 
-        background: rgba(13, 61, 101, .90);
+        background: rgba(13, 61, 101, .98);
         position: fixed;
         left: 0;
         right: 0;
@@ -62,7 +62,7 @@ component {
 
       .bottom {
 
-        background: rgba(13, 61, 101, .90);
+        background: rgba(13, 61, 101, .98);
         position: fixed;
         left: 0;
         right: 0;
@@ -90,37 +90,69 @@ component {
 
       h3 {
         font-weight: normal;
-        display: inline-block;
-        width: 500px;
-        position: absolute;
-        left: 50px;
-        top: 25px;
         font-size: 32px;
+        padding: 0;
+        margin: 25px 50px;
       }
 
       .navLink {
         font-weight: normal;
-        display: inline-block;
-        position: absolute;
         text-align: center;
-        bottom: 25px;
-        left: 15px;
-        right: 15px;
+        font-size: 17px;
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        right: 0;
+      }
 
-        .nextStep {
-          text-decoration: underline;
-          display: inline-block;
+      table.highlights {
+        padding: 25px 150px;
+        color: #ddd;
+        font-size: 25px;
+        text-align: center;
+        width: 100%;
+
+        td {
+          height: 150px;
+          text-align: center;
         }
 
-        .quit {
-          text-decoration: underline;
-          display: inline-block;
+        &.twoWide td {
+          width: 50%;
         }
 
-        .conj {
-          margin: 0 25px;
-          display: inline-block;
-        } 
+        &.threeWide td {
+          width: 33%;
+        }
+      }
+
+      .step4 table td {
+        height: auto;
+      }
+
+      .promoImage {
+        display: inline-block;
+        width: 100%;
+        max-width: 1000px;
+        height: 50%;
+        max-height: 200px;
+        margin: 25px auto 0 auto;
+        background: no-repeat center;
+        background-size: contain;
+      }
+
+      .step1 .promoImage {
+        background-image: url('../assets/happypeople.png');
+      }
+
+      .step2 .promoImage {
+        background-image: url('../assets/snake.png');
+        max-height: 100px;
+      }
+
+      .step3 .promoImage {
+        background-image: url('../assets/flag.png');
+        max-height: 100px;
       }
     }
   }
