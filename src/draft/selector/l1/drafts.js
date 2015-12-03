@@ -1,40 +1,49 @@
 import {createSelector} from 'reselect';
-import {drafts, teams} from '../l0';
+import {drafts, teams, players} from '../l0';
 
-// Return an array of indices in a 'snake' ordering - up to down, then down to up, etc
-function getSnakeTeamIndexes(teamCount, requestedSize = 10) {
-  const ret = [];
-  while(ret.length < requestedSize) {
-    for(let i = 0 ; i < teamCount ; i++) ret.push(i);
-    for(let i = 0 ; i < teamCount ; i++) ret.push(teamCount - 1 - i);
+function getTeamIndexFromDraftIndex(draftIndex, numTeams) {
+  const snakeIndex = draftIndex % (numTeams * 2);
+  if(snakeIndex >= numTeams) {
+    return 2 * numTeams - snakeIndex - 1;
+  } else {
+    return snakeIndex;
   }
-  return ret;
 }
 
-export const orderedDraftIds = createSelector(drafts, teams, (drafts, teams) => {
+function getRoundFromDraftIndex(draftIndex, teamsLength) {
+  return parseInt(draftIndex / teamsLength) + 1;
+}
+
+function isStartOfRoundFromDraftIndex(draftIndex, teamsLength) {
+  return draftIndex % teamsLength === 0;
+}
+
+// This function returns an array containing the current draft order. ie the first
+// item in the array is the currently drafting team, the second item is the next
+// team to draft, etc.
+export const orderedDraftIds = createSelector(drafts, teams, players, (drafts, teams, players) => {
   const teamsLength = teams.length;
   if(!teamsLength) {
     return [];
   }
 
-  const orderSize = 10;
-  const teamIds = getSnakeTeamIndexes(teamsLength, orderSize);
-  const cyclcalIndex = drafts.length % (2 * teamsLength);
-
-  return teamIds
-    .slice(cyclcalIndex)
-    .concat(teamIds.slice(0, cyclcalIndex))
-    .slice(0, orderSize)
-    .map(teamId => {
-      return {teamId}
+  return players
+    .map((player, index) => {
+      const teamId = getTeamIndexFromDraftIndex(index, teamsLength);
+      const round = getRoundFromDraftIndex(index, teamsLength);
+      const startOfRound = isStartOfRoundFromDraftIndex(index, teamsLength);
+      const draftNum = index + 1;
+      return {teamId, round, startOfRound, draftNum}
+    })
+    .slice(drafts.length)
+    .map((draft, index) => {
+      const current = index === 0;
+      const next = index === 1;
+      return {...draft, current, next};
     });
 });
 
 export const nextDraft = createSelector(orderedDraftIds, (ids) => {
   const teamId = ids.length > 0 ? ids[0].teamId : -1;
   return {teamId}
-});
-
-export const previousDrafts = createSelector(drafts, (drafts) => {
-  return drafts.slice(-2);
 });

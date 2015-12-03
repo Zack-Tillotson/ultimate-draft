@@ -30,7 +30,7 @@ export default React.createClass({
         <div
           className={adminClassName}
           onClick={this.clickHandler.bind(this, -1)} >
-          <div className="teamName">Administrator</div>
+          <div className="teamName">Observer</div>
         </div>
         {this.props.teams.map(team => {
           const selected = viewTeam == team.id ? 'selected' : '';

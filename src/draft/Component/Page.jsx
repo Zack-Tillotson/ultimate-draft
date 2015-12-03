@@ -16,6 +16,7 @@ import Application from '../../components/Application';
 import TabbedContainer from '../../components/TabbedContainer';
 import ModalContainer from '../../components/ModalContainer';
 import StatusView from '../../components/draft/StatusView';
+import DraftOrder from '../../components/draft/DraftOrder';
 import DraftNotifications from '../../components/draft/DraftNotifications';
 import DraftTutorial from '../../components/draft/DraftTutorial';
 
@@ -115,13 +116,19 @@ const Page = React.createClass({
     }
   },
 
-  getStatusView() {
+  getTeamStatus() {
     return (
       <StatusView 
         user={this.props.user}
         status={this.props.status}
         columns={this.props.columns}
         viewModal={this.props.dispatch.viewModal} />
+    );
+  },
+
+  getDraftOrder() {
+    return (
+      <DraftOrder status={this.props.status} />
     );
   },
 
@@ -221,7 +228,8 @@ const Page = React.createClass({
       <Application>
         <InlineCss stylesheet={styles} componentName="container">
 
-          {this.getStatusView()}
+          {this.getDraftOrder()}
+          {this.getTeamStatus()}
           {this.getTabs()}
           {this.getModal()}
           {this.getStatusOverlay()}

@@ -54,7 +54,7 @@ export default React.createClass({
     const title = 'Your Turn';
     const message = 'It is your team\'s turn to draft';
     const level = 'error';
-    const position = 'bc';
+    const position = 'tc';
     const autoDismiss = 0;
     const dismissable = false;
 

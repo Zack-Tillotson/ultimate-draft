@@ -18,59 +18,11 @@ export default React.createClass({
     this.props.viewModal(modalNames.chooseViewTeam);
   },
 
-  getDraftOrder() {
-    return (
-      <div className="draftOrders">
-        <div className="draftOrdersInner">
-          <div 
-            className={['draftOrder', 'legend'].join(' ')}>
-            <div className="draftOrderHeader">
-              Draft Order
-            </div>
-            <div className="draftOrderTeam">
-              Team
-            </div>
-            <div className="draftOrderPlayer">
-              Player
-            </div>
-          </div>
-          {this.props.status.draftOrder.map((draftOrder, index) => {
-            const current = draftOrder.current ? 'current' : '';
-            const nextUp = draftOrder.next ? 'next' : '';
-            const teamColor = draftOrder.team ? draftOrder.team.color : '';
-            const teamName = draftOrder.team ? draftOrder.team.name : '';
-            const playerId = draftOrder.playerId !== '' ? 'Player ' + draftOrder.playerId : '';
-            return (
-              <div 
-                className={["draftOrder", current].join(' ')}
-                key={index}>
-                <div className="draftOrderHeader">
-                  {draftOrder.current && (
-                    'Current'
-                  )}
-                  {draftOrder.next && (
-                    'Next Up'
-                  )}&nbsp;
-                </div>
-                <div className="draftOrderTeam" style={{borderBottomColor: teamColor}}>
-                  {teamName}&nbsp;
-                </div>
-                <div className="draftOrderPlayer">
-                  {playerId}&nbsp;
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  },
-
   getChooseTeamLink() {
     return (
       <div className={['controls', 'hasTeam'].join(' ')}>
         <div className="link" onClick={this.clickHandler}>
-          Select Team
+          Select Team View
         </div>
       </div>
     );
@@ -91,7 +43,7 @@ export default React.createClass({
       <div className="teamSummary">
         <div className="label">
           {this.props.user.viewTeam >= 0 && 'Your Team:'}
-          {this.props.user.viewTeam < 0 && 'Team Currently Drafting:'}
+          {this.props.user.viewTeam < 0 && 'Observer Mode:'}
         </div>
         <div className="teamName">
           <div className="teamColor" style={{background: team.color}} />
@@ -128,7 +80,6 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        {this.getDraftOrder()}
         {this.getChooseTeamLink()}
         {this.getTeamSummary()}
       </InlineCss>

@@ -80,13 +80,6 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        <div className="stats">
-          Round&nbsp;
-          {parseInt(this.props.drafts.length / this.props.teams.length) + 1}&nbsp;/&nbsp;
-          {parseInt(this.props.players.length / this.props.teams.length) + 1}
-          <br />
-          {this.props.drafts.length} / {this.props.players.length} Players chosen
-        </div>
         <div className="draftTable">
           {this.getDrafts(this.props.drafts)}
         </div>

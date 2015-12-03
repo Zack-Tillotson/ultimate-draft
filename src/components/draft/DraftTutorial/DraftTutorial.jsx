@@ -39,7 +39,7 @@ export default React.createClass({
             <div className="top step1">
             </div>
             <div className="bottom step1">
-              <h3>Stress free drafting, the way it should be.</h3>
+              <h3>Stress free drafting.</h3>
               <div className="promoImage"></div>
               <table className="highlights threeWide">
                 <tr>
@@ -55,7 +55,7 @@ export default React.createClass({
                 </tr>
               </table>
               <div className="navLink">
-                Click to learn more
+                Click to continue
               </div>
             </div>
           </div>
@@ -79,7 +79,7 @@ export default React.createClass({
                 </tr>
               </table>
               <div className="navLink">
-                Click to learn more
+                Click to continue
               </div>
             </div>
           </div>
@@ -106,7 +106,7 @@ export default React.createClass({
                 </tr>
               </table>
               <div className="navLink">
-                Click to learn more
+                Click to continue
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@ export default React.createClass({
                 </tr>
               </table>
               <div className="navLink">
-                Click to close tutorial
+                Click to continue
               </div>
             </div>
             <div className="bottom step4">

@@ -1,6 +1,5 @@
 container {
-  margin-bottom: 10px;
-  
+
   header {
     text-align: left;
     color: #eee;
@@ -34,6 +33,25 @@ container {
         margin-right: 25px;
         width: 70px;
         height: 35px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  container {
+    header {
+      padding: 3px 5px;
+
+      h1 {
+        font-size: 17px;
+        padding: 0;
+
+        &:before {
+          margin-right: 10px;
+          width: 35px;
+          height: 18px;
+        } 
       }
     }
   }

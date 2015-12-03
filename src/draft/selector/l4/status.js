@@ -1,20 +1,18 @@
 import {createSelector} from 'reselect';
-import {previousDrafts, orderedDraftIds, teamMap, nextDraft} from '../l3';
+import {orderedDraftIds, teamMap, nextDraft, players} from '../l3';
 
-export const draftOrder = createSelector(previousDrafts, orderedDraftIds, teamMap, (prevDrafts, ids, teams) => {
+const draftCount = createSelector(players, (players) => {
+  return players.length;
+});
 
-  ids.forEach((draft, index) => {
-    draft.current = index === 0;
-    draft.next = index === 1;
-  });
-
-  return prevDrafts.concat(ids).map(draft => {
-    const playerId = typeof draft.playerId === 'undefined' ? '' : draft.playerId;
+export const draftOrder = createSelector(orderedDraftIds, teamMap, (drafts, teams) => {
+  return drafts.map(draft => {
     const team = teams[draft.teamId];
-    return {...draft, team, playerId}
+    return {...draft, team};
   });
 });
 
-export const statusWithDraftInfo = createSelector(draftOrder, nextDraft, (draftOrder, nextDraft) => {
-  return {draftOrder, nextDraft};
+export const statusWithDraftInfo = createSelector(draftOrder, nextDraft, draftCount,
+  (draftOrder, nextDraft, draftCount) => {
+  return {draftOrder, nextDraft, draftCount};
 });

@@ -39,8 +39,30 @@ component {
           text-align: center;
         }
       }
-
     }
+  }
+}
 
+@media (max-width: 600px) {
+  component {
+
+    .foreground {
+      height: 90%;
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+      position: absolute;
+      top: 5%;
+
+      .modalChild {
+        max-height: 90%;
+      }
+
+      .modalNav {
+        border-radius: 0;
+        border-top: none;
+        background: #fff;
+      }
+    }
   }
 }
