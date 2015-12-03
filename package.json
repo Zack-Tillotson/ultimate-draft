@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --port 8888 --content-base app/ --inline --display-reasons --display-error-details",
-    "build": "webpack"
+    "build": "webpack -p"
   },
   "author": "",
   "dependencies": {
