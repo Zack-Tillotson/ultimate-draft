@@ -24,7 +24,7 @@ export default React.createClass({
   getTeamForm() {
     const viewTeam = this.props.data ? this.props.data.viewTeam : this.props.viewTeam;
     const adminSelected = viewTeam == -1 ? 'selected' : '';
-    const adminClassName = [adminSelected, 'teamChoice'].join(' ');
+    const adminClassName = [adminSelected, 'teamChoice', 'observer'].join(' ');
     return (
       <div className="teamForm">
         <div
@@ -52,7 +52,7 @@ export default React.createClass({
     return (
       <InlineCss componentName="component" stylesheet={styles}>
         <div className="teams">
-          Which team do you want to draft for?
+          Select Your Team
         </div>
         {this.getTeamForm()}
       </InlineCss>

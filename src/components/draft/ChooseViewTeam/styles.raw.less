@@ -2,39 +2,48 @@ component {
 
   text-align: center;
 
-  .teamChoice {
-    width: 80%;
-    margin: 4px auto;
-    padding: 5px;
-    border: solid 1px #ddd;
-    background: white;
-    box-shadow: 2px 2px 3px #666;
-    cursor: pointer;
+  .teams {
+    font-weight: bold;
+    margin: 15px auto;
+  }
 
-    .teamColor {
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      border-radius: 3px;
-      border: solid 1px #000;
-      margin: 0px 10px;
-    }
+  .teamForm {
 
-    .teamName {
+    .teamChoice {
       display: inline-block;
-    }
-    
-    &.selected {
-      background: #9BC0C6;
-      border: solid 1px #000;
+      width: ~"calc(33% - 50px)";
+      margin: 5px;
+      padding: 15px;
+      border: solid 1px #ddd;
+      background: white;
+      box-shadow: 2px 2px 3px #666;
+      cursor: pointer;
+
+      .teamColor {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 3px;
+        border: solid 1px #000;
+        margin: 0px 10px;
+      }
+
+      .teamName {
+        display: inline-block;
+      }
+
+      &.selected {
+        background: #9BC0C6;
+        border: solid 1px #000;
+
+        &:hover {
+          background: #9BC0C6;
+        }
+      }
 
       &:hover {
-        background: #9BC0C6;
+        border: solid 1px #666;
       }
     }
-
-    &:hover {
-      border: solid 1px #666;
-    }
-  }  
+  }
 }
