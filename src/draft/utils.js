@@ -49,7 +49,7 @@ function getCurrentlyUndraftable(playerId, teamId, player, players, columns, dra
 
   const maxVector = players // Any player...
     .filter(filterPlayer => baggageIds.indexOf(getPlayerId(filterPlayer, columns)) >= 0)
-    .reduce((maxVector, filterPlayer) => Math.max(maxVector, getVector(filterPlayer, columns)), 0);
+    .reduce((maxVector, filterPlayer) => Math.max(maxVector, getVector(filterPlayer, columns)), -1);
 
   return getVector(player, columns) <= maxVector;
 }

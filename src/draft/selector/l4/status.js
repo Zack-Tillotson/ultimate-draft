@@ -1,11 +1,11 @@
 import {createSelector} from 'reselect';
-import {orderedDraftIds, teamMap, nextDraft, players} from '../l3';
+import {draftIdsWithContext, teamMap, nextDraft, players} from '../l3';
 
 const draftCount = createSelector(players, (players) => {
   return players.length;
 });
 
-export const draftOrder = createSelector(orderedDraftIds, teamMap, (drafts, teams) => {
+export const draftOrder = createSelector(draftIdsWithContext, teamMap, (drafts, teams) => {
   return drafts.map(draft => {
     const team = teams[draft.teamId];
     return {...draft, team};

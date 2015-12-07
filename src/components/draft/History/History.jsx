@@ -27,7 +27,7 @@ export default React.createClass({
     return player.data[column.name];
   },
 
-  getDraft(draft, index) {
+  getDraft(draft, index, showUndoButton) {
     return (
       <tr className="draft" key={index}>
         <td className="index">
@@ -41,11 +41,13 @@ export default React.createClass({
           <td key={col.name}>{this.getPlayerColumn(draft.player, col)}</td>
         ))}
         <td className="controls">
-          <div 
-            className="undo"
-            onClick={this.handleUndraftClick.bind(this, draft)}>
-            X
-          </div>
+          {showUndoButton && (
+            <div 
+              className="undo"
+              onClick={this.handleUndraftClick.bind(this, draft)}>
+              X
+            </div>
+          )}
         </td>
       </tr>
     );
@@ -71,7 +73,7 @@ export default React.createClass({
           </tr>
         </thead>
         <tbody>
-          {drafts.map((draft, index) => this.getDraft(draft, index + 1  ))}
+          {drafts.map((draft, index) => this.getDraft(draft, index + 1, index == drafts.length - 1))}
         </tbody>
       </table>
     );

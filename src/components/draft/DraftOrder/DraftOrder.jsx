@@ -24,7 +24,7 @@ export default React.createClass({
   getDraftList() {
     const draftArrayArray = this.getDrafts().map((draftOrder, index) => {
       const currentClass = draftOrder.current ? 'current' : '';
-      const teamColor = draftOrder.team.color;
+      const teamColor = draftOrder.contextActive ? draftOrder.team.color : '#eee';
       const teamName = draftOrder.team.name;
       const draftNum = draftOrder.draftNum;
 
@@ -32,7 +32,7 @@ export default React.createClass({
 
       if(draftOrder.startOfRound && !draftOrder.current) {
         retArray.push(
-          <td className="roundSep">Round {draftOrder.round}</td>
+          <td key={"round" + draftOrder.round} className="roundSep">Round {draftOrder.round}</td>
         );
       }
       retArray.push(
