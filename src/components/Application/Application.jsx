@@ -6,6 +6,16 @@ import styles from './styles';
 
 export default React.createClass({
 
+  propTypes: {
+    footer: React.PropTypes.bool
+  },
+
+  getDefaultProps() {
+    return {
+      footer: true
+    };
+  },
+
   getChildren() {
     return this.props.children;
   },
@@ -15,7 +25,7 @@ export default React.createClass({
       <InlineCss stylesheet={styles} componentName="container">
         <Header />
         {this.getChildren()}
-        <Footer />
+        {this.props.footer && (<Footer />)}
       </InlineCss>
     );
   }

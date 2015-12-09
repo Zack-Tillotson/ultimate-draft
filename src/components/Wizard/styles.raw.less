@@ -1,0 +1,46 @@
+component {
+
+  .formNav {
+    margin: 15px 0;
+
+    .step {
+      display: inline-block;
+
+      .stepTransition {
+        display: inline-block;
+        width: 100px;
+        background: #ccc;
+        height: 5px;
+      }
+
+      .stepPoint {
+        border: solid 2px #ccc;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50px;
+        background: #ccc;
+        color: #eee;
+        font-size: 12px;
+      }
+
+      &.active {
+
+        .stepTransition {
+          background: #0D3D65;
+        }
+
+        .stepPoint {
+          border-color: #0D3D65;
+          background: #0D3D65;
+          color: #fff;
+        }
+      }
+    }
+
+    .formNavTitle {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+  }
+}

@@ -20,7 +20,7 @@ export default createSelector(wizard, (wizard) => {
     return form.name === currentStep ? index + 1 : step
   }, 1);
   const maxVisibleStep = forms.reduce((step, form, index) => {
-    return form.valid ? index + 1 : step
+    return form.valid ? index + 2 : step
   }, 1);
 
   return {currentStep, step, totalSteps, maxVisibleStep};

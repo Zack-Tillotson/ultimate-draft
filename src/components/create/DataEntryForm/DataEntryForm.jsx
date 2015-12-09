@@ -26,8 +26,6 @@ const DataEntryForm = React.createClass({
     const csvTextValue = this.props.inputs.csvText ? this.props.inputs.csvText.value : '';
     return (
       <InlineCss stylesheet={styles} componentName="container">
-        <h3>Enter</h3>
-
         <Formsy.Form onSubmit={this.submitHandler}>
 
           <Textarea 

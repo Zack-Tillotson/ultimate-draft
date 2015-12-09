@@ -19,7 +19,7 @@ import styles from './styles.raw.less';
 const CreatePage = React.createClass({
   render() {
     return (
-      <Application>
+      <Application footer={false}>
         <InlineCss stylesheet={styles} componentName="container">
           <Wizard {...WizardSelector(this.props.state)} navigateBack={this.props.dispatch.goBack}>
             <DataEntryForm name={formNames[0]} />

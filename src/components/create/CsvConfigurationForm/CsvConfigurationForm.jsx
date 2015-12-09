@@ -59,8 +59,6 @@ const CsvConfigurationForm = React.createClass({
   render() {
     return (
       <InlineCss stylesheet={styles} componentName="container">
-        <h3>Configure</h3>
-
         <h5>{this.props.players.length} Players</h5>
         <div>
           <div className="playerTableContainer">

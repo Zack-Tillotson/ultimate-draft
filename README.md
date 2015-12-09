@@ -20,3 +20,4 @@ A tool for Ultimate Frisbee draft leagues to use during the draft.
 
 Easily and quickly view basic information such as who is still available to be drafted and who is on each team as well as more complex information such as who has been implicetly drafted because their baggage was taken and if a player is illigal to draft for each team.
 
+Copyright 2015 Zachery Tillotson
