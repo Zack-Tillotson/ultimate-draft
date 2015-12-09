@@ -10,18 +10,20 @@ component {
         display: inline-block;
         width: 100px;
         background: #ccc;
-        height: 5px;
+        height: 3px;
+        position: relative;
+        top: -5px
       }
 
       .stepPoint {
-        border: solid 2px #ccc;
+        border: solid 3px #ccc;
         display: inline-block;
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
         border-radius: 50px;
         background: #ccc;
         color: #eee;
-        font-size: 12px;
+        font-size: 18px;
       }
 
       &.active {
@@ -34,6 +36,14 @@ component {
           border-color: #0D3D65;
           background: #0D3D65;
           color: #fff;
+        }
+      }
+
+      &.current {
+        .stepPoint {
+          border-color: #0D3D65;
+          background: #fff;
+          color: #000;
         }
       }
     }

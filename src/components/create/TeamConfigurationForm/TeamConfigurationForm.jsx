@@ -3,7 +3,7 @@ import InlineCss from "react-inline-css";
 import Formsy from 'formsy-react';
 import {Input, Select} from 'formsy-react-components';
 import {connect} from 'react-redux';
-import ColorPicker from 'react-color';
+import ColorSelector from '../../ColorSelector';
 
 import styles from './styles';
 import selector from './selector.js';
@@ -18,8 +18,10 @@ const TeamConfigurationForm = React.createClass({
   },
 
   getInitialState() {
+    const hasTeams = !!this.props.inputs.length;
     return {
-      numTeams: 10
+      showTeams: hasTeams,
+      numTeams: hasTeams ? this.props.inputs.length : 10
     };
   },
 
@@ -28,7 +30,7 @@ const TeamConfigurationForm = React.createClass({
   },
 
   numTeamsSubmitHandler(inputs) {
-    this.setState(inputs);
+    this.setState({...inputs, showTeams: true});
   },
 
   getTeamsInputs() {
@@ -36,24 +38,30 @@ const TeamConfigurationForm = React.createClass({
     const ret = [];
 
     for(let i = 0 ; i < this.state.numTeams; i++) {
+      
       const namespace = 'team' + i;
+      const input = this.props.inputs[i] || {};
+
+      const id = input.id || i;
+      const name = input.name || 'Team ' + (i + 1);
+      const color = input.color || '#fff';
+
       ret.push(
-        <div key={namespace}>
-
-          <Input
-            name={namespace + 'id'}
-            type="hidden"
-            value={i}/>
-
-          <Input
-            name={namespace + 'name'}
-            label="Team Name"
-            value={"Team " + (i + 1)} />
-
-          <Input
-            name={namespace + 'color'}
-            label="Color"
-            value={'#fff'} />
+        <div key={namespace} className="teamSection">
+          <div className="index">{i + 1}</div>
+          <div className="teamInputs">
+            <Input
+              name={namespace + 'id'}
+              type="hidden"
+              value={id}/>
+            <Input
+              name={namespace + 'name'}
+              label="Team Name"
+              value={name} />
+            <ColorSelector
+              inputName={namespace + 'color'} 
+              initialColor={color} />
+          </div>
         </div>
       );
     }
@@ -88,31 +96,30 @@ const TeamConfigurationForm = React.createClass({
               name="numTeams"
               label="How many teams?"
               value={this.state.numTeams}/>
-          <button type="submit">Change</button>
+          <button type="submit">Submit</button>
         </Formsy.Form>
 
-        <h5>Configure the teams</h5>
-        <Formsy.Form 
-          mapping={this.mapping}
-          onChange={this.changeHandler}
-          onSubmit={this.submitHandler}>
+        {this.state.showTeams && (
+          <div>
+            <h5>Configure the teams</h5>
+            <Formsy.Form 
+              mapping={this.mapping}
+              onChange={this.changeHandler}
+              onSubmit={this.submitHandler}>
 
-          {this.getTeamsInputs()}
+              {this.getTeamsInputs()}
 
-          <div className="colorHelper">
-            <ColorPicker type="chrome" />
+              {!this.props.valid && (
+                <div>
+                  There is a problem. Enter the number!
+                </div>
+              )}
+
+              {this.props.navigateBackButton}
+              <button type='submit'>Next</button>
+            </Formsy.Form>
           </div>
-
-          {!this.props.valid && (
-            <div>
-              There is a problem. Enter the number!
-            </div>
-          )}
-
-          {this.props.navigateBackButton}
-          <button type='submit'>Next</button>
-
-        </Formsy.Form>
+        )}
 
       </InlineCss>
     );

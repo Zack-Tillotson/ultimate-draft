@@ -15,7 +15,7 @@ export default React.createClass({
   getNavStep(stepNum) {
     
     const current = stepNum == this.props.step;
-    const active = stepNum <= this.props.maxVisibleStep;
+    const active = stepNum <= this.props.step;
 
     const currentClass = current ? 'current' : '';
     const activeClass = active ? 'active' : '';
@@ -23,7 +23,7 @@ export default React.createClass({
     return (
       <div className={['step', currentClass, activeClass].join(' ')} key={'step' + stepNum}>
         {stepNum !== 1 && (<div className="stepTransition" />)}
-        <div className="stepPoint">{active && !current ? '\u2713' : stepNum }</div>
+        <div className="stepPoint">{stepNum}</div>
       </div>
     );
   },

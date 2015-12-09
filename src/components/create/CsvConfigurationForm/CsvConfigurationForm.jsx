@@ -47,7 +47,9 @@ const CsvConfigurationForm = React.createClass({
   },
 
   getPlayersArray() {
-    return this.props.players.map(player => {{data: player}});
+    return this.props.players.map(player => {
+      return {data: player}
+    });
   },
 
   getPlayers() {
