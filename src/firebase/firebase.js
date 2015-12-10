@@ -1,6 +1,5 @@
 import Firebase from 'firebase';
 import utils from './utils';
-import md5 from 'md5';
 
 const children = ['players', 'teams', 'columns', 'drafts'];
 
@@ -22,9 +21,9 @@ export default {
     return new Promise((resolve, reject) => {
       
       const id = data.draft.draftId;
-      const pw = md5(data.draft.draftPw + utils.getSalt());
+      const pw = utils.hashPassword(data.draft.draftPw);
 
-      const path = utils.getVersion() + '/' + id + '/' + pw;
+      const path = id + '/' + pw;
       const firebaseUrl = utils.getFirebaseUrl(path);
       const firebase = new Firebase(firebaseUrl);
 

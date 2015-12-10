@@ -1,24 +1,9 @@
 import actions from '../../create/actionNames';
-import validator from './validator';
 import firebase from '../../firebase';
-
-const creators = {
-  submitForm(info) {
-    return {
-      type: actions.submitForm,
-      ...info
-    };
-  }
-};
 
 const dispatcher = (dispatch) => {
   return {
     dispatch: {
-      submitForm() {
-        const name = actions.login;
-        const valid = true;
-        dispatch(creators.submitForm({name, valid}));
-      },
       requestLogin(service) {
         dispatch(() => {
           const ref = firebase.connect();
@@ -35,4 +20,4 @@ const dispatcher = (dispatch) => {
   }
 }
 
-export default { creators, dispatcher };
+export default { dispatcher };

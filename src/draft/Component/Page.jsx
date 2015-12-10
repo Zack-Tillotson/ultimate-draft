@@ -37,7 +37,6 @@ const Page = React.createClass({
   componentDidMount() {
     this.connectToFirebase()
     document.addEventListener('keydown', this.keyPressHandler);
-    window.onbeforeunload = () => 'Are you sure you want to leave?';
   },
 
   componenWillUnmount() {

@@ -29,7 +29,6 @@ const LoginForm = React.createClass({
           <div className="welcome">
             <h4>Welcome {this.props.displayName}!</h4>
             <input type="button" onClick={this.props.dispatch.requestLogout} value="Logout" />
-            <input type="submit" onClick={this.props.dispatch.submitForm} value="Next" />
           </div>
         )}
         

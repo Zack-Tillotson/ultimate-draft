@@ -6,7 +6,7 @@ import firebase from '../../firebase';
 import Application from '../../components/Application';
 import Wizard from '../../components/Wizard';
 
-import LoginForm from '../../components/LoginForm';
+import OwnerConfigurationForm from '../../components/create/OwnerConfigurationForm';
 import DataEntryForm from '../../components/create/DataEntryForm';
 import CsvConfigurationForm from '../../components/create/CsvConfigurationForm';
 import TeamConfigurationForm from '../../components/create/TeamConfigurationForm';
@@ -31,7 +31,7 @@ const Page = React.createClass({
       <Application footer={false}>
         <InlineCss stylesheet={styles} componentName="container">
           <Wizard {...WizardSelector(this.props.state)} navigateBack={this.props.dispatch.goBack}>
-            <LoginForm name={formNames[0]} auth={this.props.state.auth} />
+            <OwnerConfigurationForm name={formNames[0]} auth={this.props.state.auth} />
             <DataEntryForm name={formNames[1]} />
             <CsvConfigurationForm name={formNames[2]} />
             <TeamConfigurationForm name={formNames[3]} />
