@@ -2,6 +2,7 @@ import React from 'react';
 import InlineCss from "react-inline-css";
 import {connect} from 'react-redux';
 import styles from './styles';
+import {Input} from 'formsy-react-components';
 import selector from './selector.js';
 import {dispatcher} from './actions.js';
 
@@ -19,48 +20,76 @@ const SaveDraftForm = React.createClass({
     navigateBackButton: React.PropTypes.object
   },
 
-  saveHandler(event) {
+  saveHandler(data) {
     event.preventDefault();
-    this.props.dispatch.saveDraft(this.props.data);
+    const {columns, players, teams, draft} = this.props;
+    this.props.dispatch.saveDraft({columns, players, teams, draft});
   },
 
   getShareLink() {
-    return this.props.shareLink
-      ? 'http://' + document.location.host + '/draft?id=/' + this.props.shareLink
-      : '';
+    return '/';
   },
 
   getPlayersArray() {
-    return this.props.players.map(player => {{data: player}});
+    return this.props.players.map(player => {
+      return {data: player}
+    });
   },
 
   render() {
+    const draftId = this.props.draft.draftId || '';
     return (
       <InlineCss stylesheet={styles} componentName="container">
-        <h3>Save</h3>
 
-        {!!this.props.shareLink && (
-          <div>
-            <h4>Important!</h4>
-            This is the link for this draft. Share with the captains and save it - this is
-            the only way to access this draft.
-            <div className="shareLink">
-              Link: <a href={this.getShareLink()}>{this.getShareLink()}</a>
+        <Formsy.Form 
+          onSubmit={this.saveHandler}>
+
+          <h5>Draft Details</h5>
+          <Input
+              name="draftId"
+              label="Draft ID"
+              value={draftId}
+              disabled={true} />
+
+            <Input
+              name="draftPw"
+              label="Draft Password"
+              value={this.props.draft.draftPw}
+              disabled={true} />
+
+          <h5>{this.props.players.length} Players</h5>
+          <PlayerTable players={this.getPlayersArray()} columns={this.props.columns} />
+
+          <h5>{this.props.teams.length} Teams</h5>
+          <Input
+              name="maxMen"
+              label="Maximum Men Per Team"
+              value={this.props.draft.maxMen}
+              disabled={true} />
+
+            <Input
+              name="maxWomen"
+              label="Maximum Women Per Team"
+              value={this.props.draft.maxWomen}
+              disabled={true} />
+          <TeamList teams={this.props.teams} />
+
+          {!this.props.draft.saved && (
+            <div>
+              <button type='submit'>Save Draft</button>
+              {this.props.navigateBackButton}
             </div>
-          </div>
-        )}
+          )}
 
-        <h5>{this.props.players.length} Players</h5>
-        <PlayerTable players={this.getPlayersArray()} columns={this.props.columns} />
+          {this.props.draft.saved && (
+            <div className="savedNotification">
+              Saved! This draft is ready to start. Go <a href={this.getShareLink()}>Here</a> to start drafting. 
+              Remember your draft ID and password!
+            </div>
+          )}
 
-        <h5>{this.props.teams.length} Teams</h5>
-        <TeamList teams={this.props.teams} />
+        </Formsy.Form>
 
-        <div>
-          <button type='submit' onClick={this.saveHandler}>Save Draft</button>
-        </div>
-
-        {this.props.navigateBackButton}
       </InlineCss>
     );
   }

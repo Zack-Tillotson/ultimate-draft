@@ -9,7 +9,7 @@ function getInitialState() {
 export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.submitForm:
-      if(action.name === formNames[2] && action.valid) {
+      if(action.name === formNames[3] && action.valid) {
         state = Immutable.fromJS(action.inputs);
       }
   }

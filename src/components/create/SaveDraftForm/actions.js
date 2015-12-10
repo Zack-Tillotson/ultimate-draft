@@ -2,8 +2,11 @@ import actions from '../../../create/actionNames';
 import firebase from '../../../firebase';
 
 const creators = {
+
   startingSave() {return {type: actions.startSave}},
+
   finishedSave(success, url) {return {type: actions.finishSave, success, url}},
+
   saveDraft(data) {
     return dispatch => {
       dispatch(this.startingSave());

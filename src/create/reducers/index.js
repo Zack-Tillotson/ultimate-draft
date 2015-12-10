@@ -3,4 +3,5 @@ import players from './players';
 import teams from './teams';
 import wizard from './wizard';
 import columns from './columns';
-export {draft, players, teams, wizard, columns};
+import auth from './auth';
+export {draft, players, teams, wizard, columns, auth};

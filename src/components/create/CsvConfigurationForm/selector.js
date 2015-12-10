@@ -116,7 +116,7 @@ const form = createSelector(name, forms, (name, forms) => {
   return currentForm ? currentForm.toJS() : {inputs: {}};
 });
 
-const csvText = (state) => state.wizard.get('forms').get(0).get('inputs').get('csvText').get('value');
+const csvText = (state) => state.wizard.get('forms').get(1).get('inputs').get('csvText').get('value');
 
 export default createSelector(form, csvText, (form, csvText) => {
 

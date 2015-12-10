@@ -41,12 +41,12 @@ const draft = state => state.draft;
 
 export default createSelector(draft, columns, players, teams, (draft, columns, players, teams) => {
 
+  draft = draft.toJS();
   columns = columns.toJS();
   players = players.toJS();
   teams = teams.toJS();
 
   const data = buildData(columns, players, teams);
-  const shareLink = draft.get('url');
 
-  return {...data, data, shareLink};
+  return {...data, draft};
 });

@@ -1,41 +1,22 @@
 import Firebase from 'firebase';
 
 const firebaseUrlBase = 'https://diskdraft.firebaseio.com';
-const version = '012';
+const version = '014';
 
-const alpha = ['A','B','C','D','E','F','G','H','J','K','M','N','P','Q','R','S','T','W','X','Y'];
-const numeric = ['3','4','5','6','7','8','9'];
-
-function getAlpha() {
-  return alpha[parseInt(Math.random() * alpha.length)]; 
+function getVersion() {
+  return version;
 }
 
-function getNumeric() {
-  return numeric[parseInt(Math.random() * numeric.length)]; 
+function getSalt() {
+  return 'TPZMjWAsaiNV7DRrXHq7' + version;
 }
 
-function getUniqueId() {
-  return getAlpha()
-    + getAlpha()
-    + getAlpha()
-    + getAlpha()
-    + getNumeric()
-    + getNumeric()
-    + getNumeric()
-    + getAlpha()
-    + getAlpha()
-    + getAlpha()
-    + getAlpha()
-    + getNumeric()
-    + getNumeric()
-    + getNumeric();
-}
-
-function getFirebasePath() {
-  return [version, getUniqueId()].join('/');
-}
 function getFirebaseUrl(path) {
-  return [firebaseUrlBase, path, ''].join('/');
+  if(path) {
+    return [firebaseUrlBase, path, ''].join('/');
+  } else {
+    return firebaseUrlBase;
+  }
 }
 
-export default {getUniqueId, getFirebasePath, getFirebaseUrl};
+export default {getVersion, getSalt, getFirebaseUrl};
