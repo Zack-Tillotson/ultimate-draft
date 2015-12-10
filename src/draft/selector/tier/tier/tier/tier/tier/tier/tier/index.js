@@ -2,8 +2,8 @@
 
 import {createSelector} from 'reselect';
 
-import l4 from '../l4';
+import selectors from '../';
 
 import {userWithData} from './user';
 
-export default {...l4, userWithData};
+export default {...selectors, userWithData};

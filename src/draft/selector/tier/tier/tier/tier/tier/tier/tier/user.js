@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 
-import {user, teamsWithPlayersMap, nextDraft} from '../l4';
+import {user, teamsWithPlayersMap, nextDraft} from '../';
 
 export const userWithData = createSelector(user, teamsWithPlayersMap, nextDraft, 
   (user, teamMap, nextDraft) => {

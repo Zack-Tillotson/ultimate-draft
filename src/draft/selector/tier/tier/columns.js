@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 
-import {team as teamColumn} from '../../../columnTypes';
-import {user, columns} from '../l0';
+import {team as teamColumn} from '../../../../columnTypes';
+import {user, columns} from '../';
 
 // Creates the "team" column which is a basic column type we add showing which team has drafted the player
 function getTeamColumn() {

@@ -3,7 +3,7 @@
 import {createSelector} from 'reselect';
 import {
   userWithData, uiWithData, playersWithBaggage, teamsWithPlayers, fullColumns, draftsWithTeamsAndPlayers, firebase, statusWithDraftInfo
-} from './l5';
+} from './tier/tier/tier/tier/tier/tier/tier/';
 
 export default createSelector(
   [userWithData, uiWithData, playersWithBaggage, teamsWithPlayers, fullColumns, draftsWithTeamsAndPlayers, firebase, statusWithDraftInfo],

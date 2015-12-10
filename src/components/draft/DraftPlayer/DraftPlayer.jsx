@@ -29,11 +29,13 @@ export default React.createClass({
       return false;
     }
 
-    const draftStatus = utils.getDraftStatus(data.teamId, data.player, this.props.players, this.props.drafts, this.props.columns);
+    const {draftStatus} = data.player;
     return !draftStatus.currentTeamUndraftable
         && !draftStatus.otherTeamsDraft
         && !draftStatus.otherTeamBaggage
-        && !draftStatus.currenTeamsDraft;
+        && !draftStatus.currenTeamsDraft
+        && !draftStatus.maleOverdraft
+        && !draftStatus.femaleOverdraft;
   },
 
   validateTeam(data) {
@@ -120,17 +122,10 @@ export default React.createClass({
 
     if(!errors.length) {
 
-      const draftStatus = utils.getDraftStatus(
-        this.props.data.teamId, 
-        this.props.data.player, 
-        this.props.players, 
-        this.props.drafts, 
-        this.props.columns
-      );
+      const {draftStatus} = this.props.data.player;
 
       if(draftStatus.currentTeamUndraftable) {
-        errors.push('This is an illigal pick. The team has undrafted baggage with' +
-        ' an equal or less vector.');
+        errors.push('The team has undrafted baggage with an equal or less vector.');
       }
       if(draftStatus.otherTeamsDraft) {
         errors.push('This player is already on another team.');
@@ -138,15 +133,15 @@ export default React.createClass({
       if(this.props.data.player.draftStatus.otherTeamBaggage) {
         errors.push('This player is baggaged by a player on another team.');
       }
+      if(this.props.data.player.draftStatus.maleOverdraft) {
+        errors.push('By drafting this player you would have too many men.');
+      }
+      if(this.props.data.player.draftStatus.femaleOverdraft) {
+        errors.push('By drafting this player you would have too many women.');
+      }
       if(this.props.data.player.baggage) {
 
-        const baggageDraftStatus = utils.getDraftStatus(
-          this.props.data.teamId, 
-          this.props.data.player.baggage, 
-          this.props.players, 
-          this.props.drafts, 
-          this.props.columns
-        );
+        const {draftStatus: baggageDraftStatus} = this.props.data.player.baggage;
 
         if(baggageDraftStatus.otherTeamsDraft) {
           errors.push('This player\'s baggage is already on another team.');
@@ -155,13 +150,20 @@ export default React.createClass({
     }
     return (
       <div className="validationItems">
-        {errors.map(error => {
-          return (
-            <div className="validationItem" key={error}>
-              {error}
-            </div>
-          );
-        })}
+        {errors.length > 0 && (
+          <div>
+            <h3>This is an illigal pick.</h3>
+            <ul>
+              {errors.map(error => {
+                return (
+                  <li className="validationItem" key={error}>
+                    {error}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     );
   },

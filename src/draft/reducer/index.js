@@ -21,5 +21,6 @@ import teams from './teams';
 import columns from './columns';
 import drafts from './drafts';
 import user from './user';
+import draft from './draft';
 
-export default combineReducers({ui, user, players, firebase, columns, teams, drafts});
+export default combineReducers({ui, user, players, firebase, columns, teams, drafts, draft});

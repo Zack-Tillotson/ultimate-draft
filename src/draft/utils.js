@@ -67,11 +67,24 @@ export default {
     return params.id;
   },
 
-  getDraftStatus(contextTeamId, player, players, drafts, columns) {
+  getDraftStatus(contextTeamId, player, players, drafts, columns, genderDrafts, maxGenderDrafts) {
 
     const playerId = getPlayerId(player, columns);
     const teamId = getTeamForPlayer(playerId, drafts)
     const baggageTeamId = getTeamForPlayer(getBaggageId(player, columns), drafts)
+
+    let maleDraftCount = 0;
+    let femaleDraftCount = 0;
+    if(getGender(player, columns) == 'M') {
+      maleDraftCount++;
+    } else {
+      femaleDraftCount++;
+    }
+    if(player.baggage && getGender(player.baggage, columns) == 'M') {
+      maleDraftCount++;
+    } else {
+      femaleDraftCount++;
+    }
 
     const otherTeamsDraft = teamId != null ? (teamId != contextTeamId) : false;
     const otherTeamsBaggage = baggageTeamId != null ? (baggageTeamId != contextTeamId) : false;
@@ -79,13 +92,17 @@ export default {
     const currentTeamsBaggage = baggageTeamId != null ? (baggageTeamId == contextTeamId) : false;
     const currentTeamUndraftable = !currentTeamsDraft && !currentTeamsBaggage &&
       getCurrentlyUndraftable(playerId, contextTeamId, player, players, columns, drafts);
+    const maleOverdraft = genderDrafts.male + maleDraftCount > maxGenderDrafts.maxMen;
+    const femaleOverdraft = genderDrafts.female + femaleDraftCount > maxGenderDrafts.maxWomen;
 
     return {
         otherTeamsDraft, 
         otherTeamsBaggage, 
         currentTeamsDraft, 
         currentTeamsBaggage, 
-        currentTeamUndraftable
+        currentTeamUndraftable,
+        maleOverdraft,
+        femaleOverdraft
       };
   },
 

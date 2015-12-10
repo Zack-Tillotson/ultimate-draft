@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {orderedDraftIds, user} from '../l2';
+import {orderedDraftIds, user} from '../';
 
 export const draftIdsWithContext = createSelector(orderedDraftIds, user, 
   (drafts, user) => {

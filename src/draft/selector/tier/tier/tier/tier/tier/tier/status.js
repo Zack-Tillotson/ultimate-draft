@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {draftIdsWithContext, teamMap, nextDraft, players} from '../l3';
+import {draftIdsWithContext, teamMap, nextDraft, players} from '../';
 
 const draftCount = createSelector(players, (players) => {
   return players.length;

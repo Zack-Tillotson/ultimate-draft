@@ -2,10 +2,11 @@
 
 import {createSelector} from 'reselect';
 
-import l0 from '../l0';
+import selectors from '../';
 import {orderedDraftIds, nextDraft} from './drafts';
 import {fullColumns} from './columns';
+import {maxGenderDrafts} from './draft';
 
 export default { 
-  ...l0, orderedDraftIds, nextDraft, fullColumns
+  ...selectors, orderedDraftIds, nextDraft, fullColumns, maxGenderDrafts
 };

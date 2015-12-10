@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {drafts, teams, players} from '../l0';
+import {drafts, teams, players} from '../';
 
 function getTeamIndexFromDraftIndex(draftIndex, numTeams) {
   const snakeIndex = draftIndex % (numTeams * 2);

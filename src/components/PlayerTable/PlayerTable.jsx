@@ -126,7 +126,7 @@ export default React.createClass({
       } else {
         const otherTeam = !this.props.rowFilters.viewOtherTeam && (player.draftStatus.otherTeamsDraft || player.draftStatus.otherTeamsBaggage);
         const thisTeam = !this.props.rowFilters.viewYourTeam && player.draftStatus.currentTeamsDraft;
-        const undraftable = !this.props.rowFilters.viewUndraftable && player.draftStatus.currentTeamUndraftable;
+        const undraftable = !this.props.rowFilters.viewUndraftable && (player.draftStatus.currentTeamUndraftable || player.draftStatus.maleOverdraft || player.draftStatus.femaleOverdraft);
         return !otherTeam && !thisTeam && !undraftable;
       }
     })
@@ -206,7 +206,7 @@ export default React.createClass({
       return 'drafted';
     } else if(player.draftStatus.currentTeamsBaggage) {
       return 'draftedBaggage';
-    } else if(player.draftStatus.currentTeamUndraftable) {
+    } else if(player.draftStatus.currentTeamUndraftable || player.draftStatus.maleOverdraft || player.draftStatus.femaleOverdraft) {
       return 'undraftable';
     }
     return 'draftable';
