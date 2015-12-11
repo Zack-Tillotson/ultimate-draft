@@ -75,15 +75,20 @@ export default {
 
     let maleDraftCount = 0;
     let femaleDraftCount = 0;
-    if(getGender(player, columns) == 'M') {
-      maleDraftCount++;
-    } else {
-      femaleDraftCount++;
-    }
-    if(player.baggage && getGender(player.baggage, columns) == 'M') {
-      maleDraftCount++;
-    } else {
-      femaleDraftCount++;
+    if(teamId == null && baggageTeamId == null) {
+      if(getGender(player, columns) == 'M') {
+        maleDraftCount++;
+      } else {
+        femaleDraftCount++;
+      }
+      const baggage = players.find(bag => getPlayerId(bag, columns) == getBaggageId(player, columns));
+      if(baggage) {
+        if(getGender(baggage, columns) == 'M') {
+          maleDraftCount++;
+        } else {
+          femaleDraftCount++;
+        }
+      }
     }
 
     const otherTeamsDraft = teamId != null ? (teamId != contextTeamId) : false;
