@@ -5,6 +5,12 @@ import firebase from './firebase';
 import overlay from './overlay';
 import ui from './ui';
 
+const creators = {
+  login(auth) {
+    return {type: actions.login, auth};
+  }
+}
+
 export default (dispatch) => {
   return {
     dispatch: {
@@ -34,6 +40,12 @@ export default (dispatch) => {
       },
       quitTutorial() {
         dispatch(ui.quitTutorial());
+      },
+      triggerLogin(auth) {
+        dispatch(creators.login(auth))
+      },
+      addBaggageDraft(data) {
+        firebase.putDraft(dispatch, data);
       }
     }
   }

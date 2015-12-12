@@ -5,8 +5,8 @@ import {createSelector} from 'reselect';
 import selectors from '../';
 import {orderedDraftIds, nextDraft} from './drafts';
 import {fullColumns} from './columns';
-import {maxGenderDrafts} from './draft';
+import {maxGenderDrafts, draftMeta} from './draft';
 
 export default { 
-  ...selectors, orderedDraftIds, nextDraft, fullColumns, maxGenderDrafts
+  ...selectors, orderedDraftIds, nextDraft, fullColumns, maxGenderDrafts, draftMeta,
 };

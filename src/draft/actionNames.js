@@ -14,5 +14,6 @@ export default {
   
   firebase: 'firebase',
   blowup: 'blowup',
-  syncing: 'syncing'
+  syncing: 'syncing',
+  login: 'login'
 };

@@ -38,8 +38,8 @@ const DraftRedirectForm = React.createClass({
     return (
       <InlineCss stylesheet={styles} componentName="container" className={loadingClass}>   
         <Formsy.Form onSubmit={this.handleSubmit}>
-          <Input label="Draft ID" name="draftId" placeholder="Draft administrator will provide." />
-          <Input label="Password" name="draftPw" placeholder="Leave blank if no password is required." />
+          <Input label="Draft ID" name="draftId" placeholder="Required" />
+          <Input label="Password" name="draftPw" placeholder="Optional" />
           {this.props.submitted && this.props.error >= 0 && (
             <div className="errors">
               {this.getErrorMessage(this.props.error)}
@@ -49,7 +49,7 @@ const DraftRedirectForm = React.createClass({
             <PulseLoader className="animatee" color="#999" />
           )}
           {!this.props.inProgress && (
-            <input type="submit" />
+            <input className="submit" type="submit" />
           )}
         </Formsy.Form>
       </InlineCss>

@@ -32,7 +32,7 @@ export default React.createClass({
     const {draftStatus} = data.player;
     return !draftStatus.currentTeamUndraftable
         && !draftStatus.otherTeamsDraft
-        && !draftStatus.otherTeamBaggage
+        && !draftStatus.otherTeamsBaggage
         && !draftStatus.currenTeamsDraft
         && !draftStatus.maleOverdraft
         && !draftStatus.femaleOverdraft;
@@ -130,7 +130,7 @@ export default React.createClass({
       if(draftStatus.otherTeamsDraft) {
         errors.push('This player is already on another team.');
       }
-      if(this.props.data.player.draftStatus.otherTeamBaggage) {
+      if(this.props.data.player.draftStatus.otherTeamsBaggage) {
         errors.push('This player is baggaged by a player on another team.');
       }
       if(this.props.data.player.draftStatus.maleOverdraft) {

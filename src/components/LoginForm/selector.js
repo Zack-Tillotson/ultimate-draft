@@ -4,6 +4,10 @@ function isLoggedIn(auth) {
   return auth.has('auth')
 }
 
+function authService(auth) {
+  return auth.get('provider');
+}
+
 function displayName(auth) {
   
   if(!isLoggedIn(auth)) {
@@ -23,6 +27,7 @@ function displayName(auth) {
 export default state => {
   return {
     isLoggedIn: isLoggedIn(state.auth),
-    displayName: displayName(state.auth)
+    displayName: displayName(state.auth),
+    authService: authService(state.auth)
   }
 }

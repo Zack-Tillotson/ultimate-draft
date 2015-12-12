@@ -21,6 +21,7 @@ import DraftNotifications from '../../components/draft/DraftNotifications';
 import DraftTutorial from '../../components/draft/DraftTutorial';
 
 // Tabs
+import Settings from '../../components/draft/Settings'
 import Players from '../../components/draft/Players'
 import Teams from '../../components/draft/Teams';
 import History from '../../components/draft/History';
@@ -48,6 +49,7 @@ const Page = React.createClass({
     const firebaseId = Utils.getFirebaseId();
     if(firebaseId) {
       this.firebaseRef = Firebase.sync(firebaseId, this.props.dispatch.firebase);
+      const auth = this.firebaseRef.onAuth(this.props.dispatch.triggerLogin);
     } else {
       this.props.dispatch.blowup('Draft not found, please check to make sure the URL is correct');
     }
@@ -157,6 +159,17 @@ const Page = React.createClass({
           drafts={this.props.drafts}
           teams={this.props.teams}
           players={this.props.players}
+          viewModal={this.props.dispatch.viewModal} />
+        <Settings
+          tabName={tabNames.settings}
+          columns={this.props.columns}
+          players={this.props.players}
+          drafts={this.props.drafts}
+          baggageDrafts={this.props.baggageDrafts}
+          teams={this.props.teams}
+          draftMeta={this.props.draftMeta} 
+          auth={this.props.auth}
+          addBaggageDraft={this.props.dispatch.addBaggageDraft}
           viewModal={this.props.dispatch.viewModal} />
 
       </TabbedContainer>

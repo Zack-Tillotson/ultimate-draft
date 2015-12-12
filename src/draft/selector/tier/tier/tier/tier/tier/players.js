@@ -1,15 +1,16 @@
 import {createSelector} from 'reselect';
 import utils from '../../../../../../utils';
 
-import {players, drafts, columns, teams, contextTeam, genderDrafts, maxGenderDrafts} from '../';
+import {players, drafts, baggageDrafts, columns, teams, contextTeam, genderDrafts, maxGenderDrafts} from '../';
 
 const playersWithMeta = createSelector(
-   players, drafts, contextTeam, columns, teams, genderDrafts, maxGenderDrafts,
-  (players, drafts, contextTeam, columns, teams, genderDrafts, maxGenderDrafts) => {
+   players, drafts, baggageDrafts, contextTeam, columns, teams, genderDrafts, maxGenderDrafts,
+  (players, drafts, baggageDrafts, contextTeam, columns, teams, genderDrafts, maxGenderDrafts) => {
     return players.map(player => {
-      const draft = drafts.find(draft => draft.playerId == utils.getPlayerId(player, columns));
+      const draft = drafts.find(draft => draft.playerId == utils.getPlayerId(player, columns))
+        ||  baggageDrafts.find(draft => draft.playerId == utils.getPlayerId(player, columns));
       const team = !draft ? null : teams.find(team => team.id == draft.teamId);
-      const draftStatus = utils.getDraftStatus(contextTeam, player, players, drafts, columns, genderDrafts, maxGenderDrafts);
+      const draftStatus = utils.getDraftStatus(contextTeam, player, players, drafts, baggageDrafts, columns, genderDrafts, maxGenderDrafts);
       return {data: player, draftStatus, team};
     });
 });

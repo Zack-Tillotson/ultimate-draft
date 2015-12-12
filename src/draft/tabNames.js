@@ -1,5 +1,6 @@
 export default {
-  players: 'Players', 
-  teams: 'Teams', 
+  settings: 'Settings',
+  players: 'Players',
+  teams: 'Teams',
   history: 'History'
 };

@@ -9,11 +9,19 @@ import {dispatcher} from './actions.js';
 
 const LoginForm = React.createClass({
 
-  propTypes: {
+  getInitialState() {
+    return {
+      optionsDialogOpen: false
+    }
+  },
+
+  dialogClickHandler() {
+    this.setState({optionsDialogOpen: !this.state.optionsDialogOpen});
   },
 
   render() {
     const services = ['google', 'facebook', 'twitter'];
+    const selectedService = this.props.authService;
     return (
       <InlineCss stylesheet={styles} componentName="container">
 
@@ -27,8 +35,21 @@ const LoginForm = React.createClass({
 
         {this.props.isLoggedIn && (
           <div className="welcome">
-            <h4>Welcome {this.props.displayName}!</h4>
-            <input type="button" onClick={this.props.dispatch.requestLogout} value="Logout" />
+            <div className="accountInfo">
+              Account:
+              <div className={["service", selectedService].join(' ')}></div>
+              {this.props.displayName}
+            </div>
+            <div className="optionDialog">
+              <div className="toggle" onClick={this.dialogClickHandler}>
+                {'\u25BE'}
+                {this.state.optionsDialogOpen && (
+                  <div className="optionsInner">
+                    <div onClick={this.props.dispatch.requestLogout}>Logout</div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         )}
         

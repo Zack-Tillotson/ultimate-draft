@@ -34,8 +34,8 @@ function putDraft(dispatch, data) {
     // Upate function
     (currentData) => {
 
-      const teamId = data.teamId;
-      const playerId = data.playerId;
+      const {teamId, playerId, type: rawType} = data;
+      const type = rawType || '';
 
       currentData = currentData || [];
       
@@ -45,7 +45,7 @@ function putDraft(dispatch, data) {
 
       const timestamp = Date.now();
 
-      currentData.push({teamId, playerId, timestamp});
+      currentData.push({teamId, playerId, type, timestamp});
 
       return currentData;
 
@@ -59,8 +59,7 @@ function unputDraft(dispatch, data) {
     // Upate function
     (currentData) => {
 
-      const teamId = data.teamId;
-      const playerId = data.playerId;
+      const {teamId, playerId, type} = data;
 
       currentData = currentData || [];
       
@@ -68,7 +67,9 @@ function unputDraft(dispatch, data) {
         currentData = Object.keys(currentData).sort().map(key => currentData[key]);
       }
 
-      currentData = currentData.filter(draft => draft.playerId != playerId || draft.teamId != teamId);
+      currentData = currentData.filter(draft => 
+        draft.playerId != playerId || draft.teamId != teamId || draft.type != type
+      );
 
       return currentData;
 
