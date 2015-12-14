@@ -10,7 +10,7 @@ export default React.createClass({
       <InlineCss stylesheet={styles} componentName="container">
         <header>
           <h1>
-            <a className="title" href="">discdraft</a>
+            <a className="title" href="">diskdraft</a>
           </h1>
         </header>
       </InlineCss>
