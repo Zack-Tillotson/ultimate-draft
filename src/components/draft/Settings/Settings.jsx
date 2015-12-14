@@ -15,13 +15,11 @@ export default React.createClass({
     drafts: React.PropTypes.array.isRequired,
     teams: React.PropTypes.array.isRequired,
     columns: React.PropTypes.array.isRequired,
-    draftMeta: React.PropTypes.object.isRequired
+    isAdmin: React.PropTypes.bool.isRequired
   },
 
   userIsAdmin() {
-    const currentUid = this.props.auth.uid;
-    const draftAdmin = this.props.draftMeta.owner;
-    return !!(currentUid && draftAdmin && currentUid == draftAdmin);
+    return this.props.isAdmin
   },
 
   adminSection() {

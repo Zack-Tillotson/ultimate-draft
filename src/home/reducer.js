@@ -30,6 +30,6 @@ State: {
 */
 
 import {combineReducers} from 'redux';
-import {draft, players, teams, columns, wizard, auth} from './reducers';
+import {draft, auth, draftMeta} from './reducers';
 
-export default combineReducers({draft, players, teams, columns, wizard, auth});
+export default combineReducers({draft, auth, draftMeta});

@@ -15,8 +15,13 @@ import styles from './styles.raw.less';
 const Page = React.createClass({
 
   componentDidMount() {
+    this.connectToFirebase();
+  },
+
+  connectToFirebase() {
     const ref = firebase.connect();
     const auth = ref.onAuth(this.props.dispatch.triggerLogin);
+    firebase.sync('draftMeta', this.props.dispatch.draftListChanges);
   },
 
   render() {

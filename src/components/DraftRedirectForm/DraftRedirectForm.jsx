@@ -1,7 +1,5 @@
 import React from 'react';
 import InlineCss from "react-inline-css";
-import Formsy from 'formsy-react';
-import {Input} from 'formsy-react-components';
 import {PulseLoader} from 'halogen';
 
 import {connect} from 'react-redux';
@@ -13,45 +11,52 @@ import {dispatcher} from './actions.js';
 const DraftRedirectForm = React.createClass({
 
   propTypes: {
+    draftList: React.PropTypes.array.isRequired,
+    dispatch: React.PropTypes.object.isRequired
   },
 
-  handleSubmit(inputs) {
-    if(!inputs.draftPw) {
-      inputs.draftPw = '';
-    }
-    this.props.dispatch.requestRedirect(inputs);
+  getInitialState() {
+    return {
+      selectedDraftIndex: -1
+    };
   },
 
-  getErrorMessage(errorId) {
-    switch(errorId) {
-      case 0:
-        return "These are not valid inputs.";
-      case 1:
-        return "This is not a valid draft ID";
-      case 2:
-        return "This is not the correct password.";
-    }
+  willReceiveProps(nextProps) {
+    this.setState(this.getInitialState());
+  },
+
+  handleSubmit() {
+    const draftId = this.props.draftList[this.state.selectedDraftIndex].id;
+    this.props.dispatch.requestRedirect({draftId});
+  },
+
+  handleDraftSelect(selectedDraftIndex) {
+    this.setState({selectedDraftIndex});
   },
 
   render() {
     const loadingClass = this.props.inProgress ? 'loading' : '';
     return (
       <InlineCss stylesheet={styles} componentName="container" className={loadingClass}>   
-        <Formsy.Form onSubmit={this.handleSubmit}>
-          <Input label="Draft ID" name="draftId" placeholder="Required" />
-          <Input label="Password" name="draftPw" placeholder="Optional" />
-          {this.props.submitted && this.props.error >= 0 && (
-            <div className="errors">
-              {this.getErrorMessage(this.props.error)}
-            </div>
-          )}
-          {this.props.inProgress && (
-            <PulseLoader className="animatee" color="#999" />
-          )}
-          {!this.props.inProgress && (
-            <input className="submit" type="submit" />
-          )}
-        </Formsy.Form>
+        <div className="draftItems">
+          {this.props.draftList.map((draft, index) => {
+            const selected = this.state.selectedDraftIndex == index ? 'selected' : '';
+            return (
+              <div 
+                className={["draftItem", selected].join(' ')}
+                key={draft.id} 
+                onClick={this.handleDraftSelect.bind(this, index)}>
+                {draft.id}
+              </div>
+            );
+          })}
+        </div>
+        {this.props.inProgress && (
+          <PulseLoader className="animatee" color="#999" />
+        )}
+        {!this.props.inProgress && this.state.selectedDraftIndex >= 0 && (
+          <div className="submitBtn" onClick={this.handleSubmit}>Go</div>
+        )}
       </InlineCss>
     );
   }

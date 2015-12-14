@@ -1,8 +1,6 @@
 import Firebase from 'firebase';
 import utils from './utils';
 
-const children = ['players', 'teams', 'columns', 'drafts'];
-
 function dispatchData(dispatch, child) {
   return function(snapshot) {
     dispatch(child, true, snapshot.val());
@@ -15,29 +13,62 @@ function dispatchError(dispatch, child) {
   }
 }
 
+function ensureObjPath(obj, steps) {
+  if(!obj) {
+    obj = {}
+  }
+  let pathObj = obj;
+  steps.forEach(step => {
+    if(!pathObj[step]) {
+      pathObj[step] = {};
+    }
+    pathObj = pathObj[step];
+  });
+  return obj;
+}
+
 export default {
 
   save(data) {
-    return new Promise((resolve, reject) => {
       
-      const id = data.draft.draftId;
-      const pw = utils.hashPassword(data.draft.draftPw);
+    const id = data.draft.draftId;
+    const pw = utils.hashPassword(data.draft.draftPw);
 
-      const path = id + '/' + pw;
-      const firebaseUrl = utils.getFirebaseUrl(path);
-      const firebase = new Firebase(firebaseUrl);
+    const firebaseUrl = utils.getFirebaseUrl();
+    const firebase = new Firebase(firebaseUrl);
 
-      data.draft.owner = firebase.getAuth().uid;
+    const draftMeta = {
+      hasPw: !!pw,
+      visible: true,
+      timestamp: Firebase.ServerValue.TIMESTAMP
+    };
 
-      firebase.set(data, (error) => {
-        firebase.off();
+    const {maxMen, maxWomen} = data.draft;
+    data.draft = {maxMen, maxWomen};
+
+    const draftPromise = new Promise((resolve, reject) => {
+
+      firebase.child('drafts').child(id).child(pw).set(data, (error) => {
         if(error) {
           reject(error);
         } else {
-          resolve(path);
+          resolve();
         }
       });
     });
+
+    const draftMetaPromise = new Promise((resolve, reject) => {
+
+      firebase.child('draftMeta').child(id).set(draftMeta, (error) => {
+        if(error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    return Promise.all(draftPromise, draftMetaPromise);
   },
 
   sync(path, dispatch) {
@@ -55,7 +86,7 @@ export default {
         }
       }, 
       error => {
-        dispatch(child, false);
+        dispatch(false);
       }
     );
 

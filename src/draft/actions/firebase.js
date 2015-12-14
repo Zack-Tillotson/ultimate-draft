@@ -78,10 +78,26 @@ function unputDraft(dispatch, data) {
 
 }
 
-function firebase(success, data) {
-  return {type: actions.firebase, success, data};
+function requestingData() {
+  return {type: actions.firebase, method: 'waiting'};
+}
+
+function draftData(success, data) {
+  return {type: actions.firebase, method: 'draftData', success, data};
+}
+
+function draftMetadata(success, data) {
+  return {type: actions.firebase, method: 'draftMeta', success, data};
+}
+
+function passwordRequired(success, data) {
+  return {type: actions.firebase, method: 'passwordRequired'};
+}
+
+function firebaseRoll(isAdmin) {
+  return {type: actions.firebase, method: 'role', isAdmin};
 }
 
 export default {
-  putDraft, unputDraft, firebase
+  putDraft, unputDraft, draftData, draftMetadata, passwordRequired, requestingData, firebaseRoll
 }

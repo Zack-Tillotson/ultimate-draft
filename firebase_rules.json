@@ -1,0 +1,34 @@
+{
+  "rules": {
+    "$version": {
+      "admins": {
+        ".read": "root.child($version).child('admins').child(auth.uid).exists()",
+        ".write": false // Manually change this rule and edit to add an admin account
+      },
+      "draftMeta": {
+        ".read": "auth != null",
+        "$draftId": {
+          ".write": "!data.exists() && root.child($version).child('admins').child(auth.uid).exists()", // Only admins can modify draft meta
+          ".validate": "newData.hasChildren(['hasPw', 'visible', 'timestamp'])",
+          "hasPw": {
+            ".validate": "newData.isBoolean()"
+          },
+          "visible": {
+            ".validate": "newData.isBoolean()"
+          },
+          "timestamp": {
+            ".validate": "newData.isNumber()"
+          }
+        }            
+      },
+      "drafts": {
+        "$draftId": {
+          "$password": {
+            ".read": "auth != null",
+            ".write": "!data.exists() && root.child($version).child('admins').child(auth.uid).exists()" // Only admins can modify drafts
+          }
+        }
+      }
+    }
+  }
+}

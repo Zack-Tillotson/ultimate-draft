@@ -2,7 +2,7 @@ import Firebase from 'firebase';
 import md5 from 'md5';
 
 const firebaseUrlBase = 'https://diskdraft.firebaseio.com';
-const version = '014';
+const version = '015';
 
 function getVersion() {
   return version;

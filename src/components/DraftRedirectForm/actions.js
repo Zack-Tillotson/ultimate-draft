@@ -29,22 +29,7 @@ const dispatcher = (dispatch) => {
             return;
           }
 
-          const ref = firebase.connect();
-          ref.child(draftId).once('value', (snapshot) => {
-
-            if(!snapshot.exists()) {
-              dispatch(creators.redirectFails(1));
-            } else {
-              const draftPwHash = utils.hashPassword(draftPw);
-              snapshot.ref().child(draftPwHash).once('value', (snapshot) => {
-                if(!snapshot.exists()) {
-                  dispatch(creators.redirectFails(2));
-                } else {
-                  window.location = '/draft/?id=' + draftId + '/' + draftPwHash;
-                }
-              });
-            }
-          });
+          window.location = '/draft/?id=' + draftId;
         });
       },
       

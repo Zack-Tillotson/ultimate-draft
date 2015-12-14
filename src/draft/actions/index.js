@@ -26,8 +26,19 @@ export default (dispatch) => {
       cancelModal(modalName) {
         dispatch(ui.cancelModal(modalName));
       },
-      firebase(success, data = {}) {
-        dispatch(firebase.firebase(success, data));
+      draftMeta(success, data = {}) {
+        dispatch(firebase.requestingData());
+        dispatch(firebase.draftMeta(success, data));
+      },
+      draftData(success, data = {}) {
+        dispatch(firebase.requestingData());
+        dispatch(firebase.draftData(success, data));
+      },
+      firebaseRoll(isAdmin) {
+        dispatch(firebase.firebaseRoll(isAdmin));
+      },
+      passwordRequired() {
+        dispatch(firebase.passwordRequired());
       },
       blowup(message) {
         dispatch(overlay.blowup(message));

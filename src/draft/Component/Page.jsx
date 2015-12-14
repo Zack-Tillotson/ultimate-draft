@@ -5,6 +5,7 @@ import {PulseLoader} from 'halogen';
 
 import Utils from '../utils';
 import Firebase from '../../firebase';
+import firebaseUtils from '../../firebase/utils';
 
 import selector from '../selector';
 import actions from '../actions';
@@ -13,30 +14,13 @@ import modalNames from '../modalNames';
 import styles from './styles';
 
 import Application from '../../components/Application';
-import TabbedContainer from '../../components/TabbedContainer';
-import ModalContainer from '../../components/ModalContainer';
-import StatusView from '../../components/draft/StatusView';
-import DraftOrder from '../../components/draft/DraftOrder';
-import DraftNotifications from '../../components/draft/DraftNotifications';
-import DraftTutorial from '../../components/draft/DraftTutorial';
-
-// Tabs
-import Settings from '../../components/draft/Settings'
-import Players from '../../components/draft/Players'
-import Teams from '../../components/draft/Teams';
-import History from '../../components/draft/History';
-
-// Modals
-import ChooseViewTeam from '../../components/draft/ChooseViewTeam';
-import FilterColumns from '../../components/draft/FilterColumns';
-import FilterPlayers from '../../components/draft/FilterPlayers';
-import DraftPlayer from '../../components/draft/DraftPlayer';
-import UndraftPlayer from '../../components/draft/UndraftPlayer';
+import DraftView from '../../components/draft/DraftView';
+import DraftPasswordForm from '../../components/DraftPasswordForm';
 
 const Page = React.createClass({
   
   componentDidMount() {
-    this.connectToFirebase()
+    this.syncFirebaseMeta()
     document.addEventListener('keydown', this.keyPressHandler);
   },
 
@@ -45,13 +29,46 @@ const Page = React.createClass({
     document.removeEventListener('keydown', this.keyPressHandler);
   },
 
-  connectToFirebase() {
+  // When this function completes we'll know if we need to get a password from the user
+  syncFirebaseMeta() {
     const firebaseId = Utils.getFirebaseId();
     if(firebaseId) {
-      this.firebaseRef = Firebase.sync(firebaseId, this.props.dispatch.firebase);
-      const auth = this.firebaseRef.onAuth(this.props.dispatch.triggerLogin);
+      this.firebaseMetaRef = Firebase.sync('draftMeta/' + firebaseId, this.handleFirebaseMetadata);
+      const auth = this.firebaseMetaRef.onAuth(this.handleAuth);
     } else {
-      this.props.dispatch.blowup('Draft not found, please check to make sure the URL is correct');
+      this.props.dispatch.blowup('No draft specified, unable to continue.');
+    }
+  },
+
+  handleAuth() {
+    this.props.dispatch.triggerLogin(...arguments);
+    this.firebaseRoleRef = Firebase.sync('admins', this.handleFirebaseRole);
+  },
+
+  handleFirebaseRole(isAdmin) {
+    this.props.dispatch.firebaseRoll(isAdmin);
+  },
+
+  handleFirebaseMetadata(success, data) {
+    if(!success) { // Throw an error
+      this.props.dispatch.blowup('Draft not found, please make sure the URL is correct');
+    } else {
+      if(data.hasPw) {
+        this.props.dispatch.passwordRequired();
+      } else {
+        this.syncFirebaseDrafts();
+      }
+    }
+  },
+
+  syncFirebaseDrafts(password = "") {
+    const firebaseId = Utils.getFirebaseId();
+    const pwHash = firebaseUtils.hashPassword(password);
+    if(firebaseId) {
+      this.firebaseDraftsRef = Firebase.sync(
+        'drafts/' + firebaseId + '/' + pwHash, 
+        this.props.dispatch.draftData
+      );
     }
   },
 
@@ -61,193 +78,106 @@ const Page = React.createClass({
     }
   },
 
-  getStatusOverlay() {
-    if(this.props.firebase.broken || this.props.ui.error) {
-      return (
-        <div className="error">
-          Unable to connect to the draft. Please check the URL and reload the page.
-        </div>
-      );
-    } else if(!this.props.firebase.connected && !this.props.ui.error) {
-      return (
-        <div className="error">
-          <div className="spinner">
-            Connecting to database
-          </div>
-          <PulseLoader className="animatee" color="#999" />
-        </div>
-      );
-    } else {
-      return null;
-    }
-  },
-
   keyPressHandler(event) {
-    switch(event.keyCode) {
-      case 68: // d
-        const teamId = this.props.status.nextDraft.teamId;
-        this.props.dispatch.viewModal(modalNames.draftPlayer, {playerId: 1, teamId});
-        break;
-      case 67: // c
-        this.props.dispatch.viewModal(modalNames.chooseViewTeam);
-        break;
-      case 13: // Enter
-        this.refs.modals.confirmHandler(event);
-        break;
-      case 27: // Esc
-        if(this.props.ui.modal) {
-          this.props.dispatch.cancelModal();
-        }
-        break;
-      case 49: // 1
-        if(!this.props.ui.modal) {
-          this.props.dispatch.tabClick(tabNames.players);
-        }
-        break;
-      case 50: // 2
-        if(!this.props.ui.modal) {
-          this.props.dispatch.tabClick(tabNames.teams);
-        }
-        break;
-      case 51: // 3
-        if(!this.props.ui.modal) {
-          this.props.dispatch.tabClick(tabNames.history);
-        }
-        break;
+    if(this.props.firebase.connected) {
+      switch(event.keyCode) {
+        case 68: // d
+          const teamId = this.props.status.nextDraft.teamId;
+          this.props.dispatch.viewModal(modalNames.draftPlayer, {playerId: 1, teamId});
+          break;
+        case 67: // c
+          this.props.dispatch.viewModal(modalNames.chooseViewTeam);
+          break;
+        case 13: // Enter
+          // TODO this.refs.draftView.modals.confirmHandler(event);
+          break;
+        case 27: // Esc
+          if(this.props.ui.modal) {
+            this.props.dispatch.cancelModal();
+          }
+          break;
+        case 49: // 1
+          if(!this.props.ui.modal) {
+            this.props.dispatch.tabClick(tabNames.players);
+          }
+          break;
+        case 50: // 2
+          if(!this.props.ui.modal) {
+            this.props.dispatch.tabClick(tabNames.teams);
+          }
+          break;
+        case 51: // 3
+          if(!this.props.ui.modal) {
+            this.props.dispatch.tabClick(tabNames.history);
+          }
+          break;
+      }
     }
   },
 
-  getTeamStatus() {
+  getError() {
     return (
-      <StatusView 
-        user={this.props.user}
-        status={this.props.status}
-        columns={this.props.columns}
-        viewModal={this.props.dispatch.viewModal} />
+      <div className="error">
+        Unable to connect to the draft. Please check the draft ID and reload the page.
+      </div>
     );
   },
 
-  getDraftOrder() {
+  getSpinner() {
     return (
-      <DraftOrder status={this.props.status} />
+      <div className="error">
+        <div className="spinner">
+          Connecting to database.
+        </div>
+        <PulseLoader className="animatee" color="#999" />
+      </div>
     );
   },
 
-  getTabs() {
+  getPasswordForm() {
     return (
-      <TabbedContainer 
-          currentTabName={this.props.ui.tab}
-          tabClickHandler={this.props.dispatch.tabClick} >
-
-        <Players 
-          tabName={tabNames.players}
-          columns={this.props.columns}
-          players={this.props.players}
-          drafts={this.props.drafts}
-          status={this.props.status}
-          viewModal={this.props.dispatch.viewModal} 
-          viewTeam={this.props.user.viewTeam}
-          rowFilters={this.props.user.rowFilters} />
-        <Teams 
-          tabName={tabNames.teams}
-          columns={this.props.columns}
-          teams={this.props.teams}
-          viewModal={this.props.dispatch.viewModal} />
-        <History 
-          tabName={tabNames.history}
-          columns={this.props.columns}
-          drafts={this.props.drafts}
-          teams={this.props.teams}
-          players={this.props.players}
-          viewModal={this.props.dispatch.viewModal} />
-        <Settings
-          tabName={tabNames.settings}
-          columns={this.props.columns}
-          players={this.props.players}
-          drafts={this.props.drafts}
-          baggageDrafts={this.props.baggageDrafts}
-          teams={this.props.teams}
-          draftMeta={this.props.draftMeta} 
-          auth={this.props.auth}
-          addBaggageDraft={this.props.dispatch.addBaggageDraft}
-          viewModal={this.props.dispatch.viewModal} />
-
-      </TabbedContainer>
+      <div className="pwRequired">
+        <div classname="title">
+          A password is required to access this draft.
+        </div>
+        <DraftPasswordForm 
+          submitHandler={this.syncFirebaseDrafts} 
+          requesting={this.props.firebase.requesting} />
+      </div>
     );
   },
 
-  getModal() {
+  getDraftView() {
     return (
-      <ModalContainer 
-          ref="modals"
-          currentModalName={this.props.ui.modal}
-          modalData={this.props.ui.modalData}
-          confirmHandler={this.props.dispatch.confirmModal}
-          cancelHandler={this.props.dispatch.cancelModal}>
-
-        <ChooseViewTeam
-          modalName={modalNames.chooseViewTeam}
-          updateModal={this.props.dispatch.updateModal}
-          teams={this.props.teams}
-          data={this.props.ui.modalData}
-          viewTeam={this.props.user.viewTeam} />
-        <FilterColumns 
-          modalName={modalNames.filterColumns}
-          updateModal={this.props.dispatch.updateModal}
-          data={this.props.columns} />
-        <FilterPlayers 
-          modalName={modalNames.filterRows}
-          updateModal={this.props.dispatch.updateModal}
-          data={this.props.ui.modalData} />
-        <DraftPlayer
-          modalName={modalNames.draftPlayer}
-          updateModal={this.props.dispatch.updateModal}
-          data={this.props.ui.modalData} 
-          teams={this.props.teams}
-          players={this.props.players}
-          drafts={this.props.drafts}
-          columns={this.props.columns} />
-        <UndraftPlayer
-          modalName={modalNames.undraftPlayer}
-          data={this.props.ui.modalData}
-          columns={this.props.columns} />
-
-      </ModalContainer>
+      <DraftView ref="draftView" {...this.props} />
     );
   },
 
-  getNotifications() {
-    return (
-      <DraftNotifications
-        drafts={this.props.drafts}
-        teams={this.props.teams}
-        user={this.props.user}
-        status={this.props.status} />
-    );
-  },
-
-  getTutorial() {
-    return (
-      <DraftTutorial 
-        step={this.props.user.tutorialStep}
-        nextTutorialStep={this.props.dispatch.nextTutorialStep}
-        quitTutorial={this.props.dispatch.quitTutorial} />
-    );
+  getContent(state) {
+    switch(state) {
+      case 'error': 
+        return this.getError();
+      case 'spinning':
+        return this.getSpinner();
+      case 'needPw':
+        return this.getPasswordForm();
+      case 'drafting':
+        return this.getDraftView();
+    }
   },
 
   render() {
+
+    const state = 
+        (this.props.firebase.broken || this.props.ui.error) ? 'error'
+      : this.props.firebase.needPw ? 'needPw'
+      : this.props.firebase.connected ? 'drafting'
+      : 'spinning';
+
     return (
       <Application>
         <InlineCss stylesheet={styles} componentName="container">
-
-          {this.getDraftOrder()}
-          {this.getTeamStatus()}
-          {this.getTabs()}
-          {this.getModal()}
-          {this.getStatusOverlay()}
-          {this.getNotifications()}
-          {this.getTutorial()}
-
+          {this.getContent(state)}
          </InlineCss>
       </Application>
     );
