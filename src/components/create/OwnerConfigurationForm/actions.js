@@ -1,4 +1,4 @@
-import actions from '../../../create/actionNames';
+import actions from '../../../actionNames';
 
 const creators = {
   submitForm(info) {

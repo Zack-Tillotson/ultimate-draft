@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import formNames from '../formNames.js';
-import actions from '../actionNames';
+import actions from '../../actionNames';
 
 function getInitialState() {
   return Immutable.fromJS({

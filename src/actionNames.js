@@ -1,16 +1,18 @@
 export default {
-  request: 'request',
+  submitForm: 'submitForm',
+  previousForm: 'previousForm',
+  startSave: 'startSave',
+  finishSave: 'finishSave',
 
   tabClick: 'tabClick',
   viewModal: 'viewModal',
   cancelModal: 'cancelModal',
   confirmModal: 'confirmModal',
   updateModal: 'updateModal',
+  tutorialStep: 'tutorialStep',
   sortPlayers: 'sortPlayers',
   
   firebase: 'firebase',
   blowup: 'blowup',
-  syncing: 'syncing',
-  login: 'login',
-  redirect: 'redirect'
+  syncing: 'syncing'
 };

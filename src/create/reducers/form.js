@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import actions from '../actionNames';
+import actions from '../../actionNames';
 
 export function getInitialState(name) {
   return {

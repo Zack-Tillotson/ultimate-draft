@@ -1,4 +1,4 @@
-import actions from '../actionNames';
+import actions from '../../actionNames';
 import utils from '../utils';
 import firebase from './firebase';
 import modalNames from '../modalNames';
@@ -34,5 +34,8 @@ export default {
   },
   quitTutorial() {
     return {type: actions.tutorialStep, isQuit: true};
+  },
+  loading() {
+    return {type: actions.syncing};
   }
 };

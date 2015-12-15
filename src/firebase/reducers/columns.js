@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import actions from '../actionNames';
+import actions from '../../actionNames';
 
 function getInitialState() {
   return Immutable.fromJS([]);
@@ -8,8 +8,8 @@ function getInitialState() {
 export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.firebase:
-      if(action.success) {
-        state = Immutable.fromJS(action.data.players);
+      if(!action.error && /drafts\/.+/.test(action.path)) {
+        state = Immutable.fromJS(action.data.columns);
       }
   }
   return state;

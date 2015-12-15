@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import actions from '../actionNames';
+import actions from '../../actionNames';
 import formNames from '../formNames.js';
 import {getInitialState as getFormInitialState} from './form.js';
 import formsReducer from './form.js';

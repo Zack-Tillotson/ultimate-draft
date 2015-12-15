@@ -32,27 +32,6 @@ const DraftView = React.createClass({
 
   },
   
-  getStatusOverlay() {
-    if(this.props.firebase.broken || this.props.ui.error) {
-      return (
-        <div className="error">
-          Unable to connect to the draft. Please check the URL and reload the page.
-        </div>
-      );
-    } else if(!this.props.firebase.connected && !this.props.ui.error) {
-      return (
-        <div className="error">
-          <div className="spinner">
-            Connecting to database
-          </div>
-          <PulseLoader className="animatee" color="#999" />
-        </div>
-      );
-    } else {
-      return null;
-    }
-  },
-
   getTeamStatus() {
     return (
       <StatusView 
@@ -103,7 +82,7 @@ const DraftView = React.createClass({
           drafts={this.props.drafts}
           baggageDrafts={this.props.baggageDrafts}
           teams={this.props.teams}
-          isAdmin={this.props.firebase.isAdmin} 
+          isAdmin={this.props.auth.isAdmin} 
           auth={this.props.auth}
           addBaggageDraft={this.props.dispatch.addBaggageDraft}
           viewModal={this.props.dispatch.viewModal} />
@@ -178,7 +157,6 @@ const DraftView = React.createClass({
         {this.getTeamStatus()}
         {this.getTabs()}
         {this.getModal()}
-        {this.getStatusOverlay()}
         {this.getNotifications()}
         {this.getTutorial()}
       </div>

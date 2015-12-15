@@ -7,8 +7,12 @@ function getInitialState() {
 
 export default function(state = getInitialState(), action) {
   switch(action.type) {
-    case actions.login:
-      state = Immutable.fromJS(action.auth || {});
+    case actions.firebase:
+      if(action.path == 'auth') {
+        state = Immutable.fromJS(action.data || {});
+      } else if(action.path == 'auth/isAdmin') {
+        state = state.merge({isAdmin: action.data});
+      }
       break;
   }
   return state;

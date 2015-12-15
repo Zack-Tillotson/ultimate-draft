@@ -31,24 +31,23 @@ export default {
 
   save(data) {
       
-    const id = data.draft.draftId;
-    const pw = utils.hashPassword(data.draft.draftPw);
-
-    const firebaseUrl = utils.getFirebaseUrl();
-    const firebase = new Firebase(firebaseUrl);
-
+    const {draftId, draftPw, ...metaData} = data.draft;
+    const pw = utils.hashPassword(draftPw);
     const draftMeta = {
       hasPw: !!pw,
       visible: true,
       timestamp: Firebase.ServerValue.TIMESTAMP
     };
 
-    const {maxMen, maxWomen} = data.draft;
-    data.draft = {maxMen, maxWomen};
+    data.draft = metaData;
+
+    
+    const firebaseUrl = utils.getFirebaseUrl();
+    const firebase = new Firebase(firebaseUrl);
 
     const draftPromise = new Promise((resolve, reject) => {
 
-      firebase.child('drafts').child(id).child(pw).set(data, (error) => {
+      firebase.child('drafts').child(draftId).child(pw).set(data, (error) => {
         if(error) {
           reject(error);
         } else {
@@ -59,7 +58,7 @@ export default {
 
     const draftMetaPromise = new Promise((resolve, reject) => {
 
-      firebase.child('draftMeta').child(id).set(draftMeta, (error) => {
+      firebase.child('draftMeta').child(draftId).set(draftMeta, (error) => {
         if(error) {
           reject(error);
         } else {
@@ -71,31 +70,30 @@ export default {
     return Promise.all(draftPromise, draftMetaPromise);
   },
 
-  sync(path, dispatch) {
-
-    const firebaseUrl = utils.getFirebaseUrl(path);
-    const ref = new Firebase(firebaseUrl);
-
-    ref.on(
-      'value', 
-      snapshot => {
-        if(snapshot.exists()) {
-          dispatch(true, snapshot.val());
-        } else {
-          dispatch(false);
-        }
-      }, 
-      error => {
-        dispatch(false);
-      }
-    );
-
-    return ref;
+  syncDraftList(onData) {
+    utils.syncAuth(onData);
+    utils.syncData('draftMeta', onData);
   },
 
-  connect(path) {
-    const firebaseUrl = utils.getFirebaseUrl(path);
-    return new Firebase(firebaseUrl);
+  requestAuth(service, onError) {
+    const ref = utils.connect();
+    ref.authWithOAuthRedirect(service, onError);
+  },
+
+  requestUnauth(service, onError) {
+    const ref = utils.connect();
+    ref.unauth();
+  },
+
+  syncDraftMeta(draftId, onData) {
+    utils.syncAuth(onData);
+    utils.syncData('draftMeta/' + draftId, onData);
+  },
+
+  // Might be called repeatedly with different passwords
+  syncDraft(draftId, pw, onData) {
+    const pwHash = utils.hashPassword(pw);
+    return utils.syncData(`drafts/${draftId}/${pwHash}/`, onData); 
   }
   
 }

@@ -1,4 +1,4 @@
-import actions from '../actionNames';
+import actions from '../../actionNames';
 import utils from '../utils';
 import Firebase from '../../firebase';
 import modalNames from '../modalNames';
@@ -82,22 +82,10 @@ function requestingData() {
   return {type: actions.firebase, method: 'waiting'};
 }
 
-function draftData(success, data) {
-  return {type: actions.firebase, method: 'draftData', success, data};
-}
-
-function draftMetadata(success, data) {
-  return {type: actions.firebase, method: 'draftMeta', success, data};
-}
-
-function passwordRequired(success, data) {
-  return {type: actions.firebase, method: 'passwordRequired'};
-}
-
-function firebaseRoll(isAdmin) {
-  return {type: actions.firebase, method: 'role', isAdmin};
+function data(result) {
+  return {type: actions.firebase, ...result};
 }
 
 export default {
-  putDraft, unputDraft, draftData, draftMetadata, passwordRequired, requestingData, firebaseRoll
+  putDraft, unputDraft, requestingData, data
 }

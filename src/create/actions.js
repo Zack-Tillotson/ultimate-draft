@@ -1,4 +1,4 @@
-import actions from './actionNames';
+import actions from '../actionNames';
 
 const creators = {
   goBack() {

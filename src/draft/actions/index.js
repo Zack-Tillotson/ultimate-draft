@@ -1,4 +1,4 @@
-import actions from '../actionNames';
+import actions from '../../actionNames';
 import utils from '../utils';
 import modalNames from '../modalNames';
 import firebase from './firebase';
@@ -26,16 +26,11 @@ export default (dispatch) => {
       cancelModal(modalName) {
         dispatch(ui.cancelModal(modalName));
       },
-      draftMeta(success, data = {}) {
-        dispatch(firebase.requestingData());
-        dispatch(firebase.draftMeta(success, data));
+      loading(result) {
+        dispatch(ui.loading());
       },
-      draftData(success, data = {}) {
-        dispatch(firebase.requestingData());
-        dispatch(firebase.draftData(success, data));
-      },
-      firebaseRoll(isAdmin) {
-        dispatch(firebase.firebaseRoll(isAdmin));
+      firebase(result) {
+        dispatch(firebase.data(result));
       },
       passwordRequired() {
         dispatch(firebase.passwordRequired());
@@ -51,12 +46,6 @@ export default (dispatch) => {
       },
       quitTutorial() {
         dispatch(ui.quitTutorial());
-      },
-      triggerLogin(auth) {
-        dispatch(creators.login(auth))
-      },
-      addBaggageDraft(data) {
-        firebase.putDraft(dispatch, data);
       }
     }
   }

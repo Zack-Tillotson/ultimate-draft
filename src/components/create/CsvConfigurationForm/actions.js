@@ -1,4 +1,4 @@
-import actions from '../../../create/actionNames';
+import actions from '../../../actionNames';
 import validator from './validator';
 
 const creators = {

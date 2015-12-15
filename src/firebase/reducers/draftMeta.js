@@ -1,16 +1,17 @@
 import Immutable from 'immutable';
-import actions from '../actionNames';
+import actions from '../../actionNames';
 
 function getInitialState() {
-  return Immutable.fromJS([]);
+  return Immutable.fromJS({});
 }
 
 export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.firebase:
-      if(action.success) {
-        state = Immutable.fromJS(action.data.teams);
+      if(/draftMeta\/.+/.test(action.path)) {
+        state = Immutable.fromJS(action.data || {});
       }
+      break;
   }
   return state;
 }

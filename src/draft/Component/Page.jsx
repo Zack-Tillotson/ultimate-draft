@@ -3,8 +3,8 @@ import InlineCss from 'react-inline-css';
 import { connect } from 'react-redux';
 import {PulseLoader} from 'halogen';
 
-import Utils from '../utils';
-import Firebase from '../../firebase';
+import utils from '../utils';
+import firebase from '../../firebase';
 import firebaseUtils from '../../firebase/utils';
 
 import selector from '../selector';
@@ -20,62 +20,34 @@ import DraftPasswordForm from '../../components/DraftPasswordForm';
 const Page = React.createClass({
   
   componentDidMount() {
-    this.syncFirebaseMeta()
+    this.startSyncDraftMeta();
     document.addEventListener('keydown', this.keyPressHandler);
   },
 
-  componenWillUnmount() {
-    this.disconnectFirebase();
-    document.removeEventListener('keydown', this.keyPressHandler);
-  },
-
   // When this function completes we'll know if we need to get a password from the user
-  syncFirebaseMeta() {
-    const firebaseId = Utils.getFirebaseId();
+  startSyncDraftMeta() {
+    const firebaseId = utils.getFirebaseId();
     if(firebaseId) {
-      this.firebaseMetaRef = Firebase.sync('draftMeta/' + firebaseId, this.handleFirebaseMetadata);
-      const auth = this.firebaseMetaRef.onAuth(this.handleAuth);
+      firebase.syncDraftMeta(firebaseId, this.checkDraftPassword);
     } else {
       this.props.dispatch.blowup('No draft specified, unable to continue.');
     }
   },
 
-  handleAuth() {
-    this.props.dispatch.triggerLogin(...arguments);
-    this.firebaseRoleRef = Firebase.sync('admins', this.handleFirebaseRole);
-  },
-
-  handleFirebaseRole(isAdmin) {
-    this.props.dispatch.firebaseRoll(isAdmin);
-  },
-
-  handleFirebaseMetadata(success, data) {
-    if(!success) { // Throw an error
-      this.props.dispatch.blowup('Draft not found, please make sure the URL is correct');
-    } else {
-      if(data.hasPw) {
-        this.props.dispatch.passwordRequired();
-      } else {
-        this.syncFirebaseDrafts();
-      }
+  checkDraftPassword(result) {
+    this.props.dispatch.firebase(result);
+    if(typeof result.data.hasPw == 'boolean' && !result.data.hasPw) {
+      this.startSyncDraft();
     }
   },
 
-  syncFirebaseDrafts(password = "") {
-    const firebaseId = Utils.getFirebaseId();
-    const pwHash = firebaseUtils.hashPassword(password);
-    if(firebaseId) {
-      this.firebaseDraftsRef = Firebase.sync(
-        'drafts/' + firebaseId + '/' + pwHash, 
-        this.props.dispatch.draftData
-      );
-    }
-  },
+  startSyncDraft(password = '') {
 
-  disconnectFirebase() {
-    if(this.firebaseRef) {
-      this.firebaseRef.off();
+    if(this.firebaseDraftRef) {
+      this.firebaseDraftRef.off();
     }
+    this.props.dispatch.loading();
+    this.firebaseDraftRef = firebase.syncDraft(utils.getFirebaseId(), password, this.props.dispatch.firebase);
   },
 
   keyPressHandler(event) {
@@ -141,8 +113,9 @@ const Page = React.createClass({
           A password is required to access this draft.
         </div>
         <DraftPasswordForm 
-          submitHandler={this.syncFirebaseDrafts} 
+          submitHandler={this.startSyncDraft} 
           requesting={this.props.firebase.requesting} />
+        {!this.props.firebase.requesting && this.props.firebase.wrongPassword && ('Wrong password')}
       </div>
     );
   },
@@ -170,8 +143,8 @@ const Page = React.createClass({
 
     const state = 
         (this.props.firebase.broken || this.props.ui.error) ? 'error'
-      : this.props.firebase.needPw ? 'needPw'
-      : this.props.firebase.connected ? 'drafting'
+      : this.props.firebase.draftConnected ? 'drafting'
+      : (this.props.firebase.metaConnected && this.props.firebaseMeta.hasPw) ? 'needPw'
       : 'spinning';
 
     return (

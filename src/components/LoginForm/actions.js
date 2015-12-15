@@ -1,4 +1,4 @@
-import actions from '../../create/actionNames';
+import actions from '../../actionNames';
 import firebase from '../../firebase';
 
 const dispatcher = (dispatch) => {
@@ -6,14 +6,12 @@ const dispatcher = (dispatch) => {
     dispatch: {
       requestLogin(service) {
         dispatch(() => {
-          const ref = firebase.connect();
-          ref.authWithOAuthRedirect(service, (error) => {console.log("Firebase auth error!", error)});
+          firebase.requestAuth(service, (error) => {console.log("Firebase auth error!", error)});
         });
       },
       requestLogout() {
         dispatch(() => {
-          const ref = firebase.connect();
-          ref.unauth();
+          firebase.requestUnauth();
         });
       }
     }

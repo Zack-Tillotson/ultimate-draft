@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import actions from '../actionNames';
+import actions from '../../actionNames';
 import tabNames from '../tabNames.js';
 import modals from '../modalUtil';
 import modalNames from '../modalNames';

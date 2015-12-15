@@ -1,4 +1,4 @@
-import actions from '../actionNames';
+import actions from '../../actionNames';
 
 export default {
   blowup(message) {

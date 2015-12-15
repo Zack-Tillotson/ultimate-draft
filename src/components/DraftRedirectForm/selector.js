@@ -15,7 +15,6 @@ function draftList(draftListObj) {
 export default state => {
   return {
     isLoggedIn: isLoggedIn(state.auth),
-    draftList: draftList(state.draftMeta.toJS()),
-    ...state.draft.toJS()
+    draftList: draftList(state.draftMetas.toJS())
   }
 }
