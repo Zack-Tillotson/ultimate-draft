@@ -4,8 +4,8 @@ const creators = {
   goBack() {
     return {type: actions.previousForm}
   },
-  login(auth) {
-    return {type: actions.login, auth};
+  firebase(result) {
+    return {type: actions.firebase, ...result};
   }
 };
 
@@ -15,8 +15,8 @@ const dispatcher = (dispatch) => {
       goBack() {
         dispatch(creators.goBack());
       },
-      triggerLogin(auth) {
-        dispatch(creators.login(auth))
+      firebase(result) {
+        dispatch(creators.firebase(result))
       }
     }
   }

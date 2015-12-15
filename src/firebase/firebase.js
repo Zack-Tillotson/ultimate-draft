@@ -42,8 +42,7 @@ export default {
     data.draft = metaData;
 
     
-    const firebaseUrl = utils.getFirebaseUrl();
-    const firebase = new Firebase(firebaseUrl);
+    const firebase = utils.connect();
 
     const draftPromise = new Promise((resolve, reject) => {
 
@@ -67,12 +66,7 @@ export default {
       });
     });
 
-    return Promise.all(draftPromise, draftMetaPromise);
-  },
-
-  syncDraftList(onData) {
-    utils.syncAuth(onData);
-    utils.syncData('draftMeta', onData);
+    return Promise.all([draftPromise, draftMetaPromise]);
   },
 
   requestAuth(service, onError) {
@@ -83,6 +77,15 @@ export default {
   requestUnauth(service, onError) {
     const ref = utils.connect();
     ref.unauth();
+  },
+
+  syncBase(onData) {
+    return utils.syncAuth(onData);
+  },
+
+  syncDraftList(onData) {
+    utils.syncAuth(onData);
+    utils.syncData('draftMeta', onData);
   },
 
   syncDraftMeta(draftId, onData) {

@@ -22,8 +22,7 @@ import styles from './styles.raw.less';
 const Page = React.createClass({
 
   componentDidMount() {
-    const ref = firebase.connect();
-    const auth = ref.onAuth(this.props.dispatch.triggerLogin);
+    this.firebaseRef = firebase.syncBase(this.props.dispatch.firebase);
   },
 
   render() {
