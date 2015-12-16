@@ -23,7 +23,7 @@ export default React.createClass({
   render() {
     return (
       <InlineCss stylesheet={styles} componentName="container">
-        <Header />
+        <Header isLoggedIn={this.props.isLoggedIn} />
         {this.getChildren()}
         {this.props.footer && (<Footer />)}
       </InlineCss>

@@ -148,7 +148,7 @@ const Page = React.createClass({
       : 'spinning';
 
     return (
-      <Application>
+      <Application isLoggedIn={this.props.firebaseMeta.isLoggedIn}>
         <InlineCss stylesheet={styles} componentName="container">
           {this.getContent(state)}
          </InlineCss>

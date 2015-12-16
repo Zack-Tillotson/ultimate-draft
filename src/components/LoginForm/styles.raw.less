@@ -1,59 +1,76 @@
 container {
-  margin: 25px 0;
+  margin: 5px 0;
 
   .loginOption {
     display: inline-block;
     width: 64px;
-    height: 64px;
+    height: 100px;
     margin: 10px 25px;
     cursor: pointer;
     border: solid 3px #ddd;
-    padding: 15px;
+    padding: 5px 15px;
     border-radius: 2px;
+    color: #666;
+    font-size: 12px;
 
     &:hover {
       border-color: #0D3D65;
     }
 
     &.google {
-      background: url("../assets/google-plus-64.png") no-repeat center center;
+      background: #fff url("../assets/google-plus-64.png") no-repeat center center;
     }
 
     &.facebook {
-      background: url("../assets/facebook-64.png") no-repeat center center;
+      background: #fff url("../assets/facebook-64.png") no-repeat center center;
     }
 
     &.twitter {
-      background: url("../assets/twitter-64.png") no-repeat  center center;
+      background: #fff url("../assets/twitter-64.png") no-repeat  center center;
     }
   }
 
   .welcome {
 
+    cursor: pointer;
+
     .accountInfo {
       display: inline-block;
+      position: absolute;
+      left: -65px;
+      top: -5px;
 
       .service {
         display: inline-block;
-        width: 15px;
-        height: 15px;
         margin: 0 10px;
+        padding: 10px;
+        border-radius: 25px;
+        background: #fff;
 
-        &.google {
-          background: url("../assets/google-plus-64.png") no-repeat center center;
-          background-size: contain;
-        }
+        .icon {
+          width: 20px;
+          height: 20px;
 
-        &.facebook {
-          background: url("../assets/facebook-64.png") no-repeat center center;
-          background-size: contain;
-        }
+          &.google {
+            background: url("../assets/google-plus-64.png") no-repeat center center;
+            background-size: contain;
+          }
 
-        &.twitter {
-          background: url("../assets/twitter-64.png") no-repeat  center center;
-          background-size: contain;
+          &.facebook {
+            background: url("../assets/facebook-64.png") no-repeat center center;
+            background-size: contain;
+          }
+
+          &.twitter {
+            background: url("../assets/twitter-64.png") no-repeat  center center;
+            background-size: contain;
+          }
         }
       }
+    }
+
+    .displayName {
+      display: inline-block;
     }
 
     .optionDialog {
@@ -61,21 +78,24 @@ container {
       
       .toggle {
         margin-left: 3px;
-        color: #666;
-        cursor: pointer;
         position: relative;
 
         .optionsInner {
+          color: #000;
           position: absolute;
           top: 100%;
-          left: -22px;
+          left: -100px;
           font-size: 12px;
           text-decoration: underline;
           border: solid 1px black;
-          padding: 10px;
+          padding: 15px 25px;
+          background: #fff;
         }
       }
     }
+
+    &:hover .optionDialog {
+      color: #ccc;
+    }
   }
- 
-}
+ }

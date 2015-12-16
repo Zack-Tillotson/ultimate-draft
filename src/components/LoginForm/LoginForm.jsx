@@ -25,23 +25,32 @@ const LoginForm = React.createClass({
     return (
       <InlineCss stylesheet={styles} componentName="container">
 
-        {!this.props.isLoggedIn && services.map(service => (
-          <div 
-            key={service}
-            className={["loginOption", service].join(' ')}
-            onClick={this.props.dispatch.requestLogin.bind(this, service)}>
+        {!this.props.isLoggedIn && (
+          <div className="loginSection">
+            {services.map(service => (
+              <div 
+                key={service}
+                className={["loginOption", service].join(' ')}
+                onClick={this.props.dispatch.requestLogin.bind(this, service)}>
+                {service}
+              </div>
+            ))}
+            <div className="securityNotice">
+              We take your privacy seriously - we never share your personal information, all traffic is encrypted.
+            </div>
           </div>
-        ))}
+        )}
 
         {this.props.isLoggedIn && (
-          <div className="welcome">
+          <div className="welcome" onClick={this.dialogClickHandler}>
             <div className="accountInfo">
-              Account:
-              <div className={["service", selectedService].join(' ')}></div>
-              {this.props.displayName}
+              <div className="service">
+                <div className={["icon", selectedService].join(' ')}></div>
+              </div>
             </div>
+            <div className="displayName">{this.props.displayName}</div>
             <div className="optionDialog">
-              <div className="toggle" onClick={this.dialogClickHandler}>
+              <div className="toggle">
                 {'\u25BE'}
                 {this.state.optionsDialogOpen && (
                   <div className="optionsInner">

@@ -2,4 +2,47 @@ container {
   text-align: center;
   padding: 10px;
   background: white;
+  font-family: 'Roboto', sans-serif;
+
+  .callToAction {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 25px 0;
+  }
+
+  .highlights {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    align-content: center;
+
+    .highlight {
+      width: 30%;
+      min-width: 400px;
+      margin: 5px;
+
+      .highlightTitle {
+      }
+
+      .highlightImage {
+        display: inline-block;
+        border: solid 1px #666;
+        box-shadow: 3px 3px 5px #ccc;
+        margin: 15px 0;
+
+        img {
+          height: 100px;
+        }
+      }
+
+      .highlightExtras {
+        color: #666;
+        font-size: 16px;
+
+        .highlightExtra {
+
+        }
+      }
+    }
+  }
 }

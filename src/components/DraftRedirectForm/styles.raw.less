@@ -15,21 +15,25 @@ container {
     }
   }
 
-  .submit {
-    padding: 5px 15px;
-    margin: 5px 15px;
-  }
-
   .draftItems {
     display: inline-block;
     width: 300px;
+    border: solid 2px #666;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
     
     .draftItem {
       padding: 10px;
+      border-top: solid 2px #ccc;
 
-      &.selected {
+      &:nth-of-type(1) {
+        border-top: none;
+      }
+
+      &:hover {
         background: #0D3D65;
-        color: #fff;
+        color: #eee;
       }
     }
   }

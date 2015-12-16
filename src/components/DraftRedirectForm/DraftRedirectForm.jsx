@@ -15,37 +15,23 @@ const DraftRedirectForm = React.createClass({
     dispatch: React.PropTypes.object.isRequired
   },
 
-  getInitialState() {
-    return {
-      selectedDraftIndex: -1
-    };
-  },
-
-  willReceiveProps(nextProps) {
-    this.setState(this.getInitialState());
-  },
-
-  handleSubmit() {
-    const draftId = this.props.draftList[this.state.selectedDraftIndex].id;
+  handleSubmit(selectedDraftIndex) {
+    const draftId = this.props.draftList[selectedDraftIndex].id;
     this.props.dispatch.requestRedirect({draftId});
-  },
-
-  handleDraftSelect(selectedDraftIndex) {
-    this.setState({selectedDraftIndex});
   },
 
   render() {
     const loadingClass = this.props.inProgress ? 'loading' : '';
     return (
       <InlineCss stylesheet={styles} componentName="container" className={loadingClass}>   
+        <h3>Select Your Draft</h3>
         <div className="draftItems">
-          {this.props.draftList.map((draft, index) => {
-            const selected = this.state.selectedDraftIndex == index ? 'selected' : '';
+          {this.props.draftList.filter(draft => draft.visible).map((draft, index) => {
             return (
               <div 
-                className={["draftItem", selected].join(' ')}
+                className={"draftItem"}
                 key={draft.id} 
-                onClick={this.handleDraftSelect.bind(this, index)}>
+                onClick={this.handleSubmit.bind(this, index)}>
                 {draft.id}
               </div>
             );
@@ -53,9 +39,6 @@ const DraftRedirectForm = React.createClass({
         </div>
         {this.props.inProgress && (
           <PulseLoader className="animatee" color="#999" />
-        )}
-        {!this.props.inProgress && this.state.selectedDraftIndex >= 0 && (
-          <div className="submitBtn" onClick={this.handleSubmit}>Go</div>
         )}
       </InlineCss>
     );
