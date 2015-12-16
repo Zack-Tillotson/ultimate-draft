@@ -84,6 +84,7 @@ const DraftView = React.createClass({
           teams={this.props.teams}
           isAdmin={this.props.auth.isAdmin} 
           auth={this.props.auth}
+          connection={this.props.connection}
           addBaggageDraft={this.props.dispatch.addBaggageDraft}
           viewModal={this.props.dispatch.viewModal} />
 
@@ -98,7 +99,8 @@ const DraftView = React.createClass({
           currentModalName={this.props.ui.modal}
           modalData={this.props.ui.modalData}
           confirmHandler={this.props.dispatch.confirmModal}
-          cancelHandler={this.props.dispatch.cancelModal}>
+          cancelHandler={this.props.dispatch.cancelModal}
+          connection={this.props.connection}>
 
         <ChooseViewTeam
           modalName={modalNames.chooseViewTeam}
@@ -121,11 +123,13 @@ const DraftView = React.createClass({
           teams={this.props.teams}
           players={this.props.players}
           drafts={this.props.drafts}
-          columns={this.props.columns} />
+          columns={this.props.columns}
+          connection={this.props.connection} />
         <UndraftPlayer
           modalName={modalNames.undraftPlayer}
           data={this.props.ui.modalData}
-          columns={this.props.columns} />
+          columns={this.props.columns}
+          connection={this.props.connection} />
 
       </ModalContainer>
     );

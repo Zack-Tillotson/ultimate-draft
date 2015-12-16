@@ -46,12 +46,12 @@ const Page = React.createClass({
     if(this.firebaseDraftRef) {
       this.firebaseDraftRef.off();
     }
-    this.props.dispatch.loading();
+    this.props.dispatch.passwordEntered(password);
     this.firebaseDraftRef = firebase.syncDraft(utils.getFirebaseId(), password, this.props.dispatch.firebase);
   },
 
   keyPressHandler(event) {
-    if(this.props.firebase.connected) {
+    if(this.props.connection.connected) {
       switch(event.keyCode) {
         case 68: // d
           const teamId = this.props.status.nextDraft.teamId;
@@ -114,8 +114,8 @@ const Page = React.createClass({
         </div>
         <DraftPasswordForm 
           submitHandler={this.startSyncDraft} 
-          requesting={this.props.firebase.requesting} />
-        {!this.props.firebase.requesting && this.props.firebase.wrongPassword && ('Wrong password')}
+          requesting={this.props.connection.requesting} />
+        {!this.props.connection.requesting && this.props.connection.wrongPassword && ('Wrong password')}
       </div>
     );
   },
@@ -142,9 +142,9 @@ const Page = React.createClass({
   render() {
 
     const state = 
-        (this.props.firebase.broken || this.props.ui.error) ? 'error'
-      : this.props.firebase.draftConnected ? 'drafting'
-      : (this.props.firebase.metaConnected && this.props.firebaseMeta.hasPw) ? 'needPw'
+        (this.props.connection.broken || this.props.ui.error) ? 'error'
+      : this.props.connection.draftConnected ? 'drafting'
+      : (this.props.connection.metaConnected && this.props.firebaseMeta.hasPw) ? 'needPw'
       : 'spinning';
 
     return (

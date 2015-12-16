@@ -1,18 +1,15 @@
 import actions from '../../actionNames';
 import utils from '../utils';
-import Firebase from '../../firebase';
+import firebase from '../../firebase';
 import modalNames from '../modalNames';
 import overlay from './overlay';
 
-function transformDraft(dispatch, data, tranformationFn) {
-  const teamId = data.teamId;
-  const playerId = data.playerId;
+function transformDraft(dispatch, draftId, draftPw, data, tranformationFn) {
 
   dispatch(overlay.uploadStarting());
   
-  const firebaseId = utils.getFirebaseId();
-  const draftsRef = Firebase.connect(firebaseId + '/drafts');
-  const draftRef = draftsRef.transaction(
+  const draftsRef = firebase.connectToDraft(draftId, draftPw);
+  const draftRef = draftsRef.child('drafts').transaction(
     tranformationFn,
 
     // On Complete
@@ -28,8 +25,8 @@ function transformDraft(dispatch, data, tranformationFn) {
   );
 }
 
-function putDraft(dispatch, data) {
-  return transformDraft(dispatch, data, 
+function putDraft(dispatch, draftId, draftPw, data) {
+  return transformDraft(dispatch, draftId, draftPw, data,
 
     // Upate function
     (currentData) => {
@@ -53,8 +50,8 @@ function putDraft(dispatch, data) {
   );
 }
 
-function unputDraft(dispatch, data) {
-  return transformDraft(dispatch, data, 
+function unputDraft(dispatch, draftId, draftPw, data) {
+  return transformDraft(dispatch, draftId, draftPw, data,
 
     // Upate function
     (currentData) => {

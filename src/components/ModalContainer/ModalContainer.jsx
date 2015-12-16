@@ -6,6 +6,7 @@ import styles from './styles';
 export default React.createClass({
 
   propTypes: {
+    connection: React.PropTypes.object.isRequired,
     currentModalName: React.PropTypes.string,
     confirmHandler: React.PropTypes.func.isRequired,
     cancelHandler: React.PropTypes.func.isRequired
@@ -36,7 +37,7 @@ export default React.createClass({
   confirmHandler(event) {
     event.preventDefault();
     if(!this.refs.modal.validate || this.refs.modal.validate(this.props.modalData)) {
-      this.props.confirmHandler(this.props.currentModalName, this.props.modalData);
+      this.props.confirmHandler(this.props.currentModalName, this.props.modalData, this.props.connection);
     }
   },
 

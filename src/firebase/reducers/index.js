@@ -11,4 +11,5 @@ import drafts from './drafts';
 import draftMeta from './draftMeta';
 
 export const home = combineReducers({auth, draftMetas});
+export const create = combineReducers({auth});
 export const draft = combineReducers({auth, players, teams, columns, drafts, draftMeta});

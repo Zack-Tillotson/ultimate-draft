@@ -14,12 +14,12 @@ export default {
   updateModal(data) {
     return {type: actions.updateModal, data};
   },
-  confirmModal(modalName, data) { 
+  confirmModal(modalName, data, connection) { 
     switch(modalName) {
       case modalNames.draftPlayer:
-        return (dispatch) => firebase.putDraft(dispatch, data);
+        return (dispatch) => firebase.putDraft(dispatch, connection.draftId, connection.enteredPassword, data);
       case modalNames.undraftPlayer:
-        return (dispatch) => firebase.unputDraft(dispatch, data);
+        return (dispatch) => firebase.unputDraft(dispatch, connection.draftId, connection.enteredPassword, data);
       case modalNames.chooseViewTeam:
       case modalNames.filterRows:
       case modalNames.filterColumns:
@@ -37,5 +37,8 @@ export default {
   },
   loading() {
     return {type: actions.syncing};
+  },
+  passwordEntered(password) {
+    return {type: actions.syncing, password};
   }
 };

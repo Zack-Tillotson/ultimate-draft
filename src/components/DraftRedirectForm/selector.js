@@ -1,20 +1,5 @@
-import {createSelector} from 'reselect';
-
-function isLoggedIn(auth) {
-  return auth.has('auth')
-}
-
-function draftList(draftListObj) {
-  return Object.keys(draftListObj)
-    .sort()
-    .map(key => {
-      return {...draftListObj[key], id: key}
-    });
-}
+import firebase from '../../firebase/selectors';
 
 export default state => {
-  return {
-    isLoggedIn: isLoggedIn(state.auth),
-    draftList: draftList(state.draftMetas.toJS())
-  }
-}
+  return firebase(state.firebase);
+};

@@ -1,37 +1,25 @@
 container {
+  text-align: center;
+  margin-top: 25px;
 
   .form-group {
-    display: block;
-
-    label {
-      display: inline-block;
-      width: 100px;
-      text-align: left;
-      margin-right: 5px;
-    }
+    display: inline-block;
 
     div {
       display: inline-block;
     }
-  }
+  } 
 
-  .submit {
-    padding: 5px 15px;
-    margin: 5px 15px;
-  }
-
-  .draftItems {
+  .submitBtn {
+    border: solid 1px #ccc;
+    background: #eee;
     display: inline-block;
-    width: 300px;
-    
-    .draftItem {
-      padding: 10px;
+    padding: 2px 25px;
+    margin-left: 5px;
+    cursor: pointer;
 
-      &.selected {
-        background: #0D3D65;
-        color: #fff;
-      }
+    &:hover {
+      background: #ddd;
     }
   }
- 
 }

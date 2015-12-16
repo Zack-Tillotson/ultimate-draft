@@ -97,6 +97,11 @@ export default {
   syncDraft(draftId, pw, onData) {
     const pwHash = utils.hashPassword(pw);
     return utils.syncData(`drafts/${draftId}/${pwHash}/`, onData); 
+  },
+
+  connectToDraft(draftId, pw) {
+    const pwHash = utils.hashPassword(pw);
+    return utils.connect(`drafts/${draftId}/${pwHash}/`); 
   }
   
 }

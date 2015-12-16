@@ -11,7 +11,7 @@ const creators = {
   }
 }
 
-export default (dispatch) => {
+export default (dispatch, props) => {
   return {
     dispatch: {
       tabClick(tabName) {
@@ -26,8 +26,11 @@ export default (dispatch) => {
       cancelModal(modalName) {
         dispatch(ui.cancelModal(modalName));
       },
-      loading(result) {
+      loading() {
         dispatch(ui.loading());
+      },
+      passwordEntered(password) {
+        dispatch(ui.passwordEntered(password));
       },
       firebase(result) {
         dispatch(firebase.data(result));
@@ -38,14 +41,17 @@ export default (dispatch) => {
       blowup(message) {
         dispatch(overlay.blowup(message));
       },
-      confirmModal(modalName, data = {}) {
-        dispatch(ui.confirmModal(modalName, data));
+      confirmModal(modalName, data = {}, connection = {}) {
+        dispatch(ui.confirmModal(modalName, data, connection));
       },
       nextTutorialStep(step) {
         dispatch(ui.nextTutorialStep(step));
       },
       quitTutorial() {
         dispatch(ui.quitTutorial());
+      },
+      addBaggageDraft(data, connection) {
+        firebase.putDraft(dispatch, connection.draftId, connection.enteredPassword, data);
       }
     }
   }

@@ -25,7 +25,7 @@
         "$draftId": {
           "$password": {
             ".read": "auth != null",
-            ".write": "!data.exists() && root.child($version).child('admins').child(auth.uid).exists()" // Only admins can modify drafts
+            ".write": "root.child($version).child('admins').child(auth.uid).exists()" // Only admins can modify drafts
           }
         }
       }

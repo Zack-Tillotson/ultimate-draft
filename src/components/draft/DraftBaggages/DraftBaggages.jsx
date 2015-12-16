@@ -93,7 +93,7 @@ export default React.createClass({
   },
 
   addBaggageHandler(inputs) {
-    this.props.addBaggageDraft({...inputs, type: 'baggage'});
+    this.props.addBaggageDraft({...inputs, type: 'baggage'}, this.props.connection);
   },
 
   getPlayerSummary(player) {

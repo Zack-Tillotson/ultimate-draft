@@ -15,7 +15,8 @@ export default React.createClass({
     drafts: React.PropTypes.array.isRequired,
     teams: React.PropTypes.array.isRequired,
     columns: React.PropTypes.array.isRequired,
-    isAdmin: React.PropTypes.bool.isRequired
+    isAdmin: React.PropTypes.bool.isRequired,
+    connection: React.PropTypes.object.isRequired,
   },
 
   userIsAdmin() {

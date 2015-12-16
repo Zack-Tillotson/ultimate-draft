@@ -24,8 +24,17 @@ function displayName(auth) {
   }
 }
 
-function hasPw(draftMeta) {
-  return !!draftMeta.get('hasPw');
+function hasPw(state) {
+  return state.draftMeta ? !!state.draftMeta.get('hasPw') : false;
+}
+
+function draftList(state) {
+  const draftListObj = state.draftMetas ? state.draftMetas.toJS() : {};
+  return Object.keys(draftListObj)
+    .sort()
+    .map(key => {
+      return {...draftListObj[key], id: key}
+    });
 }
 
 export default state => {
@@ -33,6 +42,7 @@ export default state => {
     isLoggedIn: isLoggedIn(state.auth),
     displayName: displayName(state.auth),
     authService: authService(state.auth),
-    hasPw: state.draftMeta && hasPw(state.draftMeta)
+    hasPw: hasPw(state),
+    draftList: draftList(state)
   }
 }

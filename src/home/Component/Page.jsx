@@ -61,10 +61,9 @@ const Page = React.createClass({
             </div>
           </div>
           <div className="redirectForm">
-            <h3>Start Drafting</h3>
             {!this.props.isLoggedIn && (
               <div>
-                <h3>To begin please sign in with one of these providers</h3>
+                <h4>To begin please sign in with one of these providers</h4>
                 <LoginForm />
               </div>
             )}
