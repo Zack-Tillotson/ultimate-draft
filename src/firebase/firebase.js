@@ -89,8 +89,10 @@ export default {
   },
 
   syncDraftMeta(draftId, onData) {
-    utils.syncAuth(onData);
-    utils.syncData('draftMeta/' + draftId, onData);
+    utils.syncAuth((auth) => {
+      onData(auth)
+      utils.syncData('draftMeta/' + draftId, onData);
+    });
   },
 
   // Might be called repeatedly with different passwords

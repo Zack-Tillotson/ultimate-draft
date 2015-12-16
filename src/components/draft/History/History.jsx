@@ -13,6 +13,7 @@ export default React.createClass({
     teams: React.PropTypes.array.isRequired,
     columns: React.PropTypes.array.isRequired,
     viewModal: React.PropTypes.func.isRequired,
+    isAdmin: React.PropTypes.bool.isRequired
   },
 
   handleUndraftClick(draft) {
@@ -40,15 +41,17 @@ export default React.createClass({
         {this.getSummaryColumns().map(col => (
           <td key={col.name}>{this.getPlayerColumn(draft.player, col)}</td>
         ))}
-        <td className="controls">
-          {showUndoButton && (
-            <div 
-              className="undo"
-              onClick={this.handleUndraftClick.bind(this, draft)}>
-              X
-            </div>
-          )}
-        </td>
+        {this.props.isAdmin && (
+          <td className="controls">
+            {showUndoButton && (
+              <div 
+                className="undo"
+                onClick={this.handleUndraftClick.bind(this, draft)}>
+                X
+              </div>
+            )}
+          </td>
+        )}
       </tr>
     );
   },
@@ -61,7 +64,9 @@ export default React.createClass({
             <td></td>
             <td></td>
             <td colSpan={this.getSummaryColumns().length}>Player</td>
-            <td className="controls"></td>
+            {this.props.isAdmin && (
+              <td className="controls"></td>
+            )}
           </tr>
           <tr>
             <td>#</td>
@@ -69,7 +74,9 @@ export default React.createClass({
             {this.getSummaryColumns().map(col => (
               <td key={col.name}>{col.name}</td>
             ))}
-            <td className="controls">Undo</td>
+            {this.props.isAdmin && (
+              <td className="controls">Undo</td>
+            )}
           </tr>
         </thead>
         <tbody>

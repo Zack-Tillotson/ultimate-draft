@@ -17,6 +17,7 @@ container {
     }
 
     h1 {
+      display: inline-block;
       margin: 0;
       padding: 0;
       font-size: 30px;
@@ -57,12 +58,11 @@ container {
       }
     }
 
-    .loginStatus {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      color: #fff;
-      font-size: 14px;
+    .loginStatus, .tutorialContainer {
+      float: right;
+      display:inline-block;
+      margin-top: 15px;
+      margin-right: 25px;
     }
   }
 }
@@ -81,6 +81,19 @@ container {
           width: 35px;
           height: 18px;
         } 
+      }
+
+      .loginStatus {
+        margin-top: 0;
+
+        .accountInfo {
+          display: none;
+        }
+      }
+
+      .tutorialContainer {
+        clear: both;
+        margin-top: 0;
       }
     }
   }

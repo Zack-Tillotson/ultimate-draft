@@ -11,7 +11,6 @@ import ModalContainer from '../../ModalContainer';
 import StatusView from '../StatusView';
 import DraftOrder from '../DraftOrder';
 import DraftNotifications from '../DraftNotifications';
-import DraftTutorial from '../DraftTutorial';
 
 // Tabs
 import Settings from '../Settings'
@@ -74,19 +73,22 @@ const DraftView = React.createClass({
           drafts={this.props.drafts}
           teams={this.props.teams}
           players={this.props.players}
-          viewModal={this.props.dispatch.viewModal} />
-        <Settings
-          tabName={tabNames.settings}
-          columns={this.props.columns}
-          players={this.props.players}
-          drafts={this.props.drafts}
-          baggageDrafts={this.props.baggageDrafts}
-          teams={this.props.teams}
           isAdmin={this.props.auth.isAdmin} 
-          auth={this.props.auth}
-          connection={this.props.connection}
-          addBaggageDraft={this.props.dispatch.addBaggageDraft}
           viewModal={this.props.dispatch.viewModal} />
+        {this.props.connection.isAdmin && (
+          <Settings
+            tabName={tabNames.settings}
+            columns={this.props.columns}
+            players={this.props.players}
+            drafts={this.props.drafts}
+            baggageDrafts={this.props.baggageDrafts}
+            teams={this.props.teams}
+            isAdmin={this.props.auth.isAdmin} 
+            auth={this.props.auth}
+            connection={this.props.connection}
+            addBaggageDraft={this.props.dispatch.addBaggageDraft}
+            viewModal={this.props.dispatch.viewModal} />
+          )}
 
       </TabbedContainer>
     );
@@ -145,15 +147,6 @@ const DraftView = React.createClass({
     );
   },
 
-  getTutorial() {
-    return (
-      <DraftTutorial 
-        step={this.props.user.tutorialStep}
-        nextTutorialStep={this.props.dispatch.nextTutorialStep}
-        quitTutorial={this.props.dispatch.quitTutorial} />
-    );
-  },
-
   render() {
     return (
       <div>
@@ -162,7 +155,6 @@ const DraftView = React.createClass({
         {this.getTabs()}
         {this.getModal()}
         {this.getNotifications()}
-        {this.getTutorial()}
       </div>
     );
   }

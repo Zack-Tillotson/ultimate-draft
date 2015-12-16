@@ -10,6 +10,16 @@ export default React.createClass({
     return (
       <InlineCss stylesheet={styles} componentName="container">
         <header>
+          {this.props.isLoggedIn && (
+            <div className="loginStatus">
+              <LoginForm />
+            </div>
+          )}
+          {!!this.props.tutorial && (
+            <div className="tutorialContainer">
+              {this.props.tutorial}
+            </div>
+          )}
           <a className="title" href="/">
             <h1>
               <div className="imageContainer">
@@ -17,11 +27,6 @@ export default React.createClass({
               </div>
             </h1>
           </a>
-          {this.props.isLoggedIn && (
-            <div className="loginStatus">
-              <LoginForm />
-            </div>
-          )}
         </header>
       </InlineCss>
     );

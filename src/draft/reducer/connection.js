@@ -11,7 +11,8 @@ function getInitialState() {
     requesting: true,
     wrongPassword: false,
     draftId: utils.getFirebaseId(),
-    enteredPassword: ''
+    enteredPassword: '',
+    isAdmin: false
   });
 }
 
@@ -26,7 +27,7 @@ export default function(state = getInitialState(), action) {
     case actions.firebase:
       if(/draftMeta\/.+/.test(action.path)) {
         if(action.error) {
-          state = state.merge({requesting: false, broken: true});
+          state = state.merge({requesting: false});
         } else {
           state = state.merge({metaConnected: true, requesting: false});
         }
@@ -36,6 +37,8 @@ export default function(state = getInitialState(), action) {
         } else {
           state = state.merge({draftConnected: true, wrongPassword: false, requesting: false});
         }
+      } else if(action.path == 'auth/isAdmin') {
+        state = state.merge({isAdmin: action.data});
       }
       break;
   }

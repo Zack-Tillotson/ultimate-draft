@@ -17,9 +17,13 @@ export default {
   confirmModal(modalName, data, connection) { 
     switch(modalName) {
       case modalNames.draftPlayer:
-        return (dispatch) => firebase.putDraft(dispatch, connection.draftId, connection.enteredPassword, data);
+        if(connection.isAdmin) {
+          return (dispatch) => firebase.putDraft(dispatch, connection.draftId, connection.enteredPassword, data);
+        }
       case modalNames.undraftPlayer:
-        return (dispatch) => firebase.unputDraft(dispatch, connection.draftId, connection.enteredPassword, data);
+        if(connection.isAdmin) {
+          return (dispatch) => firebase.unputDraft(dispatch, connection.draftId, connection.enteredPassword, data);
+        }
       case modalNames.chooseViewTeam:
       case modalNames.filterRows:
       case modalNames.filterColumns:

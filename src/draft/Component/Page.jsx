@@ -16,6 +16,8 @@ import styles from './styles';
 import Application from '../../components/Application';
 import DraftView from '../../components/draft/DraftView';
 import DraftPasswordForm from '../../components/DraftPasswordForm';
+import LoginForm from '../../components/LoginForm';
+import DraftTutorial from '../../components/draft/DraftTutorial';
 
 const Page = React.createClass({
   
@@ -36,7 +38,7 @@ const Page = React.createClass({
 
   checkDraftPassword(result) {
     this.props.dispatch.firebase(result);
-    if(typeof result.data.hasPw == 'boolean' && !result.data.hasPw) {
+    if(result.data && typeof result.data.hasPw == 'boolean' && !result.data.hasPw) {
       this.startSyncDraft();
     }
   },
@@ -51,7 +53,7 @@ const Page = React.createClass({
   },
 
   keyPressHandler(event) {
-    if(this.props.connection.connected) {
+    if(this.props.connection.draftConnected) {
       switch(event.keyCode) {
         case 68: // d
           const teamId = this.props.status.nextDraft.teamId;
@@ -61,7 +63,7 @@ const Page = React.createClass({
           this.props.dispatch.viewModal(modalNames.chooseViewTeam);
           break;
         case 13: // Enter
-          // TODO this.refs.draftView.modals.confirmHandler(event);
+          this.refs.draftView.refs.modals.confirmHandler(event);
           break;
         case 27: // Esc
           if(this.props.ui.modal) {
@@ -126,8 +128,16 @@ const Page = React.createClass({
     );
   },
 
+  getLoginForm() {
+    return (
+      <LoginForm />
+    );
+  },
+
   getContent(state) {
     switch(state) {
+      case 'login':
+        return this.getLoginForm();
       case 'error': 
         return this.getError();
       case 'spinning':
@@ -139,16 +149,26 @@ const Page = React.createClass({
     }
   },
 
+  getTutorial() {
+    return (
+      <DraftTutorial 
+        step={this.props.user.tutorialStep}
+        nextTutorialStep={this.props.dispatch.nextTutorialStep}
+        quitTutorial={this.props.dispatch.quitTutorial} />
+    );
+  },
+
   render() {
 
     const state = 
-        (this.props.connection.broken || this.props.ui.error) ? 'error'
+      (!this.props.auth.auth) ? 'login'
+      : (this.props.connection.broken || this.props.ui.error) ? 'error'
       : this.props.connection.draftConnected ? 'drafting'
       : (this.props.connection.metaConnected && this.props.firebaseMeta.hasPw) ? 'needPw'
       : 'spinning';
 
     return (
-      <Application isLoggedIn={this.props.firebaseMeta.isLoggedIn}>
+      <Application isLoggedIn={this.props.firebaseMeta.isLoggedIn} tutorial={this.getTutorial()}>
         <InlineCss stylesheet={styles} componentName="container">
           {this.getContent(state)}
          </InlineCss>
