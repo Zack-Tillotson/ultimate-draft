@@ -84,8 +84,12 @@ export default {
   },
 
   syncDraftList(onData) {
-    utils.syncAuth(onData);
-    utils.syncData('draftMeta', onData);
+    utils.syncAuth((result) => {
+      onData(result);
+      setTimeout(() => {
+        utils.syncData('draftMeta', onData);
+      }, 1000)
+    });
   },
 
   syncDraftMeta(draftId, onData) {
