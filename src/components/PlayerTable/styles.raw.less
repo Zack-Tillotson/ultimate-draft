@@ -22,13 +22,20 @@ component {
         &:hover {
           color: #666;
         }
+
+        &.columnHead:after {
+          content: ' \2195';
+          color: #ccc;
+        }
         
         &.sortAsc:after {
           content: '\25B2';
+          color: #000;
         }
 
         &.sortDesc:after {
           content: '\25BC';
+          color: #000;
         }
       }
     }

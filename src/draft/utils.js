@@ -49,17 +49,21 @@ function getCurrentlyUndraftable(playerId, teamId, player, players, columns, dra
     return false;
   }
 
-  const baggageIds = players
+  const hangingBaggageIds = players
     .filter(filterPlayer => {
       const pid = getPlayerId(filterPlayer, columns);
-      const baggageTeamless = getTeamForPlayer(getBaggageId(filterPlayer, columns), drafts, baggageDrafts) === null;
-      return getTeamForPlayer(pid, drafts, baggageDrafts) == teamId && pid != playerId && baggageTeamless;
+      const bid = getBaggageId(filterPlayer, columns);
+      const baggageTeamless = !!bid && getTeamForPlayer(bid, drafts, baggageDrafts) === null;
+      return baggageTeamless && getTeamForPlayer(pid, drafts, baggageDrafts) == teamId && pid != playerId;
     })
-    .map(filterPlayer => getBaggageId(filterPlayer, columns))
-    .concat(baggageDrafts
+    .map(filterPlayer => getBaggageId(filterPlayer, columns));
+
+  const hangingBaggageDrafts = baggageDrafts
       .filter(bagD => bagD.teamId == teamId)
+      .filter(bagD => getTeamForPlayer(bagD.playerId, drafts, baggageDrafts) === null)
       .map(bagD => bagD.playerId)
-    )
+
+  const baggageIds = hangingBaggageIds.concat(hangingBaggageDrafts)
     .sort()
     .filter((id, index, ary) => {
       return index == 0 || ary[index - 1] != id

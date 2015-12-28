@@ -46,7 +46,7 @@ export default React.createClass({
           {team.name}
         </div>
         <div className="modeLabel">
-          &nbsp; ({this.props.isAdmin ? 'admin' : 'observer'})
+          &nbsp;{this.props.isAdmin && '(admin)'}
         </div>
         <table className="teamStats">
           <thead>
@@ -54,7 +54,7 @@ export default React.createClass({
               <td>Players</td>
               <td>Male</td>
               <td>Female</td>
-              <td>Baggage (Vectors)</td>
+              <td>Undrafted Baggage</td>
             </tr>
           </thead>
           <tbody>
@@ -63,11 +63,18 @@ export default React.createClass({
               <td>{this.getPlayersOfGender('M')}</td>
               <td>{this.getPlayersOfGender('F')}</td>
               <td>
-                {this.props.user.team.baggage.map(player => 
-                  utils.getVector(player, this.props.columns))
-                .sort()
-                .join(', ')
-                }
+                {!!this.props.user.team.baggage.length && (
+                  <span>
+                    {this.props.user.team.baggage.length} Players 
+                    (Vectors: 
+                    {this.props.user.team.baggage.map(player => 
+                      utils.getVector(player, this.props.columns))
+                    .sort()
+                    .join(', ')
+                    }
+                    )
+                  </span>
+                )}
               </td>
             </tr>
           </tbody>

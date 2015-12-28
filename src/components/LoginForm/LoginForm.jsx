@@ -53,8 +53,8 @@ const LoginForm = React.createClass({
               <div className="toggle">
                 {'\u25BE'}
                 {this.state.optionsDialogOpen && (
-                  <div className="optionsInner">
-                    <div onClick={this.props.dispatch.requestLogout}>Logout</div>
+                  <div className="optionsInner" onClick={this.props.dispatch.requestLogout}>
+                    Logout
                   </div>
                 )}
               </div>
