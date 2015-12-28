@@ -1,11 +1,11 @@
 import {createSelector} from 'reselect';
-import {contextTeam, drafts, players, columns} from '../';
+import {contextTeam, drafts, baggageDrafts, players, columns} from '../';
 import utils from '../../../../../utils';
 
-export const genderDrafts = createSelector(contextTeam, drafts, players, columns,
-  (contextTeam, drafts, players, columns) => {
+export const genderDrafts = createSelector(contextTeam, drafts, baggageDrafts, players, columns,
+  (contextTeam, drafts, baggageDrafts, players, columns) => {
     let male = 0, female = 0;
-    if(contextTeam) {
+    if(contextTeam !== null) {
       drafts
         .filter(draft => draft.teamId == contextTeam)
         .forEach(draft => {
@@ -24,6 +24,17 @@ export const genderDrafts = createSelector(contextTeam, drafts, players, columns
             } else {
               female++;
             } 
+          }
+        });
+      baggageDrafts
+        .filter(draft => draft.teamId == contextTeam)
+        .filter(draft => !drafts.find(regDraft => !regDraft.type && regDraft.playerId == draft.playerId))
+        .forEach(draft => {
+          const player = players.find(player => utils.getPlayerId(player, columns) == draft.playerId);
+          if(utils.getGender(player, columns) == 'M') {
+            male++;
+          } else {
+            female++;
           }
         });
   }

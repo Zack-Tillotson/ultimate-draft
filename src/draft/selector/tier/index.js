@@ -15,7 +15,8 @@ const teams = createSelector(firebaseIm, firebaseIm => firebaseIm.teams.toJS());
 const columns = createSelector(firebaseIm, firebaseIm => firebaseIm.columns.toJS());
 const drafts = createSelector(firebaseIm, firebaseIm => firebaseIm.drafts.toJS().filter(draft => !draft.type));
 const baggageDrafts = createSelector(firebaseIm, firebaseIm => firebaseIm.drafts.toJS().filter(draft => draft.type == 'baggage'));
-const draft = createSelector(firebaseIm, firebaseIm => firebaseIm.draftMeta.toJS());
+const draftMeta = createSelector(firebaseIm, firebaseIm => firebaseIm.draftMeta.toJS());
+const draft = createSelector(firebaseIm, firebaseIm => firebaseIm.draft.toJS());
 const auth = createSelector(firebaseIm, firebaseIm => firebaseIm.auth.toJS());
 
-export default {user, ui, players, teams, columns, drafts, baggageDrafts, connection, draft, auth};
+export default {user, ui, players, teams, columns, drafts, baggageDrafts, connection, draft, draftMeta, auth};
