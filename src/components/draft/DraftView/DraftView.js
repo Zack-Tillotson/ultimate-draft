@@ -37,6 +37,7 @@ const DraftView = React.createClass({
         user={this.props.user}
         status={this.props.status}
         columns={this.props.columns}
+        isAdmin={this.props.auth.isAdmin}
         viewModal={this.props.dispatch.viewModal} />
     );
   },

@@ -22,7 +22,7 @@ export default React.createClass({
     return (
       <div className={['controls', 'hasTeam'].join(' ')}>
         <div className="link" onClick={this.clickHandler}>
-          Select Team View
+          Select Team
         </div>
       </div>
     );
@@ -41,13 +41,12 @@ export default React.createClass({
     const {team} = this.props.user;    
     return (
       <div className="teamSummary">
-        <div className="label">
-          {this.props.user.viewTeam >= 0 && 'Your Team:'}
-          {this.props.user.viewTeam < 0 && 'Observer Mode:'}
-        </div>
         <div className="teamName">
           <div className="teamColor" style={{background: team.color}} />
           {team.name}
+        </div>
+        <div className="modeLabel">
+          &nbsp; ({this.props.isAdmin ? 'admin' : 'observer'})
         </div>
         <table className="teamStats">
           <thead>

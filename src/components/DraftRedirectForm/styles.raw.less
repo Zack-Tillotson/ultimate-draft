@@ -18,17 +18,17 @@ container {
   .draftItems {
     display: inline-block;
     width: 300px;
-    border: solid 2px #666;
-    border-radius: 3px;
     position: relative;
     cursor: pointer;
     
     .draftItem {
       padding: 10px;
-      border-top: solid 2px #ccc;
+      border-bottom: solid 2px #ccc;
+      border-right: solid 2px #ccc;
+      border-left: solid 2px #ccc;
 
       &:nth-of-type(1) {
-        border-top: none;
+        border-top: solid 2px #ccc;
       }
 
       &:hover {

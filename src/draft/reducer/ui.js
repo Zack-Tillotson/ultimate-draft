@@ -7,7 +7,7 @@ import modalNames from '../modalNames';
 function getInitialState() {
   return Immutable.fromJS({
     tab: tabNames.players,
-    modal: '',//modalNames.chooseViewTeam,
+    modal: modalNames.chooseViewTeam,
     error: '',
     modalData: {},
     saving: false
@@ -27,8 +27,11 @@ export default function(state = getInitialState(), action) {
         modalData: action.data
       });
       break;
-    case actions.confirmModal:
     case actions.syncing:
+      if(state.get('modal') === modalNames.chooseViewTeam) { // Don't close the choose team modal
+        break;
+      }
+    case actions.confirmModal:
     case actions.cancelModal:
       state = state.merge({
         modal: '',

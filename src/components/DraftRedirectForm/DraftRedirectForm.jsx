@@ -24,7 +24,7 @@ const DraftRedirectForm = React.createClass({
     const loadingClass = this.props.inProgress ? 'loading' : '';
     return (
       <InlineCss stylesheet={styles} componentName="container" className={loadingClass}>   
-        <h3>Select Your Draft</h3>
+        <h3>Choose a draft from the list below</h3>
         <div className="draftItems">
           {this.props.draftList.filter(draft => draft.visible).map((draft, index) => {
             return (
@@ -36,10 +36,10 @@ const DraftRedirectForm = React.createClass({
               </div>
             );
           })}
+          {!this.props.draftList.length && (
+            <PulseLoader className="animatee" color="#999" />
+          )}
         </div>
-        {this.props.inProgress && (
-          <PulseLoader className="animatee" color="#999" />
-        )}
       </InlineCss>
     );
   }
