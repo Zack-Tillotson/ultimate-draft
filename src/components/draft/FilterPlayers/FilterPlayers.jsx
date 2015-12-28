@@ -27,31 +27,31 @@ export default React.createClass({
         <h3>Filter Players</h3>
         <div className="options">
           <div className="option">
-            <label htmlFor="viewOtherTeam">Hide players drafted by other teams.</label>
             <input
               type="checkbox" 
               name="viewOtherTeam"
               ref="viewOtherTeam"
               onChange={this.changeHandler}
               defaultChecked={!this.props.data.viewOtherTeam} />
+            <label htmlFor="viewOtherTeam">Players on other teams.</label>
           </div>
           <div className="option">
-            <label htmlFor="viewYourTeam">Hide players drafted by your team.</label>
             <input
               type="checkbox" 
               name="viewYourTeam"
               ref="viewYourTeam"
               onChange={this.changeHandler}
               defaultChecked={!this.props.data.viewYourTeam} />
+            <label htmlFor="viewYourTeam">Players on your team.</label>
           </div>
           <div className="option">
-            <label htmlFor="viewUndraftable">Hide players your team is not currently allowed to draft.</label>
             <input
               type="checkbox" 
               name="viewUndraftable"
               ref="viewUndraftable"
               onChange={this.changeHandler}
               defaultChecked={!this.props.data.viewUndraftable} />
+            <label htmlFor="viewUndraftable">Players not currently allowed.</label>
           </div>
         </div>
       </InlineCss>

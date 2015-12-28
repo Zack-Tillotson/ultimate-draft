@@ -47,15 +47,30 @@ component {
   component {
 
     .foreground {
-      height: 90%;
+      height: 100%;
       width: 100%;
       margin: 0;
       border-radius: 0;
       position: absolute;
-      top: 5%;
+      top: 0;
 
       .modalChild {
         max-height: 90%;
+
+        h3 {
+          margin: 15px 0;
+        }
+
+        &:after {
+          content: ' ';
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          width: 40px;
+          height: 40px;
+          background: url('/assets/diskdraft120x120.png') no-repeat;
+          background-size: contain;
+        }
       }
 
       .modalNav {
