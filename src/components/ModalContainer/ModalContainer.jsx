@@ -54,9 +54,11 @@ export default React.createClass({
                 <div className="buttonContainer">
                   <button tabIndex={99} onClick={this.cancelHandler}>Cancel</button>
                 </div>
-                <div className="buttonContainer">
-                  <button tabIndex={2} onClick={this.confirmHandler}>Confirm</button>
-                </div>
+                {this.props.showConfirm && (
+                  <div className="buttonContainer">
+                    <button tabIndex={2} onClick={this.confirmHandler}>Confirm</button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
