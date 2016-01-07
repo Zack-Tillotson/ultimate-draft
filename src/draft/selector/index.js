@@ -3,15 +3,15 @@
 import {createSelector} from 'reselect';
 import {
   userWithData, uiWithData, playersWithBaggage, teamsWithPlayers, fullColumns, draftsWithTeamsAndPlayers, 
-  baggageDraftsWithTeamsAndPlayers, connection, statusWithDraftInfo, auth
+  baggageDraftsWithTeamsAndPlayers, connection, statusWithDraftInfo, auth, draft, draftMeta
 } from './tier/tier/tier/tier/tier/tier/tier/';
 import firebaseMetaSelector from '../../firebase/selectors';
 
 const metaSelector = createSelector(
   userWithData, uiWithData, playersWithBaggage, teamsWithPlayers, fullColumns, draftsWithTeamsAndPlayers, 
-  baggageDraftsWithTeamsAndPlayers, connection, statusWithDraftInfo, auth,
-  (user, ui, players, teams, columns, drafts, baggageDrafts, connection, status, auth) => {
-  return {user, ui, players, teams, columns, drafts, baggageDrafts, connection, status, auth};
+  baggageDraftsWithTeamsAndPlayers, connection, statusWithDraftInfo, auth, draft, draftMeta,
+  (user, ui, players, teams, columns, drafts, baggageDrafts, connection, status, auth, draft, draftMeta) => {
+  return {user, ui, players, teams, columns, drafts, baggageDrafts, connection, status, auth, draft, draftMeta};
 });
 
 export default (state) => {

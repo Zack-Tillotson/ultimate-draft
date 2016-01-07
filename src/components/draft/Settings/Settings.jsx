@@ -4,6 +4,9 @@ import InlineCss from 'react-inline-css';
 import PlayerTable from '../../PlayerTable';
 import LoginForm from '../../LoginForm';
 import DraftBaggages from '../DraftBaggages';
+import TeamConfig from '../TeamConfig';
+import GenderLimits from '../GenderLimits';
+import VisibilitySettings from '../VisibilitySettings';
 
 import firebase from '../../../firebase';
 import styles from './styles';
@@ -12,6 +15,7 @@ export default React.createClass({
 
   propTypes: {
     players: React.PropTypes.array.isRequired,
+    draft: React.PropTypes.object.isRequired,
     drafts: React.PropTypes.array.isRequired,
     teams: React.PropTypes.array.isRequired,
     columns: React.PropTypes.array.isRequired,
@@ -27,17 +31,16 @@ export default React.createClass({
     return (
       <div className="adminOnly">
         <div className="section">
-          <h3>Team Config</h3>
+          <TeamConfig {...this.props} />
         </div>
         <div className="section">
-          <h3>Captain Baggage</h3>
           <DraftBaggages {...this.props} />
         </div>
         <div className="section">
-          <h3>Gender Limits</h3>
+          <GenderLimits {...this.props} />
         </div>
         <div className="section">
-          <h3>Draft Visibility</h3>
+          <VisibilitySettings {...this.props} />
         </div>
         <div className="section">
         </div>

@@ -52,7 +52,16 @@ export default (dispatch, props) => {
       },
       addBaggageDraft(data, connection) {
         firebase.putDraft(dispatch, connection.draftId, connection.enteredPassword, data);
-      }
+      },
+      saveTeams(data, connection) {
+        firebase.updateTeams(dispatch, connection.draftId, connection.enteredPassword, data);
+      },
+      saveDraft(data, connection) {
+        firebase.updateDraft(dispatch, connection.draftId, connection.enteredPassword, data);
+      },
+      saveVisibility(data, connection) {
+        firebase.updateVisibility(dispatch, connection.draftId, data);
+      },
     }
   }
 }

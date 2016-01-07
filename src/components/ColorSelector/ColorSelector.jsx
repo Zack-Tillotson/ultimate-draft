@@ -38,6 +38,10 @@ export default React.createClass({
     this.setState({showSelector: !this.state.showSelector});
   },
 
+  componentDidMount() {
+    this.refs.input.setValue(this.state.color);
+  },
+
   render() {
     return (
       <InlineCss stylesheet={styles} componentName="component">

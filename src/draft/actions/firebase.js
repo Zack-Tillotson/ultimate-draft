@@ -83,6 +83,88 @@ function data(result) {
   return {type: actions.firebase, ...result};
 }
 
+function updateTeams(dispatch, draftId, draftPw, data) {
+  dispatch(overlay.uploadStarting());
+  
+  const draftsRef = firebase.connectToDraft(draftId, draftPw);
+  const draftRef = draftsRef.child('teams').transaction(
+
+    // Upate function
+    (currentData) => {
+
+      return data;
+
+    },    
+
+    // On Complete
+    (error, committed, snapshot) => {
+      if(error) {
+        dispatch(overlay.blowup(error));
+      }
+      dispatch(overlay.uploadFinished());
+    }, 
+
+    // Dont see intermediate states
+    false 
+  );
+    
+}
+
+function updateDraft(dispatch, draftId, draftPw, data) {
+  dispatch(overlay.uploadStarting());
+  
+  const draftsRef = firebase.connectToDraft(draftId, draftPw);
+  const draftRef = draftsRef.child('draft').transaction(
+
+    // Upate function
+    (currentData) => {
+
+      return data;
+
+    },    
+
+    // On Complete
+    (error, committed, snapshot) => {
+      if(error) {
+        dispatch(overlay.blowup(error));
+      }
+      dispatch(overlay.uploadFinished());
+    }, 
+
+    // Dont see intermediate states
+    false 
+  );
+    
+}
+
+function updateVisibility(dispatch, draftId, data) {
+  dispatch(overlay.uploadStarting());
+  
+  const draftMetaRef = firebase.connectToDraftMeta(draftId);
+  const draftRef = draftMetaRef.child('visible').transaction(
+
+    // Upate function
+    (currentData) => {
+
+      return data;
+
+    },    
+
+    // On Complete
+    (error, committed, snapshot) => {
+      if(error) {
+        dispatch(overlay.blowup(error));
+      }
+      dispatch(overlay.uploadFinished());
+    }, 
+
+    // Dont see intermediate states
+    false 
+  );
+    
+}
+
+
 export default {
-  putDraft, unputDraft, requestingData, data
+  putDraft, unputDraft, requestingData, data, updateTeams, updateDraft, updateVisibility
 }

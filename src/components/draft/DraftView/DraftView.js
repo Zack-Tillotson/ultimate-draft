@@ -82,13 +82,18 @@ const DraftView = React.createClass({
             columns={this.props.columns}
             players={this.props.players}
             drafts={this.props.drafts}
+            draft={this.props.draft}
+            draftMeta={this.props.draftMeta}
             baggageDrafts={this.props.baggageDrafts}
             teams={this.props.teams}
             isAdmin={this.props.auth.isAdmin} 
             auth={this.props.auth}
             connection={this.props.connection}
             addBaggageDraft={this.props.dispatch.addBaggageDraft}
-            viewModal={this.props.dispatch.viewModal} />
+            viewModal={this.props.dispatch.viewModal} 
+            saveTeams={this.props.dispatch.saveTeams}
+            saveDraft={this.props.dispatch.saveDraft}
+            saveVisibility={this.props.dispatch.saveVisibility} />
           )}
 
       </TabbedContainer>

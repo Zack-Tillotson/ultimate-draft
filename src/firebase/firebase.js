@@ -108,6 +108,10 @@ export default {
   connectToDraft(draftId, pw) {
     const pwHash = utils.hashPassword(pw);
     return utils.connect(`drafts/${draftId}/${pwHash}/`); 
+  },
+
+  connectToDraftMeta(draftId) {
+    return utils.connect(`draftMeta/${draftId}/`); 
   }
   
 }
