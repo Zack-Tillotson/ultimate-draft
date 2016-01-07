@@ -11,7 +11,7 @@ const user = createSelector(userIm, user => user.toJS());
 const ui = createSelector(uiIm, ui => ui.toJS());
 const connection = createSelector(connectionIm, connection => connection.toJS());
 const players = createSelector(firebaseIm, firebaseIm => firebaseIm.players.toJS());
-const teams = createSelector(firebaseIm, firebaseIm => firebaseIm.teams.toJS());
+const teams = createSelector(firebaseIm, firebaseIm => firebaseIm.teams.toJS().filter(team => !!team));
 const columns = createSelector(firebaseIm, firebaseIm => firebaseIm.columns.toJS());
 const drafts = createSelector(firebaseIm, firebaseIm => firebaseIm.drafts.toJS().filter(draft => !draft.type));
 const baggageDrafts = createSelector(firebaseIm, firebaseIm => firebaseIm.drafts.toJS().filter(draft => draft.type == 'baggage'));

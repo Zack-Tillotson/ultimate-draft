@@ -12,21 +12,6 @@ export default React.createClass({
           <div className="shortcuts">
               Shortcuts
             <div className="shortcut">
-              <span className="label">1</span>
-              :
-              <span className="desc">Players tab</span>
-            </div>
-            <div className="shortcut">
-              <span className="label">2</span>
-              :
-              <span className="desc">Teams tab</span>
-            </div>
-            <div className="shortcut">
-              <span className="label">3</span>
-              :
-              <span className="desc">History tab</span>
-            </div>
-            <div className="shortcut">
               <span className="label">D</span>
               :
               <span className="desc">Draft form</span>

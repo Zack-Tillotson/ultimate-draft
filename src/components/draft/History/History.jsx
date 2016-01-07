@@ -29,8 +29,11 @@ export default React.createClass({
   },
 
   getDraft(draft, index, showUndoButton) {
+    const roundEndClass = index > 1 && index % this.props.teams.length == 0
+      ? 'endOfRound' 
+      : '';
     return (
-      <tr className="draft" key={index}>
+      <tr className={["draft", roundEndClass].join(' ')} key={index}>
         <td className="index">
           {index}.
         </td>

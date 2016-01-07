@@ -70,21 +70,6 @@ const Page = React.createClass({
             this.props.dispatch.cancelModal();
           }
           break;
-        case 49: // 1
-          if(!this.props.ui.modal) {
-            this.props.dispatch.tabClick(tabNames.players);
-          }
-          break;
-        case 50: // 2
-          if(!this.props.ui.modal) {
-            this.props.dispatch.tabClick(tabNames.teams);
-          }
-          break;
-        case 51: // 3
-          if(!this.props.ui.modal) {
-            this.props.dispatch.tabClick(tabNames.history);
-          }
-          break;
       }
     }
   },

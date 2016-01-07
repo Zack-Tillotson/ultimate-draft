@@ -10,7 +10,8 @@ function getInitialState() {
     modal: modalNames.chooseViewTeam,
     error: '',
     modalData: {},
-    saving: false
+    saving: false,
+    sorts: {}
   });
 }
 
@@ -50,6 +51,9 @@ export default function(state = getInitialState(), action) {
       state = state.merge({
         saving: !action.inProgress
       });
+      break;
+    case actions.sorting:
+      state = state.setIn(['sorts', action.sortItem], action.sort);
       break;
   }
   return state;

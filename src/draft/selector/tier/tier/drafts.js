@@ -29,7 +29,7 @@ export const orderedDraftIds = createSelector(drafts, teams, players, (drafts, t
 
   return players
     .map((player, index) => {
-      const teamId = getTeamIndexFromDraftIndex(index, teamsLength);
+      const teamId = teams[getTeamIndexFromDraftIndex(index, teamsLength)].id;
       const round = getRoundFromDraftIndex(index, teamsLength);
       const startOfRound = isStartOfRoundFromDraftIndex(index, teamsLength);
       const draftNum = index + 1;

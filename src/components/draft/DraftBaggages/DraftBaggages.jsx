@@ -4,7 +4,7 @@ import PlayerTable from '../../PlayerTable';
 import PlayerSummary from '../../PlayerSummary';
 import utils from '../../../draft/utils';
 import Formsy from 'formsy-react';
-import {Select} from 'formsy-react-components';
+import {Select, Input} from 'formsy-react-components';
 import modalNames from '../../../draft/modalNames';
 
 import styles from './styles';
@@ -18,6 +18,12 @@ export default React.createClass({
     baggageDrafts: React.PropTypes.array.isRequired,
     viewModal: React.PropTypes.func.isRequired,
     addBaggageDraft: React.PropTypes.func.isRequired
+  },
+
+  getInitialState() {
+    return {
+      playerIdText: ''
+    }
   },
 
   isDrafted(baggageDraft) {
@@ -76,31 +82,59 @@ export default React.createClass({
         value: team.id
       }
     });
-    const playerOptions = this.props.players.map(player => {
-      return {
-        label: this.getPlayerSummary(player), 
-        value: utils.getPlayerId(player, this.props.columns)
-      }
-    });
 
     return (
-      <Formsy.Form className="form" onSubmit={this.addBaggageHandler}>
-        <Select name="teamId" label="Team" options={teamOptions} value={teamOptions[0].value}/>
-        <Select name="playerId" label="Player" options={playerOptions} value={playerOptions[0].value} />
+      <Formsy.Form className="form" onSubmit={this.addBaggageHandler} ref="form">
+        <Select name="teamId" label="Team" options={teamOptions} value={teamOptions[0].value} />
+        <input type="text" ref="playerIdText" onChange={this.updatePlayerId} />
+        <Input type="hidden" name="playerId" value={this.getPlayerIdFromText()} />
         <input type="submit" value="Add" />
+        {this.getPlayerSummary()}
       </Formsy.Form>
     )
   },
 
-  addBaggageHandler(inputs) {
-    this.props.addBaggageDraft({...inputs, type: 'baggage'}, this.props.connection);
+  updatePlayerId() {
+    this.setState({playerIdText: this.refs.playerIdText.value});
   },
 
-  getPlayerSummary(player) {
-    return this.props.columns
-      .filter(column => column.summary)
-      .map(column => player.data[column.name])
-      .join(' ');
+  getPlayerIdFromText() {
+    const {playerIdText} = this.state;
+    const player = this.props.players.find(player => 
+      utils.getPlayerId(player, this.props.columns) == playerIdText
+    );
+    return !!player ? playerIdText : null;
+  },
+
+  addBaggageHandler(inputs) {
+    this.props.addBaggageDraft({...inputs, type: 'baggage'}, this.props.connection);
+    const {playerIdText} = this.state;
+    const baggage = this.props.players.find(player => 
+      utils.getPlayerId(player, this.props.columns) == playerIdText
+    ).baggage;
+    if(!!baggage) {
+      const baggageId = utils.getPlayerId(baggage, this.props.columns);
+      this.props.addBaggageDraft({...inputs, playerId: baggageId, type: 'baggage'}, this.props.connection);
+    }
+  },
+
+  getPlayerSummary() {
+    const {playerIdText} = this.state;
+    const player = this.props.players.find(player => 
+      utils.getPlayerId(player, this.props.columns) == playerIdText
+    );
+    if(!player) {
+      return null;
+    } else {
+      const baggage = player.baggage;
+      return (
+        <div>
+          <PlayerSummary player={player} columns={this.props.columns} />
+          baggaged with 
+          {!!baggage && <PlayerSummary player={baggage} columns={this.props.columns} />}
+        </div>
+      );
+    }
   },
 
   render() {

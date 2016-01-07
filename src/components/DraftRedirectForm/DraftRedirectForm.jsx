@@ -15,8 +15,7 @@ const DraftRedirectForm = React.createClass({
     dispatch: React.PropTypes.object.isRequired
   },
 
-  handleSubmit(selectedDraftIndex) {
-    const draftId = this.props.draftList[selectedDraftIndex].id;
+  handleSubmit(draftId) {
     this.props.dispatch.requestRedirect({draftId});
   },
 
@@ -31,7 +30,7 @@ const DraftRedirectForm = React.createClass({
               <div 
                 className={"draftItem"}
                 key={draft.id} 
-                onClick={this.handleSubmit.bind(this, index)}>
+                onClick={this.handleSubmit.bind(this, draft.id)}>
                 {draft.id}
               </div>
             );

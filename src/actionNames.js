@@ -10,7 +10,7 @@ export default {
   confirmModal: 'confirmModal',
   updateModal: 'updateModal',
   tutorialStep: 'tutorialStep',
-  sortPlayers: 'sortPlayers',
+  sorting: 'sorting',
   
   firebase: 'firebase',
   blowup: 'blowup',

@@ -26,8 +26,21 @@ export default React.createClass({
   adminSection() {
     return (
       <div className="adminOnly">
-        <h5>Administrator</h5>
-        <DraftBaggages {...this.props} />
+        <div className="section">
+          <h3>Team Config</h3>
+        </div>
+        <div className="section">
+          <h3>Captain Baggage</h3>
+          <DraftBaggages {...this.props} />
+        </div>
+        <div className="section">
+          <h3>Gender Limits</h3>
+        </div>
+        <div className="section">
+          <h3>Draft Visibility</h3>
+        </div>
+        <div className="section">
+        </div>
       </div>
     )
   },
@@ -35,7 +48,6 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        <LoginForm />
         {this.userIsAdmin() && this.adminSection()}
       </InlineCss>
     );
