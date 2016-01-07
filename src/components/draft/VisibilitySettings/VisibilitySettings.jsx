@@ -35,7 +35,7 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        <h3>Visibility Settings</h3>
+        <h3>Draft Settings</h3>
         <Formsy.Form ref="form" onSubmit={this.saveVisibility} onChange={this.updateSubmitState}>
           <Checkbox name="visible" label="Visible" value={this.props.draftMeta.visible} />
           {this.state.showSubmit && (
