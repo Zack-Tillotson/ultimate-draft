@@ -11,7 +11,6 @@ function getInitialState() {
     requesting: true,
     wrongPassword: false,
     draftId: utils.getFirebaseId(),
-    enteredPassword: '',
     isAdmin: false
   });
 }
@@ -20,9 +19,6 @@ export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.syncing:
       state = state.set('requesting', true);
-      if(typeof action.password !== 'undefined') {
-        state = state.set('enteredPassword', action.password);
-      }
       break;
     case actions.firebase:
       if(/draftMeta\/.+/.test(action.path)) {

@@ -26,7 +26,7 @@ export default React.createClass({
             <PulseLoader className="animatee" color="#999" />
           )}
           {!this.props.requesting && (
-            <div className="submitBtn" onClick={this.handleSubmit}>Go</div>
+            <input type="submit" className="submitBtn" value="Go" />
           )}
         </Formsy.Form>
       </InlineCss>

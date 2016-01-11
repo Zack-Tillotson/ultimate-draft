@@ -37,7 +37,7 @@ const DraftView = React.createClass({
         user={this.props.user}
         status={this.props.status}
         columns={this.props.columns}
-        isAdmin={this.props.auth.isAdmin}
+        isAdmin={this.props.firebaseMeta.isAdmin}
         viewModal={this.props.dispatch.viewModal} />
     );
   },
@@ -74,9 +74,9 @@ const DraftView = React.createClass({
           drafts={this.props.drafts}
           teams={this.props.teams}
           players={this.props.players}
-          isAdmin={this.props.auth.isAdmin} 
+          isAdmin={this.props.firebaseMeta.isAdmin} 
           viewModal={this.props.dispatch.viewModal} />
-        {this.props.connection.isAdmin && (
+        {this.props.firebaseMeta.isAdmin && (
           <Settings
             tabName={tabNames.settings}
             columns={this.props.columns}
@@ -86,7 +86,7 @@ const DraftView = React.createClass({
             draftMeta={this.props.draftMeta}
             baggageDrafts={this.props.baggageDrafts}
             teams={this.props.teams}
-            isAdmin={this.props.auth.isAdmin} 
+            isAdmin={this.props.firebaseMeta.isAdmin} 
             auth={this.props.auth}
             connection={this.props.connection}
             addBaggageDraft={this.props.dispatch.addBaggageDraft}
@@ -106,7 +106,7 @@ const DraftView = React.createClass({
           ref="modals"
           currentModalName={this.props.ui.modal}
           modalData={this.props.ui.modalData}
-          showConfirm={this.props.ui.modal != modalNames.draftPlayer || this.props.auth.isAdmin}
+          showConfirm={this.props.ui.modal != modalNames.draftPlayer || this.props.firebaseMeta.isAdmin}
           confirmHandler={this.props.dispatch.confirmModal}
           cancelHandler={this.props.dispatch.cancelModal}
           connection={this.props.connection}>

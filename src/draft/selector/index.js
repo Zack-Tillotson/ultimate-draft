@@ -22,7 +22,6 @@ export default (state) => {
   const firebaseMeta = firebaseMetaSelector(state.firebase);
 
   const endTime = Date.now();
-  console.log("Selector complete in " + (parseInt(endTime - startTime) / 10) / 100 + ' seconds');
-
+  
   return {...mainResult, firebaseMeta};
 }

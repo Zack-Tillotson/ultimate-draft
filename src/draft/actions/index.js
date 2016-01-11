@@ -29,9 +29,6 @@ export default (dispatch, props) => {
       loading() {
         dispatch(ui.loading());
       },
-      passwordEntered(password) {
-        dispatch(ui.passwordEntered(password));
-      },
       firebase(result) {
         dispatch(firebase.data(result));
       },

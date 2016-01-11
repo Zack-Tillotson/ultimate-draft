@@ -22,34 +22,66 @@ import DraftTutorial from '../../components/draft/DraftTutorial';
 const Page = React.createClass({
   
   componentDidMount() {
-    this.startSyncDraftMeta();
+    this.firebaseSync();
     document.addEventListener('keydown', this.keyPressHandler);
   },
 
-  // When this function completes we'll know if we need to get a password from the user
-  startSyncDraftMeta() {
+  firebaseSync() {
+
     const firebaseId = utils.getFirebaseId();
-    if(firebaseId) {
-      firebase.syncDraftMeta(firebaseId, this.checkDraftPassword);
-    } else {
+    if(!firebaseId) {
       this.props.dispatch.blowup('No draft specified, unable to continue.');
+    } else {
+      firebase.syncDraftMeta(firebaseId, this.props.dispatch.firebase);
+      firebase.syncAuth(this.authWillUpdate);
     }
+
   },
 
-  checkDraftPassword(result) {
-    this.props.dispatch.firebase(result);
-    if(result.data && typeof result.data.hasPw == 'boolean' && !result.data.hasPw) {
-      this.startSyncDraft();
+  authWillUpdate(authResult) {
+
+    this.props.dispatch.firebase(authResult);
+
+    const {auth} = authResult.data;
+    if(this.userDataRef) {
+      this.userDataRef.off();
+      this.userDataRef = undefined;
     }
+    if(auth) {
+      this.userDataRef = firebase.syncUserData(utils.getFirebaseId(), auth.uid, this.userDataWillUpdate);
+    }
+
+  },
+
+  userDataWillUpdate(userDataResult) {
+    if(this.draftRef) {
+      this.draftRef.off();
+      this.draftRef = undefined;
+    }
+    const enteredPassword = !!userDataResult.data ? userDataResult.data.enteredPassword : '';
+    this.startSyncDraft(enteredPassword);
   },
 
   startSyncDraft(password = '') {
 
+    const userId = firebase.getUserId();
+
+    firebase
+      .connectToUserData(utils.getFirebaseId(), userId)
+      .child('enteredPassword')
+      .set(password);
+
     if(this.firebaseDraftRef) {
       this.firebaseDraftRef.off();
     }
-    this.props.dispatch.passwordEntered(password);
-    this.firebaseDraftRef = firebase.syncDraft(utils.getFirebaseId(), password, this.props.dispatch.firebase);
+    this.firebaseDraftRef = firebase.syncDraft(utils.getFirebaseId(), password, this.syncDraftHandler);
+
+  },
+
+  syncDraftHandler(results) {
+    if (results.exists) {
+      this.props.dispatch.firebase(results);
+    }
   },
 
   keyPressHandler(event) {

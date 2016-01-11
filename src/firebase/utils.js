@@ -38,15 +38,10 @@ function syncData(path, onData) {
   ref.on(
     'value', 
     snapshot => {
-      if(snapshot.exists()) {
-        onData({path, error: false, data: snapshot.val()});
-      } else {
-        onData({path, error: true, data: {}});
-      }
+      onData({path, error: false, data: snapshot.val(), exists: snapshot.exists()});
     }, 
     error => {
-      console.log("Firebase error", error);
-      onData({path, error: true, data: null, errorData: error});
+      onData({path, error: true, data: null, exists: false, errorData: error});
     }
   );
 
@@ -56,11 +51,16 @@ function syncData(path, onData) {
 function syncAuth(onData) {
   const ref = connect();
   ref.onAuth((auth) => {
-    onData({path: 'auth', error: false, data: auth});
-    const roleRef = syncData(
-      'admins', 
-      (result) => onData({path: 'auth/isAdmin', error: false, data: !result.error})
-    );
+    onData({path: 'auth', error: false, data: auth, exists: true});
+    if(auth) {
+      const roleRef = connect(`admins/${auth.uid}/`).once(
+        'value',
+        (result) => onData({path: 'auth/isAdmin', error: false, exists: true, data: true}),
+        (result) => onData({path: 'auth/isAdmin', error: false, exists: true, data: false})
+      );
+    } else {
+      onData({path: 'auth/isAdmin', error: false, exists: true, data: false})
+    }
   });
 }
 

@@ -7,19 +7,31 @@
       },
       "draftMeta": {
         ".read": "auth != null",
+        ".write": "root.child($version).child('admins').child(auth.uid).exists()", // Only admins can modify draft meta
         "$draftId": {
           ".validate": "newData.hasChildren(['hasPw', 'visible', 'timestamp'])",
           "hasPw": {
-            ".write": "!data.exists() && root.child($version).child('admins').child(auth.uid).exists()", // Only admins can modify draft meta
             ".validate": "newData.isBoolean()"
           },
           "visible": {
-            ".write": "root.child($version).child('admins').child(auth.uid).exists()", // Only admins can modify draft meta
             ".validate": "newData.isBoolean()"
           },
           "timestamp": {
-            ".write": "!data.exists() && root.child($version).child('admins').child(auth.uid).exists()", // Only admins can modify draft meta
             ".validate": "newData.isNumber()"
+          }
+        }            
+      },
+      "userData": {
+        "$draftId": {
+          "$userId": {
+            ".read": "auth.uid === $userId",
+            ".write": "auth.uid === $userId",
+            "enteredPw": {
+              ".validate": "newData.isString()"
+            },
+            "chosenTeam": {
+              ".validate": "newData.isNumber()"
+            }
           }
         }            
       },

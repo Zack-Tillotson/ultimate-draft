@@ -79,6 +79,16 @@ export default {
     ref.unauth();
   },
 
+
+  getUserId() {
+    const auth = utils.connect().getAuth();
+    if(auth) {
+      return auth.uid;
+    } else {
+      return null;
+    }
+  },
+
   syncBase(onData) {
     return utils.syncAuth(onData);
   },
@@ -92,17 +102,26 @@ export default {
     });
   },
 
+  syncAuth(onData) {
+    return utils.syncAuth(onData);
+  },
+
   syncDraftMeta(draftId, onData) {
-    utils.syncAuth((auth) => {
-      onData(auth)
-      utils.syncData('draftMeta/' + draftId, onData);
-    });
+    utils.syncData(`draftMeta/${draftId}/`, onData);
+  },
+
+  syncUserData(draftId, userId, onData) {
+    return utils.syncData(`userData/${draftId}/${userId}/`, onData); 
   },
 
   // Might be called repeatedly with different passwords
   syncDraft(draftId, pw, onData) {
     const pwHash = utils.hashPassword(pw);
     return utils.syncData(`drafts/${draftId}/${pwHash}/`, onData); 
+  },
+
+  connectToUserData(draftId, userId) {
+    return utils.connect(`userData/${draftId}/${userId}/`);
   },
 
   connectToDraft(draftId, pw) {

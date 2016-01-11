@@ -4,6 +4,10 @@ function isLoggedIn(auth) {
   return auth.has('auth')
 }
 
+function isAdmin(connection) {
+  return connection.isAdmin
+}
+
 function authService(auth) {
   return auth.get('provider');
 }
@@ -40,6 +44,7 @@ function draftList(state) {
 export default state => {
   return {
     isLoggedIn: isLoggedIn(state.auth),
+    isAdmin: isAdmin(state.auth),
     displayName: displayName(state.auth),
     authService: authService(state.auth),
     hasPw: hasPw(state),

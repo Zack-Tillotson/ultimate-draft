@@ -1,8 +1,6 @@
 import Immutable from 'immutable';
 import actions from '../../actionNames';
 
-// Used to get the list of draft metas
-
 function getInitialState() {
   return Immutable.fromJS({});
 }
@@ -10,7 +8,7 @@ function getInitialState() {
 export default function(state = getInitialState(), action) {
   switch(action.type) {
     case actions.firebase:
-      if(action.path == 'draftMeta') {
+      if(/userData\/.+/.test(action.path)) {
         state = Immutable.fromJS(action.data || {});
       }
       break;
