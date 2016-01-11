@@ -4,6 +4,8 @@ import firebase from './firebase';
 import modalNames from '../modalNames';
 import overlay from './overlay';
 
+import firebaseUtil from '../../firebase';
+
 export default {
   tabClick(tabName) {
     return {type: actions.tabClick, tabName}
@@ -25,6 +27,10 @@ export default {
           return (dispatch) => firebase.unputDraft(dispatch, connection.draftId, connection.enteredPassword, data);
         }
       case modalNames.chooseViewTeam:
+        firebaseUtil
+          .connectToUserData(utils.getFirebaseId(), firebaseUtil.getUserId())
+          .child('viewTeam')
+          .set(data.viewTeam);
       case modalNames.filterRows:
       case modalNames.filterColumns:
         return {type: actions.confirmModal, modal: modalName, data};

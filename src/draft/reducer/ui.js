@@ -55,6 +55,14 @@ export default function(state = getInitialState(), action) {
     case actions.sorting:
       state = state.setIn(['sorts', action.sortItem], action.sort);
       break;
+    case actions.firebase:
+      if(/^userData\//.test(action.path) && !!action.data) {
+        const {viewTeam} = action.data;
+        if(viewTeam >= -1) {
+          state = state.set('modal', '');
+        }
+      }
+      break;
   }
   return state;
 }

@@ -24,6 +24,7 @@ const Page = React.createClass({
   componentDidMount() {
     this.firebaseSync();
     document.addEventListener('keydown', this.keyPressHandler);
+    window.onbeforeunload = () => 'You are leaving this draft. All draft information will be saved.';
   },
 
   firebaseSync() {
@@ -54,6 +55,9 @@ const Page = React.createClass({
   },
 
   userDataWillUpdate(userDataResult) {
+
+    this.props.dispatch.firebase(userDataResult);
+
     if(this.draftRef) {
       this.draftRef.off();
       this.draftRef = undefined;

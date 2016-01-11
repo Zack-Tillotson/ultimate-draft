@@ -116,6 +116,7 @@ const DraftView = React.createClass({
           updateModal={this.props.dispatch.updateModal}
           teams={this.props.teams}
           data={this.props.ui.modalData}
+          previousTeamChoice={this.props.userData.selectedTeam}
           viewTeam={this.props.user.viewTeam} />
         <FilterColumns 
           modalName={modalNames.filterColumns}

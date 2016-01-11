@@ -39,6 +39,13 @@ export default function(state = getInitialState(), action) {
     } else {
       const tutorialStep = action.step || (state.get('tutorialStep') + 1) % 5;
       state = state.merge({tutorialStep});
+    } 
+  } else if(action.type === actions.firebase) {
+    if(/^userData\//.test(action.path) && !!action.data) {
+      const {viewTeam} = action.data;
+      if(viewTeam >= -1) {
+        state = state.set('viewTeam', viewTeam);
+      }
     }
   }
   return state;
