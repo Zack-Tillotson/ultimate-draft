@@ -45,7 +45,7 @@ const Page = React.createClass({
 
     const {auth} = authResult.data;
     if(this.userDataRef) {
-      this.userDataRef.off();
+      this.userDataRef.off('value', this.userDataWillUpdate);
       this.userDataRef = undefined;
     }
     if(auth) {
@@ -59,7 +59,7 @@ const Page = React.createClass({
     this.props.dispatch.firebase(userDataResult);
 
     if(this.draftRef) {
-      this.draftRef.off();
+      this.draftRef.off('value', this.syncDraftHandler);
       this.draftRef = undefined;
     }
     const enteredPassword = !!userDataResult.data ? userDataResult.data.enteredPassword : '';
@@ -76,7 +76,7 @@ const Page = React.createClass({
       .set(password);
 
     if(this.firebaseDraftRef) {
-      this.firebaseDraftRef.off();
+      this.firebaseDraftRef.off('value', this.syncDraftHandler);
     }
     this.firebaseDraftRef = firebase.syncDraft(utils.getFirebaseId(), password, this.syncDraftHandler);
 
