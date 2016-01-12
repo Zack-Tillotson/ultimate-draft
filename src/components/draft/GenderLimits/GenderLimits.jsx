@@ -18,7 +18,7 @@ export default React.createClass({
   },
 
   saveDraft(inputs) {
-    this.props.saveDraft(inputs, this.props.connection);
+    this.props.saveDraft(inputs, this.props.connection.draftId, this.props.userData.enteredPassword);
   },
 
   getGenderStats(gender) {

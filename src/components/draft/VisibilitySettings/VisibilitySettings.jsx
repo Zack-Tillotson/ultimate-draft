@@ -24,7 +24,7 @@ export default React.createClass({
   },
 
   saveVisibility(inputs) {
-    this.props.saveVisibility(inputs.visible, this.props.connection);
+    this.props.saveVisibility(inputs.visible, this.props.connection.draftId);
   },
 
   updateSubmitState() {

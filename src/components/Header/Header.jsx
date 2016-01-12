@@ -12,7 +12,7 @@ export default React.createClass({
         <header>
           {this.props.isLoggedIn && (
             <div className="loginStatus">
-              <LoginForm />
+              <LoginForm isAdmin={this.props.isAdmin} />
             </div>
           )}
           {!!this.props.tutorial && (

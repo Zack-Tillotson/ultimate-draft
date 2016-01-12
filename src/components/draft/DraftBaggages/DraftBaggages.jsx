@@ -107,14 +107,14 @@ export default React.createClass({
   },
 
   addBaggageHandler(inputs) {
-    this.props.addBaggageDraft({...inputs, type: 'baggage'}, this.props.connection);
+    this.props.addBaggageDraft({...inputs, type: 'baggage'}, this.props.connection.draftId, this.props.userData.enteredPassword);
     const {playerIdText} = this.state;
     const baggage = this.props.players.find(player => 
       utils.getPlayerId(player, this.props.columns) == playerIdText
     ).baggage;
     if(!!baggage) {
       const baggageId = utils.getPlayerId(baggage, this.props.columns);
-      this.props.addBaggageDraft({...inputs, playerId: baggageId, type: 'baggage'}, this.props.connection);
+      this.props.addBaggageDraft({...inputs, playerId: baggageId, type: 'baggage'}, this.props.connection.draftId, this.props.userData.enteredPassword);
     }
   },
 

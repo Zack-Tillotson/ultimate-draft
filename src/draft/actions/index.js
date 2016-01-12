@@ -47,17 +47,17 @@ export default (dispatch, props) => {
       quitTutorial() {
         dispatch(ui.quitTutorial());
       },
-      addBaggageDraft(data, connection) {
-        firebase.putDraft(dispatch, connection.draftId, connection.enteredPassword, data);
+      addBaggageDraft(data, draftId, enteredPassword) {
+        firebase.putDraft(dispatch, draftId, enteredPassword, data);
       },
-      saveTeams(data, connection) {
-        firebase.updateTeams(dispatch, connection.draftId, connection.enteredPassword, data);
+      saveTeams(data, draftId, enteredPassword) {
+        firebase.updateTeams(dispatch, draftId, enteredPassword, data);
       },
-      saveDraft(data, connection) {
-        firebase.updateDraft(dispatch, connection.draftId, connection.enteredPassword, data);
+      saveDraft(data, draftId, enteredPassword) {
+        firebase.updateDraft(dispatch, draftId, enteredPassword, data);
       },
-      saveVisibility(data, connection) {
-        firebase.updateVisibility(dispatch, connection.draftId, data);
+      saveVisibility(data, draftId) {
+        firebase.updateVisibility(dispatch, draftId, data);
       },
     }
   }

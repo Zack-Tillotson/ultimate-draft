@@ -48,7 +48,10 @@ const LoginForm = React.createClass({
                 <div className={["icon", selectedService].join(' ')}></div>
               </div>
             </div>
-            <div className="displayName">{this.props.displayName}</div>
+            <div className="displayName">
+              {this.props.displayName}
+              {this.props.isAdmin && '*'}
+            </div>
             <div className="optionDialog">
               <div className="toggle">
                 {'\u25BE'}

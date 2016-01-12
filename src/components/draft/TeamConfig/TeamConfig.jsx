@@ -32,7 +32,7 @@ export default React.createClass({
       const {order, ...team} = rawTeam;
       return team;
     });
-    this.props.saveTeams(data, this.props.connection);
+    this.props.saveTeams(data, this.props.connection.draftId, this.props.userData.enteredPassword);
   },
   
   render() {
