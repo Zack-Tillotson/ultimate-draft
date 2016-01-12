@@ -110,7 +110,8 @@ const DraftView = React.createClass({
           showConfirm={this.props.ui.modal != modalNames.draftPlayer || this.props.connection.isAdmin}
           confirmHandler={this.props.dispatch.confirmModal}
           cancelHandler={this.props.dispatch.cancelModal}
-          connection={this.props.connection}>
+          connection={this.props.connection}
+          userData={this.props.userData}>
 
         <ChooseViewTeam
           modalName={modalNames.chooseViewTeam}

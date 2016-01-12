@@ -37,7 +37,7 @@ export default React.createClass({
   confirmHandler(event) {
     event.preventDefault();
     if(event.ctrlKey || !this.refs.modal.validate || this.refs.modal.validate(this.props.modalData)) {
-      this.props.confirmHandler(this.props.currentModalName, this.props.modalData, this.props.connection);
+      this.props.confirmHandler(this.props.currentModalName, this.props.modalData, this.props.connection, this.props.userData.enteredPassword);
     }
   },
 

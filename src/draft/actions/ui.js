@@ -16,15 +16,15 @@ export default {
   updateModal(data) {
     return {type: actions.updateModal, data};
   },
-  confirmModal(modalName, data, connection) { 
+  confirmModal(modalName, data, connection, enteredPassword) { 
     switch(modalName) {
       case modalNames.draftPlayer:
         if(connection.isAdmin) {
-          return (dispatch) => firebase.putDraft(dispatch, connection.draftId, connection.enteredPassword, data);
+          return (dispatch) => firebase.putDraft(dispatch, connection.draftId, enteredPassword, data);
         }
       case modalNames.undraftPlayer:
         if(connection.isAdmin) {
-          return (dispatch) => firebase.unputDraft(dispatch, connection.draftId, connection.enteredPassword, data);
+          return (dispatch) => firebase.unputDraft(dispatch, connection.draftId, enteredPassword, data);
         }
       case modalNames.chooseViewTeam:
         firebaseUtil

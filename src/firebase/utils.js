@@ -2,14 +2,14 @@ import Firebase from 'firebase';
 import md5 from 'md5';
 
 const firebaseUrlBase = 'https://diskdraft.firebaseio.com';
-const version = '100';
+const version = '110';
 
 function getVersionUrl() {
   return [firebaseUrlBase, version].join('/');
 }
 
 function getSalt() {
-  return 'TPZMjWAsaiNV7DRrXHq7' + version;
+  return 'BNOODCyaWtsPMjktQNdH' + version;
 }
 
 function getVersion() {

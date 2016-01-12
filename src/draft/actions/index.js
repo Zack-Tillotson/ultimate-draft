@@ -38,8 +38,8 @@ export default (dispatch, props) => {
       blowup(message) {
         dispatch(overlay.blowup(message));
       },
-      confirmModal(modalName, data = {}, connection = {}) {
-        dispatch(ui.confirmModal(modalName, data, connection));
+      confirmModal(modalName, data = {}, connection = {}, enteredPassword = '') {
+        dispatch(ui.confirmModal(modalName, data, connection, enteredPassword));
       },
       nextTutorialStep(step) {
         dispatch(ui.nextTutorialStep(step));
