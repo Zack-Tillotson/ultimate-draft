@@ -21,7 +21,6 @@ import History from '../History';
 // Modals
 import ChooseViewTeam from '../ChooseViewTeam';
 import FilterColumns from '../FilterColumns';
-import FilterPlayers from '../FilterPlayers';
 import DraftPlayer from '../DraftPlayer';
 import UndraftPlayer from '../UndraftPlayer';
 
@@ -62,6 +61,7 @@ const DraftView = React.createClass({
           status={this.props.status}
           viewModal={this.props.dispatch.viewModal} 
           viewTeam={this.props.user.viewTeam}
+          toggleFilter={this.props.dispatch.toggleFilter}
           rowFilters={this.props.user.rowFilters} />
         <Teams 
           tabName={tabNames.teams}
@@ -124,10 +124,6 @@ const DraftView = React.createClass({
           modalName={modalNames.filterColumns}
           updateModal={this.props.dispatch.updateModal}
           data={this.props.columns} />
-        <FilterPlayers 
-          modalName={modalNames.filterRows}
-          updateModal={this.props.dispatch.updateModal}
-          data={this.props.ui.modalData} />
         <DraftPlayer
           modalName={modalNames.draftPlayer}
           updateModal={this.props.dispatch.updateModal}

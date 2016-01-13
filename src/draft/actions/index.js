@@ -41,6 +41,9 @@ export default (dispatch, props) => {
       confirmModal(modalName, data = {}, connection = {}, enteredPassword = '') {
         dispatch(ui.confirmModal(modalName, data, connection, enteredPassword));
       },
+      toggleFilter(data) {
+        dispatch(ui.toggleFilter(data));
+      },
       nextTutorialStep(step) {
         dispatch(ui.nextTutorialStep(step));
       },

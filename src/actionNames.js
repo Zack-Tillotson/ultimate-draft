@@ -11,6 +11,7 @@ export default {
   updateModal: 'updateModal',
   tutorialStep: 'tutorialStep',
   sorting: 'sorting',
+  toggleFilter: 'toggleFilter',
   
   firebase: 'firebase',
   blowup: 'blowup',

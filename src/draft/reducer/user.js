@@ -9,7 +9,9 @@ function getInitialState() {
     rowFilters: {
       viewOtherTeam: false,
       viewYourTeam: false,
-      viewUndraftable: true
+      viewYourBaggage: true,
+      viewUndraftableVector: true,
+      viewUndraftableGender: false
     },
     columnFilters: [],
     tutorialStep: 0
@@ -22,17 +24,12 @@ export default function(state = getInitialState(), action) {
       case modalNames.chooseViewTeam:
         state = state.merge({viewTeam: action.data.viewTeam});
         break;
-      case modalNames.filterRows:
-        state = state.merge({rowFilters: {
-          viewOtherTeam: action.data.viewOtherTeam,
-          viewYourTeam: action.data.viewYourTeam,
-          viewUndraftable: action.data.viewUndraftable
-        }});
-        break;
       case modalNames.filterColumns:
         state = state.merge({columnFilters: action.data});
         break;
     }
+  } else if(action.type === actions.toggleFilter) {
+    state = state.mergeIn(['rowFilters'], action.data);
   } else if(action.type === actions.tutorialStep) {
     if(action.isQuit) {
       state = state.merge({tutorialStep: 0});

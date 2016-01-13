@@ -180,7 +180,7 @@ const Page = React.createClass({
   },
 
   render() {
-
+    
     const state = 
       (!this.props.auth.auth) ? 'login'
       : (this.props.connection.broken || this.props.ui.error) ? 'error'

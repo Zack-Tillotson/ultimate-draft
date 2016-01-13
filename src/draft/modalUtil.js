@@ -10,8 +10,6 @@ function validateModalInput(modal, name, value) {
       break;
     case modalNames.filterColumns:
       break;
-    case modalNames.filterRows:
-      break;
     case modalNames.draftPlayer:
       switch(name) {
         case 'teamId':

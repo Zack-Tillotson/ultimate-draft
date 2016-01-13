@@ -2,6 +2,7 @@ import React from 'react';
 import InlineCss from 'react-inline-css';
 import modalNames from '../../../draft/modalNames';
 import PlayerTable from '../../PlayerTable';
+import FilterPlayers from '../FilterPlayers'
 
 import styles from './styles';
 
@@ -37,35 +38,9 @@ export default React.createClass({
     );
   },
 
-  getRowFilterModalLink() {
-    const name = modalNames.filterRows;
-    const {rowFilters} = this.props;
+  getRowFilters() {
     return (
-      <span className="rowFilters modalLink" onClick={this.modalClickHandler.bind(this, name, rowFilters)}>
-        <div className="title">
-          Filters
-        </div>
-        <div className="filterIcons">
-          <div className={
-            ['rowFilter', 'otherTeam', rowFilters.viewOtherTeam ? 'unfiltered' : 'filtered'].join(' ')
-          }>
-            Other Team
-            <div className="logo">{rowFilters.viewOtherTeam ? '\u2a09' : '\u2713'}</div>
-          </div>
-          <div className={
-            ['rowFilter', 'yourTeam', rowFilters.viewYourTeam ? 'unfiltered' : 'filtered'].join(' ')
-          }>
-            Your Team
-            <div className="logo">{rowFilters.viewYourTeam ? '\u2a09' : '\u2713'}</div>
-          </div>
-          <div className={
-            ['rowFilter', 'undraftable', rowFilters.viewUndraftable ? 'unfiltered' : 'filtered'].join(' ')
-          }>
-            Illegal Drafts
-            <div className="logo">{rowFilters.viewUndraftable ? '\u2a09' : '\u2713'}</div>
-          </div>
-        </div>
-      </span>
+      <FilterPlayers rowFilters={this.props.rowFilters} toggleFilter={this.props.toggleFilter} />
     );
   },
 
@@ -73,18 +48,17 @@ export default React.createClass({
     return (
       <InlineCss componentName="component" stylesheet={styles}>
         <div className="configs">
+          {this.getRowFilters()}
           {this.getColumnFilterModalLink()}
-          {this.getRowFilterModalLink()}
         </div>
         <PlayerTable 
-          players={this.props.players} 
+          players={this.props.players}
           filterColumns={true}
           columns={this.props.columns}
           filterRows={true}
           rowFilters={this.props.rowFilters}
-          bottomLegend={true}
-          topLegend={true}
-          playerClickHandler={this.draftPlayerHandler} />
+          playerClickHandler={this.draftPlayerHandler}
+          colors={true} />
       </InlineCss>
     );
   }

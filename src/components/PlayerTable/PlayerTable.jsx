@@ -14,20 +14,15 @@ export default React.createClass({
     filterRows: React.PropTypes.bool,
     rowFilters: React.PropTypes.object,
     playerClickHandler: React.PropTypes.func,
-    colors: React.PropTypes.bool,
     includeBaggageSummary: React.PropTypes.bool,
-    topLegend: React.PropTypes.bool,
-    bottomLegend: React.PropTypes.bool
+    colors: React.PropTypes.bool,
   },
 
   getDefaultProps() {
     return {
       filterColumns: false,
       filterRows: false,
-      colors: true,
       includeBaggageSummary: true,
-      topLegend: false,
-      bottomLegend: true
     };
   },
 
@@ -126,8 +121,10 @@ export default React.createClass({
       } else {
         const otherTeam = !this.props.rowFilters.viewOtherTeam && (player.draftStatus.otherTeamsDraft || player.draftStatus.otherTeamsBaggage);
         const thisTeam = !this.props.rowFilters.viewYourTeam && player.draftStatus.currentTeamsDraft;
-        const undraftable = !this.props.rowFilters.viewUndraftable && (player.draftStatus.currentTeamUndraftable || player.draftStatus.maleOverdraft || player.draftStatus.femaleOverdraft);
-        return !otherTeam && !thisTeam && !undraftable;
+        const thisTeamBag = !this.props.rowFilters.viewYourBaggage && player.draftStatus.currentTeamsBaggage;
+        const undraftableVector = !this.props.rowFilters.viewUndraftableVector && player.draftStatus.currentTeamUndraftable;
+        const undraftableGender = !this.props.rowFilters.viewUndraftableGender && (player.draftStatus.maleOverdraft || player.draftStatus.femaleOverdraft);
+        return !thisTeamBag && !otherTeam && !thisTeam && !undraftableVector && !undraftableGender;
       }
     })
     .sort(this.sortTwoPlayers);
@@ -206,32 +203,17 @@ export default React.createClass({
       return 'drafted';
     } else if(player.draftStatus.currentTeamsBaggage) {
       return 'draftedBaggage';
-    } else if(player.draftStatus.currentTeamUndraftable || player.draftStatus.maleOverdraft || player.draftStatus.femaleOverdraft) {
-      return 'undraftable';
+    } else if(player.draftStatus.currentTeamUndraftable) {
+      return 'undraftableVector';
+    } else if(player.draftStatus.maleOverdraft || player.draftStatus.femaleOverdraft) {
+      return 'undraftableGender';
     }
     return 'draftable';
-  },
-
-  getColorDescriptions() {
-    if(this.props.players.length > 0) {
-      return (
-        <div className="tableColors">
-          <h5>Legend</h5>
-          <div className="tableColor otherTeam">Another team</div>
-          <div className="tableColor drafted">Your team</div>
-          <div className="tableColor draftedBaggage">Your team&#39;s undrafted baggage</div>
-          <div className="tableColor undraftable">Illegal Draft</div>
-        </div>
-      );
-    } else {
-      return null;
-    }
   },
 
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        {this.props.colors && this.props.topLegend && this.getColorDescriptions()}
         <table className="players">
           <thead>
             {this.getHeaderRows()}
@@ -240,7 +222,6 @@ export default React.createClass({
             {this.getBodyRows()}
           </tbody>
         </table>
-        {this.props.colors && this.props.bottomLegend && this.getColorDescriptions()}
       </InlineCss>
     );
   }

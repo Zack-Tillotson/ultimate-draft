@@ -50,5 +50,8 @@ export default {
   },
   passwordEntered(password) {
     return {type: actions.syncing, password};
+  },
+  toggleFilter(data) {
+    return {type: actions.toggleFilter, data};
   }
 };

@@ -1,18 +1,74 @@
 component {
 
-  .options {
-    text-align: left;
-    padding: 0 25px;
-    font-size: 12px;
+  .title {
+    display: block;
+    text-align: center;
 
-    .option {
+    .explanationToggle {
+      padding: 0px 5px;
+      border: solid 1px #ccc;
+      cursor: pointer;
+      border-radius: 25px;
+      margin-left: 5px;
 
-      label {
-        display: inline-block;
+      &:hover {
+        border-color: #666;
+      }
+    }
+  }
+
+  .filterExplanations {
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+
+    .filterDec {
+      text-align: left;
+      vertical-align: bottom;
+    }
+
+    .okBtn {
+      font-size: 14px;
+      text-align: center;
+      text-decoration: underline;
+      color: #3379A9;
+      cursor: pointer;
+
+      &:hover {
+        color: #9BC0C6;
+      }
+    }
+  }
+
+  .filterIcons {
+    display: inline-block;
+    margin: 3px 0;
+
+    .rowFilter {
+      display: inline-block;
+      padding: 5px;
+      background: #fff;
+      text-align: center;
+      margin: 3px 5px;
+      cursor: pointer;
+
+      &.filtered {
+        box-shadow: 1px 1px 5px #666;
       }
 
-      input {
+      &:hover {
+        background: #e9e9e9;
+      }
+
+      .logo {
         display: inline-block;
+        width: 40px;
+        height: 40px;
+      }
+
+      .filterName {
+        display: inline-block;
+        width: 100%;
       }
     }
   }

@@ -31,7 +31,9 @@ export default React.createClass({
   getPlayersOfGender(gender) {
     return this.props.user.team.players.filter(player => 
       utils.getGender(player, this.props.columns) == gender
-    ).length;
+    ).concat(this.props.user.team.baggage.filter(player => 
+      utils.getGender(player, this.props.columns) == gender
+    )).length;
   },
 
   getTeamSummary() {
@@ -59,7 +61,7 @@ export default React.createClass({
           </thead>
           <tbody>
             <tr>
-              <td>{team.players.length}</td>
+              <td>{team.players.length + team.baggage.length}</td>
               <td>{this.getPlayersOfGender('M')}</td>
               <td>{this.getPlayersOfGender('F')}</td>
               <td>
