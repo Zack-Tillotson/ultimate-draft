@@ -105,7 +105,7 @@ export default React.createClass({
               key={column.name + (column.baggage ? 'bag' : '')} 
               onClick={this.sortColumnHandler.bind(this, index)}
               className={['columnHead', columnClassName, baggageClassName, firstClassName, lastClassName].join(' ')}>
-              {column.name}
+              <div className="tdContainer">{column.name}</div>
             </td>
           );
         })}

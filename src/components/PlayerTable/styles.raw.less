@@ -14,28 +14,42 @@ component {
       td {
         font-weight: bold;
         cursor: pointer;
+        position: relative;
+        z-index: 1;
+        padding-right: 3px;
 
         &.baggageHeader {
           text-align: center;
         }
 
-        &:hover {
+        .tdContainer {
+          margin-left: 5px;
+
+          &:hover {
+            color: #9BC0C6;
+          }
+        }
+
+        .tdContainer:after {
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: -1;
+        }
+
+        &.columnHead .tdContainer:after {
+          content: '◥';
+          color: #ddd;
+        }
+        
+        &.sortAsc .tdContainer:after {
+          content: '◢';
           color: #666;
         }
 
-        &.columnHead:after {
-          content: ' \2195';
-          color: #ccc;
-        }
-        
-        &.sortAsc:after {
-          content: '\25B2';
-          color: #000;
-        }
-
-        &.sortDesc:after {
-          content: '\25BC';
-          color: #000;
+        &.sortDesc .tdContainer:after {
+          content: '◥';
+          color: #666;
         }
       }
     }
