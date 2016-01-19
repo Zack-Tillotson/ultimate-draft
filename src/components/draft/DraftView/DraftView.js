@@ -149,7 +149,9 @@ const DraftView = React.createClass({
         drafts={this.props.drafts}
         teams={this.props.teams}
         user={this.props.user}
-        status={this.props.status} />
+        status={this.props.status}
+        columns={this.props.columns}
+        players={this.props.players} />
     );
   },
 

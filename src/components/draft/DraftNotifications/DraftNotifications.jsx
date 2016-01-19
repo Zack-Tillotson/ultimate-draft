@@ -1,6 +1,5 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
-import Notification from 'react-notification-system';
 import utils from '../../../draft/utils';
 
 import styles from './styles.raw.less';
@@ -8,70 +7,79 @@ import styles from './styles.raw.less';
 export default React.createClass({
 
   propTypes: {
-    teams: React.PropTypes.array,
     drafts: React.PropTypes.array.isRequired,
     status: React.PropTypes.object.isRequired,
-    user: React.PropTypes.object
+    user: React.PropTypes.object,
+    columns: React.PropTypes.array.isRequired,
+    players: React.PropTypes.array.isRequired
   },
 
-  componentWillReceiveProps(nextProps) {
-    
-    const {drafts} = this.props;
-
-    const newDraft = nextProps.drafts.find(draft => 
-      !drafts.find(findDraft => findDraft.timestamp === draft.timestamp)
-    );
-    if(newDraft && newDraft.timestamp > Date.now() - 15000) {
-      this.addDraftNotification(newDraft);
+  getInitialState() {
+    return {
+      hideSelectionTime: 0
     }
-
-    if(nextProps.user.team) {
-      if(nextProps.user.viewTeam >= 0 && nextProps.user.team.id == nextProps.status.nextDraft.teamId) {
-        this.addYourTeamDraftNotification(); 
-      } else {
-        this.removeYourTeamDraftNotification();
-      }
-    }
-
   },
 
-  addDraftNotification(draft) {
-
-    const team = this.props.teams[draft.teamId];
-
-    const title = 'Player Drafted';
-    const message = team.name + ' drafted Player #' + draft.playerId;
-    const level = 'info';
-    const position = 'bl';
-    const autoDismiss = 15;
-
-    this.refs.notificationSystem.addNotification({title, message, level, position, autoDismiss});
+  closeClickHandler(event) {
+    this.setState({hideSelectionTime: Date.now()});
   },
 
-  addYourTeamDraftNotification() {
+  currentTeamDrafting() {
+    return !!this.props.user.team && 
+      this.props.user.viewTeam >= 0 && 
+      this.props.user.team.id == this.props.status.nextDraft.teamId;
+  },
 
-    const uid = 'yourteam';
-    const title = 'Your Turn';
-    const message = 'It is your team\'s turn to draft';
-    const level = 'error';
-    const position = 'tc';
-    const autoDismiss = 0;
-    const dismissable = false;
+  getDraftSummary(draft) {
 
-    this.refs.notificationSystem.addNotification(
-      {uid, title, message, level, position, autoDismiss, dismissable}
+    const teamName = draft.team.name;
+    const teamColor = draft.team.color;
+    const playerId = draft.playerId;
+    const hasBaggage = !!draft.player.baggage;
+    const baggageId = utils.getBaggageId(draft.player, this.props.columns);
+
+    return (
+      <span>
+        {teamName}
+        <span className="teamBox" style={{background: teamColor}} />
+        &nbsp;drafted #{playerId}
+        {hasBaggage && (
+          <span>
+            &nbsp;and #{baggageId}
+          </span>
+        )}
+      </span>
     );
   },
 
-  removeYourTeamDraftNotification() {
-    const uid = 'yourteam';
-    this.refs.notificationSystem.removeNotification({uid});
+  shouldShowSelection(draft) {
+    return this.state.hideSelectionTime < draft.timestamp;
   },
 
   render() {
+
+    const lastDraft = this.props.drafts.find((draft, index, ary) => 
+      index == ary.length - 1 && ary.length > 0
+    );
+
+    const activeClass = this.currentTeamDrafting() ? 'active' : '';
+    const selectionClass = !!lastDraft ? 'active' : '';
+
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        <Notification ref="notificationSystem" />  
+        <div className={["draftActive", activeClass].join(' ')}>
+          ⚠ Your turn to draft!
+        </div>
+        {!!lastDraft && this.shouldShowSelection(lastDraft) && (
+          <div className={["draftSelection", selectionClass].join(' ')}>
+            <div className="draftInformation">
+              Draft: {this.getDraftSummary(lastDraft)}
+            </div>
+            <div className="hideButton" onClick={this.closeClickHandler}>
+              X
+            </div>
+          </div>
+        )}
       </InlineCss>
     );
   }

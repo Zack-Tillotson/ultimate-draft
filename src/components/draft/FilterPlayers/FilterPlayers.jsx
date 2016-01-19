@@ -68,7 +68,7 @@ export default React.createClass({
                   <div className="filterName">Vector Limited</div>
                 </td>
                 <td className="filterDec">
-                  Players you can not currently draft because of gender limits - you may not draft a player if they or their baggage would make your team have too many players of either gender.
+                  Players you can not currently draft because of their vector - you may not draft a player whose baggage is less than or equal to any vector of an undrafted player on your team.
                 </td>
               </tr>
               <tr className="explanation">
@@ -77,7 +77,7 @@ export default React.createClass({
                   <div className="filterName">Gender Limited</div>
                 </td>
                 <td className="filterDec">
-                  Players you can not currently draft because of their vector - you may not draft a player whose baggage is less than or equal to any vector of an undrafted player on your team.
+                  Players you can not currently draft because of gender limits - you may not draft a player if they or their baggage would make your team have too many players of either gender.
                 </td>
               </tr>
               <tr>
