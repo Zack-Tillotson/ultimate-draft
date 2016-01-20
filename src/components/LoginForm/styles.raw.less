@@ -1,4 +1,4 @@
-container {
+component {
   margin: 5px 0;
 
   .loginOption {
@@ -68,10 +68,14 @@ container {
 
     .displayName {
       display: inline-block;
+      position: relative;
+      top: -10px;
     }
 
     .optionDialog {
       display: inline-block;
+      position: relative;
+      top: -10px;
       
       .toggle {
         margin-left: 3px;
@@ -93,6 +97,16 @@ container {
 
     &:hover .optionDialog {
       color: #ccc;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  component {
+    .welcome {
+      .displayName, .optionDialog {
+        top: 17px;
+      }
     }
   }
 }

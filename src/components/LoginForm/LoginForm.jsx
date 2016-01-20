@@ -23,7 +23,7 @@ const LoginForm = React.createClass({
     const services = ['google', 'facebook', 'twitter'];
     const selectedService = this.props.authService;
     return (
-      <InlineCss stylesheet={styles} componentName="container">
+      <InlineCss stylesheet={styles} componentName="component">
 
         {!this.props.isLoggedIn && (
           <div className="loginSection">
