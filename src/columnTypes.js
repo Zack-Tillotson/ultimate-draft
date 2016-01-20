@@ -98,7 +98,7 @@ export const bool = {
 };
 
 export const team = {
-  name: 'Team', 
+  name: '⚠', 
   description: 'What team a player is on', 
   unique: true, 
   required: false, 

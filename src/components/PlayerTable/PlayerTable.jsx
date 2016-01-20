@@ -16,6 +16,7 @@ export default React.createClass({
     playerClickHandler: React.PropTypes.func,
     includeBaggageSummary: React.PropTypes.bool,
     colors: React.PropTypes.bool,
+    labels: React.PropTypes.bool, // Per user labels for players
   },
 
   getDefaultProps() {
@@ -23,6 +24,8 @@ export default React.createClass({
       filterColumns: false,
       filterRows: false,
       includeBaggageSummary: true,
+      colors: false,
+      labels: false,
     };
   },
 
@@ -184,7 +187,21 @@ export default React.createClass({
       const bagPlayer = player.baggage;
       return bagPlayer ? bagPlayer.data[column.name] : '';
     } else if(column.name == teamColumnType.name) {
-      return player.team ? player.team.name : '';
+      return (
+        <span className="status">
+          {player.draftStatus.currentTeamsDraft && (
+            <img src="/assets/filters/yourteam.png" height="10" width="10" />
+          ) || player.draftStatus.currentTeamsBaggage && (
+            <img src="/assets/filters/yourbags.png" height="10" width="10" />
+          ) || (player.draftStatus.otherTeamsDraft || player.draftStatus.otherTeamsBaggage) && (
+            <img src="/assets/filters/otherteam.png" height="10" width="10" />
+          ) || player.draftStatus.currentTeamUndraftable && (
+            <img src="/assets/filters/vectorillegal.png" height="10" width="10" />
+          ) || (player.draftStatus.maleOverdraft || player.draftStatus.femaleOverdraft) && (
+            <img src="/assets/filters/genderillegal.png" height="10" width="10" />
+          )}
+        </span>
+      );
     } else {
       return player.data[column.name]
     }

@@ -117,34 +117,76 @@ export default React.createClass({
     const errors = [];
     
     if(!this.props.data.player) {
-      errors.push('Enter a valid player ID');
+      errors.push((
+        <div>Enter a valid player ID</div>
+      ));
     }
 
     if(!errors.length) {
 
       const {draftStatus} = this.props.data.player;
 
-      if(draftStatus.currentTeamUndraftable) {
-        errors.push('The team has undrafted baggage with an equal or less vector.');
-      }
-      if(draftStatus.otherTeamsDraft) {
-        errors.push('This player is already on another team.');
-      }
-      if(this.props.data.player.draftStatus.otherTeamsBaggage) {
-        errors.push('This player is baggaged by a player on another team.');
-      }
-      if(this.props.data.player.draftStatus.maleOverdraft) {
-        errors.push('By drafting this player you would have too many men.');
-      }
-      if(this.props.data.player.draftStatus.femaleOverdraft) {
-        errors.push('By drafting this player you would have too many women.');
-      }
-      if(this.props.data.player.baggage) {
+      if(draftStatus.currentTeamsDraft) {
+        errors.push((
+          <div>
+            <img src="/assets/filters/yourteam.png" height="12" width="12" />
+            This player is already drafted by this team.
+          </div>
+        ));
+      } else if(draftStatus.otherTeamsDraft) {
+        errors.push((
+          <div>
+            <img src="/assets/filters/otherteam.png" height="12" width="12" />
+            This player is already on another team.
+          </div>
+        ));
+      } else if(this.props.data.player.draftStatus.otherTeamsBaggage) {
+        errors.push((
+          <div>
+            <img src="/assets/filters/otherteam.png" height="12" width="12" />
+            This player is baggaged by a player on another team.
+          </div>
+        ));
+      } else if(this.props.data.player.baggage) {
 
         const {draftStatus: baggageDraftStatus} = this.props.data.player.baggage;
 
         if(baggageDraftStatus.otherTeamsDraft) {
-          errors.push('This player\'s baggage is already on another team.');
+          errors.push((
+            <div>
+              <img src="/assets/filters/otherteam.png" height="12" width="12" />
+              This player's baggage is already on another team.
+            </div>
+          ));
+        }
+      } 
+
+      if(!errors.length) {
+
+        if(draftStatus.currentTeamUndraftable) {
+          errors.push((
+            <div>
+              <img src="/assets/filters/vectorillegal.png" height="12" width="12" />
+              The team has undrafted baggage with an equal or less vector.
+            </div>
+          ));
+        }
+        
+        if(this.props.data.player.draftStatus.maleOverdraft) {
+          errors.push((
+            <div>
+              <img src="/assets/filters/genderillegal.png" height="12" width="12" />
+              By drafting this player you would have too many men.
+            </div>
+          ));  
+        }
+        if(this.props.data.player.draftStatus.femaleOverdraft) {
+          errors.push((
+            <div>
+              <img src="/assets/filters/genderillegal.png" height="12" width="12" />
+              By drafting this player you would have too many women.
+            </div>
+          ));  
         }
       }
     }
@@ -171,7 +213,7 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        <h3>Draft Player</h3>
+        <h3>{this.props.connection.isAdmin ? 'Draft Player' : 'Player Detail'}</h3>
         <div className="draftForm">
           {this.getPlayerForm()}
           {this.getTeamForm()}

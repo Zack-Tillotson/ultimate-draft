@@ -58,7 +58,8 @@ export default React.createClass({
           filterRows={true}
           rowFilters={this.props.rowFilters}
           playerClickHandler={this.draftPlayerHandler}
-          colors={true} />
+          colors={true}
+          labels={true} />
       </InlineCss>
     );
   }
