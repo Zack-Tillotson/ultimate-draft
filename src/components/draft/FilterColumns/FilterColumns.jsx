@@ -24,29 +24,38 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        <h3>Filter Players</h3>
-        <div className="options">
-          <div className="option header" key={name}>
-            <div className="columnName">Column</div>
-            <div className="include">Visible</div>
-          </div>
+        <h3>Select Visible Columns</h3>
+        <table className="options">
+          <thead>
+            <tr className="option header" key={name}>
+              <td className="columnName">Column</td>
+              <td className="include">Visible</td>
+            </tr>
+          </thead>
+          <tbody>
           {this.props.data.map((column, index) => {
             const name = 'column' + index;
             return (
-            <div className="option" key={name}>
-              <label className="columnName" htmlFor={name}>
-                {column.name}
+            <tr className="option" key={name}>
+              <td>
+                <label className="columnName" htmlFor={name}>
+                  {column.name}
+                </label>
+              </td>
+              <td>
                 <input
-                  className="visible"
-                  type="checkbox" 
-                  name={name}
-                  ref={name}
-                  onChange={this.changeHandler}
-                  defaultChecked={column.visible} />
-              </label>
-            </div>
+                    className="visible"
+                    type="checkbox" 
+                    name={name}
+                    ref={name}
+                    id={name}
+                    onChange={this.changeHandler}
+                    defaultChecked={column.visible} />
+              </td>
+            </tr>
           )})}
-        </div>
+          </tbody>
+        </table>
       </InlineCss>
     );
   }
