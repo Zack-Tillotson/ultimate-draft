@@ -30,9 +30,13 @@ export default React.createClass({
   },
 
   getInitialState() {
-    return {
-      sort: -1,
-      sortDir: 1
+    if(this.props.userData && this.props.userData.playerTableSort) {
+      return this.props.userData.playerTableSort;
+    } else {
+      return {
+        sort: -1,
+        sortDir: 1
+      }
     }
   },
 
@@ -67,14 +71,21 @@ export default React.createClass({
   },
 
   sortColumnHandler(column) {
+    let sortPref;
+
     if(this.state.sort == column) {
       const sortDir = this.state.sortDir == 0 ? 1
         : this.state.sortDir == 1 ? -1
         : 0;
         const sort = sortDir === 0 ? -1 : this.state.sort;
-      this.setState({sort, sortDir});
+      sortPref = {sort, sortDir};
     } else {
-      this.setState({sort: column, sortDir: 1});
+      sortPref = {sort: column, sortDir: 1};
+    }
+
+    this.setState(sortPref);
+    if(this.props.updateSortPreference) {
+      this.props.updateSortPreference(sortPref);
     }
   },
 

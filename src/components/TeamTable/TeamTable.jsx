@@ -17,12 +17,14 @@ export default React.createClass({
         <PlayerTable 
           players={team.players}
           columns={this.props.columns} 
-          colors={false} />
+          colors={false} 
+          userData={this.props.userData} />
         <h6>Undrafted Baggage</h6>
         <PlayerTable 
           players={team.baggage}
           columns={this.props.columns} 
-          colors={false} />
+          colors={false} 
+          playerTableSort />
       </div>
     );
   },

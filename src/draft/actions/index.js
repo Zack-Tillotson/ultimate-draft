@@ -2,6 +2,7 @@ import actions from '../../actionNames';
 import utils from '../utils';
 import modalNames from '../modalNames';
 import firebase from './firebase';
+import firebaseActions from '../../firebase';
 import overlay from './overlay';
 import ui from './ui';
 
@@ -62,6 +63,11 @@ export default (dispatch, props) => {
       saveVisibility(data, draftId) {
         firebase.updateVisibility(dispatch, draftId, data);
       },
+      updateSortPreference(data) {
+        const draftId = utils.getFirebaseId();
+        const userId = firebaseActions.getUserId();
+        firebase.updateSortPreference(dispatch, draftId, userId, data);
+      }
     }
   }
 }

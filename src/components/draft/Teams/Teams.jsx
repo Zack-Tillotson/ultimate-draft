@@ -14,7 +14,7 @@ export default React.createClass({
   render() {
     return (
       <InlineCss componentName="component" stylesheet={styles}>
-        <TeamTable teams={this.props.teams} columns={this.props.columns} />
+        <TeamTable teams={this.props.teams} columns={this.props.columns} userData={this.props.userData} />
       </InlineCss>
     );
   }

@@ -59,7 +59,8 @@ export default React.createClass({
           rowFilters={this.props.rowFilters}
           playerClickHandler={this.draftPlayerHandler}
           colors={true}
-          labels={true} />
+          userData={this.props.userData}
+          updateSortPreference={this.props.updateSortPreference} />
       </InlineCss>
     );
   }

@@ -164,7 +164,30 @@ function updateVisibility(dispatch, draftId, data) {
     
 }
 
+function updateSortPreference(dispatch, draftId, userId, data) {
+  dispatch(overlay.uploadStarting());
+  
+  const draftUserRef = firebase.connectToUserData(draftId, userId);
+  const draftRef = draftUserRef.child('playerTableSort').transaction(
+
+    // Upate function
+    (currentData) => {
+      return data;
+    },    
+
+    // On Complete
+    (error, committed, snapshot) => {
+      dispatch(overlay.uploadFinished());
+    }, 
+
+    // Dont see intermediate states
+    false 
+  );
+    
+}
+
 
 export default {
-  putDraft, unputDraft, requestingData, data, updateTeams, updateDraft, updateVisibility
+  putDraft, unputDraft, requestingData, data, updateTeams, updateDraft, updateVisibility, 
+  updateSortPreference
 }
