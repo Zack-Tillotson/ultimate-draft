@@ -53,5 +53,8 @@ export default {
   },
   toggleFilter(data) {
     return {type: actions.toggleFilter, data};
+  },
+  updateSorts(data) {
+    return {type: actions.sortsUpdate, data};
   }
 };

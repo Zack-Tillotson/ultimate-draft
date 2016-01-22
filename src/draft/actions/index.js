@@ -5,6 +5,7 @@ import firebase from './firebase';
 import firebaseActions from '../../firebase';
 import overlay from './overlay';
 import ui from './ui';
+import localStorage from '../../localStorage';
 
 const creators = {
   login(auth) {
@@ -65,8 +66,7 @@ export default (dispatch, props) => {
       },
       updateSortPreference(data) {
         const draftId = utils.getFirebaseId();
-        const userId = firebaseActions.getUserId();
-        firebase.updateSortPreference(dispatch, draftId, userId, data);
+        dispatch(ui.updateSorts(localStorage.updateSortPreference(draftId, data)));
       }
     }
   }

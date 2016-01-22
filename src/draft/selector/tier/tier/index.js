@@ -8,5 +8,5 @@ import {fullColumns} from './columns';
 import {maxGenderDrafts} from './draft';
 
 export default { 
-  ...selectors, orderedDraftIds, nextDraft, fullColumns, maxGenderDrafts,
+  ...selectors, orderedDraftIds, nextDraft, fullColumns, maxGenderDrafts
 };

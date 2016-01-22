@@ -12,6 +12,7 @@ export default {
   tutorialStep: 'tutorialStep',
   sorting: 'sorting',
   toggleFilter: 'toggleFilter',
+  sortsUpdate: 'sortsUpdate',
   
   firebase: 'firebase',
   blowup: 'blowup',

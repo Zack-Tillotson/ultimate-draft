@@ -25,6 +25,12 @@ component {
     font-size: 14px;
     background: #0D3D65;
     color: #fff;
+    z-index: 9;
+    cursor: pointer;
+
+    &:hover .hideButton {
+      background: #FF2B2B;
+    }
 
     .draftInformation {
       display: inline-block;
@@ -47,7 +53,6 @@ component {
       border-radius: 2px;
       border: solid 1px #fff;
       background: #F97171;
-      cursor: pointer;
     }
 
     &.active {

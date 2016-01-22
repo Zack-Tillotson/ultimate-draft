@@ -6,7 +6,10 @@ function objectToJs(state) {
   const keys = Object.keys(state);
   const ret = {};
   keys.forEach(key => 
-    ret[key] = typeof state[key].toJS == 'function' ? state[key].toJS() : objectToJs(state[key])
+    ret[key] = 
+      key == 'local' ? state[key] :
+      typeof state[key].toJS == 'function' ? state[key].toJS() : 
+      objectToJs(state[key])
   );
   return ret;
 }

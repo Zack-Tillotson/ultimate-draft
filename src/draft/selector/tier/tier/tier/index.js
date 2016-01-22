@@ -6,5 +6,6 @@ import selectors from '../';
 
 import {teamMap} from './teams';
 import {contextTeam} from './user';
+import {localDataCleanSorts} from './userData';
 
-export default { ...selectors, teamMap, contextTeam };
+export default { ...selectors, teamMap, contextTeam, localDataCleanSorts };

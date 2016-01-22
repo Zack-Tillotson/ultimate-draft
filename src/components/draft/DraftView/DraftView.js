@@ -63,13 +63,13 @@ const DraftView = React.createClass({
           viewTeam={this.props.user.viewTeam}
           toggleFilter={this.props.dispatch.toggleFilter}
           rowFilters={this.props.user.rowFilters}
-          userData={this.props.userData}
+          userData={this.props.local}
           updateSortPreference={this.props.dispatch.updateSortPreference} />
         <Teams 
           tabName={tabNames.teams}
           columns={this.props.columns}
           teams={this.props.teams}
-          userData={this.props.userData}
+          userData={this.props.local}
           viewModal={this.props.dispatch.viewModal} />
         <History 
           tabName={tabNames.history}

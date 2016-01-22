@@ -17,6 +17,7 @@ import {combineReducers} from 'redux';
 import ui from './ui';
 import user from './user';
 import connection from './connection';
+import local from './local';
 import {draft} from '../../firebase/reducers';
 
-export default combineReducers({ui, user, connection, firebase: draft});
+export default combineReducers({ui, user, connection, firebase: draft, local});

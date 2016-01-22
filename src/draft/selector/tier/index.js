@@ -32,4 +32,6 @@ const baggageDrafts = createSelector(firebaseIm, drafts, players, columns, (fire
     ));
 });
 
-export default {user, ui, players, teams, columns, drafts, baggageDrafts, connection, draft, draftMeta, auth, userData};
+const local = state => state.local;
+
+export default {user, ui, players, teams, columns, drafts, baggageDrafts, connection, draft, draftMeta, auth, userData, local};

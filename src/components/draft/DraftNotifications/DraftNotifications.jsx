@@ -16,12 +16,12 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      hideSelectionTime: 0
+      playerId: -1
     }
   },
 
-  closeClickHandler(event) {
-    this.setState({hideSelectionTime: Date.now()});
+  closeClickHandler(playerId) {
+    this.setState({playerId});
   },
 
   currentTeamDrafting() {
@@ -53,7 +53,7 @@ export default React.createClass({
   },
 
   shouldShowSelection(draft) {
-    return this.state.hideSelectionTime < draft.timestamp;
+    return this.state.playerId != draft.playerId;
   },
 
   render() {
@@ -71,11 +71,11 @@ export default React.createClass({
           ⚠ Your turn to draft!
         </div>
         {!!lastDraft && this.shouldShowSelection(lastDraft) && (
-          <div className={["draftSelection", selectionClass].join(' ')}>
+          <div className={["draftSelection", selectionClass].join(' ')} onClick={this.closeClickHandler.bind(this, lastDraft.playerId)}>
             <div className="draftInformation">
               Draft: {this.getDraftSummary(lastDraft)}
             </div>
-            <div className="hideButton" onClick={this.closeClickHandler}>
+            <div className="hideButton">
               X
             </div>
           </div>

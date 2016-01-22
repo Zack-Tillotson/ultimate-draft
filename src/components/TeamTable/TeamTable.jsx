@@ -24,7 +24,7 @@ export default React.createClass({
           players={team.baggage}
           columns={this.props.columns} 
           colors={false} 
-          playerTableSort />
+          userData={this.props.userData} />
       </div>
     );
   },

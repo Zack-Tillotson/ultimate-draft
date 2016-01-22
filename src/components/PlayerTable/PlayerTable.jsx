@@ -15,8 +15,7 @@ export default React.createClass({
     rowFilters: React.PropTypes.object,
     playerClickHandler: React.PropTypes.func,
     includeBaggageSummary: React.PropTypes.bool,
-    colors: React.PropTypes.bool,
-    labels: React.PropTypes.bool, // Per user labels for players
+    colors: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -30,14 +29,8 @@ export default React.createClass({
   },
 
   getInitialState() {
-    if(this.props.userData && this.props.userData.playerTableSort) {
-      return this.props.userData.playerTableSort;
-    } else {
-      return {
-        sort: -1,
-        sortDir: 1
-      }
-    }
+    const sorts = this.props.userData && this.props.userData.sorts || [];
+    return {sorts}
   },
 
   getColumns() {
@@ -71,28 +64,35 @@ export default React.createClass({
   },
 
   sortColumnHandler(column) {
-    let sortPref;
+    const currentSortDir = this.getCurrentSort(column);
+    const sortDir = !currentSortDir ? 1 : -1 * currentSortDir;
+    const columnName = this.getColumns()[column].name;
+    const sortPref = {sortDir, columnName};
 
-    if(this.state.sort == column) {
-      const sortDir = this.state.sortDir == 0 ? 1
-        : this.state.sortDir == 1 ? -1
-        : 0;
-        const sort = sortDir === 0 ? -1 : this.state.sort;
-      sortPref = {sort, sortDir};
-    } else {
-      sortPref = {sort: column, sortDir: 1};
-    }
+    const newSorts = [sortPref].concat(this.state.sorts.filter(sortItem => sortItem.columnName != columnName));
 
-    this.setState(sortPref);
+    this.setState({sorts: newSorts});
     if(this.props.updateSortPreference) {
-      this.props.updateSortPreference(sortPref);
+      this.props.updateSortPreference(newSorts);
     }
+  },
+
+  getCurrentSort(columnIndex) {
+    const column = this.getColumns()[columnIndex];
+    const existingSort = this.state.sorts.find(sortItem => sortItem.columnName == column.name);
+    return !existingSort ? 0 : existingSort.sortDir;
+  },
+
+  getLatestSortColumn() {
+    const latestSort = this.state.sorts.find(() => true);
+    return !latestSort ? -1 : this.getColumns().findIndex(column => column.name == latestSort.columnName);
   },
 
   getHeaderRows() {
     
     const rows = [];
     const columns = this.getColumns();
+    const latestSort = this.getLatestSortColumn()
 
     if(this.props.includeBaggageSummary) {
       const bagIdIndex = columns.findIndex(column => column.baggage);
@@ -108,8 +108,8 @@ export default React.createClass({
     rows.push(
       <tr key="columnheaders">
         {columns.map((column, index) => {
-          const isSortColumn = index == this.state.sort;
-          const isSortAsc = this.state.sortDir == 1;
+          const isSortColumn = latestSort == index;
+          const isSortAsc = this.getCurrentSort(latestSort) == 1;
           const columnClassName = isSortColumn ? (isSortAsc ? 'sortAsc' : 'sortDesc') : 'noSort';
           const baggageClassName = column.baggage ? 'baggageColumn' : 'playerColumn';
           const firstClassName = column.first ? 'first' : '';
@@ -128,6 +128,7 @@ export default React.createClass({
     return rows;
   },
 
+  // Also sorts
   getFilteredPlayers() {
     return this.props.players.filter(player => {
       if(!this.props.filterRows) {
@@ -145,14 +146,21 @@ export default React.createClass({
   },
 
   sortTwoPlayers(a,b) {
-    if(this.state.sort < 0) {
-      return 0;
-    }
-    const column = this.getColumns()[this.state.sort];
-    const type = this.getColumns()[this.state.sort].type;
-    const sortFn = columnTypes.find(column => column.name == type).sort;
+
+    return this.state.sorts.reduce((soFar, sortItem) => {
+
+      const column = this.getColumns().find(column => column.name == sortItem.columnName);
+
+      if(!column) {
+        return 0;
+      }
+      
+      const sortFn = columnTypes.find(columnType => column.type == columnType.name).sort;      
+      const result = sortItem.sortDir * sortFn(this.getValueOfColumnForPlayer(column, a), this.getValueOfColumnForPlayer(column, b));
+
+      return !!soFar ? soFar : result;
+    }, 0) || 0;
     
-    return this.state.sortDir * sortFn(this.getValueOfColumnForPlayer(column, a), this.getValueOfColumnForPlayer(column, b));
   },
 
   getBodyRows() {
