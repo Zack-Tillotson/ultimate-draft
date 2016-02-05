@@ -23,6 +23,7 @@ import ChooseViewTeam from '../ChooseViewTeam';
 import FilterColumns from '../FilterColumns';
 import DraftPlayer from '../DraftPlayer';
 import UndraftPlayer from '../UndraftPlayer';
+import DraftFaq from '../DraftFaq';
 
 const DraftView = React.createClass({
 
@@ -104,13 +105,23 @@ const DraftView = React.createClass({
     );
   },
 
+  shouldModalShowConfirm() {
+    if(this.props.ui.modal == modalNames.draftPlayer && !this.props.connection.isAdmin) {
+      return false;
+    }
+    if(this.props.ui.modal == modalNames.faq) {
+      return false;
+    }
+    return true; // else
+  },
+
   getModal() {
     return (
       <ModalContainer 
           ref="modals"
           currentModalName={this.props.ui.modal}
           modalData={this.props.ui.modalData}
-          showConfirm={this.props.ui.modal != modalNames.draftPlayer || this.props.connection.isAdmin}
+          showConfirm={this.shouldModalShowConfirm()}
           confirmHandler={this.props.dispatch.confirmModal}
           cancelHandler={this.props.dispatch.cancelModal}
           connection={this.props.connection}
@@ -141,6 +152,8 @@ const DraftView = React.createClass({
           data={this.props.ui.modalData}
           columns={this.props.columns}
           connection={this.props.connection} />
+        <DraftFaq
+          modalName={modalNames.faq} />
 
       </ModalContainer>
     );

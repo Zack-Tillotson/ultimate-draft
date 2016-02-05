@@ -173,9 +173,9 @@ const Page = React.createClass({
   getTutorial() {
     return (
       <DraftTutorial 
-        step={this.props.user.tutorialStep}
-        nextTutorialStep={this.props.dispatch.nextTutorialStep}
-        quitTutorial={this.props.dispatch.quitTutorial} />
+        isActive={this.props.ui.modal == modalNames.faq}
+        openFaq={this.props.dispatch.viewModal.bind(this, modalNames.faq)}
+        closeFaq={this.props.dispatch.cancelModal.bind(this)} />
     );
   },
 

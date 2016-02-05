@@ -1,0 +1,74 @@
+component {
+
+  section {
+    padding: 0 25px;
+
+    h2 {
+      font-size: 18px;
+    }
+
+    .faqItem {
+      text-align: left;
+      margin-bottom: 10px;
+
+      .faqTitle {
+        color: #0D3D65;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .faqAnswer {
+        color: #000;
+        font-size: 13px;
+
+        .playerColors {
+          ul {
+            list-style: none;
+            padding-left: 15px;
+
+            li {
+              margin-bottom: 5px;
+
+              .colorSquare {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                margin-right: 5px;
+
+                &.white {
+                  border: solid 1px #ccc;
+                }
+
+                &.blue {
+                  background: #AADAFF;
+                }
+
+                &.green {
+                  background: #BDFFB7;
+                }
+
+                &.orange {
+                  background: #FFD17E;
+                }
+
+                &.grey {
+                  background: #ddd;
+                }
+
+                &.pink {
+                  background: #FFDAFB;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  component {
+    
+  }
+}
