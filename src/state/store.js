@@ -14,13 +14,16 @@ function objectToJs(state) {
   return ret;
 }
 
+const middleware = [ThunkMiddleware];
+
+if(__DEBUG__) {
+  middleware.push(LoggerMiddleware({
+    level: 'info',
+    predicate: (state, action) => true,
+    transformer: objectToJs
+  }));
+}
+
 export default function buildStore(reducer) {
-  return applyMiddleware(
-    ThunkMiddleware,
-    LoggerMiddleware({
-      level: 'info',
-      predicate: (state, action) => true,
-      transformer: objectToJs
-    })
-  )(createStore)(reducer);
+  return applyMiddleware(...middleware)(createStore)(reducer);
 }
