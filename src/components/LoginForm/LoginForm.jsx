@@ -42,26 +42,36 @@ const LoginForm = React.createClass({
         )}
 
         {this.props.isLoggedIn && (
-          <div className="welcome" onClick={this.dialogClickHandler}>
-            <div className="accountInfo">
-              <div className="service">
-                <div className={["icon", selectedService].join(' ')}></div>
-              </div>
-            </div>
-            <div className="displayName">
-              {this.props.displayName}
-              {this.props.isAdmin && '*'}
-            </div>
-            <div className="optionDialog">
-              <div className="toggle">
-                {'\u25BE'}
-                {this.state.optionsDialogOpen && (
-                  <div className="optionsInner" onClick={this.props.dispatch.requestLogout}>
-                    Logout
+          <div className="welcome">
+            {!this.state.optionsDialogOpen && (
+              <div onClick={this.dialogClickHandler}>
+                <div className="accountInfo">
+                  <div className="service">
+                    <div className={["icon", selectedService].join(' ')}></div>
                   </div>
-                )}
+                </div>
+                <div className="displayName">
+                  {this.props.displayName}
+                  {this.props.isAdmin && '*'}
+                  <span className="toggle">
+                    {'\u25BE'}
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
+            {this.state.optionsDialogOpen && (
+              <div className="loginInfo">
+                <div className="uid">
+                  UID: {this.props.uid}
+                </div>
+                <span className="logoutBtn" onClick={this.props.dispatch.requestLogout}>
+                  Logout
+                </span>
+                <span className="toggle" onClick={this.dialogClickHandler}>
+                  {'\u24E7'}
+                </span>
+              </div>
+            )}
           </div>
         )}
         

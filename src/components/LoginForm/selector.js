@@ -1,5 +1,6 @@
 import firebase from '../../firebase/selectors';
 
 export default state => {
-  return firebase(state.firebase);
+	const uid = state.firebase.auth.get('uid');
+  return {...firebase(state.firebase), uid};
 }
