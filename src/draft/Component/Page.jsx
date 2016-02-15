@@ -68,6 +68,8 @@ const Page = React.createClass({
 
   startSyncDraft(password = '') {
 
+    this.props.dispatch.errorSync(false);
+
     const userId = firebase.getUserId();
 
     firebase
@@ -83,8 +85,13 @@ const Page = React.createClass({
   },
 
   syncDraftHandler(results) {
+
     if (results.exists) {
       this.props.dispatch.firebase(results);
+    } else {
+      setTimeout(() => {
+        this.props.dispatch.errorSync(true);
+      }, 400);
     }
   },
 
@@ -137,7 +144,8 @@ const Page = React.createClass({
         </div>
         <DraftPasswordForm 
           submitHandler={this.startSyncDraft} 
-          requesting={this.props.connection.requesting} />
+          requesting={this.props.connection.requesting}
+          isError={this.props.ui.syncError} />
         {!this.props.connection.requesting && this.props.connection.wrongPassword && ('Wrong password')}
       </div>
     );

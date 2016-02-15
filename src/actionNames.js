@@ -13,6 +13,7 @@ export default {
   sorting: 'sorting',
   toggleFilter: 'toggleFilter',
   sortsUpdate: 'sortsUpdate',
+  errorSyncing: 'errorSyncing',
   
   firebase: 'firebase',
   blowup: 'blowup',

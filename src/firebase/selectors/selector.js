@@ -5,7 +5,7 @@ function isLoggedIn(auth) {
 }
 
 function isAdmin(connection) {
-  return connection.isAdmin
+  return connection.get('isAdmin');
 }
 
 function authService(auth) {

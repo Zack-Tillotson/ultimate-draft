@@ -52,7 +52,6 @@ const LoginForm = React.createClass({
                 </div>
                 <div className="displayName">
                   {this.props.displayName}
-                  {this.props.isAdmin && '*'}
                   <span className="toggle">
                     {'\u25BE'}
                   </span>
@@ -62,7 +61,8 @@ const LoginForm = React.createClass({
             {this.state.optionsDialogOpen && (
               <div className="loginInfo">
                 <div className="uid">
-                  UID: {this.props.uid}
+                  {this.props.isAdmin ? 'Admin' : 'UID'}
+                  : {this.props.uid}
                 </div>
                 <span className="logoutBtn" onClick={this.props.dispatch.requestLogout}>
                   Logout

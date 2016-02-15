@@ -11,7 +11,8 @@ function getInitialState() {
     error: '',
     modalData: {},
     saving: false,
-    sorts: {}
+    sorts: {},
+    syncError: false
   });
 }
 
@@ -62,6 +63,9 @@ export default function(state = getInitialState(), action) {
           state = state.set('modal', '');
         }
       }
+      break;
+    case actions.errorSyncing:
+      state = state.set('syncError', action.isError);
       break;
   }
   return state;

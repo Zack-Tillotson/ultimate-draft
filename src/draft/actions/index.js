@@ -67,6 +67,9 @@ export default (dispatch, props) => {
       updateSortPreference(data) {
         const draftId = utils.getFirebaseId();
         dispatch(ui.updateSorts(localStorage.updateSortPreference(draftId, data)));
+      },
+      errorSync(isError) {
+        dispatch(ui.errorSync(isError));
       }
     }
   }

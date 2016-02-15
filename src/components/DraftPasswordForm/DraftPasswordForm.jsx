@@ -10,7 +10,8 @@ export default React.createClass({
 
   propTypes: {
     submitHandler: React.PropTypes.func.isRequired,
-    requesting: React.PropTypes.bool.isRequired
+    requesting: React.PropTypes.bool.isRequired,
+    isError: React.PropTypes.bool.isRequired
   },
 
   handleSubmit(inputs) {
@@ -25,8 +26,9 @@ export default React.createClass({
           {this.props.requesting && (
             <PulseLoader className="animatee" color="#999" />
           )}
-          {!this.props.requesting && (
-            <input type="submit" className="submitBtn" value="Go" />
+          <input type="submit" className="submitBtn" value="Go" disabled={!this.props.isError} />
+          {!this.props.isError && (
+            <PulseLoader className="animatee" color="#999" />
           )}
         </Formsy.Form>
       </InlineCss>

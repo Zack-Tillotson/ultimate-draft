@@ -1,6 +1,5 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
-import {PulseLoader} from 'halogen';
 
 import tabNames from '../../../draft/tabNames';
 import modalNames from '../../../draft/modalNames';

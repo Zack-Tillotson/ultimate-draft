@@ -56,5 +56,8 @@ export default {
   },
   updateSorts(data) {
     return {type: actions.sortsUpdate, data};
+  },
+  errorSync(isError = false){
+    return {type: actions.errorSyncing, isError};
   }
 };
