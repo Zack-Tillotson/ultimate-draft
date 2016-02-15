@@ -36,6 +36,7 @@ const DraftView = React.createClass({
       <StatusView 
         user={this.props.user}
         status={this.props.status}
+        draft={this.props.draft}
         columns={this.props.columns}
         isAdmin={this.props.connection.isAdmin}
         viewModal={this.props.dispatch.viewModal} />

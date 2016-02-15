@@ -36,6 +36,10 @@ export default React.createClass({
     )).length;
   },
 
+  getGenderLimit(gender) {
+    return gender == 'M' ? this.props.draft.maxMen : this.props.draft.maxWomen;
+  },
+
   getTeamSummary() {
     if(!this.props.user || !this.props.user.team) {
       return null;
@@ -62,8 +66,8 @@ export default React.createClass({
           <tbody>
             <tr>
               <td>{team.players.length + team.baggage.length}</td>
-              <td>{this.getPlayersOfGender('M')}</td>
-              <td>{this.getPlayersOfGender('F')}</td>
+              <td>{this.getPlayersOfGender('M')} ({this.getGenderLimit('M')} Max.)</td>
+              <td>{this.getPlayersOfGender('F')} ({this.getGenderLimit('F')} Max.)</td>
               <td>
                 {!!this.props.user.team.baggage.length && (
                   <span>
