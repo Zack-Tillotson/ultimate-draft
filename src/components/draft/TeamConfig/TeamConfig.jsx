@@ -40,20 +40,37 @@ export default React.createClass({
       <InlineCss componentName="component" stylesheet={styles}>
         <h3>Team Configuration</h3>
         <Formsy.Form onSubmit={this.saveTeams}>
-          <ol>
-            {this.props.teams.map((team, index) => {
-              return (
-                <li key={team.id}>
-                  <Input label="Name" name={`name${team.id}`} value={team.name} />
-                  <ColorSelector
-                    inputName={`color${team.id}`}
-                    initialColor={team.color} />
-                  <Input name={`order${team.id}`} value={index + 1} label="Order" />
-                </li>
-              );
-            })}
-          </ol>
-          <input type="submit" value="Save" />
+          <table>
+            <thead>
+              <tr>
+                <td colSpan={2}>Order</td>
+                <td>Name</td>
+                <td>Color</td>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.teams.map((team, index) => {
+                return (
+                  <tr key={team.id}>
+                    <td className="orderView">{index + 1}</td>
+                    <td className="orderInput">
+                      <Input name={`order${team.id}`} value={index + 1} />
+                    </td>
+                    <td className="nameInput">
+                      <Input name={`name${team.id}`} value={team.name} />
+                    </td>
+                    <td className="colorInput">
+                      <ColorSelector
+                        showLabel={false}
+                        inputName={`color${team.id}`}
+                        initialColor={team.color} />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <input className="submitBtn" type="submit" value="Save" />
         </Formsy.Form>
       </InlineCss>
     );

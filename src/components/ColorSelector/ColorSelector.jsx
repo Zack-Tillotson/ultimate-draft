@@ -8,12 +8,14 @@ export default React.createClass({
 
   propTypes: {
     inputName: React.PropTypes.string.isRequired,
-    initialColor: React.PropTypes.string
+    initialColor: React.PropTypes.string,
+    showLabel: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
-      initialColor: '#fff'
+      initialColor: '#fff',
+      showLabel: true
     };
   },
 
@@ -47,7 +49,7 @@ export default React.createClass({
       <InlineCss stylesheet={styles} componentName="component">
         <Input
           name={this.props.inputName}
-          label="Color"
+          label={this.props.showLabel ? "Color" : null}
           defaultValue={this.state.color}
           ref="input"
           onChange={this.updateColorFromInput} />

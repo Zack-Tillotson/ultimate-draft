@@ -22,11 +22,12 @@ export default React.createClass({
     return (
       <InlineCss stylesheet={styles} componentName="container">
         <Formsy.Form onSubmit={this.handleSubmit}>
-          <Input name="draftPw" placeholder="Enter password" />
-          {this.props.requesting && (
-            <PulseLoader className="animatee" color="#999" />
+          {!!this.props.isError && (
+            <div>
+              <Input name="draftPw" placeholder="Enter password" />
+              <input type="submit" className="submitBtn" value="Go" disabled={!this.props.isError} />
+            </div>
           )}
-          <input type="submit" className="submitBtn" value="Go" disabled={!this.props.isError} />
           {!this.props.isError && (
             <PulseLoader className="animatee" color="#999" />
           )}
